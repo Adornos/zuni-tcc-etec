@@ -1,0 +1,10 @@
+{
+    "name": "etec/zuni",
+    "description": "Trabalho de conclusão de curso - sistema de educação infantil",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\":"app/"
+        }
+    }
+}
