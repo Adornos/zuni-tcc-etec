@@ -1,11 +1,21 @@
 <?php
 
+//INICIALIZAÇÃO DAS COISAS COMUNS NO PROJETO
+//Inicialização do composer - Autoload
 require __DIR__.'/vendor/autoload.php';
+
+//Carregamento das variaveis ambientes
+\App\Common\Enviroment::load(__DIR__);
 
 use \App\Http\Router;
 use \App\Utils\View;
+use \App\Common\Enviroment;
 
-define('URL', 'http://zuni.tcc');
+Enviroment::load(__DIR__);
+
+
+// Define a contante URL
+define('URL', getenv('URL'));
 
 $obRouter = new Router(URL);
 

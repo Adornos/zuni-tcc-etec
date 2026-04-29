@@ -27,7 +27,7 @@ class Page{
      * Retorna (view) duma página
      * @return string
      */
-    public static function getPage($title, $content = '404 Error', $header = '', $footer = ''){
+    public static function getPage($title = '', $content = '', $header = '', $footer = ''){
     return View::render('pages/page', [
         'title' => $title,
         'content'=> $content,

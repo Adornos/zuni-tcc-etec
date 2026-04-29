@@ -17,7 +17,14 @@ $obRouter->get('/sobre', [
     }
 ]);
 
-//ROTA DINÂMICA
+//ROTA alunoMatricula
+$obRouter->get('/alunoMatricula', [
+    function () {
+        return new Response(200, Pages\StudentEnroll::getStudentEnroll());
+    }
+]);
+
+//ROTA DINÂMICA TESTE
 $obRouter->get('/pagina/{idPagina}/{acao}', [
     function ($idPagina, $acao) {
         return new Response(200, 'Pagina '.$idPagina.' - '.$acao);
