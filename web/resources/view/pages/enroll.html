@@ -1,0 +1,434 @@
+<h1>Matrícula</h1>
+<hr>
+
+<section class="enroll">
+    <div class="card mb-3">
+        <h1 class="card-header">MATRÍCULA DO ALUNO</h1>
+
+        <div class="card-body">
+
+            <div class="progress mb-4">
+                <div id="progressBar" class="progress-bar" style="width: 20%;">Etapa 1</div>
+            </div>
+
+            <form method="post" id="formMatricula" enctype="multipart/form-data">
+
+                <!-- ETAPA 1 -->
+                <div class="step">
+                    <h4>Aluno</h4>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Nome</label>
+                            <input type="text" name="nome_aluno" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Data Nascimento</label>
+                            <input type="date" name="data_nascimento" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Sexo</label>
+                            <select name="sexo_aluno" class="form-control" required>
+                                <option value="">Selecione</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Feminino</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mt-3">
+                            <label>Histórico Escolar (PDF)</label>
+                            <input type="file" name="historico" class="form-control" accept="application/pdf">
+                        </div>
+
+                        <div class="col-md-6 mt-3">
+                            <label>Série</label>
+                            <select name="id_serie" class="form-control" required>
+                                {{serieOptions}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ETAPA 2 -->
+                <div class="step d-none">
+                    <h4>Responsável 1</h4>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Nome</label>
+                            <input type="text" name="resp1_nome" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Telefone</label>
+                            <input type="text" name="resp1_tel" class="form-control telefone" required>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>CPF</label>
+                            <input type="text" name="resp1_cpf" class="form-control cpf" required>
+                        </div>
+
+                        <div class="col-md-6 mt-3">
+                            <label>Email</label>
+                            <input type="email" name="resp1_email" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-3 mt-3">
+                            <label>Sexo</label>
+                            <select name="resp1_sexo" class="form-control">
+                                <option value="M">Masculino</option>
+                                <option value="F">Feminino</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-3 mt-3">
+                            <label>Parentesco</label>
+                            <select name="resp1_parentesco" class="form-control">
+                                <option>Pai</option>
+                                <option>Mãe</option>
+                                <option>Responsável legal</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ETAPA 3 -->
+                <div class="step d-none">
+                    <h4>Responsável 2</h4>
+
+                    <div class="mb-3">
+                        <input type="checkbox" id="toggleResp2" name="toggleResp2"> Possui responsável 2?
+                    </div>
+
+                    <div id="resp2Fields" class="d-none">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Nome</label>
+                                <input type="text" name="resp2_nome" class="form-control">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>Telefone</label>
+                                <input type="text" name="resp2_tel" class="form-control telefone">
+                            </div>
+
+                            <div class="col-md-3 mt-3">
+                                <label>CPF</label>
+                                <input type="text" name="resp2_cpf" class="form-control cpf">
+                            </div>
+
+                        <div class="col-md-6">
+                            <label>Email</label>
+                            <input type="email" name="resp2_email" class="form-control" required>
+                        </div>
+
+                            <div class="col-md-3 mt-3">
+                                <label>Sexo</label>
+                                <select name="resp2_sexo" class="form-control">
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Feminino</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 mt-3">
+                                <label>Parentesco</label>
+                                <select name="resp2_parentesco" class="form-control">
+                                    <option>Pai</option>
+                                    <option>Mãe</option>
+                                    <option>Responsável legal</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ETAPA 4 -->
+                <div class="step d-none">
+                    <h4>Endereço</h4>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>CEP</label>
+                            <input type="text" id="cep" class="form-control">
+                        </div>
+
+                        <div class="col-md-8">
+                            <label>Logradouro</label>
+                            <input type="text" name="logradouro" id="logradouro" class="form-control">
+                        </div>
+
+                        <div class="col-md-2 mt-3">
+                            <label>Número</label>
+                            <input type="text" name="numero" class="form-control">
+                        </div>
+
+                        <div class="col-md-4 mt-3">
+                            <label>Bairro</label>
+                            <input type="text" name="bairro" id="bairro" class="form-control">
+                        </div>
+
+                        <div class="col-md-4 mt-3">
+                            <label>Cidade</label>
+                            <input type="text" name="cidade" id="cidade" class="form-control">
+                        </div>
+
+                        <div class="col-md-2 mt-3">
+                            <label>Estado</label>
+                            <select name="estado" id="estado" class="form-control">
+                                <option>SP</option>
+                                <option>RJ</option>
+                                <option>MG</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ETAPA 5 -->
+                <div class="step d-none">
+                    <h4>Informações Médicas</h4>
+
+                    <div class="form-check form-switch mb-3">
+                        <input type="hidden" name="neurodivergencia" value="0">
+                        <input class="form-check-input" type="checkbox" name="neuro" value="1">
+                        <label class="form-check-label">Neurodivergência</label>
+                    </div>
+
+                    <div class="form-check form-switch mb-3">
+                        <input type="hidden" name="alergia" value="0">
+                        <input class="form-check-input" type="checkbox" name="alergia_bool" value="1">
+                        <label class="form-check-label">Possui alergias?</label>
+                    </div>
+
+                    <div class="form-check form-switch mb-3">
+                        <input type="hidden" name="restricao_alimentar" value="0">
+                        <input class="form-check-input" type="checkbox" name="restricao_bool" value="1">
+                        <label class="form-check-label">Restrição alimentar?</label>
+                    </div>
+
+                    <div class="form-check form-switch mb-3">
+                        <input type="hidden" name="cuidados_especiais" value="0">
+                        <input class="form-check-input" type="checkbox" name="cuidados_bool" value="1">
+                        <label class="form-check-label">Cuidados especiais?</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Descrição</label>
+                        <textarea name="descricao" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">Voltar</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep()">Próximo</button>
+                    <button type="submit" class="btn btn-success d-none" id="submitBtn">Finalizar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+
+/* =========================
+   CONFIGURAÇÃO DE DEBUG
+   ========================= */
+
+/*
+DEBUG_MODE:
+true  = ignora validações e permite avançar livremente
+false = valida campos antes de avançar
+*/
+const DEBUG_MODE = true;
+
+
+/* =========================
+   VARIÁVEIS GLOBAIS
+   ========================= */
+
+/*
+currentStep:
+Armazena o índice da etapa atual do formulário
+*/
+let currentStep = 0;
+
+/*
+steps:
+Lista de todas as etapas do formulário (div.step)
+*/
+const steps = document.querySelectorAll(".step");
+
+/*
+progressBar:
+Elemento visual da barra de progresso
+*/
+const progressBar = document.getElementById("progressBar");
+
+/*
+submitBtn:
+Botão de envio final (aparece apenas na última etapa)
+*/
+const submitBtn = document.getElementById("submitBtn");
+
+
+/* =========================
+   FUNÇÕES PRINCIPAIS
+   ========================= */
+
+/*
+showStep(index)
+- Exibir a etapa atual
+- Esconder as demais
+- Atualizar barra de progresso
+- Controlar botão de submit
+*/
+function showStep(index){
+    steps.forEach((step, i)=>{
+        step.classList.toggle("d-none", i !== index);
+    });
+
+    let progress = ((index + 1) / steps.length) * 100;
+    progressBar.style.width = progress + "%";
+    progressBar.innerText = "Etapa " + (index + 1);
+
+    submitBtn.classList.toggle("d-none", index !== steps.length - 1);
+}
+
+
+/*
+nextStep()
+- Validar campos da etapa atual (se DEBUG_MODE = false)
+- Avançar para próxima etapa
+*/
+function nextStep(){
+
+    if(!DEBUG_MODE){
+        const inputs = steps[currentStep].querySelectorAll("input, select, textarea");
+
+        for(let input of inputs){
+            if(!input.checkValidity()){
+                input.reportValidity();
+                return;
+            }
+        }
+    }
+
+    if(currentStep < steps.length - 1){
+        currentStep++;
+        showStep(currentStep);
+    }
+}
+
+
+/*
+prevStep()
+- Voltar para etapa anterior
+*/
+function prevStep(){
+    if(currentStep > 0){
+        currentStep--;
+        showStep(currentStep);
+    }
+}
+
+
+/* =========================
+   MASKS
+   ========================= */
+
+/*
+CPF:
+Formata automaticamente no padrão 000.000.000-00
+*/
+document.querySelectorAll(".cpf").forEach(el=>{
+    el.addEventListener("input", e=>{
+        let v = e.target.value.replace(/\D/g,'').slice(0,11);
+        v = v.replace(/(\d{3})(\d)/,"$1.$2");
+        v = v.replace(/(\d{3})(\d)/,"$1.$2");
+        v = v.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
+        e.target.value = v;
+    });
+});
+
+
+/*
+Telefone:
+Formata automaticamente no padrão (00) 00000-0000
+*/
+document.querySelectorAll(".telefone").forEach(el=>{
+    el.addEventListener("input", e=>{
+        let v = e.target.value.replace(/\D/g,'').slice(0,11);
+        v = v.replace(/(\d{2})(\d)/,"($1) $2");
+        v = v.replace(/(\d{5})(\d)/,"$1-$2");
+        e.target.value = v;
+    });
+});
+
+
+/* =========================
+   RESPONSÁVEL 2 (TOGGLE)
+   ========================= */
+
+/*
+toggleResp2:
+Checkbox que define se os campos do responsável 2 serão exibidos
+*/
+
+window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("toggleResp2").dispatchEvent(new Event("change"));
+});
+
+document.getElementById("toggleResp2").addEventListener("change", e=>{
+
+    const container = document.getElementById("resp2Fields");
+    const inputs = container.querySelectorAll("input, select, textarea");
+
+    const isChecked = e.target.checked;
+
+    // Mostra ou esconde os campos
+    container.classList.toggle("d-none", !isChecked);
+
+    // ativa/desativa campos
+    inputs.forEach(input => {
+        input.disabled = !isChecked;
+    });
+
+});
+
+
+/* =========================
+   CEP AUTOMÁTICO (ViaCEP)
+   ========================= */
+
+/*
+Ao sair do campo CEP:
+- Faz requisição para API ViaCEP
+- Preenche automaticamente endereço
+*/
+document.getElementById("cep").addEventListener("blur", ()=>{
+    let cep = document.getElementById("cep").value.replace(/\D/g,'');
+
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    .then(r=>r.json())
+    .then(d=>{
+        document.getElementById("logradouro").value = d.logradouro || '';
+        document.getElementById("bairro").value = d.bairro || '';
+        document.getElementById("cidade").value = d.localidade || '';
+        document.getElementById("estado").value = d.uf || '';
+    });
+});
+
+
+/* =========================
+   INICIALIZAÇÃO
+   ========================= */
+
+/*
+Inicia o formulário exibindo a primeira etapa
+*/
+showStep(currentStep);
+
+</script>

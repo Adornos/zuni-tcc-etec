@@ -1,2 +1,5 @@
-# zuni-tcc-tec
-Trabalho de conclusão de curso sendo realizado na ETEC de Registro
+# Checklist
+
+- Dar um jeito no BD
+    - Simplificar Hydratate
+    - Documentar o fluxo de trabalho php-mysql que está sendo utilizado
