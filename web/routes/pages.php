@@ -18,9 +18,17 @@ $obRouter->get('/sobre', [
 ]);
 
 //ROTA alunoMatricula
-$obRouter->get('/alunoMatricula', [
+$obRouter->get('/matricula', [
     function () {
         return new Response(200, Pages\StudentEnroll::getStudentEnroll());
+    }
+]);
+
+//ROTA alunoMatricula (insert)
+
+$obRouter->post('/matricula', [
+    function ($request) {
+        return new Response(200, Pages\StudentEnroll::insertEnroll($request));
     }
 ]);
 

@@ -6,7 +6,7 @@ namespace App\Common;
 class Enviroment{    
     /**
      * Carrega as variaveis ambientes
-     * @param  string $dir Caminho absoluto do arquivo de variáveis
+     * @param string $dir Caminho absoluto do arquivo de variáveis
      */
     public static function load($dir){
         //VERIFICA A EXISTENCIA DO ARQUIVO .env

@@ -37,9 +37,9 @@ class Router{
     
     /**
      * Inicia a classe
-     *
+     * @param string $url
      * @return void
-     */
+     */    
     public function __construct($url)
     {
         $this->request = new Request();
