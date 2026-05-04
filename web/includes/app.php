@@ -11,6 +11,7 @@ use \App\Db\Database;
 //Carregamento das variaveis ambientes
 Enviroment::load(__DIR__.'/../');
 
+
 //DEFINE AS CONFIGURAÇÕES DO BANCO
 Database::config(
     getenv('DB_HOST'),
