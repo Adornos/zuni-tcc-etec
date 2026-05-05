@@ -1,0 +1,100 @@
+.nav-link {
+  	text-decoration: none;
+  	color: #ffffff;
+  	font-family: 'Montserrat';
+
+}
+
+.div {
+  	width: 100%;
+  	position: relative;
+  	background-color: #f3f8ff;
+  	display: flex;
+  	align-items: flex-start;
+  	padding: 24px 120px;
+  	box-sizing: border-box;
+  	isolation: isolate;
+  	gap: 410.8px;
+  	text-align: left;
+  	font-size: 19px;
+  	color: #02033b;
+  	font-family: Montserrat;
+}
+.divbefore {
+  	height: 51px;
+  	width: 1440px;
+  	position: absolute;
+  	margin: 0 !important;
+  	top: 51px;
+  	left: 0px;
+  	background: linear-gradient(0deg, #e7effa, rgba(255, 255, 255, 0));
+  	z-index: 0;
+  	flex-shrink: 0;
+}
+.logosvg-icon {
+
+  	height: 54px;
+  	width: 176px;
+  	position: relative;
+  	z-index: 1;
+  	flex-shrink: 0;
+}
+.div2 {
+  	display: flex;
+  	align-items: center;
+  	gap: 48px;
+  	cursor: pointer;
+  	z-index: 2;
+  	flex-shrink: 0;
+}
+.ulmenu-main {
+  	height: 54px;
+  	width: 492.2px;
+  	position: relative;
+}
+.sobre-ns-parent {
+  	position: absolute;
+  	top: 0px;
+  	left: 500px;
+  	display: flex;
+  	align-items: center;
+  	gap: 28px;
+}
+.sobre-ns {
+  	position: relative;
+  	line-height: 25px;
+  	font-weight: 800;
+}
+.limenu-item-212908 {
+  	display: flex;
+  	align-items: flex-start;
+  	padding: 14.5px 0px;
+  	font-family: Inter;
+}
+.a {
+  	display: flex;
+  	align-items: center;
+  	gap: 9.1px;
+}
+.aafter-icon {
+  	height: 7px;
+  	width: 12px;
+  	position: relative;
+}
+.a2 {
+  	border-radius: 42px;
+  	background-color: #c13936;
+  	overflow: hidden;
+  	display: flex;
+  	align-items: flex-start;
+  	padding: 16px 21px 16px 20px;
+  	font-size: 15px;
+  	color: #fff;
+  	font-family: Inter;
+}
+.registre-se {
+  	position: relative;
+  	line-height: 18px;
+  	font-weight: 800;
+}
+

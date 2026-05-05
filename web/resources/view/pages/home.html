@@ -15,25 +15,27 @@
 <body>
 
 <section class="hero-section">
-  <div class="gradient"></div>
+  <img class="ellipse-img" src="public/Ellipse 2.svg" alt="">
+  <div class="hero-section-container">
 
-  <div class="hero-wrapper">
-    <div class="hero-text">
-      <h1>
-        Onde a Tecnologia Encontra com a Educação
-      </h1>
-
-      <p>
-        Sistema de gestão escolar que conecta pais e professores
-      </p>
-
-      <a href="#">Sobre Nosso Serviço</a>
-    </div>
-
-    <div class="hero-image">
-      <img src="public/adorable-hispanic-boy-student-wearing-backpack-holding-book-kindergarten-Photoroom 1.svg" alt="">
+    <div class="hero-wrapper">
+      <div class="hero-text">
+        <h1>
+          Onde a Tecnologia Encontra com a Educação
+        </h1>
+  
+        <p>
+          Sistema de gestão escolar que conecta pais e professores
+        </p>
+  
+        <a href="#">Sobre Nosso Serviço</a>
+      </div>
+    
     </div>
   </div>
+
+
+
 </section>
 
 <style>
@@ -49,29 +51,64 @@
     
   }
 
+.ellipse-img {
+  position: absolute;
+  left: -450px;
+  top: -320px;
+  width: 1400px;
+  height: 1400px;
+  z-index: 2;
+  pointer-events: none;
+}
+  p{
+  margin-left: 19px;
+  font-size: clamp(1rem, 2vw, 1.7rem);
+  margin-bottom: 36px;
+  max-width: 760px;
+  transform: translateX(40px);
+  font-weight: 500;
+  }
+  
+
   * {
     box-sizing: border-box;
   }
 
-  .hero-section {
-    width: 100vw;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-    background: #F3F8FF;
-  }
+.hero-section {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  
+}
 
+.hero-section-container {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  background:
+    url("public/adorable-hispanic-boy-student-wearing-backpack-holding-book-kindergarten-Photoroom 1.svg")
+    no-repeat right 6vw bottom;
+  background-size: min(120vw, 1200px);
+  background-color: #F3F8FF;
+  background-position-y: 10%;
+  background-position-x:120%;
+  z-index:2;
+}
   .gradient {
     position: absolute;
     width: 1400px;  
     height: 1400px;
-    left: -350px;
+    left: -450px;
     top: -320px;
     border-radius: 50%;
     background: linear-gradient(358deg, white 0%, #E7EFFA 100%);
-    z-index: 0;
+    z-index: 1;
   }
 
   .hero-wrapper {
@@ -82,7 +119,6 @@
     justify-content: space-between;
     padding: 0 3vw 0 2vw;
     position: relative;
-    z-index: 2;
   }
 
   .hero-text {
@@ -90,15 +126,15 @@
   }
 
   .hero-text h1 {
-    font-size: clamp(2.5rem, 6vw, 5.2rem);
+    font-size: clamp(40px, 6vw, 60.2px);
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 24px;
-
+    margin-left: -3px;
   max-width: 700px;
   transform: translateX(60px);
 }
-  }
+  
 
 .hero-text p {
   font-size: clamp(1rem, 2vw, 1.7rem);
@@ -115,7 +151,8 @@
     text-decoration: none;
     border-radius: 16px;
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 600;
+    margin-left: 60px;
   }
 
   .hero-image {
