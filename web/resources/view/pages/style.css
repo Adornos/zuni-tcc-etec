@@ -1,3 +1,7 @@
+@import "style.css";
+@import "footerstyle.css"
+
+
 :root {
   --dl-layout-size-large: 144px;
   --dl-layout-size-small: 48px;
