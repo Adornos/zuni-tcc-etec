@@ -27,6 +27,7 @@ class View{
     private static function getContentView($view){
 
         $file = __DIR__.'/../../resources/view/'.$view.'.html';
+
         return file_exists($file) ? file_get_contents($file) : '';
     }
 
@@ -39,6 +40,7 @@ class View{
      */
 
     public static function render($view, $vars = []){
+
         // Conteudo da view
         $contentView = self::getContentView($view);
 
@@ -47,6 +49,7 @@ class View{
 
         //Chaves das variaveis
         $keys = array_keys($vars);
+
         $keys = array_map(function ($item) {
             return '{{'.$item.'}}';
         }, $keys);
