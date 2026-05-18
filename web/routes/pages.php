@@ -32,6 +32,23 @@ $obRouter->post('/matricula', [
     }
 ]);
 
+//ROTA login
+
+$obRouter->get('/login', [
+    function () {
+        return new Response(200, Pages\Login::getLogin());
+    }
+]);
+
+//ROTA professor
+
+$obRouter->get('/professor', [
+    function () {
+        return new Response(200, Pages\Professor::getPainelProfessor());
+    }
+]);
+
+
 //ROTA DINÂMICA TESTE
 $obRouter->get('/pagina/{idPagina}/{acao}', [
     function ($idPagina, $acao) {

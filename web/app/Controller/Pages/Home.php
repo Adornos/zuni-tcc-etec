@@ -16,7 +16,7 @@ class Home extends Page{
         $content = View::render('pages/home', array_merge([],Organization::getOrganizationData()));
 
             //retorna a view da página
-            return parent::getPage('Zuni', $content);
+            return parent::getPage('Zuni', $content, 'home');
     }
     
 

@@ -1,0 +1,312 @@
+  <style>
+
+    body{
+      background:#dfe4ea;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap:15px;
+      padding:20px;
+      height: 80vh;
+      width: 80vw;
+    }
+
+    .card-custom{
+      background:#eceff4;
+      border-radius:20px;
+      padding:20px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.08);
+      height:100%;
+    }
+
+    .card-small{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .card-small h2{
+      font-size:2rem;
+      font-weight:700;
+      margin:0;
+    }
+
+    .card-small p{
+      margin:0;
+      color:#555;
+    }
+
+    .card-small i{
+      font-size:3rem;
+      color:#07075d;
+    }
+
+    /* POSIÇÕES GRID */
+
+    .sala{
+      grid-column:1;
+      grid-row:1;
+    }
+
+    .cantina{
+      grid-column:2;
+      grid-row:1;
+    }
+
+    .bimestre{
+      grid-column:3;
+      grid-row:1 / span 2;
+    }
+
+    .agenda{
+      grid-column:4;
+      grid-row:1 / span 4;
+      overflow-y:auto;
+    }
+
+    .reuniao{
+      grid-column:1;
+      grid-row:2;
+    }
+
+    .mensagens{
+      grid-column:2;
+      grid-row:2;
+    }
+
+    .grafico{
+      grid-column:1 / span 3;
+      grid-row:3 / span 2;
+    }
+
+    .btn-programacao{
+      background:#d63c3c;
+      border:none;
+      padding:10px 20px;
+      color:white;
+      border-radius:10px;
+      margin-top:15px;
+    }
+
+    .event-item{
+      display:flex;
+      gap:10px;
+      margin-bottom:20px;
+      align-items:flex-start;
+    }
+
+    .event-bar{
+      width:4px;
+      height:50px;
+      border-radius:10px;
+    }
+
+    .event-red{
+      background:#2f46ff;
+    }
+
+    .event-cyan{
+      background:#2bd4ff;
+    }
+
+    .event-yellow{
+      background:#ffc400;
+    }
+
+    .event-purple{
+      background:#592bff;
+    }
+
+    .event-pink{
+      background:#ff00aa;
+    }
+
+    .event-green{
+      background:#56d100;
+    }
+
+    .badge-hour{
+      background:#d63c3c;
+      color:white;
+      border-radius:20px;
+      padding:2px 10px;
+      font-size:.7rem;
+    }
+
+    .tabs{
+      display:flex;
+      justify-content:space-around;
+      border-bottom:1px solid #ccc;
+      margin-bottom:20px;
+    }
+
+    .tab-active{
+      border-bottom:3px solid #d63c3c;
+      padding-bottom:10px;
+      font-weight:bold;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="teacher-dashboard container-fluid p-0">
+
+  <div class="dashboard-grid">
+
+    <!-- SALA -->
+    <div class="card-custom card-small sala">
+      <div>
+        <h2>Sala 34</h2>
+        <p>Próxima aula</p>
+      </div>
+
+      <i class="bi bi-people-fill"></i>
+    </div>
+
+    <!-- CANTINA -->
+    <div class="card-custom card-small cantina">
+      <div>
+        <h2>R$155</h2>
+        <p>Créditos da cantina</p>
+      </div>
+    </div>
+
+    <!-- BIMESTRE -->
+    <div class="card-custom bimestre">
+
+      <h2 class="fw-bold text-primary">
+        Novo Bimestre!
+      </h2>
+
+      <p class="mt-3 text-muted">
+        Atualize as habilidades que serão trabalhadas com cada turma esse ano,
+        não faça da última hora!
+      </p>
+
+      <button class="btn-programacao">
+        Ir para Programação →
+      </button>
+
+    </div>
+
+    <!-- REUNIÃO -->
+    <div class="card-custom card-small reuniao">
+
+      <div>
+        <h2>13/03</h2>
+        <p>Próxima reunião</p>
+      </div>
+
+      <i class="bi bi-easel-fill"></i>
+
+    </div>
+
+    <!-- MENSAGENS -->
+    <div class="card-custom card-small mensagens">
+
+      <div>
+        <h2>10</h2>
+        <p>novas mensagens</p>
+      </div>
+
+    </div>
+
+    <!-- GRÁFICO -->
+    <div class="card-custom grafico">
+
+      <h6 class="mb-4">
+        Rendimento por turma
+      </h6>
+
+    </div>
+
+    <!-- AGENDA -->
+    <div class="card-custom agenda">
+
+      <div class="tabs">
+        <div class="tab-active">Horários</div>
+        <div>Eventos</div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-bar event-red"></div>
+
+        <div>
+          <strong>2ºano aula</strong>
+          <br>
+          <small>hor:</small>
+          <span class="badge-hour">13:00</span>
+          <span class="badge-hour">13:50</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-bar event-cyan"></div>
+
+        <div>
+          <strong>2ºano aula</strong>
+          <br>
+          <small>hor:</small>
+          <span class="badge-hour">13:00</span>
+          <span class="badge-hour">13:50</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-bar event-yellow"></div>
+
+        <div>
+          <strong>2ºano aula</strong>
+          <br>
+          <small>hor:</small>
+          <span class="badge-hour">13:00</span>
+          <span class="badge-hour">13:50</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-bar event-purple"></div>
+
+        <div>
+          <strong>2ºano aula</strong>
+          <br>
+          <small>hor:</small>
+          <span class="badge-hour">13:00</span>
+          <span class="badge-hour">13:50</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-bar event-pink"></div>
+
+        <div>
+          <strong>2ºano aula</strong>
+          <br>
+          <small>hor:</small>
+          <span class="badge-hour">13:00</span>
+          <span class="badge-hour">13:50</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-bar event-green"></div>
+
+        <div>
+          <strong>2ºano aula</strong>
+          <br>
+          <small>hor:</small>
+          <span class="badge-hour">13:00</span>
+          <span class="badge-hour">13:50</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

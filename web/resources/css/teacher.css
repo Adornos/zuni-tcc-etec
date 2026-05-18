@@ -1,0 +1,60 @@
+.teacher-sidebar {
+    /* width: 260px; */
+    grid-area: Sidebar;
+
+    background: #C13936;
+    border-right: 1px solid #e5e5e5;
+}
+
+.teacher-sidebar .nav-link {
+    color: #fff;
+    padding: 10px;
+    padding-left: 48px;
+    transition: 0.2s;
+}
+
+.teacher-sidebar .nav-link:hover {
+    background: #fff;
+    color: #C13936;
+}
+
+
+.teacher-sidebar .nav-link i {
+    width: 40px;
+    font-size: 40px;
+    text-align: center;
+    color: #fff;
+}
+
+.teacher-sidebar .nav-link:hover i {
+    color: #C13936;
+}
+
+.teacher-sidebar .sidebar-bottom .nav-link i {
+    width: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.teacher-panel > div{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    background-color: #E7EFFA;
+
+    grid-template-areas: 
+    "Sidebar Header Header Header Header"
+    "Sidebar Panel Panel Panel Panel"
+    "Sidebar Panel Panel Panel Panel"
+    "Sidebar Panel Panel Panel Panel"
+    "Sidebar Panel Panel Panel Panel"; 
+
+    height: 100vh;
+
+}
+
+.teacher-header{ grid-area: Header; }
+
+
+.teacher-dashboard { grid-area: Panel; }
+    

@@ -7,6 +7,7 @@ use \App\Model\Entity\Organization;
 
 class Page{
 
+
     /**
      * Renderiza o Header
      * @return string
@@ -27,12 +28,13 @@ class Page{
      * Retorna (view) duma página
      * @return string
      */
-    public static function getPage($title = '', $content = '', $header = '', $footer = ''){
+    public static function getPage($title = '', $content = '', $namespace = '', $header = null, $footer = null){
     return View::render('pages/page', [
         'title' => $title,
+        'namespace' => $namespace,
+        'header' => $header ?? self::getHeader(),
         'content'=> $content,
-        'header' => self::getHeader(),
-        'footer' => self::getFooter(),
+        'footer' => $footer ?? self::getFooter(),
         ]);
     }
 

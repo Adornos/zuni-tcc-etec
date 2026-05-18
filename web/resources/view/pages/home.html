@@ -1,19 +1,19 @@
-  <!DOCTYPE html>
-  <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZUNI</title>
+<section class="hero-section">
+  <img class="ellipse-img" src="resources/assets/Ellipse 2.svg" alt="">
+  <img class="child-img" src="resources/assets/criança.svg" alt="">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&family=Montserrat:wght@400;600;800&family=Inter:wght@400;800&display=swap" rel="stylesheet" />
+  <div class="hero-wrapper">
+    <div class="hero-text">
+      <h1>Onde a Tecnologia Encontra com a Educação</h1>
+      <p>Sistema de gestão escolar que conecta pais e professores</p>
+      <a href="#">Sobre Nosso Serviço</a>
+    </div>
+  </div>
+</section>
 
-    <style>
-      * {
-        box-sizing: border-box;
-      }
+<section class="section-cards">
 
+<<<<<<< HEAD
       
       
 .section {
@@ -184,290 +184,68 @@
         font-family: 'Montserrat', sans-serif;
         color: #02033b;
       }
+=======
+  <div class="sobre-nossos-servicos">
+    SOBRE NOSSOS SERVIÇOS ESCOLARES
+  </div>
+>>>>>>> 02ece0f514ec8b5aadebe43f1dfed1e6efb3dac6
 
-      img {
-        max-width: 100%;
-        display: block;
-      }
+  <div class="cards">
+    <div class="card">
+      <h3>Contato direto com os professores</h3>
+      <p>
+        No Zuni é possível os pais dos alunos mandarem mensagens diretamente
+        com os professores em tempo real para tirar dúvidas, de forma fácil,
+        simples e prática.
+      </p>
+    </div>
 
-      /* HERO */
+    <div class="card">
+      <h3>Sistema próprio pra cantina!</h3>
+      <p>
+        As escolas que utilizam o nosso sistema possuem um próprio sistema
+        para pagamento dos lanches, utilizando créditos digitais adicionados
+        pelos pais dentro do próprio aplicativo Zuni.
+      </p>
+    </div>
 
-      .hero-section {
-        min-height: 100vh;
-        position: relative;
-        overflow: hidden;
-        background: #f3f8ff;
-      }
+    <div class="card">
+      <h3>Acompanhamento diário</h3>
+      <p>
+        Nossos professores fazem registros diariamente sobre o dia a dia de
+        seu filho, possibilitando o acompanhamento do desempenho escolar.
+      </p>
+    </div>
+  </div>
+      <img src="resources/assets/Ellipse 2.png" style="
+      position:absolute;
+      top: 290px;
+      left: 0px;
+      " >
+</section>
 
-      .ellipse-img {
-        position: absolute;
-        left: -50px;
-        top: -80px;
-        width: min(75vw, 1100px);
-        z-index: 1;
-        pointer-events: none;
-      }
+<section class="section-app">
+  <div class="app-wrapper">
+    <div class="app-text">
+      <h2>ACOMPANHE SEU FILHO MESMO NO TRABALHO!</h2>
 
-      .child-img {
-        position: absolute;
-        right: -80px;
-        top: 0px;
-        width: min(58vw, 820px);
-        height: auto;
-        z-index: 2;
-        pointer-events: none;
-      }
+      <p>
+        Quer saber se o seu filho comeu tudo, escovou os dentes ou até mesmo
+        conseguiu realizar as atividades propostas na aula?
+        Instale o Zuni e acompanhe o dia do seu filho!
+      </p>
 
-      .hero-wrapper {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        padding: 0 80px;
-        position: relative;
-        z-index: 3;
-      }
-
-      .hero-text {
-        max-width: 620px;
-      }
-
-      .hero-text h1 {
-        font-size: clamp(42px, 6vw, 64px);
-        line-height: 1.08;
-        margin: 0 0 24px;
-        font-family: 'Poppins', sans-serif;
-      }
-
-      .hero-text p {
-        font-size: clamp(1rem, 2vw, 1.4rem);
-        line-height: 1.5;
-        margin: 0 0 36px;
-        max-width: 520px;
-      }
-
-      .hero-text a {
-        display: inline-block;
-        padding: 18px 34px;
-        background: #c13936;
-        color: white;
-        text-decoration: none;
-        border-radius: 16px;
-        font-weight: 600;
-      }
-
-      /* SEÇÃO CARDS */
-
-      .section-cards {
-        padding: 90px 60px 110px;
-        background: white;
-        position: relative;
-        overflow: visible;
-        z-index: 2;
-      }
-
-      .sobre-nossos-servicos {
-        text-align: center;
-        font-family: 'Poppins', sans-serif;
-        font-size: clamp(30px, 4vw, 45px);
-        font-weight: 800;
-        line-height: 1.2;
-        margin-bottom: 60px;
-        position: relative;
-        z-index: 2;
-      }
-
-      .cards {
-        display: flex;
-        gap: 30px;
-        flex-wrap: wrap;
-        justify-content: center;
-        position: relative;
-        z-index: 2;
-      }
-
-      .card {
-        width: 351px;
-        min-height: 150px;
-        background: white;
-        border-radius: 48px;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-        padding: 36px;
-        border: none;
-        position: relative;
-        z-index: 2;
-      }
-
-      .card h3 {
-        font-size: 30px;
-        font-weight: 600;
-        line-height: 1.1;
-        margin: 0 0 28px;
-      }
-
-      .card p {
-        margin: 0;
-        font-family: 'Inter', sans-serif;
-        font-size: 16px;
-        line-height: 1.5;
-      }
-
-      .ellipsecard {
-        position: absolute;
-        width: 620px;
-        left: -80px;
-        bottom: 0;
-        transform: translateY(50%);
-        z-index: 1;
-        pointer-events: none;
-      }
-
-      /* SEÇÃO APP */
-
-      .section-app {
-        background: linear-gradient(180deg, #e7effa, #fff);
-        width: 100%;
-        padding: 90px 70px;
-        position: relative;
-        z-index: 1;
-      }
-
-      .app-wrapper {
-        max-width: 1280px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 60px;
-        flex-wrap: wrap;
-        position: relative;
-        z-index: 2;
-      }
-
-      .app-text {
-        flex: 1 1 500px;
-        max-width: 560px;
-      }
-
-      .app-text h2 {
-        margin: 0 0 24px;
-        font-family: 'Poppins', sans-serif;
-        font-size: clamp(32px, 4vw, 46px);
-        line-height: 1.1;
-      }
-
-      .app-text p {
-        margin: 0 0 36px;
-        font-size: 20px;
-        line-height: 1.6;
-      }
-
-      .app-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        align-items: flex-start;
-      }
-
-      .btn-primary,
-      .btn-secondary {
-        text-decoration: none;
-        font-weight: 800;
-        font-size: 18px;
-        border-radius: 42px;
-        padding: 16px 26px;
-        display: inline-block;
-      }
-
-      .btn-primary {
-        background: #c13936;
-        color: white;
-      }
-
-      .btn-secondary {
-        color: #02033b;
-        box-shadow: inset 0 0 0 2px #02033b;
-        background: transparent;
-      }
-
-      .app-image {
-        flex: 1 1 420px;
-        display: flex;
-        justify-content: center;
-      }
-
-      .image-frame {
-        width: min(420px, 100%);
-        aspect-ratio: 1 / 1;
-        background: #c13936;
-        position: relative;
-        overflow: visible;
-      }
-
-      .image-frame img {
-        position: absolute;
-        width: 160%;
-        max-width: none;
-        left: -28%;
-        top: -11%;
-        height: auto;
-        object-fit: cover;
-      }
-
-      /* RESPONSIVO */
-
-      @media (max-width: 900px) {
-        .hero-wrapper {
-          padding: 100px 30px 60px;
-          align-items: flex-start;
-        }
-
-        .child-img {
-          opacity: 1;
-          right: -120px;
-          top: 0px;
-          width: 90vw;
-          z-index: 0;
-        
-        }
-
-        .ellipse-img {
-          width: 120vw;
-          left: -280px;
-        }
-
-        .section-cards,
-        .section-app {
-          padding-left: 24px;
-          padding-right: 24px;
-        }
-
-        .card {
-          width: 100%;
-        }
-
-      }
-    </style>
-  </head>
-  <body>
-
-    <section class="hero-section">
-      <img class="ellipse-img" src="public/Ellipse 2.svg" alt="">
-      <img class="child-img" src="public/criança.svg" alt="">
-
-      <div class="hero-wrapper">
-        <div class="hero-text">
-          <h1>Onde a Tecnologia Encontra com a Educação</h1>
-          <p>Sistema de gestão escolar que conecta pais e professores</p>
-          <a href="#">Sobre Nosso Serviço</a>
-        </div>
+      <div class="app-buttons">
+        <a href="#" class="btn-primary">Acesse no seu iPhone</a>
+        <a href="#" class="btn-secondary">Acesse no Android</a>
       </div>
-    </section>
+    </div>
 
-    <section class="section-cards">
-
-      <div class="sobre-nossos-servicos">
-        SOBRE NOSSOS SERVIÇOS ESCOLARES
+    <div class="app-image">
+      <div class="image-frame">
+        <img src="resources/assets/little-boy-with-notebooks-Photoroom 1.svg" alt="">
       </div>
+<<<<<<< HEAD
 
       <div class="cards">
         <div class="card">
@@ -562,3 +340,8 @@
   	
 </body>
 </html>
+=======
+    </div>
+  </div>
+</section>
+>>>>>>> 02ece0f514ec8b5aadebe43f1dfed1e6efb3dac6
