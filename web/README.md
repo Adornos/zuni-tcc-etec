@@ -29,6 +29,7 @@
 
 ### Ademar:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [ ] Terminar a dashboard
 - [ ] Responsividade
     - [ ] Home
@@ -39,6 +40,18 @@
     - [ ] Bodys
 - [ ] Efeito fade-in
 
+=======
+- [ ] Terminar a dashboard
+- [ ] Responsividade
+    -[ ] Home
+    -[ ] Dashboard
+    -[ ] Matrícula
+- [ ] Deixar os botões funcionais
+    -[ ] Headerv
+    -[ ] Bodys
+- [ ] Efeito fade-in
+- [ ] 
+>>>>>>> a3bcb72 (feat: Update README with additional tasks for dashboard and front-end design)
 ### João:
 - [ ] Implementar menu header e menu footer que será usado no mobile no design
 - [ ] Terminar por completo o design do front-end
@@ -46,8 +59,12 @@
     - [ ] Terminar por completo o design mobile
 - [ ] Fazer a documentação do projeto mobile e web
     - [ ] Escrever as funcionalidades do web e mobile de cada tela
+<<<<<<< HEAD
 - [ ] Desenvolver brading da marca Zuni
 =======
 
 ### João:
 >>>>>>> bb422a5 (feat: Update professor dashboard with schedule functionality and styling)
+=======
+- [ ] Desenvolver brading da marca Zuni
+>>>>>>> a3bcb72 (feat: Update README with additional tasks for dashboard and front-end design)
