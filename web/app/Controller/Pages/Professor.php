@@ -18,7 +18,7 @@ class Professor extends Page
         "curriculo" => "Professor de Matemática com mais de 10 anos de experiência em ensino médio e preparatórios para vestibulares."
     ];
 
-    
+
     private static function getHeader()
     {
         return View::render('pages/professor/header');
@@ -28,6 +28,7 @@ class Professor extends Page
     {
         return View::render('pages/professor/aside');
     }
+
 
     private static function getDashboard()
     {
@@ -39,19 +40,31 @@ class Professor extends Page
         return View::render('pages/professor/schedule');
     }
 
+    private static array $panels = [
+        'dashboard' => 'getDashboard',
+        'schedule' => 'getSchedule',
+    ];
+
+
 
     /**
-     * Retorna (view) da sobre
+     * Retorna o painel do professor e aloca sua página em específico
+     *
+     * @param  string $page
      * @return string
      */
-    public static function getPainelProfessor($page = 'dashboard')
+    public static function getPainelProfessor($page)
     {
+
+        if (!key_exists($page, self::$panels)) {
+            throw new \Exception('Painel '. $page .' não existe', 404);
+        }
 
         // retorna view da sobre
         $content = View::render('pages/professor/index', array_merge(
             [
                 'aside' => self::getAside(),
-                'content' => self::getSchedule()
+                'content' => self::{self::$panels[$page]}(),
             ],
             Organization::getOrganizationData(),
             self::$dados_professor

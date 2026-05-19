@@ -59,87 +59,78 @@
 .teacher-dashboard,
 .teacher-schedule { grid-area: Panel; }
     
-.teacher-schedule {
-    padding-inline: 0.45vw;
-}
 
 .schedule-table{
-    width: fit-content;
     border-collapse:separate;
-    border-spacing:0.9vw;
-    padding: 0.45vw;
+    border-spacing:12px;
 }
 
 .schedule-table th{
     text-align:center;
-    font-size:1.32vw;
+    font-size:1.1rem;
     font-weight:600;
     color:#222;
-    padding:0.6vw;
-    padding-bottom:0.75vw;
+    padding-bottom:10px;
 }
 
 .schedule-table td{
-    width: fit-content;
-    /* min-width:220px; */
+    min-width:220px;
     vertical-align:top;
-    padding:0.6vw;
 }
 
 .schedule-card{
     background:white;
-    border-radius:1.05vw;
-    padding:1.125vw;
+    border-radius:14px;
+    padding:15px;
     display:flex;
-    gap:0.9vw;
+    gap:12px;
     align-items:flex-start;
     box-shadow:0 2px 8px rgba(0,0,0,0.06);
 }
 
 .schedule-line{
-    width:.375vw;
-    height: 7vw;
-    border-radius:0.75vw;
+    width:5px;
+    min-height:60px;
+    border-radius:10px;
     background:#1d2dff;
 }
 
 .schedule-title{
-    font-size: 1.32vw;
+    font-size:1.1rem;
     font-weight:700;
-    margin-bottom:.375vw;
+    margin-bottom:5px;
 }
 
 .schedule-info{
     color:#444;
-    font-size:1.2vw;
-    margin-bottom:0.6vw;
+    font-size:1rem;
+    margin-bottom:8px;
 }
 
 .time-badge{
     background:#d74444;
     color:white;
-    border-radius:2.25vw;
-    padding: 2px .375vw;
-    font-size: .75vw;
+    border-radius:30px;
+    padding:4px 10px;
+    font-size:.75rem;
 }
 
 .hour-label{
-    font-size:1vw;
     font-weight:600;
-    margin-right:.375vw;
+    margin-right:5px;
 }
 
 .time-row{
     display:flex;
     align-items:center;
-    gap:.375vw;
+    gap:5px;
     flex-wrap:wrap;
 }
 
 .time-column{
-    width:2.25vw;
+    width:90px;
     text-align:center;
     font-weight:700;
     color:#666;
-    font-size:1.08vw;
+    font-size:.9rem;
 }

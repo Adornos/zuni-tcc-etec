@@ -2,8 +2,16 @@
 
 ### Adorno:
 
-- [ ] Implementar função de troca de painel em Professor
+- [x] Implementar função de troca de painel em Professor
+- [ ] Implementar páginas de:
+    - [ ] Perfil
+    - [x] Dashboard
+    - [x] Programação
+    - [ ] Relatórios
+    - [ ] Comunicados
+    - [ ] Configuração
 - [ ] Implementar model dos dados do professor
+- [ ] Implementar Auth de professores
 - [ ] Implementar schedule no banco de dados para aprovação de alunos
 - [ ] Construir o algoritmo de sort para os alunos
 
