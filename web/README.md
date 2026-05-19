@@ -10,14 +10,14 @@
 ### Ademar:
 - [ ] Terminar a dashboard
 - [ ] Responsividade
-    -[ ] Home
-    -[ ] Dashboard
-    -[ ] Matrícula
+    - [ ] Home
+    - [ ] Dashboard
+    - [ ] Matrícula
 - [ ] Deixar os botões funcionais
-    -[ ] Headerv
-    -[ ] Bodys
+    - [ ] Headerv
+    - [ ] Bodys
 - [ ] Efeito fade-in
-- [ ] 
+
 ### João:
 - [ ] Implementar menu header e menu footer que será usado no mobile no design
 - [ ] Terminar por completo o design do front-end
