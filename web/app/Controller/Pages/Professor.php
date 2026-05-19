@@ -18,6 +18,11 @@ class Professor extends Page
         "curriculo" => "Professor de Matemática com mais de 10 anos de experiência em ensino médio e preparatórios para vestibulares."
     ];
 
+    
+    private static function getHeader()
+    {
+        return View::render('pages/professor/header');
+    }
 
     private static function getHeader()
     {
@@ -44,6 +49,7 @@ class Professor extends Page
         return View::render('pages/professor/schedule');
     }
 
+<<<<<<< HEAD
     private static array $panels = [
         'profile' => 'getProfile',
         'dashboard' => 'getDashboard',
@@ -51,6 +57,8 @@ class Professor extends Page
     ];
 
 
+=======
+>>>>>>> bb422a5 (feat: Update professor dashboard with schedule functionality and styling)
 
     /**
      * Retorna o painel do professor e aloca sua página em específico
@@ -58,7 +66,11 @@ class Professor extends Page
      * @param  string $page
      * @return string
      */
+<<<<<<< HEAD
     public static function getPainelProfessor($page)
+=======
+    public static function getPainelProfessor($page = 'dashboard')
+>>>>>>> bb422a5 (feat: Update professor dashboard with schedule functionality and styling)
     {
 
         if (!key_exists($page, self::$panels)) {
@@ -69,7 +81,11 @@ class Professor extends Page
         $content = View::render('pages/professor/index', array_merge(
             [
                 'aside' => self::getAside(),
+<<<<<<< HEAD
                 'content' => self::{self::$panels[$page]}(),
+=======
+                'content' => self::getSchedule()
+>>>>>>> bb422a5 (feat: Update professor dashboard with schedule functionality and styling)
             ],
             Organization::getOrganizationData(),
             self::$dados_professor
@@ -90,6 +106,7 @@ class Professor extends Page
         $postVars = $request->getPostVars();
     
     }
+
 
 
 

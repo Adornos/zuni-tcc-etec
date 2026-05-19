@@ -2,6 +2,7 @@
 
 ### Adorno:
 
+<<<<<<< HEAD
 - [x] Implementar função de troca de painel em Professor
 - [ ] Implementar páginas de:
     - [x] Perfil
@@ -19,10 +20,15 @@
         - [ ] Relatórios
         - [ ] Comunicados
         - [ ] Configuração
+=======
+- [ ] Implementar função de troca de painel em Professor
+- [ ] Implementar model dos dados do professor
+>>>>>>> bb422a5 (feat: Update professor dashboard with schedule functionality and styling)
 - [ ] Implementar schedule no banco de dados para aprovação de alunos
 - [ ] Construir o algoritmo de sort para os alunos
 
 ### Ademar:
+<<<<<<< HEAD
 - [ ] Terminar a dashboard
 - [ ] Responsividade
     - [ ] Home
@@ -41,3 +47,7 @@
 - [ ] Fazer a documentação do projeto mobile e web
     - [ ] Escrever as funcionalidades do web e mobile de cada tela
 - [ ] Desenvolver brading da marca Zuni
+=======
+
+### João:
+>>>>>>> bb422a5 (feat: Update professor dashboard with schedule functionality and styling)
