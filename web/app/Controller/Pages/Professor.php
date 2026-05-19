@@ -18,6 +18,11 @@ class Professor extends Page
         "curriculo" => "Professor de Matemática com mais de 10 anos de experiência em ensino médio e preparatórios para vestibulares."
     ];
 
+    
+    private static function getHeader()
+    {
+        return View::render('pages/professor/header');
+    }
 
     private static function getAside()
     {
@@ -29,23 +34,24 @@ class Professor extends Page
         return View::render('pages/professor/dashboard');
     }
 
-    private static function getHeader()
+    private static function getSchedule()
     {
-        return View::render('pages/professor/header');
+        return View::render('pages/professor/schedule');
     }
+
 
     /**
      * Retorna (view) da sobre
      * @return string
      */
-    public static function getPainelProfessor()
+    public static function getPainelProfessor($page = 'dashboard')
     {
 
         // retorna view da sobre
         $content = View::render('pages/professor/index', array_merge(
             [
                 'aside' => self::getAside(),
-                'content' => self::getDashboard(),
+                'content' => self::getSchedule()
             ],
             Organization::getOrganizationData(),
             self::$dados_professor
@@ -54,6 +60,7 @@ class Professor extends Page
         //retorna a view da página
         return parent::getPage('Zuni', $content, 'teacher-panel', self::getHeader(), '');
     }
+
 
 
 }

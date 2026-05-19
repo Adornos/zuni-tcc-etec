@@ -1,5 +1,12 @@
 # Checklist
 
-- Dar um jeito no BD
-    - Simplificar Hydratate
-    - Documentar o fluxo de trabalho php-mysql que está sendo utilizado
+### Adorno:
+
+- [ ] Implementar função de troca de painel em Professor
+- [ ] Implementar model dos dados do professor
+- [ ] Implementar schedule no banco de dados para aprovação de alunos
+- [ ] Construir o algoritmo de sort para os alunos
+
+### Ademar:
+
+### João:
