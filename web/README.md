@@ -43,15 +43,19 @@
 =======
 - [ ] Terminar a dashboard
 - [ ] Responsividade
-    -[ ] Home
-    -[ ] Dashboard
-    -[ ] Matrícula
+    - [ ] Home
+    - [ ] Dashboard
+    - [ ] Matrícula
 - [ ] Deixar os botões funcionais
-    -[ ] Headerv
-    -[ ] Bodys
+    - [ ] Headerv
+    - [ ] Bodys
 - [ ] Efeito fade-in
+<<<<<<< HEAD
 - [ ] 
 >>>>>>> a3bcb72 (feat: Update README with additional tasks for dashboard and front-end design)
+=======
+
+>>>>>>> 36278f6 (fix: Correct checklist formatting in README for better readability)
 ### João:
 - [ ] Implementar menu header e menu footer que será usado no mobile no design
 - [ ] Terminar por completo o design do front-end
