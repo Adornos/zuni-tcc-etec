@@ -3,14 +3,21 @@
 ### Adorno:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [x] Implementar função de troca de painel em Professor
 - [ ] Implementar páginas de:
     - [x] Perfil
+=======
+- [x] Implementar função de troca de painel em Professor
+- [ ] Implementar páginas de:
+    - [ ] Perfil
+>>>>>>> d20d959 (feat: Enhance professor dashboard with new panel routing and improved schedule layout)
     - [x] Dashboard
     - [x] Programação
     - [ ] Relatórios
     - [ ] Comunicados
     - [ ] Configuração
+<<<<<<< HEAD
 - [ ] Implementar model dos dados do professor
     - [ ] Implementar Auth de professores
     - [ ] Request de dados do professor (Armazenamento em cookies para diluir requests repetidas?)
@@ -24,6 +31,10 @@
 - [ ] Implementar função de troca de painel em Professor
 - [ ] Implementar model dos dados do professor
 >>>>>>> bb422a5 (feat: Update professor dashboard with schedule functionality and styling)
+=======
+- [ ] Implementar model dos dados do professor
+- [ ] Implementar Auth de professores
+>>>>>>> d20d959 (feat: Enhance professor dashboard with new panel routing and improved schedule layout)
 - [ ] Implementar schedule no banco de dados para aprovação de alunos
 - [ ] Construir o algoritmo de sort para os alunos
 

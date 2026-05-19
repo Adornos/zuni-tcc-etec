@@ -18,7 +18,7 @@ class Professor extends Page
         "curriculo" => "Professor de Matemática com mais de 10 anos de experiência em ensino médio e preparatórios para vestibulares."
     ];
 
-    
+
     private static function getHeader()
     {
         return View::render('pages/professor/header');
@@ -34,10 +34,13 @@ class Professor extends Page
         return View::render('pages/professor/aside');
     }
 
+<<<<<<< HEAD
     private static function getProfile()
     {
         return View::render('pages/professor/profile');
     }
+=======
+>>>>>>> d20d959 (feat: Enhance professor dashboard with new panel routing and improved schedule layout)
 
     private static function getDashboard()
     {
@@ -50,15 +53,22 @@ class Professor extends Page
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private static array $panels = [
         'profile' => 'getProfile',
+=======
+    private static array $panels = [
+>>>>>>> d20d959 (feat: Enhance professor dashboard with new panel routing and improved schedule layout)
         'dashboard' => 'getDashboard',
         'schedule' => 'getSchedule',
     ];
 
 
+<<<<<<< HEAD
 =======
 >>>>>>> bb422a5 (feat: Update professor dashboard with schedule functionality and styling)
+=======
+>>>>>>> d20d959 (feat: Enhance professor dashboard with new panel routing and improved schedule layout)
 
     /**
      * Retorna o painel do professor e aloca sua página em específico
@@ -67,10 +77,14 @@ class Professor extends Page
      * @return string
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     public static function getPainelProfessor($page)
 =======
     public static function getPainelProfessor($page = 'dashboard')
 >>>>>>> bb422a5 (feat: Update professor dashboard with schedule functionality and styling)
+=======
+    public static function getPainelProfessor($page)
+>>>>>>> d20d959 (feat: Enhance professor dashboard with new panel routing and improved schedule layout)
     {
 
         if (!key_exists($page, self::$panels)) {
@@ -82,10 +96,14 @@ class Professor extends Page
             [
                 'aside' => self::getAside(),
 <<<<<<< HEAD
+<<<<<<< HEAD
                 'content' => self::{self::$panels[$page]}(),
 =======
                 'content' => self::getSchedule()
 >>>>>>> bb422a5 (feat: Update professor dashboard with schedule functionality and styling)
+=======
+                'content' => self::{self::$panels[$page]}(),
+>>>>>>> d20d959 (feat: Enhance professor dashboard with new panel routing and improved schedule layout)
             ],
             Organization::getOrganizationData(),
             self::$dados_professor
