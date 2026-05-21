@@ -42,7 +42,7 @@ $obRouter->get('/login', [
 
 //ROTA professor
 
-$obRouter->get('/professor', [
+$obRouter->get('/professor/', [
     function () {
         return new Response(200, Pages\Professor::getPainelProfessor('dashboard'));
     }

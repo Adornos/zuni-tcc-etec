@@ -29,6 +29,10 @@ class Professor extends Page
         return View::render('pages/professor/aside');
     }
 
+    private static function getProfile()
+    {
+        return View::render('pages/professor/profile');
+    }
 
     private static function getDashboard()
     {
@@ -41,6 +45,7 @@ class Professor extends Page
     }
 
     private static array $panels = [
+        'profile' => 'getProfile',
         'dashboard' => 'getDashboard',
         'schedule' => 'getSchedule',
     ];
@@ -72,6 +77,18 @@ class Professor extends Page
 
         //retorna a view da página
         return parent::getPage('Zuni', $content, 'teacher-panel', self::getHeader(), '');
+    }
+    
+    /**
+     * Metodo que requisita as informações do professor para visualização no painel (perfil, dashboard, agenda, etc)
+     *
+     * @param  mixed $request
+     */
+    public static function requestProfessorInfo($request)
+    {
+
+        $postVars = $request->getPostVars();
+    
     }
 
 

@@ -4,14 +4,21 @@
 
 - [x] Implementar função de troca de painel em Professor
 - [ ] Implementar páginas de:
-    - [ ] Perfil
+    - [x] Perfil
     - [x] Dashboard
     - [x] Programação
     - [ ] Relatórios
     - [ ] Comunicados
     - [ ] Configuração
 - [ ] Implementar model dos dados do professor
-- [ ] Implementar Auth de professores
+    - [ ] Implementar Auth de professores
+    - [ ] Request de dados do professor (Armazenamento em cookies para diluir requests repetidas?)
+        - [ ] Perfil
+        - [ ] Dashboard
+        - [ ] Programação
+        - [ ] Relatórios
+        - [ ] Comunicados
+        - [ ] Configuração
 - [ ] Implementar schedule no banco de dados para aprovação de alunos
 - [ ] Construir o algoritmo de sort para os alunos
 
