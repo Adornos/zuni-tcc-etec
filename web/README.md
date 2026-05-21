@@ -10,8 +10,12 @@
 =======
 - [x] Implementar função de troca de painel em Professor
 - [ ] Implementar páginas de:
+<<<<<<< HEAD
     - [ ] Perfil
 >>>>>>> d20d959 (feat: Enhance professor dashboard with new panel routing and improved schedule layout)
+=======
+    - [x] Perfil
+>>>>>>> ce4075f (feat: Implement teacher panel features including profile, dashboard, and schedule views; update navigation and styles)
     - [x] Dashboard
     - [x] Programação
     - [ ] Relatórios
@@ -33,8 +37,19 @@
 >>>>>>> bb422a5 (feat: Update professor dashboard with schedule functionality and styling)
 =======
 - [ ] Implementar model dos dados do professor
+<<<<<<< HEAD
 - [ ] Implementar Auth de professores
 >>>>>>> d20d959 (feat: Enhance professor dashboard with new panel routing and improved schedule layout)
+=======
+    - [ ] Implementar Auth de professores
+    - [ ] Request de dados do professor (Armazenamento em cookies para diluir requests repetidas?)
+        - [ ] Perfil
+        - [ ] Dashboard
+        - [ ] Programação
+        - [ ] Relatórios
+        - [ ] Comunicados
+        - [ ] Configuração
+>>>>>>> ce4075f (feat: Implement teacher panel features including profile, dashboard, and schedule views; update navigation and styles)
 - [ ] Implementar schedule no banco de dados para aprovação de alunos
 - [ ] Construir o algoritmo de sort para os alunos
 

@@ -35,12 +35,18 @@ class Professor extends Page
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ce4075f (feat: Implement teacher panel features including profile, dashboard, and schedule views; update navigation and styles)
     private static function getProfile()
     {
         return View::render('pages/professor/profile');
     }
+<<<<<<< HEAD
 =======
 >>>>>>> d20d959 (feat: Enhance professor dashboard with new panel routing and improved schedule layout)
+=======
+>>>>>>> ce4075f (feat: Implement teacher panel features including profile, dashboard, and schedule views; update navigation and styles)
 
     private static function getDashboard()
     {
@@ -56,9 +62,12 @@ class Professor extends Page
 <<<<<<< HEAD
     private static array $panels = [
         'profile' => 'getProfile',
+<<<<<<< HEAD
 =======
     private static array $panels = [
 >>>>>>> d20d959 (feat: Enhance professor dashboard with new panel routing and improved schedule layout)
+=======
+>>>>>>> ce4075f (feat: Implement teacher panel features including profile, dashboard, and schedule views; update navigation and styles)
         'dashboard' => 'getDashboard',
         'schedule' => 'getSchedule',
     ];
@@ -124,7 +133,10 @@ class Professor extends Page
         $postVars = $request->getPostVars();
     
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ce4075f (feat: Implement teacher panel features including profile, dashboard, and schedule views; update navigation and styles)
 
 
 
