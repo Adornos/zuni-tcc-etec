@@ -94,13 +94,13 @@ class TeacherPanel {
 
         $data = (new Database('professor'))->select('idProfessor = '. $idProfessor)->fetchObject(self::class);
         
-        self::idProfessor = $data['idProfessor'];
-        self::nome = $data['nome'];
-        self::email = $data['email'];
-        self::telefone = $data['telefone'];
-        self::cpf = $data['cpf'];
-        self::sexo = $data['sexo'];
-        self::curriculo = $data['curriculo'];
+        $this->idProfessor = $data->idProfessor;
+        $this->nome = $data->nome;
+        $this->email = $data->email;
+        $this->telefone = $data->telefone;
+        $this->cpf = $data->cpf;
+        $this->sexo = $data->sexo;
+        $this->curriculo = $data->curriculo;
 
     }
 
