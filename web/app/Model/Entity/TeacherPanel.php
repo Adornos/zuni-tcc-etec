@@ -95,6 +95,9 @@ class TeacherPanel {
         $data = (new Database('professor'))->select('idProfessor = '. $idProfessor)->fetchObject(self::class);
         
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 534ea55 (fix: Correct property access in getDadosPerfil method to use $this instead of self)
         $this->idProfessor = $data->idProfessor;
         $this->nome = $data->nome;
         $this->email = $data->email;
@@ -102,6 +105,7 @@ class TeacherPanel {
         $this->cpf = $data->cpf;
         $this->sexo = $data->sexo;
         $this->curriculo = $data->curriculo;
+<<<<<<< HEAD
 =======
         self::idProfessor = $data['idProfessor'];
         self::nome = $data['nome'];
@@ -111,6 +115,8 @@ class TeacherPanel {
         self::sexo = $data['sexo'];
         self::curriculo = $data['curriculo'];
 >>>>>>> ce4075f (feat: Implement teacher panel features including profile, dashboard, and schedule views; update navigation and styles)
+=======
+>>>>>>> 534ea55 (fix: Correct property access in getDadosPerfil method to use $this instead of self)
 
     }
 
