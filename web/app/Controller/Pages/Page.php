@@ -33,6 +33,8 @@ class Page{
         'title' => $title,
         'namespace' => $namespace,
         'header' => $header ?? self::getHeader(),
+        // 'header' => '',
+
         'content'=> $content,
         'footer' => $footer ?? self::getFooter(),
         ]);
