@@ -38,8 +38,13 @@ img {
   
   .child-img {
     position: absolute;
+<<<<<<< HEAD
     right: -40px;
     top: auto;
+=======
+    right: -100px;
+    top: 'auto';
+>>>>>>> 23ce052 (aniversario andre)
     width: min(58vw, 820px);
     height: auto;
     z-index: 2;

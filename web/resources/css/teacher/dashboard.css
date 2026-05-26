@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 23ce052 (aniversario andre)
 
 /*
 
@@ -7,12 +10,16 @@
 
 */
 
+<<<<<<< HEAD
 =======
 >>>>>>> ce4075f (feat: Implement teacher panel features including profile, dashboard, and schedule views; update navigation and styles)
+=======
+>>>>>>> 23ce052 (aniversario andre)
 body {
   background: #dfe4ea;
   font-family: Arial, Helvetica, sans-serif;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 .novo-bimestre{
   font-size: 1.2rem;
@@ -20,6 +27,11 @@ body {
 =======
 
 >>>>>>> ce4075f (feat: Implement teacher panel features including profile, dashboard, and schedule views; update navigation and styles)
+=======
+.novo-bimestre{
+  font-size: 1.2rem;
+}
+>>>>>>> 23ce052 (aniversario andre)
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -100,19 +112,27 @@ body {
 
 .btn-programacao {
 <<<<<<< HEAD
+<<<<<<< HEAD
   font-size: 14px;
 
 =======
 >>>>>>> ce4075f (feat: Implement teacher panel features including profile, dashboard, and schedule views; update navigation and styles)
+=======
+  font-size: 14px;
+
+>>>>>>> 23ce052 (aniversario andre)
   background: #d63c3c;
   border: none;
   padding: 10px 20px;
   color: white;
   border-radius: 10px;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   margin-top: 15px;
 >>>>>>> ce4075f (feat: Implement teacher panel features including profile, dashboard, and schedule views; update navigation and styles)
+=======
+>>>>>>> 23ce052 (aniversario andre)
 }
 
 .event-item {
