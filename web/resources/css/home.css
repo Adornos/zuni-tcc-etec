@@ -38,8 +38,8 @@ img {
   
   .child-img {
     position: absolute;
-    right: -100px;
-    top: 'auto';
+    right: -40px;
+    top: auto;
     width: min(58vw, 820px);
     height: auto;
     z-index: 2;
@@ -53,6 +53,7 @@ img {
     padding: 0 80px;
     position: relative;
     z-index: 3;
+    
   }
   
   .hero-text {
@@ -114,7 +115,7 @@ img {
   }
   
   .card {
-    width: 351px;
+    width: 340px;
     min-height: 150px;
     background: white;
     border-radius: 48px;
@@ -134,7 +135,7 @@ img {
   
   .card p {
     margin: 0;
-    font-family: "Inter", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     line-height: 1.5;
   }
@@ -152,7 +153,7 @@ img {
   /* SEÇÃO APP */
   
   .section-app {
-    background: linear-gradient(180deg, #e7effa, #fff);
+    background-color: white;
     width: 100%;
     padding: 90px 70px;
     position: relative;
