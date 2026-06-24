@@ -2,12 +2,12 @@
     <div class="sidebar-section d-flex flex-column justify-content-around">
         <!-- LOGO -->
         <div class="sidebar-logo my-4 mx-auto p-3">
-            <img src="resources/assets/logo_white.svg" alt="" />
+            <img src="{{URL}}/resources/assets/logo_white.svg" alt="" />
         </div>
 
         <!-- NAVEGAÇÃO -->
         <nav class="nav flex-column gap-2 flex-grow-1">
-            <a href="#" class="nav-link d-flex align-items-center gap-2">
+            <a href="profile" class="nav-link d-flex align-items-center gap-2">
                 <i class="bi bi-person-circle"></i>
                 <div class="sidebar-profile d-flex align-items-center">
                     <div class="ms-3">
@@ -17,12 +17,12 @@
                 </div>
             </a>
 
-            <a href="#" class="nav-link d-flex align-items-center gap-2">
+            <a href="dashboard" class="nav-link d-flex align-items-center gap-2" id="dashboard">
                 <i class="bi bi-speedometer2"></i>
                 <p class="ms-3 m-0">Dashboard</p>
             </a>
 
-            <a href="#" class="nav-link d-flex align-items-center gap-2">
+            <a href="schedule" class="nav-link d-flex align-items-center gap-2" id="schedule">
                 <i class="bi bi-calendar3"></i>
                 <p class="ms-3 m-0">Programação</p>
             </a>
@@ -52,4 +52,7 @@
             </a>
         </div>
     </div>
+
+    <script src="{{URL}}/resources/js/teacherPanel.js"></script>
+
 </aside>

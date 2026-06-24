@@ -42,11 +42,20 @@ $obRouter->get('/login', [
 
 //ROTA professor
 
-$obRouter->get('/professor', [
+$obRouter->get('/professor/', [
     function () {
-        return new Response(200, Pages\Professor::getPainelProfessor());
+        return new Response(200, Pages\Professor::getPainelProfessor('dashboard'));
     }
 ]);
+
+$obRouter->get('/professor/{page}', [
+    function ($page) {
+
+        $page = ($page == '') ? 'dashboard' : $page;
+        return new Response(200, Pages\Professor::getPainelProfessor($page));
+    }
+]);
+
 
 
 //ROTA DINÂMICA TESTE

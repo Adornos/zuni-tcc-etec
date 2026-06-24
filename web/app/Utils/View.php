@@ -53,7 +53,6 @@ class View{
         $keys = array_map(function ($item) {
             return '{{'.$item.'}}';
         }, $keys);
-        
 
         // Retorna o conteudo renderizado, substituindo as variaveis
         return str_replace($keys,array_values($vars), $contentView);

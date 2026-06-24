@@ -1,0 +1,25 @@
+.slogan .texto{
+
+}
+
+.slogan .circle{
+    position: absolute;
+    left: 0px;
+    height: 80vmin;
+    width: 80vmax;
+}
+
+.slogan .kid {
+    position: absolute;
+    right: 0px;
+    height: 80vmin;
+}
+
+/* .app .image::before{
+    content: '';
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #c13936;
+    
+} */
