@@ -20,18 +20,18 @@
                 <form method="POST" action="/login">
                     @csrf
 
-                    <!-- Email -->
+                    <!-- Email ou Username -->
                     <label class="floating-label mb-6">
                         <input
-                            type="email"
-                            name="email"
-                            placeholder="responsavel@email.com"
-                            value="{{ old('email') }}"
-                            class="input input-bordered w-full @error('email') input-error @enderror"
+                            type="text"
+                            name="login"
+                            placeholder="Email ou Username"
+                            value="{{ old('login') }}"
+                            class="input input-bordered w-full @error('login') input-error @enderror"
                             required
                         >
 
-                        <span>E-mail</span>
+                        <span>Email ou Username</span>
                     </label>
 
                     @error('email')

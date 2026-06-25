@@ -4,7 +4,7 @@
         <div class="flex flex-row items-center justify-between">
                 <div>
                     <h2 class="text-3xl font-bold">
-                        2
+                        {{count(auth()->user()->students()->latest()->get() ?? [])}}
                     </h2>
 
                     <p class="text-base-content/60">
@@ -17,7 +17,9 @@
                 </span>
             
         </div>
-            <a class="flex items-center text-[1vmax] pl-[0.6vmax] pr-[1.8vmax] py-[0.6vmax] rounded-full bg-Csecondary text-white font-medium hover:bg-Csecondary-dark transition">
+            <a 
+            href="{{ route('guardian.registered') }}#cadastro"
+            class="flex items-center text-[1vmax] pl-[0.6vmax] pr-[1.8vmax] py-[0.6vmax] rounded-full bg-Csecondary text-white font-medium hover:bg-Csecondary-dark transition">
                 <h1 class="text-[4vmax] leading-0 mr-[1vmax]">+</h1>
                 <p>Cadastrar <br> nova criança</p>
             </a>

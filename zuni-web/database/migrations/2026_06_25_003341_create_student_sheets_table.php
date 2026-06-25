@@ -8,14 +8,21 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('student_sheets', function (Blueprint $table) {
             
             $table->id();
 
-            // Guardian (User relation)
-            $table->foreignId('user_id')
-                ->constrained()
+            // Student user
+            $table->foreignId('student_id')
+                ->constrained('users')
                 ->cascadeOnDelete();
+
+            // Guardian eho registered
+            $table->foreignId('guardian_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+
+
 
             // Student data
             $table->string('name', 100);

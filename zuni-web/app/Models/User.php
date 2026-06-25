@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use App\Models\StudentSheet;
+
+
+
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
@@ -23,6 +27,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
+        'registration_number',
         'email',
         'cpf',
         'password',
@@ -52,6 +57,10 @@ class User extends Authenticatable
     {
         return $this->role === UserRole::GUARDIAN;
     }
+    public function isStudent(): bool
+    {
+        return $this->role === UserRole::STUDENT;
+    }
 
     public function isTeacher(): bool
     {
@@ -65,7 +74,12 @@ class User extends Authenticatable
 
     public function students(): HasMany
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(StudentSheet::class, 'guardian_id');
+    }
+
+    public function studentSheet(): HasOne
+    {
+        return $this->hasOne(StudentSheet::class, 'student_id');
     }
 
 

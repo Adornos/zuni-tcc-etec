@@ -51,7 +51,6 @@ class GuardianController extends Controller
             'dashboardInfo' => view('guardian.registered', compact('children'))
         ]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -63,13 +62,25 @@ class GuardianController extends Controller
             'dashboardInfo' => $student->create()
         ]);
     }
-
     /**
      * Store a newly created resource in storage.
      */
     public function registerStudent(Request $request)
     {
         return app(StudentController::class)->store($request);
+    }
+
+    public function forum()
+    {
+        return view('guardian.dashboard', [
+            'dashboardInfo' => view('guardian.forum')
+        ]);
+    }
+    public function chat()
+    {
+        return view('guardian.dashboard', [
+            'dashboardInfo' => view('guardian.chat')
+        ]);
     }
 
     /**

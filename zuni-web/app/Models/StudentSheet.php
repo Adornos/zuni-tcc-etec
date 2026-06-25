@@ -5,29 +5,35 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Student extends Model
+class StudentSheet extends Model
 {
     protected $fillable = [
-        'user_id',
+        'student_id',
+        'guardian_id',
+
         'name',
         'birth_date',
         'gender',
         'class',
         'age',
+
         'street',
         'number',
         'district',
         'city',
         'state',
+
         'neurodivergent',
         'allergy',
         'food_restriction',
         'special_care',
+
         'notes',
     ];
 
     protected $casts = [
         'birth_date' => 'date',
+
         'neurodivergent' => 'boolean',
         'allergy' => 'boolean',
         'food_restriction' => 'boolean',
@@ -39,6 +45,11 @@ class Student extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'student_id');
+    }
+
+    public function guardian(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'guardian_id');
     }
 }

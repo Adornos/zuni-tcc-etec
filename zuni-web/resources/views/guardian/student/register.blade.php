@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('guardian.student.register') }}" class="space-y-8 col-span-4">
+<form method="POST" action="{{ route('guardian.student.store') }}" class="space-y-8 col-span-4">
     @csrf
 
     {{-- Dados do aluno --}}

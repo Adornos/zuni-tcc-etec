@@ -61,9 +61,15 @@
                             Situação
                         </p>
 
-                        <p class="text-lg font-semibold text-success">
-                            Ativo
+                        <p @class([
+                                'text-lg font-semibold',
+                                'text-green-600' => $child->status === 'ativo',
+                                'text-red-600' => $child->status === 'inativo',
+                                'text-amber-500' => !in_array($child->status, ['ativo', 'inativo']),
+                            ])>
+                            {{ ucfirst($child->status ?? 'pendente') }}
                         </p>
+
 
                         <div class="mt-2">
                             <span class="badge text-white bg-Csecondary">
@@ -113,6 +119,7 @@
                 <div class="mt-4 flex justify-end ">
 
                     <a href="{{ route('guardian.student.register') }}"
+                        id="cadastro"
                         class="px-5 py-2 rounded-full bg-Csecondary text-white font-medium hover:bg-Csecondary-dark transition">
 
                         + Cadastrar criança

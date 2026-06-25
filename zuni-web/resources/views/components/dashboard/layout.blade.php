@@ -16,7 +16,7 @@
 
     <div class="grid h-screen grid-cols-[19.5vmax_1fr] grid-rows-[6.75vmax_1fr]">
 
-        {{-- Aside --}}    
+        {{-- Aside --}}
         <aside class="row-span-2 bg-Csecondary text-primary-content flex flex-col">
 
             {{-- Logo --}}
@@ -54,7 +54,7 @@
                     </li>
 
                     <li>
-                        <a href="/logout" class="text-error">
+                        <a href="{{ route('logout') }}" class="text-error">
 
                             <i class="bi bi-box-arrow-right text-lg"></i>
 
@@ -91,7 +91,7 @@
                         </span>
 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-6">
+                            stroke="#FFAE00" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.05c0 .243 0 .486-.002.729A8.967 8.967 0 013.69 15.77a23.848 23.848 0 005.454 1.31m5.713 0a24.255 24.255 0 01-5.713 0m5.713 0a3 3 0 11-5.713 0" />
                         </svg>
@@ -99,15 +99,32 @@
                 </button>
 
                 {{-- Perfil --}}
-                <div class="dropdown dropdown-end">
-                    <div tabindex="0" role="button" class="btn btn-outline">
-                        Perfil
+                <div class="dropdown dropdown-end" tabindex="0" role="button">
+                    <div class="avatar flex items-center p-[1vmax] rounded-[1vmax] bg-white cursor-pointer">
+                        <div class="w-12 rounded-full">
+                            <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name ?? 'Sem nome' }}" />
+                        </div>
+                        <span class="pl-[1vmax]">
+                            <span class="flex items-center">
+                                <p>{{ auth()->user()->name ?? 'Sem nome' }}</p>
+                                <span class="">
+                                    <div class="w-3 self-start m-[.525vmax]">
+                                        <img class=" h-full object-contain"
+                                            src="{{ asset('images/icons/chevronDown.svg') }}" alt="">
+                                    </div>
+                                </span>
+
+                            </span>
+                            <small class="text-Ctext-muted">{{ auth()->user()->email ?? 'sem email' }}</small>
+                        </span>
+
+
                     </div>
 
                     <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow">
 
                         <li>
-                            <a href="#">
+                            <a href="{{ route(auth()->user()->role->value.'.profile')}}">
                                 Meu Perfil
                             </a>
                         </li>
@@ -136,7 +153,7 @@
 
             <div class="grid grid-cols-4 grid-rows-4 gap-4 h-full">
 
-                
+
                 @isset($dashboardInfo)
                     {!! $dashboardInfo !!}
                 @else
