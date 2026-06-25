@@ -8,7 +8,7 @@
     {{-- Perfil --}}
         <li>
             <a
-                href="{{ route('guardian.index') }}"
+                href="{{ route('teacher.index') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <i class="bi bi-person-circle"></i>
@@ -19,7 +19,7 @@
     {{-- Perfil --}}
         <li>
             <a
-                href="{{ route('guardian.profile') }}"
+                href="{{ route(auth()->user()->role->value.'.profile') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <i class="bi bi-person-circle"></i>
@@ -30,18 +30,18 @@
         {{-- Cadastros --}}
         <li>
             <a
-                href="{{ route('guardian.registered') }}"
+                href="{{ route('teacher.schedule') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <i class="bi bi-journal-plus"></i>
-                Cadastros
+                Cronograma
             </a>
         </li>
 
         {{-- Mural --}}
         <li>
             <a
-                href="{{ route('guardian.forum') }}"
+                href="{{ route('teacher.forum') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <i class="bi bi-megaphone"></i>
@@ -52,7 +52,7 @@
         {{-- Chat --}}
         <li>
             <a
-                href="{{ route('guardian.chat') }}"
+                href="{{ route('teacher.chat') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <i class="bi bi-chat-dots"></i>

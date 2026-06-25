@@ -21,6 +21,7 @@ class Register extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+
         // Create the user
         $user = User::create([
             'name' => $validated['name'],
