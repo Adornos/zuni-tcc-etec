@@ -8,22 +8,28 @@
     {{-- Perfil --}}
         <li>
             <a
-                href="{{ route('guardian.index') }}"
+                href="{{ route(auth()->user()->role->value.'.profile') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
-                <i class="bi bi-person-circle"></i>
-                Dashboard
+                <img 
+                class="w-[2.2vmax] mr-[1vmax] rounded-full " 
+                src="https://ui-avatars.com/api/?name={{ $profile->name[0] ?? 'Sem nome' }}" 
+                />
+                Perfil
             </a>
         </li>
 
-    {{-- Perfil --}}
+    {{-- Dashboard --}}
         <li>
             <a
-                href="{{ route('guardian.profile') }}"
+                href="{{ route('guardian.index') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
-                <i class="bi bi-person-circle"></i>
-                Perfil
+                <img 
+                class="w-[2.2vmax] mr-[1vmax]" 
+                src="{{ asset('images/icons/dashboard.svg') }}" 
+                />
+                Dashboard
             </a>
         </li>
 
@@ -33,7 +39,10 @@
                 href="{{ route('guardian.registered') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
-                <i class="bi bi-journal-plus"></i>
+                <img 
+                class="w-[2.2vmax] mr-[1vmax]" 
+                src="{{ asset('images/icons/enroll.svg') }}" 
+                />
                 Cadastros
             </a>
         </li>
@@ -44,7 +53,10 @@
                 href="{{ route('guardian.forum') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
-                <i class="bi bi-megaphone"></i>
+                <img 
+                class="w-[2.2vmax] mr-[1vmax]" 
+                src="{{ asset('images/icons/forum.svg') }}" 
+                />
                 Mural
             </a>
         </li>
@@ -55,7 +67,10 @@
                 href="{{ route('guardian.chat') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
-                <i class="bi bi-chat-dots"></i>
+                <img 
+                class="w-[2.2vmax] mr-[1vmax]" 
+                src="{{ asset('images/icons/chat.svg') }}" 
+                />
                 Chat
             </a>
         </li> 

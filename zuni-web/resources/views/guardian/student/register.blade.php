@@ -19,6 +19,7 @@
                     <input
                         type="text"
                         name="name"
+                        value="oi"
                         class="input input-bordered w-full"
                         required
                     >

@@ -9,14 +9,14 @@
             </h2>
 
             <span class="badge text-white bg-Csecondary">
-                {{ count($children ?? []) }}
+                {{ count($students ?? []) }}
             </span>
         </div>
 
         <!-- Área scrollável -->
         <div class="space-y-3 overflow-y-auto max-h-[68vh] pr-2 bg-white p-[2vmax]">
 
-            @forelse($children ?? [] as $child)
+            @forelse($students ?? [] as $student)
 
                 <div
                     class="card-body flex flex-row items-center justify-between rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.15)]">
@@ -27,27 +27,27 @@
                         <!-- Avatar -->
                         <div class="avatar">
                             <div class="w-20 rounded-full">
-                                <img src="https://ui-avatars.com/api/?name={{ $child->name }}" />
+                                <img src="https://ui-avatars.com/api/?name={{ $student->name }}" />
                             </div>
                         </div>
 
                         <!-- Informações principais -->
                         <div>
                             <h2 class="text-2xl font-bold">
-                                {{ $child->name ?? 'Nome da criança' }}
+                                {{ $student->name ?? 'Nome da criança' }}
                             </h2>
 
                             <p class="text-base-content/60">
-                                {{ $child->class ?? 'Turma não definida' }} • {{ $child->shift ?? 'Turno não definido' }}
+                                {{ $student->class ?? 'Turma não definida' }} • {{ $student->shift ?? 'Turno não definido' }}
                             </p>
 
                             <div class="flex gap-2 mt-2">
                                 <span class="badge text-white bg-Csecondary">
-                                    Matrícula: {{ $child->registration ?? '0000' }}
+                                    Matrícula: {{ $student->registration ?? '0000' }}
                                 </span>
 
                                 <span class="badge text-white bg-Csecondary">
-                                    {{ $child->age ?? '0' }} anos
+                                    {{ $student->age ?? '0' }} anos
                                 </span>
                             </div>
                         </div>
@@ -63,17 +63,17 @@
 
                         <p @class([
                                 'text-lg font-semibold',
-                                'text-green-600' => $child->status === 'ativo',
-                                'text-red-600' => $child->status === 'inativo',
-                                'text-amber-500' => !in_array($child->status, ['ativo', 'inativo']),
+                                'text-green-600' => $student->status === 'ativo',
+                                'text-red-600' => $student->status === 'inativo',
+                                'text-amber-500' => !in_array($student->status, ['ativo', 'inativo']),
                             ])>
-                            {{ ucfirst($child->status ?? 'pendente') }}
+                            {{ ucfirst($student->status ?? 'pendente') }}
                         </p>
 
 
                         <div class="mt-2">
                             <span class="badge text-white bg-Csecondary">
-                                Frequência: {{ $child->attendance ?? '0%' }}
+                                Frequência: {{ $student->attendance ?? '0%' }}
                             </span>
                         </div>
 
@@ -114,7 +114,7 @@
 
             @endforelse
 
-            @if (count($children ?? []))
+            @if (count($students ?? []))
 
                 <div class="mt-4 flex justify-end ">
 
