@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Enums\UserRole;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -47,12 +48,12 @@ class User extends Authenticatable
     }
 
 
-    public function isResponsavel(): bool
+    public function isGuardian(): bool
     {
         return $this->role === UserRole::GUARDIAN;
     }
 
-    public function isProfessor(): bool
+    public function isTeacher(): bool
     {
         return $this->role === UserRole::TEACHER;
     }
@@ -61,5 +62,11 @@ class User extends Authenticatable
     {
         return $this->role === UserRole::ADMIN;
     }
+
+    public function students(): HasMany
+    {
+        return $this->hasMany(Student::class);
+    }
+
 
 }

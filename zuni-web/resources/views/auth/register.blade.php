@@ -3,7 +3,6 @@
         Cadastro de Responsável
     </x-slot:title>
 
-```
 <div class="hero min-h-[calc(100vh-16rem)] bg-Cprimary-light">
     <div class="hero-content flex-col">
 
@@ -196,6 +195,6 @@
 
     </div>
 </div>
-```
+
 
 </x-layout>

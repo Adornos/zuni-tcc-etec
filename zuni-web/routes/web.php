@@ -13,9 +13,13 @@ Route::get('/', [ZuniController::class, 'index']);
 Route::middleware(['auth', 'role:guardian'])->group(function () {
 
     // Only Responsável users can access this routes.
-    Route::get('/guardian', [GuardianController::class, 'index']);
-    // Route::post('/guardian', [GuardianController::class, 'storeChild']);
-    // Route::get('/guardian', [GuardianController::class, 'edit']);
+    Route::get('/guardian', [GuardianController::class, 'index'])->name('guardian.index');
+    Route::get('/guardian/profile', [GuardianController::class, 'profile'])->name('guardian.profile');
+
+    Route::get('/guardian/registered', [GuardianController::class, 'registered'])->name('guardian.registered');
+    Route::get('/guardian/register', [GuardianController::class, 'registerStudentForm'])->name('guardian.student.register');
+    Route::post('/guardian/register', [GuardianController::class, 'registerStudent']);
+
     // Route::put('/guardian', [GuardianController::class, 'update']);
     // Route::delete('/guardian', [GuardianController::class, 'destroy']);
 
