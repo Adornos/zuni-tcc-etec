@@ -13,9 +13,9 @@
             >
                 <img 
                 class="w-[2.2vmax] mr-[1vmax] rounded-full " 
-                src="https://ui-avatars.com/api/?name={{ $profile->name[0] ?? 'Sem nome' }}" 
+                src="https://ui-avatars.com/api/?name={{ auth()->user()->name[0] ?? 'Sem nome' }}" 
                 />
-                Perfil
+                {{ auth()->user()->name }}
             </a>
         </li>
 
