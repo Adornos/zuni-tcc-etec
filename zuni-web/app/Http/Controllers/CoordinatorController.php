@@ -12,22 +12,31 @@ class CoordinatorController extends Controller
 {
     public function index()
     {
-        return view('coordinator.index');
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => view('coordinator.panel')
+            
+        ]);
     }
-
     public function profile()
     {
-        return view('coordinator.profile');
+        $user = Auth::user();
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => view('coordinator.profile', ['profile' => $user])
+        ]);
     }
 
     public function forum()
     {
-        return view('coordinator.forum');
+       return view('coordinator.dashboard', [
+            'dashboardInfo' => view('coordinator.forum')
+        ]);
     }
 
     public function chat()
     {
-        return view('coordinator.chat');
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => view('coordinator.chat')
+        ]);
     }
 
     // Aprovação de matrículas
@@ -38,12 +47,18 @@ class CoordinatorController extends Controller
             ->latest()
             ->paginate(20);
 
-        return view('coordinator.enrollments.index', compact('enrollments'));
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => 'coordinator.enrollments.index',
+            'enrollments' => $enrollments
+        ]);
     }
 
     public function showEnrollment(Enrollment $enrollment)
     {
-        return view('coordinator.enrollments.show', compact('enrollment'));
+        return view('coordinator.dashboard',[
+        'dashboardInfo' => 'coordinator.enrollments.show',
+        'enrollments' => $enrollment
+        ]);
     }
 
     public function approveEnrollment(Request $request, Enrollment $enrollment)
@@ -73,7 +88,10 @@ class CoordinatorController extends Controller
     {
         $schedules = Schedule::with('teacher', 'student')->get();
 
-        return view('coordinator.schedules.index', compact('schedules'));
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => 'coordinator.schedules.index', 
+            'schedules' => $schedules
+        ]);
     }
 
     public function updateSchedules(Request $request)
@@ -103,14 +121,20 @@ class CoordinatorController extends Controller
     {
         $schedules = Schedule::where('student_id', $student->id)->get();
 
-        return view('coordinator.schedules.student', compact('student', 'schedules'));
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => 'coordinator.schedules.student', 
+            compact('student', 'schedules')
+            ]);
     }
 
     public function teacherSchedule(User $teacher)
     {
         $schedules = Schedule::where('teacher_id', $teacher->id)->get();
 
-        return view('coordinator.schedules.teacher', compact('teacher', 'schedules'));
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => 'coordinator.schedules.teacher', 
+            compact('teacher', 'schedules')
+            ]);
     }
 
     // Relatórios (internos: para docentes | externos: para responsáveis)
@@ -118,12 +142,17 @@ class CoordinatorController extends Controller
     {
         $reports = Report::latest()->paginate(20);
 
-        return view('coordinator.reports.index', compact('reports'));
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => 'coordinator.reports.index', 
+            compact('reports')
+            ]);
     }
 
     public function createReport()
     {
-        return view('coordinator.reports.create');
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => 'coordinator.reports.create'
+            ]);
     }
 
     public function storeReport(Request $request)
@@ -144,7 +173,10 @@ class CoordinatorController extends Controller
 
     public function editReport(Report $report)
     {
-        return view('coordinator.reports.edit', compact('report'));
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => 'coordinator.reports.edit',
+            compact('report')
+            ]);
     }
 
     public function updateReport(Request $request, Report $report)

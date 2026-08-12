@@ -17,7 +17,7 @@ return new class extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->foreignId('teacher_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('student_id')->nullable()->constrained('students')->cascadeOnDelete(); // ou class_id, se houver turmas
+            $table->foreignId('student_id')->nullable()->constrained('student_sheets')->cascadeOnDelete(); // ou class_id, se houver turmas
             $table->string('subject')->nullable();
             $table->timestamps();
         });
