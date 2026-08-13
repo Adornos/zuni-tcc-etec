@@ -27,7 +27,7 @@
             {{-- Navegação --}}
             <div class="flex-1 px-3">
 
-                <ul class="menu w-full gap-1">
+                <ul class="menu w-full gap-[2vmin] text-[1vmax]">
 
                     @isset($aside)
                         {!! $aside  !!}
@@ -47,7 +47,7 @@
                     <li>
                         <a href="#">
 
-                            <i class="bi bi-gear text-lg"></i>
+                            <img src="{{ asset('images/icons/config.svg') }}" class="w-[1.6vmax] mr-[1vmax]" alt=""/>
 
                             Configurações
                         </a>
@@ -56,7 +56,7 @@
                     <li>
                         <a href="{{ route('logout') }}" class="text-error">
 
-                            <i class="bi bi-box-arrow-right text-lg"></i>
+                            <img src="{{ asset('images/icons/logout.svg') }}" class="w-[1.6vmax] mr-[1vmax]" alt=""/>
 
                             Encerrar sessão
                         </a>
@@ -129,15 +129,16 @@
                             </a>
                         </li>
 
-                        <li>
+                        {{-- <li>
                             <a href="#">
                                 Configurações
                             </a>
-                        </li>
+                        </li> --}}
 
                         <li>
-                            <a class="text-error" href="#">
+                            <a class="text-error" href="{{ route('logout') }}">
                                 Sair
+                            <img loading="lazy" src="{{ asset('images/icons/logout-red.svg') }}" class="w-[1.6vmax] ml-auto mr-[1vmax]" alt=""/>
                             </a>
                         </li>
                     </ul>

@@ -165,7 +165,7 @@ class StudentController extends Controller
     /**
      * Form edição
      */
-    public function edit(Student $student)
+    public function edit(User $student)
     {
         $user = auth()->user();
 
@@ -179,7 +179,7 @@ class StudentController extends Controller
     /**
      * Atualizar student
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, User $student)
     {
         $user = auth()->user();
 
@@ -218,7 +218,7 @@ class StudentController extends Controller
     /**
      * Deletar student
      */
-    public function destroy(Student $student)
+    public function destroy(User $student)
     {
         $user = auth()->user();
 

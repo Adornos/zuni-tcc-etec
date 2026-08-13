@@ -7,16 +7,16 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class AdminUserSeeder extends Seeder
+class CoordinatorUserSeeder extends Seeder
 {
     public function run(): void
     {
         User::firstOrCreate(
-            ['username' => 'admin'],
+            ['username' => 'coordinator01'],
             [
-                'name' => 'Administrator',
+                'name' => 'Coordenador',
                 
-                'password' => Hash::make('12345678'),
+                'password' => Hash::make('123456'),
                 'role' => 'coordinator',
             ]
         );

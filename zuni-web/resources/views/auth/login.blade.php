@@ -10,11 +10,11 @@
             <div class="card-body">
 
                 <h1 class="text-3xl font-bold text-center text-Cprimary mb-2">
-                    Área do Responsável
+                    Área de login
                 </h1>
 
                 <p class="text-center text-Ctext-muted mb-6">
-                    Entre para acompanhar seus alunos
+                    Entre para o sistema!
                 </p>
 
                 <form method="POST" action="/login">

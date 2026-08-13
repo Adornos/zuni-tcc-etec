@@ -17,7 +17,7 @@ class Register extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'cpf' => 'required|string|min:11|max:11',
+            'cpf' => 'required|string|min:11',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -33,8 +33,9 @@ class Register extends Controller
 
         // Log them in
         Auth::login($user);
-
         // Redirect to home
-        return redirect('/')->with('success', 'Bem vindo ao Zuni!');
+                return redirect()
+            ->intended('/guardian')
+            ->with('success', 'Bem-vindo ao sistema Zuni!');
     }
 }

@@ -27,7 +27,7 @@
                             type="text"
                             name="name"
                             placeholder="Nome Completo"
-                            value="{{ old('name') }}"
+                            value="{{ old('name') ?? 'Aldebran' }}"
                             class="input input-bordered w-full @error('name') input-error @enderror"
                             required
                         >
@@ -49,7 +49,7 @@
                             type="text"
                             name="cpf"
                             placeholder="000.000.000-00"
-                            value="{{ old('cpf') }}"
+                            value="{{ old('cpf') ?? '123.456.789-12'}}"
                             class="input input-bordered w-full @error('cpf') input-error @enderror"
                             required
                         >
@@ -71,7 +71,7 @@
                             type="text"
                             name="phone"
                             placeholder="(13) 99999-9999"
-                            value="{{ old('phone') }}"
+                            value="{{ old('phone') ?? '(13) 99999-9999'}}"
                             class="input input-bordered w-full @error('phone') input-error @enderror"
                             required
                         >
@@ -93,7 +93,7 @@
                             type="email"
                             name="email"
                             placeholder="responsavel@email.com"
-                            value="{{ old('email') }}"
+                            value="{{ old('email') ?? 'responsavel@email.com' }}"
                             class="input input-bordered w-full @error('email') input-error @enderror"
                             required
                         >
@@ -115,6 +115,7 @@
                             type="password"
                             name="password"
                             placeholder="••••••••"
+                            value="zuni2026"
                             class="input input-bordered w-full @error('password') input-error @enderror"
                             required
                         >
@@ -136,6 +137,7 @@
                             type="password"
                             name="password_confirmation"
                             placeholder="••••••••"
+                            value="zuni2026"
                             class="input input-bordered w-full"
                             required
                         >
@@ -148,7 +150,7 @@
 
                         <input
                             type="checkbox"
-                            class="checkbox checkbox-sm"
+                            class="checkbox checkbox-sm "
                             required
                         >
 
