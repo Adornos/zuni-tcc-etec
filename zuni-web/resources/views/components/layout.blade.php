@@ -13,7 +13,7 @@
 </head>
 
 <body class="min-h-screen flex flex-col bg-white font-sans">
-    <header class="w-full px-8 py-5 bg-white">
+    <header class="w-full px-8 py-5 bg-linear-to-b from-white to-transparent">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
 
             <!-- Logo -->
@@ -22,7 +22,7 @@
             </a>
 
             <!-- Navegação -->
-            <nav class="flex items-center gap-[3vmax]">
+            <nav class="flex items-center gap-[1.5vmax]">
 
                 <a href="#" class="font-medium text-Ctext hover:text-Cprimary-dark transition">
                     Sobre Nós
@@ -55,7 +55,7 @@
                     </ul>
                 </div>
 
-                <a href="#" class="font-medium text-Ctext hover:text-Cprimary-dark transition">
+                <a href="#" class="mr-[3vmax] font-medium text-Ctext hover:text-Cprimary-dark transition">
                     Ajuda
                 </a>
 

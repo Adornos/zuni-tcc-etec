@@ -28,27 +28,11 @@ class GuardianController extends Controller
     public function registered()
     {
 
-        $children = auth()->user()->students()->latest()->get() ?? [
-        (object)[
-            'name' => 'Maria Silva',
-            'class' => '3º Ano A',
-            'age' => 8
-        ],
-        (object)[
-            'name' => 'João Pedro',
-            'class' => '2º Ano B',
-            'age' => 7
-        ],
-        (object)[
-            'name' => 'Ana Clara',
-            'class' => '4º Ano C',
-            'age' => 9
-        ],
-    ];
+        $students = auth()->user()->students()->latest()->get() ?? [];
         
         return view('guardian.dashboard', [
-            // 'dashboardInfo' => view('guardian.registered', compact('children'))
-            'dashboardInfo' => view('guardian.registered', compact('children'))
+            // 'dashboardInfo' => view('guardian.registered', compact('students'))
+            'dashboardInfo' => view('guardian.registered', compact('students'))
         ]);
     }
     /**
@@ -58,7 +42,7 @@ class GuardianController extends Controller
     {
         $student = new StudentController();
                 return view('guardian.dashboard', [
-            // 'dashboardInfo' => view('guardian.registered', compact('children'))
+            // 'dashboardInfo' => view('guardian.registered', compact('students'))
             'dashboardInfo' => $student->create()
         ]);
     }

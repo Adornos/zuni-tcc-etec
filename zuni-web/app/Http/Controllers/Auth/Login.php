@@ -41,7 +41,7 @@ class Login extends Controller
         $request->session()->regenerate();
 
         return redirect()
-            ->intended('/')
+            ->intended(auth()->user()->role->value)
             ->with('success', 'Bem-vindo novamente!');
     }
 }
