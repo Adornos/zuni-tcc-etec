@@ -81,7 +81,7 @@ class StudentController extends Controller
         ]);
     }
     /**
-     * Faz o link entre o usuário Student e sua StidentSheet
+     * Faz o link entre o usuário Student e sua StudentSheet
      */
     private function linkStudentSheet(Request $request, User $studentUser){
 
