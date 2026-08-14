@@ -1,3 +1,28 @@
+<!-- ENtryPoints 
+ 
+    1. Enrollment :
+        - Usuários do sistema
+        (Se funcionário -> mostrar role)
+        (Se responsável -> mostrar status e alunos)
+        (Se aluno -> mostrar status)
+        (Se aluno já está matriculado -> mostrar status, turma e ficha)
+        (Se aluno não está matriculado -> mostrar status e botão de matrícula e ficha da matricula)
+
+    // Busca no banco dos usuários com filtro por role e status para exibir numa tabela
+    // A busca precisará de um popup com mais informações:
+        - Usuário
+        - Role
+        - Status
+        - Turma
+        - Turno
+        - Ficha de matrícula (se houver)
+    // Botão de Status do usuário (se for funcionário ou responsável)
+    // Botão de matrícula (se for aluno e não estiver matriculado)
+    // Botão de ficha de matrícula (se for aluno e estiver matriculado)
+    
+-->
+
+
 <div class="card bg-white shadow-md col-span-5 row-span-5 flex">
 
     <div class="card-body">
