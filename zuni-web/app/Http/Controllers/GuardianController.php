@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\Enrollment;
+
 
 class GuardianController extends Controller
 {
@@ -29,10 +31,18 @@ class GuardianController extends Controller
     {
 
         $students = auth()->user()->students()->latest()->get() ?? [];
-        
+        $enrollments = auth()->user()->enrollments()->latest()->get() ?? [];
+
+        //Fazer Entrypoints dos enrollments na visão de crianças cadastradas
+
         return view('guardian.dashboard', [
             // 'dashboardInfo' => view('guardian.registered', compact('students'))
-            'dashboardInfo' => view('guardian.registered', compact('students'))
+
+
+            'dashboardInfo' => view('guardian.registered', [
+                'students' => $students,
+                'enrollments' => $enrollments,
+            ])
         ]);
     }
     /**

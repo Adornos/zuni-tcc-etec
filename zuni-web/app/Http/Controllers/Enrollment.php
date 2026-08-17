@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 class Enrollment extends Controller
 {
+
     /**
-     * Prove métodos com as matriculas
+     * Provê métodos com as matriculas
      */
 
     public function getRequests(Request $request)
@@ -19,4 +20,6 @@ class Enrollment extends Controller
 
         return $enrollments;
     }
+
+    
 }
