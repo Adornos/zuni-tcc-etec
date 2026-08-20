@@ -49,7 +49,7 @@ class CoordinatorController extends Controller
             ->paginate(20);
 
         return view('coordinator.dashboard', [
-            'dashboardInfo' => 'coordinator.enrollments.index',
+            'dashboardInfo' => view('coordinator.enrollments'),
             'enrollments' => $enrollments
         ]);
     }
