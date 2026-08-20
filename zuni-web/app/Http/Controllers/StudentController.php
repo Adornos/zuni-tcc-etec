@@ -128,7 +128,7 @@ class StudentController extends Controller
             'guardian_id'   => 'integer',
         ]);
 
-        $studentUser->studentEnroll()->create([
+        $studentUser->Enrollments()->create([
             'guardian_id' => $user->id,
             'student_id' => $studentUser->id,
         ]);

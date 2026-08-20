@@ -44,7 +44,7 @@
 
                             <div class="flex gap-2 mt-2">
                                 <span class="badge text-white bg-Csecondary">
-                                    Matrícula: {{ $student->registration ?? '0000' }}
+                                    Matrícula: {{ $student->student_id ?? '0000' }}
                                 </span>
 
                                 <span class="badge text-white bg-Csecondary">
@@ -68,13 +68,13 @@
                                 'text-red-600' => $student->status === 'inativo',
                                 'text-amber-500' => !in_array($student->status, ['ativo', 'inativo']),
                             ])>
-                            {{ ucfirst($student->status ?? 'pendente') }}
+                            {{ ucfirst($student->status ?? 'não encontrado') }}
                         </p>
 
 
                         <div class="mt-2">
                             <span class="badge text-white bg-Csecondary">
-                                Frequência: {{ $student->attendance ?? '0%' }}
+                                Frequência: {{ $student->attendance ?? 'Sem frequencia' }}
                             </span>
                         </div>
 

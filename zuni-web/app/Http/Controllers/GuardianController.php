@@ -31,7 +31,9 @@ class GuardianController extends Controller
     {
 
         $students = auth()->user()->students()->latest()->get() ?? [];
-        $enrollments = auth()->user()->enrollments()->latest()->get() ?? [];
+        $enrollments = auth()->user()->enrollments()->latest()->get(['student_id','status']) ?? [];
+
+        // dd($students, $enrollments);
 
         //Fazer Entrypoints dos enrollments na visão de crianças cadastradas
 
