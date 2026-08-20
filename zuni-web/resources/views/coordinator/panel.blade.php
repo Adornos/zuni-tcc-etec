@@ -1,5 +1,5 @@
 {{-- Matriculas --}}
-<div class="card bg-base-100 shadow-md row-span-2 col-span-2 flex-col pt-[.7vmax] pl-[.7vmax]">
+<div class="card bg-base-100 shadow-md row-span-2 col-span-2 flex-col pt-[.7vmax] pl-[.7vmax] bg-Ccard">
     <div class="card-body flex flex-col items-start justify-evenly">
     <div class="flex flex-col">
         <div class="flex flex-row items-center">
@@ -10,7 +10,7 @@
             </span>
         </div>
         <div>
-            <p class="text-base-content/60 text-[1.1vmax]">
+            <p class="text-base-content text-[1.1vmax]">
                 Veja as recentes alterações nas matrículas
             </p>
         </div>
@@ -52,12 +52,12 @@
 </div>
 
 {{-- Chat --}}
-<div class="card bg-base-100 shadow-md row-span-2 flex-col pt-[.7vmax] pl-[.7vmax]">
+<div class="card bg-base-100 shadow-md row-span-2 flex-col pt-[.7vmax] pl-[.7vmax] bg-Ccard">
     <div class="card-body flex flex-col items-start justify-evenly">
 
-        <div class="flex flex-col">
+        <div class="flex flex-col ">
             <div class="flex flex-row items-center">
-                <span class="text-[2.2vmax] font-bold">
+                <span class="text-[2.2vmax] font-bold text-Cprimary">
                     Chat
                 </span>
                 <span class="text-[3.5vmax] font-bold leading-0">
@@ -65,7 +65,7 @@
             </div>
 
             <div>
-                <p class="text-base-content/60 text-[1.1vmax]">
+                <p class="text-base-content text-[1.1vmax]">
                     Veja suas novas mensagens
                 </p>
             </div>
@@ -95,7 +95,7 @@
                         </span>
                     </div>
 
-                    <p class="text-[.9vmax] text-base-content/60 truncate">
+                    <p class="text-[.9vmax] text-base-content truncate">
                         {{ $chatLastMessage ?? 'Você possui novas mensagens.' }}
                     </p>
                 </div>
@@ -112,7 +112,7 @@
 
 
 {{-- Relatórios --}}
-<div class="card bg-base-100 shadow-md row-span-4 flex-col  pt-[1.5vmax] pl-[.7vmax]">
+<div class="card bg-base-100 shadow-md row-span-4 flex-col  pt-[1.5vmax] pl-[.7vmax] bg-Ccard">
     <div class="card-body flex flex-col items-start justify-start">
 
         <div class="flex flex-col gap-[.1vmax]">
@@ -125,7 +125,7 @@
             </div>
 
             <div>
-                <p class="text-base-content/60 text-[1.1vmax] ">
+                <p class="text-base-content text-[1.1vmax] ">
                     Consulte e crie relatórios rapidamente
                 </p>
             </div>
@@ -195,9 +195,7 @@
                 @empty
 
                     <div class="flex flex-col
-                    justify-start py-[1vmax]">
-                        <span class="text-[2vmax]">
-                        </span>
+                    justify-start">
 
                         <p class="text-[.9vmax] text-base-content/50">
                             Nenhum relatório recente.
@@ -222,26 +220,25 @@
 
 
 {{-- Cronogramas --}}
-<div class="card bg-base-100 shadow-md row-span-2 flex-col p-[1vmax]">
-    <div class="card-body flex flex-col items-start justify-evenly">
-
-        <span class="text-[3.5vmax] font-bold leading-0">
-        </span>
+<div class="card bg-base-100 shadow-md row-span-2 flex-col p-[.5vmax] bg-Ccard">
+    <div class="card-body flex flex-col
+    pt-[2vmax]">
+    
         <div class="flex flex-col">
-            <div class="flex flex-row items-center">
+            <div class="flex items-center">
                 <span class="text-[2.2vmax] font-bold">
                     Cronogramas
                 </span>
 
             </div>
             <div>
-                <p class="text-base-content/60 text-[1.1vmax]">
+                <p class="text-base-content text-[1.1vmax] pt-[.5vmax]">
                     Consulte os cronogramas disponíveis
                 </p>
             </div>
         </div>
 
-        <div class="flex flex-row items-center justify-between w-full gap-[1vmax]">
+        <div class="flex flex-row items-center  ">
 
             {{-- <div class="flex flex-col">
                 <span class="text-[1.2vmax] font-bold">
@@ -265,8 +262,8 @@
 
 
 {{-- Fórum --}}
-<div class="card bg-base-100 shadow-md row-span-2 col-span-2 flex-col p-[1vmax]">
-    <div class="card-body flex flex-col items-start justify-evenly">
+<div class="card bg-base-100 shadow-md row-span-2 col-span-2 flex-col p-[1vmax] bg-Ccard">
+    <div class="card-body flex flex-col items-start justify-">
 
         <div class="flex flex-col">
             <div class="flex flex-row items-center">
@@ -279,7 +276,7 @@
             </div>
 
             <div>
-                <p class="text-base-content/60 text-[1.1vmax]">
+                <p class="text-base-content text-[1.1vmax]">
                     Acompanhe as últimas discussões
                 </p>
             </div>
@@ -301,7 +298,7 @@
                         {{ $latestForumPost->title }}
                     </h2>
 
-                    <p class="text-[.9vmax] text-base-content/60 line-clamp-2">
+                    <p class="text-[.9vmax] text-base-content line-clamp-2">
                         {{ $latestForumPost->excerpt ?? $latestForumPost->content ?? '' }}
                     </p>
 
