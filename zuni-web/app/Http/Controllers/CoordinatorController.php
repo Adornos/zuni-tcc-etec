@@ -90,7 +90,7 @@ class CoordinatorController extends Controller
         $schedules = Schedule::with('teacher', 'student')->get();
 
         return view('coordinator.dashboard', [
-            'dashboardInfo' => 'coordinator.schedules.index', 
+            'dashboardInfo' => view('coordinator.schedules'), 
             'schedules' => $schedules
         ]);
     }
