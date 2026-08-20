@@ -114,23 +114,19 @@ class StudentController extends Controller
             'name' => $studentUser->name,
         ]);
 
+        // dd($response);
+
+        
+
         
     }
     /**
-     * Faz o link entre o usuário Student e sua Enrollment
+     * Faz o link entre o a StudentSheet e sua Enrollment
      */
-    private function linkStudentEnroll(Request $request, User $studentUser){
+    private function linkStudentEnroll(StudentSheet $studentSheet){
 
-        $user = auth()->user();
-
-        $studentEnroll_validated = $request->validate([
-            'student_id'    => 'integer',
-            'guardian_id'   => 'integer',
-        ]);
-
-        $studentUser->Enrollments()->create([
-            'guardian_id' => $user->id,
-            'student_id' => $studentUser->id,
+        $studentSheet->Enrollments()->create([
+            'sheet_id' => $studentSheet->id,
         ]);
         
     }
@@ -154,7 +150,7 @@ class StudentController extends Controller
             $studentUser = $this->registerStudent($request);
                         
             $this->linkStudentSheet($request, $studentUser);
-            $this->linkStudentEnroll($request, $studentUser);
+            $this->linkStudentEnroll($studentUser->studentSheet);
             
             }catch (\Throwable $e){
                 dd($e->getMessage());

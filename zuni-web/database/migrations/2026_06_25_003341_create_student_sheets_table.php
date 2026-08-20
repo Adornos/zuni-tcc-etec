@@ -22,7 +22,8 @@ return new class extends Migration
                 ->constrained('users')
                 ->cascadeOnDelete();
 
-
+            // Student status in the system
+            $table->enum('status', ['pending', 'active', 'inactive', 'suspended'])->default('pending');
 
             // Student data
             $table->string('name', 100);
