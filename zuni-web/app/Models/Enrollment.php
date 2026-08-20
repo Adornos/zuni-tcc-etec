@@ -14,27 +14,14 @@ class Enrollment extends Model
     // database/migrations/xxxx_xx_xx_create_enrollments_table.php
 
     protected $fillable = [
-        'student_id',
-        'guardian_id',
-        'status',
+        'sheet_id',
+        'reviewed_by',
+        'reviewed_at',
     ];
 
-    protected $casts = [
-        'status' => 'string',
-    ];
-
-    function student(): BelongsTo
+    function student_sheet(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'student_id');
+        return $this->belongsTo(StudentSheet::class, 'sheet_id');
     }
 
-    function guardian(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'guardian_id');
-    }
-
-    function studentSheet(): BelongsTo
-    {
-        return $this->belongsTo(studentSheet::class, 'student_id');
-    }
 }
