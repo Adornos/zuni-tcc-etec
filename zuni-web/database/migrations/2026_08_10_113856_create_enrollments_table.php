@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        
         Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('student_sheets')->cascadeOnDelete();
+            $table->foreignId('student_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('guardian_id')->constrained('users')->cascadeOnDelete();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->foreignId('reviewed_by')->nullable()->constrained('users')->nullOnDelete(); // coordinator que aprovou/rejeitou

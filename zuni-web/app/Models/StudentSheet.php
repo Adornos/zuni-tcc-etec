@@ -52,4 +52,9 @@ class StudentSheet extends Model
     {
         return $this->belongsTo(User::class, 'guardian_id');
     }
+
+    public function enrollment(): HasOne
+    {
+        return $this->hasOne(User::class, 'student_id');
+    }
 }
