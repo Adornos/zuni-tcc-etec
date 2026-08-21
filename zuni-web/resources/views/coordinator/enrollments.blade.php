@@ -118,4 +118,9 @@ row-span-4 col-span-4 flex-col p-[1vmax] bg-Ccard overflow-y-auto">
                     </span>
                 </div>
     </div>
+<div class="container">
+
+    <h1>Enrollments</h1>
+    {{print_r($enrollments);}}
+
 </div>

@@ -125,7 +125,7 @@ class StudentController extends Controller
      */
     private function linkStudentEnroll(StudentSheet $studentSheet){
 
-        $studentSheet->Enrollments()->create([
+        $studentSheet->Enrollment()->create([
             'sheet_id' => $studentSheet->id,
         ]);
         

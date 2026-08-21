@@ -13,7 +13,7 @@ return new class extends Migration
     {
         
         Schema::create('enrollments', function (Blueprint $table) {
-            $table->id();
+            $table->id('student_id');
             $table->foreignId('sheet_id')->constrained('student_sheets')->cascadeOnDelete();
             $table->foreignId('reviewed_by')->nullable()->constrained('users')->nullOnDelete(); // coordinator que aprovou/rejeitou
             $table->timestamp('reviewed_at')->nullable();

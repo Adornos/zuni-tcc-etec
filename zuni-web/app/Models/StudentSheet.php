@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class StudentSheet extends Model
 {
@@ -55,6 +56,6 @@ class StudentSheet extends Model
 
     public function enrollment(): HasOne
     {
-        return $this->hasOne(User::class, 'student_id');
+        return $this->hasOne(Enrollment::class, 'student_id');
     }
 }

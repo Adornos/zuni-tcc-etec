@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\StudentSheet;
+
 class CoordinatorController extends Controller
 {
     public function index()
@@ -43,10 +45,9 @@ class CoordinatorController extends Controller
     // Aprovação de matrículas
     public function enrollments()
     {
-        $enrollments = Enrollment::with('student', 'guardian')
-            ->where('status', 'pending')
-            ->latest()
-            ->paginate(20);
+        $enrollments = StudentSheet::where('status', 'pending')->get(['student_id', 'status']);
+
+        // Validar dados de $enrollments para disponibilizar depois.
 
         return view('coordinator.dashboard', [
             'dashboardInfo' => view('coordinator.enrollments'),
