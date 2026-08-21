@@ -7,11 +7,10 @@
                 Matrículas
             </span>
             <span class="text-[3.5vmax] font-bold leading-0">
-            🎫
             </span>
         </div>
         <div>
-            <p class="text-base-content/60 text-[1.1vmax]">
+            <p class="text-base-content text-[1.1vmax]">
                 Veja as recentes alterações nas matrículas
             </p>
         </div>
@@ -20,24 +19,28 @@
         <div class="flex flex-row">
             <div class="flex flex-col flex-1 gap-[.5vmax]">
                 <div class="indicator">
+                    <!-- {{$enrollmentsPendents = 8 ?? 'hidden'}} 8 notificação bolinha -->
                     <span class="indicator-item badge badge-error {{$enrollmentsPendents ?? 'hidden'}}">{{$enrollmentsPendents ?? ''}}</span>
                     <a href="" class="text-[1vmax] bg-yellow-200 text-yellow-900 badge badge-xl badge-soft shadow-md w-fit transition-all hover:bg-yellow-500 hover:text-Cprimary-light">
                         Pendentes
                     </a>
                 </div>
                 <div class="indicator">
+                    <!-- {{$enrollmentsNews = 8 ?? 'hidden'}} 8 notificação bolinha -->
                     <span class="indicator-item badge badge-error {{$enrollmentsNews ?? 'hidden'}}">{{$enrollmentsNews ?? ''}}</span>
                     <a href="" class="text-[1vmax] bg-green-300 text-green-900 badge badge-xl badge-soft shadow-md w-fit transition-all hover:bg-green-600 hover:text-Cprimary-light">
                         Novas
                     </a>
                 </div>
                 <div class="indicator">
-                    <span class="indicator-item badge badge-error {{$enrollmentsNotViewed ?? 'hidden'}}">{{$enrollmentsNotViewed ?? ''}}</span>
+                    <!-- {{$enrollmentsNotViewed = 8 ?? 'hidden'}} 8 notificação bolinha -->
+                    <span class="indicator-item badge badge-error {{$enrollmentsNotViewed?? 'hidden'}}">{{$enrollmentsNotViewed ?? ''}}</span>
                     <a href="" class="text-[1vmax] bg-red-300 text-red-900 badge badge-xl badge-soft shadow-md w-fit transition-all hover:bg-red-600 hover:text-Cprimary-light">
                         Não vistas
                     </a>
                 </div>
             </div>
+            
             <div class="flex flex-row gap-[1vmax] flex-1 items-center">
                 <h2 class="text-[1.5vmax] font-bold">Total de matriculas</h2>
                 <h2 class="text-[3.5vmax] font-bold">{{ $totalEnrollments ??  0 }}</h2>
@@ -52,18 +55,17 @@
 <div class="card bg-base-100 shadow-md row-span-2 max-md:row-span-1 flex-col items-center">
     <div class="card-body flex flex-col items-start justify-evenly">
 
-        <div class="flex flex-col">
+        <div class="flex flex-col ">
             <div class="flex flex-row items-center">
-                <span class="text-[2.2vmax] font-bold">
+                <span class="text-[2.2vmax] font-bold text-Cprimary">
                     Chat
                 </span>
                 <span class="text-[3.5vmax] font-bold leading-0">
-                    💬
                 </span>
             </div>
 
             <div>
-                <p class="text-base-content/60 text-[1.1vmax]">
+                <p class="text-base-content text-[1.1vmax]">
                     Veja suas novas mensagens
                 </p>
             </div>
@@ -93,7 +95,7 @@
                         </span>
                     </div>
 
-                    <p class="text-[.9vmax] text-base-content/60 truncate">
+                    <p class="text-[.9vmax] text-base-content truncate">
                         {{ $chatLastMessage ?? 'Você possui novas mensagens.' }}
                     </p>
                 </div>
@@ -113,28 +115,30 @@
 <div class="card bg-base-100 shadow-md row-span-4 max-md:row-span-1 flex-col items-center">
     <div class="card-body flex flex-col items-start justify-evenly">
 
-        <div class="flex flex-col">
+        <div class="flex flex-col gap-[.1vmax]">
             <div class="flex flex-row items-center">
                 <span class="text-[2.2vmax] font-bold">
                     Relatórios
                 </span>
                 <span class="text-[3.5vmax] font-bold leading-0">
-                    📊
                 </span>
             </div>
 
             <div>
-                <p class="text-base-content/60 text-[1.1vmax]">
+                <p class="text-base-content text-[1.1vmax] ">
                     Consulte e crie relatórios rapidamente
                 </p>
             </div>
         </div>
 
-        <div class="flex flex-col w-full gap-[1vmax]">
+        <div class="flex flex-col 
+        gap-[1vmax] items-start">
 
             {{-- Novo relatório --}}
             <a href=""
-               class="flex flex-row items-center justify-between w-full p-[.8vmax] rounded-box bg-Cprimary-light text-Cprimary-dark shadow-md transition-all hover:bg-Cprimary hover:text-Cprimary-light">
+               class="flex items-center
+                justify-between w-full 
+                p-[1.3vmax] rounded-box bg-Cprimary-light text-Cprimary-dark shadow-md transition-all hover:bg-Cprimary hover:text-Cprimary-light">
 
                 <div class="flex flex-col">
                     <span class="text-[1.1vmax] font-bold">
@@ -153,14 +157,16 @@
 
 
             {{-- Lista de relatórios --}}
-            <div class="flex flex-col gap-[.5vmax] w-full">
+            <div class="flex flex-col gap-[.5vmax] leading-none">
 
-                <div class="flex flex-row justify-between items-center">
+                <div class="flex flex-row justify-center items-center">
                     <h2 class="text-[1.2vmax] font-bold">
                         Relatórios recentes
                     </h2>
 
-                    <span class="text-[.8vmax] text-base-content/50">
+                    <span class="
+                    text-[1vmax] text-base-content/50 
+                    p-[.5vmax]">
                         {{ count($recentReports ?? []) }}
                     </span>
                 </div>
@@ -188,10 +194,8 @@
 
                 @empty
 
-                    <div class="flex flex-col items-center justify-center py-[1vmax] text-center">
-                        <span class="text-[2vmax]">
-                            📄
-                        </span>
+                    <div class="flex flex-col
+                    justify-start">
 
                         <p class="text-[.9vmax] text-base-content/50">
                             Nenhum relatório recente.
@@ -223,20 +227,20 @@
             🗓️
         </span>
         <div class="flex flex-col">
-            <div class="flex flex-row items-center">
+            <div class="flex items-center">
                 <span class="text-[2.2vmax] font-bold">
                     Cronogramas
                 </span>
 
             </div>
             <div>
-                <p class="text-base-content/60 text-[1.1vmax]">
+                <p class="text-base-content text-[1.1vmax] pt-[.5vmax]">
                     Consulte os cronogramas disponíveis
                 </p>
             </div>
         </div>
 
-        <div class="flex flex-row items-center justify-between w-full gap-[1vmax]">
+        <div class="flex flex-row items-center  ">
 
             {{-- <div class="flex flex-col">
                 <span class="text-[1.2vmax] font-bold">
@@ -270,12 +274,11 @@
                 </span>
 
                 <span class="text-[3.5vmax] font-bold leading-0">
-                    💡
                 </span>
             </div>
 
             <div>
-                <p class="text-base-content/60 text-[1.1vmax]">
+                <p class="text-base-content text-[1.1vmax]">
                     Acompanhe as últimas discussões
                 </p>
             </div>
@@ -297,7 +300,7 @@
                         {{ $latestForumPost->title }}
                     </h2>
 
-                    <p class="text-[.9vmax] text-base-content/60 line-clamp-2">
+                    <p class="text-[.9vmax] text-base-content line-clamp-2">
                         {{ $latestForumPost->excerpt ?? $latestForumPost->content ?? '' }}
                     </p>
 

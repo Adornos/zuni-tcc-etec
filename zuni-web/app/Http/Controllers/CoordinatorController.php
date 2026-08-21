@@ -7,6 +7,7 @@ use App\Models\Report;
 use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CoordinatorController extends Controller
 {
@@ -48,7 +49,7 @@ class CoordinatorController extends Controller
             ->paginate(20);
 
         return view('coordinator.dashboard', [
-            'dashboardInfo' => 'coordinator.enrollments.index',
+            'dashboardInfo' => view('coordinator.enrollments'),
             'enrollments' => $enrollments
         ]);
     }
@@ -89,7 +90,7 @@ class CoordinatorController extends Controller
         $schedules = Schedule::with('teacher', 'student')->get();
 
         return view('coordinator.dashboard', [
-            'dashboardInfo' => 'coordinator.schedules.index', 
+            'dashboardInfo' => view('coordinator.schedules'), 
             'schedules' => $schedules
         ]);
     }

@@ -106,70 +106,70 @@
 
     <footer class="w-full h-screen bg-Cprimary-dark text-white flex flex-col">
 
-    <div class="flex-1 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-20 p-20 [column-rule:2px_solid_#ccc]">
+        <div class="flex-1 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-20 p-20 [column-rule:2px_solid_#ccc]">
 
-        <div class="py-10 space-y-6">
+            <div class="py-10 space-y-6">
 
-        <h2 class="text-xl font-bold leading-[3em]">
-            Nossas redes sociais
-        </h2>
+            <h2 class="text-xl font-bold leading-[3em]">
+                Nossas redes sociais
+            </h2>
 
-        <div class="flex gap-12">
-            <a href="#" class="w-10 h-10 flex items-center justify-center hover:bg-white/20 transition">
-            <i class="fa-brands fa-square-facebook fa-3x"></i>
-            </a>
-            <a href="#" class="w-10 h-10 flex items-center justify-center hover:bg-white/20 transition">
-            <i class="fa-brands fa-square-twitter fa-3x"></i>
-            </a>
-            <a href="#" class="w-10 h-10 flex items-center justify-center hover:bg-white/20 transition">
-            <i class="fa-brands fa-square-youtube fa-3x"></i>
-            </a>
+            <div class="flex gap-12">
+                <a href="#" class="w-10 h-10 flex items-center justify-center hover:bg-white/20 transition">
+                <i class="fa-brands fa-square-facebook fa-3x"></i>
+                </a>
+                <a href="#" class="w-10 h-10 flex items-center justify-center hover:bg-white/20 transition">
+                <i class="fa-brands fa-square-twitter fa-3x"></i>
+                </a>
+                <a href="#" class="w-10 h-10 flex items-center justify-center hover:bg-white/20 transition">
+                <i class="fa-brands fa-square-youtube fa-3x"></i>
+                </a>
+            </div>
+
+            <p class="text-sm text-white/80">
+                Privacy policy | Terms of service
+            </p>
+
+            <div class="text-sm space-y-1 text-white/80">
+                <p>Copyright @ 2026 Zuni Software Limited | Registered in São Paulo SP, CEP</p>
+                <p>Design feito por João Vitor Barbosa</p>
+                <p>Programação: Guilherme Augusto e André Moura</p>
+                <p>Textos e Pesquisa: Akemi</p>
+            </div>
+
+            </div>
+
+            <div class="py-10">
+
+            <h2 class="text-xl  font-bold leading-[3em]">
+                Suporte e Documentação
+            </h2>
+
+            <ul class="space-y-2 text-white/80">
+                <li>Documentação Técnica</li>
+                <li>FAQ - Perguntas Frequentes</li>
+                <li>Central de Ajuda</li>
+                <li>Tutorial do site</li>
+                <li>Tutorial do Aplicativo</li>
+            </ul>
+
+            </div>
+
+            <div class="py-10 ">
+
+            <h2 class="text-xl font-bold leading-[3em]">
+                Contato e Serviços
+            </h2>
+
+            <ul class="space-y-2 text-white/80">
+                <li>Termos de Uso</li>
+                <li>Política de Privacidade</li>
+                <li>Solicitar Demonstração</li>
+            </ul>
+
+            </div>
+
         </div>
-
-        <p class="text-sm text-white/80">
-            Privacy policy | Terms of service
-        </p>
-
-        <div class="text-sm space-y-1 text-white/80">
-            <p>Copyright @ 2026 Zuni Software Limited | Registered in São Paulo SP, CEP</p>
-            <p>Design feito por João Vitor Barbosa</p>
-            <p>Programação: Guilherme Augusto e André Moura</p>
-            <p>Textos e Pesquisa: Akemi</p>
-        </div>
-
-        </div>
-
-        <div class="py-10">
-
-        <h2 class="text-xl  font-bold leading-[3em]">
-            Suporte e Documentação
-        </h2>
-
-        <ul class="space-y-2 text-white/80">
-            <li>Documentação Técnica</li>
-            <li>FAQ - Perguntas Frequentes</li>
-            <li>Central de Ajuda</li>
-            <li>Tutorial do site</li>
-            <li>Tutorial do Aplicativo</li>
-        </ul>
-
-        </div>
-
-        <div class="py-10 ">
-
-        <h2 class="text-xl font-bold leading-[3em]">
-            Contato e Serviços
-        </h2>
-
-        <ul class="space-y-2 text-white/80">
-            <li>Termos de Uso</li>
-            <li>Política de Privacidade</li>
-            <li>Solicitar Demonstração</li>
-        </ul>
-
-        </div>
-
-    </div>
 
     <div class=" p-6 text-center text-sm text-white/80">
         Zuni, Trabalho de Conclusão de Curso de Desenvolvimento de Sistemas da Escola Técnica Estadual de São Paulo, feito pelos alunos João Vitor Barbosa, Guilherme Augusto Adorno dos Passos, André de Moura Silva e Julia Akemi com objetivo de otimizar a gestão em sala de aula.

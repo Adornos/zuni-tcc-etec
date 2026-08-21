@@ -147,7 +147,7 @@
         </header>
 
 
-        <main class="bg-base-200 p-6 overflow-auto">
+        <main class="bg-base-200 p-6 overflow-auto bg-Cprimary-light">
 
 
 

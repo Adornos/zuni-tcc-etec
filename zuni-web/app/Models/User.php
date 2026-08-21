@@ -14,6 +14,7 @@ use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\Models\StudentSheet;
+use App\Models\Enrollment;
 
 
 
@@ -31,6 +32,7 @@ class User extends Authenticatable
         'email',
         'cpf',
         'password',
+        'role',
     ];
 
     protected $hidden = [
@@ -77,10 +79,17 @@ class User extends Authenticatable
         return $this->hasMany(StudentSheet::class, 'guardian_id');
     }
 
+    public function Enrollments(): HasMany
+    {
+        return $this->hasMany(Enrollment::class, 'guardian_id');
+    }
+
     public function studentSheet(): HasOne
     {
         return $this->hasOne(StudentSheet::class, 'student_id');
     }
+
+
 
 
 }
