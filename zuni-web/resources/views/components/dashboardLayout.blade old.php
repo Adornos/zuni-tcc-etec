@@ -149,7 +149,7 @@
         {{-- Dashboard --}}
         <main class="bg-base-200 p-6 overflow-auto">
 
-            <div class="grid grid-cols-4 grid-rows-4 gap-4 min-h-full">
+            <div class="md:grid md:grid-cols-4 md:grid-rows-4 gap-4 min-h-full">
 
                 <div class="card bg-base-100 shadow-md">
                     <div class="card-body">
