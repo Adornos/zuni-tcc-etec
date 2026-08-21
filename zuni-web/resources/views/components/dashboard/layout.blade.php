@@ -69,29 +69,31 @@
         </aside>
 
         {{-- Header --}}
-        <header class="bg-base-100 border-b px-6 flex items-center justify-between">
+        <header class="bg-base-100 border-b px-3 py-3 sm:px-4 md:px-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 
-            <div>
-                <h1 class="text-2xl font-bold uppercase">
+            <div class="min-w-0">
+                <h1 class="text-lg font-bold uppercase sm:text-xl md:text-2xl">
                     {!! isset($panelTitle) ? $panelTitle : 'Painel' !!}
                 </h1>
 
-                <p class="text-sm text-base-content/60">
+                <p class="text-xs text-base-content/60 sm:text-sm">
                     {!! isset($panelMessage) ? $panelMessage : 'Seja bem-vindo novamente ao seu quadro de controle' !!}
                 </p>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center justify-end gap-2 sm:gap-4">
 
                 {{-- Notificações --}}
-                <button class="btn btn-ghost btn-circle">
-                    <div class="indicator">
-                        <span class="indicator-item badge badge-error badge-sm">
+                <button onclick="toggleNotifications()" class="btn btn-ghost btn-circle btn-sm sm:btn-md">
+                    <div class="
+                    max-sm:hidden indicator"
+                    >
+                        <span class="indicator-item badge badge-error badge-xs sm:badge-sm">
                             3
                         </span>
 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="#FFAE00" class="size-6">
+                            stroke="#FFAE00" class="size-4 sm:size-5 md:size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.05c0 .243 0 .486-.002.729A8.967 8.967 0 013.69 15.77a23.848 23.848 0 005.454 1.31m5.713 0a24.255 24.255 0 01-5.713 0m5.713 0a3 3 0 11-5.713 0" />
                         </svg>
@@ -99,26 +101,23 @@
                 </button>
 
                 {{-- Perfil --}}
-                <div class="dropdown dropdown-end" tabindex="0" role="button">
-                    <div class="avatar flex items-center p-[1vmax] rounded-[1vmax] bg-white cursor-pointer">
-                        <div class="w-12 rounded-full">
+                <div class="max-sm:hidden dropdown dropdown-end" tabindex="0" role="button">
+                    <div class="avatar flex items-center gap-2 rounded-xl bg-base-100 p-1 sm:p-2 md:p-[1vmax] cursor-pointer">
+                        <div class="w-8 rounded-full sm:w-10 md:w-12">
                             <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name ?? 'Sem nome' }}" />
                         </div>
-                        <span class="pl-[1vmax]">
-                            <span class="flex items-center">
-                                <p>{{ auth()->user()->name ?? 'Sem nome' }}</p>
-                                <span class="">
-                                    <div class="w-3 self-start m-[.525vmax]">
-                                        <img class=" h-full object-contain"
+                        <span class="hidden sm:block min-w-0">
+                            <span class="flex items-center gap-1">
+                                <p class="truncate text-sm font-medium md:text-base">{{ auth()->user()->name ?? 'Sem nome' }}</p>
+                                <span class="inline-flex">
+                                    <div class="w-3 self-start">
+                                        <img class="h-full object-contain"
                                             src="{{ asset('images/icons/chevronDown.svg') }}" alt="">
                                     </div>
                                 </span>
-
                             </span>
-                            <small class="text-Ctext-muted">{{ auth()->user()->email ?? 'sem email' }}</small>
+                            <small class="block truncate text-[10px] text-Ctext-muted md:text-xs">{{ auth()->user()->email ?? 'sem email' }}</small>
                         </span>
-
-
                     </div>
 
                     <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow">
@@ -152,7 +151,7 @@
 
 
 
-            <div class="grid grid-cols-4 grid-rows-4 gap-4 h-full">
+            <div class="md:grid md:grid-cols-4 md:grid-rows-4 gap-4 h-full flex flex-col">
 
 
                 @isset($dashboardInfo)

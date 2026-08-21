@@ -1,5 +1,5 @@
 {{-- Matriculas --}}
-<div class="card bg-base-100 shadow-md row-span-2 col-span-2 flex-col pt-[.7vmax] pl-[.7vmax] bg-Ccard">
+<div class="card bg-base-100 shadow-md row-span-2 col-span-2 max-md:row-span-1 flex-col items-center">
     <div class="card-body flex flex-col items-start justify-evenly">
     <div class="flex flex-col">
         <div class="flex flex-row items-center">
@@ -52,7 +52,7 @@
 </div>
 
 {{-- Chat --}}
-<div class="card bg-base-100 shadow-md row-span-2 flex-col pt-[.7vmax] pl-[.7vmax] bg-Ccard">
+<div class="card bg-base-100 shadow-md row-span-2 max-md:row-span-1 flex-col items-center">
     <div class="card-body flex flex-col items-start justify-evenly">
 
         <div class="flex flex-col ">
@@ -112,8 +112,8 @@
 
 
 {{-- Relatórios --}}
-<div class="card bg-base-100 shadow-md row-span-4 flex-col  pt-[1.5vmax] pl-[.7vmax] bg-Ccard">
-    <div class="card-body flex flex-col items-start justify-start">
+<div class="card bg-base-100 shadow-md row-span-4 max-md:row-span-1 flex-col items-center">
+    <div class="card-body flex flex-col items-start justify-evenly">
 
         <div class="flex flex-col gap-[.1vmax]">
             <div class="flex flex-row items-center">
@@ -220,10 +220,12 @@
 
 
 {{-- Cronogramas --}}
-<div class="card bg-base-100 shadow-md row-span-2 flex-col p-[.5vmax] bg-Ccard">
-    <div class="card-body flex flex-col
-    pt-[2vmax]">
-    
+<div class="card bg-base-100 shadow-md row-span-2 max-md:row-span-1 flex-col items-center">
+    <div class="card-body flex flex-col items-start justify-evenly">
+
+        <span class="text-[3.5vmax] font-bold leading-0">
+            🗓️
+        </span>
         <div class="flex flex-col">
             <div class="flex items-center">
                 <span class="text-[2.2vmax] font-bold">
@@ -262,8 +264,8 @@
 
 
 {{-- Fórum --}}
-<div class="card bg-base-100 shadow-md row-span-2 col-span-2 flex-col p-[1vmax] bg-Ccard">
-    <div class="card-body flex flex-col items-start justify-">
+<div class="card bg-base-100 shadow-md row-span-2 col-span-2 max-md:row-span-1  flex-col items-center">
+    <div class="card-body flex flex-col items-start justify-evenly">
 
         <div class="flex flex-col">
             <div class="flex flex-row items-center">
