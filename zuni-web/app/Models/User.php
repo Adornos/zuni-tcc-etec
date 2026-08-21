@@ -79,10 +79,10 @@ class User extends Authenticatable
         return $this->hasMany(StudentSheet::class, 'guardian_id');
     }
 
-    public function Enrollments(): HasMany
-    {
-        return $this->hasMany(Enrollment::class, 'guardian_id');
-    }
+    // public function Enrollments(): HasMany
+    // {
+    //     return $this->hasMany(Enrollment::class, 'guardian_id');
+    // }
 
     public function studentSheet(): HasOne
     {
