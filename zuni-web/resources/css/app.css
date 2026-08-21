@@ -6,7 +6,7 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Poppins', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Poppins', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, SemiBold, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
     --color-Cprimary: #0a155c;
@@ -22,4 +22,6 @@
 
     --color-Cwhite: #FFFFFF;
     --color-Ccard: #F3F8FF;
+
+    --font-Sans: 'Poppins';
 }
