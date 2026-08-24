@@ -50,17 +50,17 @@ class CoordinatorController extends Controller
         // Validar dados de $enrollments para disponibilizar depois.
 
         return view('coordinator.dashboard', [
-            'dashboardInfo' => view('coordinator.enrollments'),
-            'enrollments' => $enrollments
+            'dashboardInfo' => view('coordinator.enrollments', compact('enrollments'))
         ]);
     }
 
-    public function showEnrollment(Enrollment $enrollment)
+    public function showEnrollment($enrollment)
     {
-        return view('coordinator.dashboard',[
-        'dashboardInfo' => 'coordinator.enrollments.show',
-        'enrollments' => $enrollment
-        ]);
+        $enrollmentInfo = StudentSheet::where('student_id', $enrollment)->firstOrFail();
+
+        return view('coordinator.dashboard',[ 
+            'dashboardInfo' => view('coordinator.enrollment.info', ['enrollmentInfo' => $enrollmentInfo])
+            ]);
     }
 
     public function approveEnrollment(Request $request, Enrollment $enrollment)

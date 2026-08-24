@@ -60,34 +60,34 @@ Route::middleware(['auth', 'role:teacher'])
 
 });
 
-Route::middleware(['auth', 'role:director'])
-    ->prefix('director')
-    ->name('director.')
-    ->group(function () {
+// Route::middleware(['auth', 'role:director'])
+//     ->prefix('director')
+//     ->name('director.')
+//     ->group(function () {
 
-    // Rotas do Diretor
-    Route::get('/', [DirectorController::class, 'index'])->name('index');
-    Route::get('/profile', [DirectorController::class, 'profile'])->name('profile');
+//     // Rotas do Diretor
+//     Route::get('/', [DirectorController::class, 'index'])->name('index');
+//     Route::get('/profile', [DirectorController::class, 'profile'])->name('profile');
 
-    Route::get('/forum', [DirectorController::class, 'forum'])->name('forum');
-    Route::get('/chat', [DirectorController::class, 'chat'])->name('chat');
+//     Route::get('/forum', [DirectorController::class, 'forum'])->name('forum');
+//     Route::get('/chat', [DirectorController::class, 'chat'])->name('chat');
 
-    // Gerenciamento de professores
-    Route::get('/teachers', [DirectorController::class, 'teachers'])->name('teachers.index');
-    Route::get('/teachers/{teacher}', [DirectorController::class, 'showTeacher'])->name('teachers.show');
-    Route::post('/teachers', [DirectorController::class, 'storeTeacher'])->name('teachers.store');
-    Route::put('/teachers/{teacher}', [DirectorController::class, 'updateTeacher'])->name('teachers.update');
-    Route::delete('/teachers/{teacher}', [DirectorController::class, 'destroyTeacher'])->name('teachers.destroy');
+//     // Gerenciamento de professores
+//     Route::get('/teachers', [DirectorController::class, 'teachers'])->name('teachers.index');
+//     Route::get('/teachers/{teacher}', [DirectorController::class, 'showTeacher'])->name('teachers.show');
+//     Route::post('/teachers', [DirectorController::class, 'storeTeacher'])->name('teachers.store');
+//     Route::put('/teachers/{teacher}', [DirectorController::class, 'updateTeacher'])->name('teachers.update');
+//     Route::delete('/teachers/{teacher}', [DirectorController::class, 'destroyTeacher'])->name('teachers.destroy');
 
-    // Relatórios (Diretor também pode criar/gerenciar)
-    Route::get('/reports', [DirectorController::class, 'reports'])->name('reports.index');
-    Route::get('/reports/create', [DirectorController::class, 'createReport'])->name('reports.create');
-    Route::post('/reports', [DirectorController::class, 'storeReport'])->name('reports.store');
-    Route::get('/reports/{report}/edit', [DirectorController::class, 'editReport'])->name('reports.edit');
-    Route::put('/reports/{report}', [DirectorController::class, 'updateReport'])->name('reports.update');
-    Route::delete('/reports/{report}', [DirectorController::class, 'destroyReport'])->name('reports.destroy');
+//     // Relatórios (Diretor também pode criar/gerenciar)
+//     Route::get('/reports', [DirectorController::class, 'reports'])->name('reports.index');
+//     Route::get('/reports/create', [DirectorController::class, 'createReport'])->name('reports.create');
+//     Route::post('/reports', [DirectorController::class, 'storeReport'])->name('reports.store');
+//     Route::get('/reports/{report}/edit', [DirectorController::class, 'editReport'])->name('reports.edit');
+//     Route::put('/reports/{report}', [DirectorController::class, 'updateReport'])->name('reports.update');
+//     Route::delete('/reports/{report}', [DirectorController::class, 'destroyReport'])->name('reports.destroy');
 
-});
+// });
 
 Route::middleware(['auth', 'role:coordinator'])
     ->prefix('coordinator')
@@ -103,9 +103,9 @@ Route::middleware(['auth', 'role:coordinator'])
 
     // Aprovação de matrículas
     Route::get('/enrollments', [CoordinatorController::class, 'enrollments'])->name('enrollments.index');
-    Route::get('/enrollments/{enrollment}', [CoordinatorController::class, 'showEnrollment'])->name('enrollments.show');
-    Route::put('/enrollments/{enrollment}/approve', [CoordinatorController::class, 'approveEnrollment'])->name('enrollments.approve');
-    Route::put('/enrollments/{enrollment}/reject', [CoordinatorController::class, 'rejectEnrollment'])->name('enrollments.reject');
+    Route::get('/enrollments/{enrollment}', [CoordinatorController::class, 'showEnrollment'])->name('enrollment.show');
+    Route::put('/enrollments/{enrollment}/approve', [CoordinatorController::class, 'approveEnrollment'])->name('enrollment.approve');
+    Route::put('/enrollments/{enrollment}/reject', [CoordinatorController::class, 'rejectEnrollment'])->name('enrollment.reject');
 
     // Gerenciamento de horários (abordagem de grade)
     Route::get('/schedules', [CoordinatorController::class, 'schedules'])->name('schedules.index');
