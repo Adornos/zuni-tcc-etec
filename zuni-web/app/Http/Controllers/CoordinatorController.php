@@ -45,7 +45,7 @@ class CoordinatorController extends Controller
     // Aprovação de matrículas
     public function enrollments()
     {
-        $enrollments = StudentSheet::where('status', 'pending')->get(['student_id', 'status']);
+        $enrollments = StudentSheet::where('status', 'pending')->get(['student_id', 'name', 'status']);
 
         // Validar dados de $enrollments para disponibilizar depois.
 
