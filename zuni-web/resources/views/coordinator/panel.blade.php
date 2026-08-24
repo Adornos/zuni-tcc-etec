@@ -5,12 +5,12 @@
         {{-- Bolinha vermelha que deve aparecer apenas quando houver matrículas pendentes --}}
         <div class="absolute top-5 right-5 w-5 h-5 rounded-full bg-red-500"></div>
 
-        <div class="flex flex-col items-center text-center mt-4">
+        <div class="flex flex-col items-center text-center pt-[.5vmax]">
             <h2 class="text-4xl font-Sans font-bold Text-Bold text-primary-dark pt-[1vmax]">
                 Matrículas
             </h2>
 
-            <p class="text-base-content/70 mt-3 max-w-[180px]">
+            <p class="text-base-content/70 mt-3 max-w-[200px] pt-[1vmax]">
                 Veja as recentes alterações nas matrículas
             </p>
         </div>
@@ -46,7 +46,7 @@
             Novo Bimestre!
         </h2>
 
-        <p class="text-base-content/70">
+        <p class="text-base-content/70 pt-[1vmax]">
             Atualize as habilidades que serão trabalhadas com cada
             turma esse ano, não faça da última hora.
         </p>
@@ -62,42 +62,23 @@
 
 {{-- Agenda --}}
 <div class="card bg-base-100 shadow-md row-span-4">
-    <div class="card-body overflow-y-auto">
-
-        <div role="tablist" class="tabs tabs-bordered">
-            <a role="tab" class="tab tab-active">
-                Horários
-            </a>
-
-            <a role="tab" class="tab">
-                Eventos
-            </a>
+    <div class="card-body">
+        <h2 class="text-4xl font-Sans font-bold Text-Bold text-primary-dark pt-[1vmax]">
+            Relatórios
+        </h2>
+        <p class="text-base-content/70 pt-[1vmax]">
+            Consulte e crie seus relatórios rapidamente nesta área!
+        </p>
+        <div class="card bg-base-100 shadow-md 
+        w-full 
+        h-[10vmax] mt-5">
+            <h2 class=" font-Sans font-semibold text-primary-dark p-[1vmax]">
+                Relatórios
+            </h2>
+            <p class="text-base-content/70 pt-[1vmax] text-center">
+                Clique aqui para gerar um novo relatório, ou consulte os relatórios já gerados.
+            </p>
         </div>
-
-        @foreach(range(1, 6) as $evento)
-            <div class="flex gap-3 mt-4">
-
-                <div class="w-1 rounded bg-primary"></div>
-
-                <div>
-                    <p class="font-semibold">
-                        2º Ano Aula
-                    </p>
-
-                    <div class="flex gap-2 mt-1">
-                        <span class="badge badge-primary">
-                            13:00
-                        </span>
-
-                        <span class="badge badge-primary">
-                            13:50
-                        </span>
-                    </div>
-                </div>
-
-            </div>
-        @endforeach
-
     </div>
 </div>
 

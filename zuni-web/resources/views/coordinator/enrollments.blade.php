@@ -31,7 +31,8 @@
 
             <!-- Lista -->
             <div class="mt-16 space-y-10">
-
+        
+        @foreach(range(1, 6) as $alunos)
                 <!-- Aluno -->
                 <div
                     class="flex h-[84px] items-center rounded-[25px] bg-[#f8fbff]
