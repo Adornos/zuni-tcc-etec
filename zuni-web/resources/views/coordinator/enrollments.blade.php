@@ -69,10 +69,12 @@
 @foreach ($enrollments as $enrollment)
 
     <div class="card bg-base-100 shadow-xl p-[2vmax] col-span-4">
-        <p>Student ID: {{ $enrollment->student_id }}</p>
-        <p>Student Name: {{ $enrollment->name }}</p>
-        <p>Status: {{ $enrollment->status }}</p>
-        <a href="{{ route('coordinator.enrollment.show', $enrollment->student_id) }}" class="btn btn-primary w-fit">Mais informações</a>
+        <div class="card bg-base-100 shadow-xl p-[2vmax]">
+            <p>Student ID: {{ $enrollment->student_id }}</p>
+            <p>Student Name: {{ $enrollment->name }}</p>
+            <p>Status: {{ $enrollment->status }}</p>
+            <a href="{{ route('coordinator.enrollment.show', $enrollment->student_id) }}" class="btn btn-primary w-fit">Mais informações</a>
+        </div>
     </div>
     
 @endforeach
