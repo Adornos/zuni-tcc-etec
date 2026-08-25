@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('content');
             $table->enum('type', ['internal', 'external']); // internal = docentes | external = responsáveis
             $table->foreignId('author_id')->constrained('users')->cascadeOnDelete(); // director ou coordinator
-            $table->foreignId('student_id')->nullable()->constrained('student_sheets')->cascadeOnDelete(); // usado em relatórios externos
+            $table->foreignId('student_id')->nullable()->constrained('studentSheet')->cascadeOnDelete(); // usado em relatórios externos
             $table->timestamps();
         });
     }
@@ -29,4 +29,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('reports');
     }
+
 };

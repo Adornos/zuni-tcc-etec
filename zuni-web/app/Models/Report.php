@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Report extends Model
 {
@@ -17,6 +18,10 @@ class Report extends Model
         'status' => 'string',
     ];
     
+    public function student() : belongsTo
+    {
+        return $this->belongsTo(Student::class, 'student_id');
+    }
 
 
 }

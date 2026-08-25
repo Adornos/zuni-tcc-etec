@@ -145,8 +145,8 @@ class CoordinatorController extends Controller
         $reports = Report::latest()->paginate(20);
 
         return view('coordinator.dashboard', [
-            'dashboardInfo' => 'coordinator.reports.index', 
-            compact('reports')
+            'dashboardInfo' => view('coordinator.reports.index', 
+            compact('reports'))
             ]);
     }
 
