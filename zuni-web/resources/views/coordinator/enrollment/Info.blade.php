@@ -1,6 +1,6 @@
-<form class="card bg-base-200 min-h-screen shadow-xl p-6 col-span-4">
+<form class="card bg-base-200 h-fit shadow-xl p-6 col-span-4">
 
-    <div class="grid grid-cols-1 gap-[1vmax] md:grid-cols-12 flex">
+    <div class="grid grid-cols-1 gap-[1vmax] ">
 
 
         {{-- HEADER --}}

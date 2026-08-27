@@ -68,13 +68,68 @@
 
 @foreach ($enrollments as $enrollment)
 
-    <div class="card bg-base-100 shadow-xl p-[2vmax] col-span-4">
-        <div class="card bg-base-100 shadow-xl p-[2vmax]">
-            <p>Student ID: {{ $enrollment->student_id }}</p>
-            <p>Student Name: {{ $enrollment->name }}</p>
-            <p>Status: {{ $enrollment->status }}</p>
-            <a href="{{ route('coordinator.enrollment.show', $enrollment->student_id) }}" class="btn btn-primary w-fit">Mais informações</a>
+<div class="card bg-base-100 border border-base-200 shadow-sm transition-shadow hover:shadow-md h-fit">
+    <div class="card-body p-5">
+
+        {{-- Header --}}
+        <div class="flex items-start justify-between gap-4">
+            <div>
+                <h2 class="card-title text-base-content">
+                    {{ $enrollment->name }}
+                </h2>
+
+                <p class="text-sm text-base-content/60">
+                    Student #{{ $enrollment->student_id }}
+                </p>
+            </div>
+
         </div>
+
+        {{-- Informações --}}
+        <div class="divider my-2"></div>
+
+            <div class="flex items-center justify-between gap-4">
+                <span class="text-sm text-base-content/60">
+                    Student ID
+                </span>
+
+                <span class="font-medium text-base-content">
+                    {{ $enrollment->student_id }}
+                </span>
+            </div>
+
+            <div class="flex items-center justify-between gap-4">
+                <span class="text-sm text-base-content/60">
+                    Student Name
+                </span>
+
+                <span class="font-medium text-base-content text-right">
+                    {{ $enrollment->name }}
+                </span>
+            </div>
+
+            <div class="flex items-center justify-between gap-4">
+                <span class="text-sm text-base-content/60">
+                    Status
+                </span>
+
+                <span class="badge badge-primary badge-sm">
+                    {{ $enrollment->status }}
+                </span>
+            </div>
+
+        {{-- Action --}}
+        <div class="card-actions justify-end mt-4">
+            <a
+                href="{{ route('coordinator.enrollment.show', $enrollment->student_id) }}"
+                class="btn text-white btn-sm bg-Csecondary-dark"
+            >
+                Mais informações
+                <span aria-hidden="true">→</span>
+            </a>
+        </div>
+
     </div>
+</div>
     
 @endforeach
