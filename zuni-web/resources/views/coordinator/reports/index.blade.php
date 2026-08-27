@@ -4,21 +4,21 @@
 
     <form class="bg-white shadow-md rounded-lg p-4 mb-4">
 
-        <!-- Aluno -->
+        <!-- Referencia -->
         <div class="mb-4">
-            <label for="aluno" class="block text-sm font-medium text-gray-600 mb-1">
+            <label for="index" class="block text-sm font-medium text-gray-600 mb-1">
                 Referência
             </label>
 
             <select
-                id="aluno"
-                name="aluno"
+                id="index"
+                name="index"
                 class="w-full border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:outline-none"
             >
                 <option value="">Selecione uma referência</option>
                 <option value="1">Aluno</option>
                 <option value="2">Sala</option>
-                <option value="3">Escola</option>
+                <option value="3">Geral</option>
             </select>
         </div>
 
@@ -79,3 +79,31 @@
 
    
 </div>
+
+<script>
+    document.getElementById('index').addEventListener('change', async function () {
+        const index = this.value;
+
+        if (!index) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/broadcast/data/${index}`);
+
+            if (!response.ok) {
+                throw new Error('Erro ao buscar os dados.');
+            }
+
+            const result = await response.json();
+
+            console.log(result);
+
+            // Aqui você atualiza a interface
+            // com result.data
+
+        } catch (error) {
+            console.error(error);
+        }
+    });
+</script>

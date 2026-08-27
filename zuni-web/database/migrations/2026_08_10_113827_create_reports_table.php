@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        //Fazer classroom migration
+
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->enum('type', ['internal', 'external']); // internal = docentes | external = responsáveis
+            // $table->enum('type', ['internal', 'external']); // internal = docentes | external = responsáveis
             $table->foreignId('author_id')->constrained('users')->cascadeOnDelete(); // director ou coordinator
-            $table->foreignId('student_id')->nullable()->constrained('studentSheet')->cascadeOnDelete(); // usado em relatórios externos
+            $table->foreignId('sheet_id')->nullable()->constrained('student_sheets')->cascadeOnDelete(); // usado em relatórios externos
             $table->timestamps();
         });
     }
