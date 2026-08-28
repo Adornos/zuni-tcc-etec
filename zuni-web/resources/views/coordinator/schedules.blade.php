@@ -121,8 +121,8 @@
                     <div class="flex items-start gap-2 p-3 rounded-lg  shadow border-l-4 border-green-500">
                         <div class="w-1 bg-green-500 rounded"></div>
                         <div>
-                            <div class="font-semibold">To sem ideia ja</div>
-                            <div class="text-gray-500 text-sm">alguma coisa</div>
+                            <div class="font-semibold">Vazio</div>
+                            <div class="text-gray-500 text-sm">Vazio</div>
                         </div>
                     </div>
                 </td>
@@ -262,8 +262,8 @@
                     <div class="flex items-start gap-2 p-3 rounded-lg  shadow border-l-4 border-red-500">
                         <div class="w-1 bg-red-500 rounded"></div>
                         <div>
-                            <div class="font-semibold">Coisas de coordenação</div>
-                            <div class="text-gray-500 text-sm">coisas importantes</div>
+                            <div class="font-semibold">Vazio</div>
+                            <div class="text-gray-500 text-sm">Vazio</div>
                         </div>
                     </div>
                 </td>

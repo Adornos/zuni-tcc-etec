@@ -18,7 +18,7 @@
 
             <!-- Logo -->
             <a href="/" class="flex items-center">
-                <img src="{{ asset('images/logo.svg') }}" alt="Zuni" class="h-10">
+                <img src="{{ asset('images/logo.svg') }}" alt="Zuni" class="h-6">
             </a>
 
             <!-- Navegação -->

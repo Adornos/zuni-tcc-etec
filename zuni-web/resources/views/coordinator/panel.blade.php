@@ -16,7 +16,7 @@
         </div>
 
         <div class="card-actions mt-auto">
-            <button class="btn btn-primary w-full">
+            <button class="btn btn-primary w-full bg-Cprimary">
                 <span>Ver Mais</span>
                 <span class="ml-auto text-xl">→</span>
             </button>
@@ -52,7 +52,7 @@
         </p>
 
         <div class="card-actions mt-auto">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary bg-Cprimary">
                 Ir para Programação →
             </button>
         </div>
@@ -61,26 +61,26 @@
 </div>
 
 {{-- Agenda --}}
+
 <div class="card bg-base-100 shadow-md row-span-4">
     <div class="card-body">
-        <h2 class="text-4xl font-Sans font-bold Text-Bold text-primary-dark pt-[1vmax]">
-            Relatórios
-        </h2>
-        <p class="text-base-content/70 pt-[1vmax]">
-            Consulte e crie seus relatórios rapidamente nesta área!
-        </p>
-        <div class="card bg-base-100 shadow-md 
-        w-full 
-        h-[10vmax] mt-5">
-            <h2 class=" font-Sans font-semibold text-primary-dark p-[1vmax]">
+
+        <!-- Título da seção -->
+        <div class="mb-6">
+            <h2 class="text-4xl font-sans font-bold text-primary-dark">
                 Relatórios
             </h2>
-            <p class="text-base-content/70 pt-[1vmax] text-center">
-                Clique aqui para gerar um novo relatório, ou consulte os relatórios já gerados.
+
+            <p class="mt-2 text-base-content/70">
+                Consulte e crie seus relatórios rapidamente nesta área!
             </p>
         </div>
+
+
     </div>
 </div>
+
+
 
 {{-- Reunião --}}
 <div class="card bg-base-100 shadow-md text-center pt-[1vmax]">

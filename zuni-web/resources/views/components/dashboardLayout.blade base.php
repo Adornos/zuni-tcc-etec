@@ -21,7 +21,7 @@
 
             {{-- Logo --}}
             <div class="flex justify-center py-8">
-                <img src="{{ asset('images/logo_white.svg') }}" alt="Logo" class="h-8">
+                <img src="{{ asset('images/logo_white.svg') }}" alt="Logo" class="h-14">
             </div>
 
             {{-- Navegação --}}

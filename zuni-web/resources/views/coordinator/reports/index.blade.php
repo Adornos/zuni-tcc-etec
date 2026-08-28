@@ -24,7 +24,7 @@
 
         <!-- Título -->
         <div class="mb-4">
-            <label for="titulo" class="block text-sm font-medium text-gray-600 mb-1">
+            <label for="titulo" class="block text-sm text-gray-600 mb-1">
                 Título
             </label>
 
@@ -40,7 +40,7 @@
         <!-- Corpo -->
         <div class="mb-4">
             <label for="corpo" class="block text-sm font-medium text-gray-600 mb-1">
-                Corpo
+                Relatório
             </label>
 
             <textarea
@@ -64,7 +64,7 @@
 
 <div class="col-span-2 row-span-4 bg-white shadow-md rounded-lg p-4">
 
-    <h2 class="text-xl font-semibold mb-4 text-[2vmax] text-center">Associação de (...)</h2>
+    <h2 class="text-xl font-semibold mb-4 text-[2vmax] text-center">Aluno Relatado</h2>
         
             <div class="mb-4 p-4 border border-gray-300 rounded-md flex gap-[2vmax] items-center">
                 <form action="get">

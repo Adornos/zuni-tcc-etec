@@ -113,7 +113,7 @@
                     Status
                 </span>
 
-                <span class="badge badge-primary badge-sm">
+                <span class="text-sm text-base-content/60">
                     {{ $enrollment->status }}
                 </span>
             </div>
@@ -122,7 +122,7 @@
         <div class="card-actions justify-end mt-4">
             <a
                 href="{{ route('coordinator.enrollment.show', $enrollment->student_id) }}"
-                class="btn text-white btn-sm bg-Csecondary-dark"
+                class="btn text-white btn-sm bg-Csecondary"
             >
                 Mais informações
                 <span aria-hidden="true">→</span>
