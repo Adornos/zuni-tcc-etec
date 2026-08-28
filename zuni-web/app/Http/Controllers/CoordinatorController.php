@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enrollment;
-use App\Models\Report;
+use App\Models\Reports;
 use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\StudentSheet;
+use Illuminate\Http\JsonResponse;
 
 class CoordinatorController extends Controller
 {
@@ -139,16 +140,44 @@ class CoordinatorController extends Controller
             ]);
     }
 
-    // Relatórios (internos: para docentes | externos: para responsáveis)
+    // TRATAMENTO EDE RELATÓRIOS
+    
     public function reports()
     {
-        $reports = Report::latest()->paginate(20);
+        $reports = Reports::latest()->paginate(20);
 
         return view('coordinator.dashboard', [
             'dashboardInfo' => view('coordinator.reports.index', 
             compact('reports'))
             ]);
     }
+
+    public function searchItems($index) : JsonResponse
+    {
+        return match ($index) {
+
+            1 => response()->json([
+                'type' => 'general',
+                'data' => Reports::query()->get(),
+            ]),
+
+            2 => response()->json([
+                'type' => 'classroom',
+                'data' => [],
+                ]),
+                
+            3 => response()->json([
+                'type' => 'student',
+                'data' => StudentSheet::query()->get('id', 'student_id', 'name', 'class'),
+            ]),
+
+            default => response()->json([
+                'message' => 'Referência inválida.'
+            ], 422),
+            
+        };
+    }
+
 
     public function createReport()
     {
@@ -168,12 +197,12 @@ class CoordinatorController extends Controller
 
         $validated['author_id'] = $request->user()->id;
 
-        Report::create($validated);
+        Reports::create($validated);
 
         return redirect()->route('coordinator.reports.index');
     }
 
-    public function editReport(Report $report)
+    public function editReport(Reports $report)
     {
         return view('coordinator.dashboard', [
             'dashboardInfo' => 'coordinator.reports.edit',

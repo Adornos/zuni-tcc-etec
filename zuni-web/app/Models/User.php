@@ -88,6 +88,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(StudentSheet::class, 'student_id');
     }
+    public function report(): HasMany
+    {
+        return $this->hasMany(Report::class, 'report_id');
+    }
 
 
 

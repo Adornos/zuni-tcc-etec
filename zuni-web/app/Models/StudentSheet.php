@@ -58,4 +58,8 @@ class StudentSheet extends Model
     {
         return $this->hasOne(Enrollment::class, 'student_id');
     }
+    public function report(): HasMany
+    {
+        return $this->hasMany(Report::class, 'student_id');
+    }
 }
