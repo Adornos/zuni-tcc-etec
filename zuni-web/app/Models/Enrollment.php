@@ -12,7 +12,7 @@ use App\Models\studentSheet;
 
 class Enrollment extends Model
 {
-    // database/migrations/xxxx_xx_xx_create_enrollments_table.php
+    protected $primaryKey = 'student_id';
 
     protected $fillable = [
         'sheet_id',
@@ -20,9 +20,21 @@ class Enrollment extends Model
         'reviewed_at',
     ];
 
-    function student_sheet(): BelongsTo
+    //REVISAR ESSAS CONEXOES
+
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'student_id');
+    }
+
+    public function studentSheet()
     {
         return $this->belongsTo(StudentSheet::class, 'sheet_id');
+    }
+
+    public function reviewer()
+    {
+        return $this->belongsTo(User::class, 'reviewed_by');
     }
 
 }

@@ -13,8 +13,10 @@ class Enrollment extends Controller
 
     public function getRequests(Request $request)
     {
+        $status = $request->status ?? "pending";
+
         $enrollments = \App\Models\Enrollment::with('student', 'guardian')
-            ->where('status', 'pending')
+            ->where('status', $status)
             ->latest()
             ->paginate(20);
 

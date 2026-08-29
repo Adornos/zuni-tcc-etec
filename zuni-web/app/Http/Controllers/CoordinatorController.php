@@ -46,7 +46,7 @@ class CoordinatorController extends Controller
     // Aprovação de matrículas
     public function enrollments()
     {
-        $enrollments = StudentSheet::where('status', 'pending')->get(['student_id', 'name', 'status']);
+        $enrollments = StudentSheet::where('status', 'pending')->get(['id', 'student_id', 'name', 'status']);
 
         // Validar dados de $enrollments para disponibilizar depois.
 
@@ -55,9 +55,50 @@ class CoordinatorController extends Controller
         ]);
     }
 
+    public function searchEnrollments(Request $request)
+{
+    $query = Enrollment::query()
+        ->with('studentSheet');
+
+    // Nome
+    if ($request->filled('name')) {
+        $name = $request->name;
+
+        $query->whereHas('studentSheet', function ($q) use ($name) {
+            $q->where('name', 'like', "%{$name}%");
+        });
+    }
+
+    // Ano escolar
+    if ($request->filled('ano')) {
+        $query->whereHas('studentSheet', function ($q) use ($request) {
+            $q->where('school_year', $request->ano);
+        });
+    }
+
+    // Status
+    if ($request->filled('status')) {
+        $query->whereHas('studentSheet', function ($q) use ($request) {
+            $q->where('status', $request->status);
+        });
+    }
+
+    // // Turma
+    // if ($request->filled('turma')) {
+    //     $query->whereHas('studentSheet', function ($q) use ($request) {
+    //         $q->where('class', $request->turma);
+    //     });
+    // }
+
+    return response()->json(
+        $query->get()
+    );
+}
+
     public function showEnrollment($enrollment)
     {
-        $enrollmentInfo = StudentSheet::where('student_id', $enrollment)->firstOrFail();
+
+        $enrollmentInfo = StudentSheet::where('id', $enrollment)->firstOrFail();
 
         return view('coordinator.dashboard',[ 
             'dashboardInfo' => view('coordinator.enrollment.info', ['enrollmentInfo' => $enrollmentInfo])
@@ -66,24 +107,40 @@ class CoordinatorController extends Controller
 
     public function approveEnrollment(Request $request, Enrollment $enrollment)
     {
+
+        // Atualiza o processo de matrícula
         $enrollment->update([
-            'status' => 'approved',
             'reviewed_by' => $request->user()->id,
             'reviewed_at' => now(),
         ]);
 
-        return redirect()->route('coordinator.enrollments.index');
+        // Atualiza a ficha do aluno
+        $enrollment->studentSheet->update([
+            'status' => 'active',
+        ]);
+
+        return redirect()->route('coordinator.enrollment.show', [
+            'enrollment' => $enrollment->student_id,
+        ]);
     }
 
     public function rejectEnrollment(Request $request, Enrollment $enrollment)
     {
+
+        // Atualiza o processo de matrícula
         $enrollment->update([
-            'status' => 'rejected',
             'reviewed_by' => $request->user()->id,
             'reviewed_at' => now(),
         ]);
 
-        return redirect()->route('coordinator.enrollments.index');
+        // Atualiza a ficha do aluno
+        $enrollment->studentSheet->update([
+            'status' => 'inactive',
+        ]);
+
+        return redirect()->route('coordinator.enrollment.show', [
+            'enrollment' => $enrollment->student_id,
+        ]);
     }
 
     // Gerenciamento de horários (abordagem de grade)
@@ -120,7 +177,7 @@ class CoordinatorController extends Controller
         return redirect()->route('coordinator.schedules.index');
     }
 
-    public function studentSchedule(\App\Models\Student $student)
+    public function studentSchedule(\App\Models\StudentSheet $student)
     {
         $schedules = Schedule::where('student_id', $student->id)->get();
 
@@ -210,7 +267,7 @@ class CoordinatorController extends Controller
             ]);
     }
 
-    public function updateReport(Request $request, Report $report)
+    public function updateReport(Request $request, Reports $report)
     {
         $validated = $request->validate([
             'title' => ['sometimes', 'string', 'max:255'],
@@ -224,7 +281,7 @@ class CoordinatorController extends Controller
         return redirect()->route('coordinator.reports.index');
     }
 
-    public function destroyReport(Report $report)
+    public function destroyReport(Reports $report)
     {
         $report->delete();
 

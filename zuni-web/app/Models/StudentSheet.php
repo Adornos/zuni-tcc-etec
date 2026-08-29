@@ -12,6 +12,8 @@ class StudentSheet extends Model
         'student_id',
         'guardian_id',
 
+        'status',
+
         'name',
         'birth_date',
         'gender',
@@ -56,7 +58,7 @@ class StudentSheet extends Model
 
     public function enrollment(): HasOne
     {
-        return $this->hasOne(Enrollment::class, 'student_id');
+        return $this->hasOne(Enrollment::class, 'sheet_id');
     }
     public function report(): HasMany
     {

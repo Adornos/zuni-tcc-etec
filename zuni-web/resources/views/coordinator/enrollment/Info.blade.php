@@ -1,4 +1,4 @@
-<form class="card bg-base-200 h-fit shadow-xl p-6 col-span-4">
+<div class="card bg-base-200 h-fit shadow-xl p-6 col-span-4">
 
     <div class="grid grid-cols-1 gap-[1vmax] ">
 
@@ -32,10 +32,10 @@
                                     src="{{ asset('storage/' . $enrollmentInfo->student->photo) }}"
                                     alt="Foto de {{ $enrollmentInfo->name }}"
                                     class="w-full h-full object-cover">
-                        </div>
+                            </div>
 
                             {{-- Caso não tenha foto --}}
-                        @else
+                            @else
 
                             <div class="
                                 flex
@@ -57,35 +57,33 @@
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
-                                    stroke-width="1.5"
-                                >
+                                    stroke-width="1.5">
                                     <path
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
-                                        d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a7.5 7.5 0 0115 0"
-                                    />
+                                        d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a7.5 7.5 0 0115 0" />
                                 </svg>
 
                             </div>
 
-                        @endif
-                            
+                            @endif
 
-                        <div class="
+
+                            <div class="
                             p-[2vmax]
                             items-center
                             gap-x-[.5vmax]
                             mt-[.3vmax]
                             text-[.9vmax]
                         ">
-                            <h1 class="
+                                <h1 class="
                                 text-[2vmax]
                                 font-Sans
                                 font-bold
                                 text-primary-dark
                             ">
-                                {{ $enrollmentInfo->name }}
-                            </h1>
+                                    {{ $enrollmentInfo->name }}
+                                </h1>
 
 
 
@@ -143,17 +141,31 @@
 
                         <span class="
                             badge
-                            badge-warning
-                            gap-[.3vmax]
                             rounded-full
                             px-[1vmax]
                             py-[1vmax]
                             text-[.8vmax]
                             font-semibold
-                        ">
-                            <span class="w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
 
-                            {{ $enrollmentInfo->status }}
+                            {{ match($enrollmentInfo->status) {
+                                'pending' => 'badge-warning',
+                                'active' => 'badge-success',
+                                'inactive' => 'badge-error',
+                                'suspended' => 'badge-neutral',
+                                default => 'badge-ghost',
+                            } }}
+                        ">
+
+                            <span class="mr-[.3vmax] w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
+
+                            {{ match($enrollmentInfo->status) {
+                                'pending' => 'Pendente',
+                                'active' => 'Ativa',
+                                'inactive' => 'Inativa',
+                                'suspended' => 'Suspensa',
+                                default => ucfirst($enrollmentInfo->status),
+                            } }}
+
                         </span>
 
 
@@ -338,19 +350,34 @@
 
                         <span class="
                             badge
-                            badge-warning
                             rounded-full
                             px-[1vmax]
                             py-[1vmax]
                             text-[.8vmax]
                             font-semibold
+
+                            {{ match($enrollmentInfo->status) {
+                                'pending' => 'badge-warning',
+                                'active' => 'badge-success',
+                                'inactive' => 'badge-error',
+                                'suspended' => 'badge-neutral',
+                                default => 'badge-ghost',
+                            } }}
                         ">
 
                             <span class="mr-[.3vmax] w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
 
-                            {{ $enrollmentInfo->status }}
+                            {{ match($enrollmentInfo->status) {
+                                'pending' => 'Pendente',
+                                'active' => 'Ativa',
+                                'inactive' => 'Inativa',
+                                'suspended' => 'Suspensa',
+                                default => ucfirst($enrollmentInfo->status),
+                            } }}
 
                         </span>
+
+                        
 
                     </div>
 
@@ -366,28 +393,44 @@
                     pt-[1.5vmax]
                 ">
 
-                    <button class="
-                        btn
-                        btn-primary
-                        w-full
-                        min-h-[2.5vmax]
-                        h-[2.5vmax]
-                        text-[.8vmax]
-                    ">
-                        Aprovar matrícula
-                    </button>
+                    <form action="{{ route('coordinator.enrollment.approve', ['enrollment' => $enrollmentInfo]) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
+                        <button
+                            type="submit"
+                            class="
+                                btn
+                                btn-primary
+                                w-full
+                                min-h-[2.5vmax]
+                                h-[2.5vmax]
+                                text-[.8vmax]
+                        ">
+                            Aprovar matrícula
+                        </button>
+                    </form>
 
 
-                    <button class="
-                        btn
-                        btn-outline
-                        w-full
-                        min-h-[2.5vmax]
-                        h-[2.5vmax]
-                        text-[.8vmax]
-                    ">
-                        Editar
-                    </button>
+                    <form action="{{ route('coordinator.enrollment.reject', ['enrollment' => $enrollmentInfo]) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
+                        <button
+                            type="submit"
+                            class="
+                            btn
+                            btn-outline
+                            btn-error
+                            w-full
+                            min-h-[2.5vmax]
+                            h-[2.5vmax]
+                            text-[.8vmax]
+                        ">
+                            Rejeitar matrícula
+                        </button>
+                    </form>
+
 
                 </div>
 
@@ -699,7 +742,7 @@
         {{-- OBSERVAÇÕES --}}
         @if($enrollmentInfo->notes)
 
-            <div class="
+        <div class="
                 card
                 bg-base-100
                 shadow-md
@@ -707,33 +750,33 @@
                 md:col-span-12
             ">
 
-                <div class="card-body p-[1.5vmax]">
+            <div class="card-body p-[1.5vmax]">
 
-                    <h2 class="
+                <h2 class="
                         text-[1.1vmax]
                         font-bold
                         uppercase
                         text-error
                     ">
-                        Observações
-                    </h2>
+                    Observações
+                </h2>
 
 
-                    <p class="
+                <p class="
                         text-[.9vmax]
                         text-base-content/70
                         whitespace-pre-line
                         mt-[1vmax]
                     ">
-                        {{ $enrollmentInfo->notes }}
-                    </p>
-
-                </div>
+                    {{ $enrollmentInfo->notes }}
+                </p>
 
             </div>
+
+        </div>
 
         @endif
 
     </div>
 
-</form>
+</div>

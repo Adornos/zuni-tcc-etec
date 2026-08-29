@@ -60,12 +60,23 @@
                         <span class="label-text">Graduação</span>
                     </label>
 
-                    <input
-                        type="text"
+                                        <select
                         name="class"
-                        value="1º Ano"
-                        class="input input-bordered"
+                        class="select select-bordered w-full"
                     >
+                        <option value="">Todos</option>
+                        <option value="1-jardim">1º Jardim</option>
+                        <option value="2-jardim">2º Jardim</option>
+                        <option value="1-ano">1º Ano</option>
+                        <option value="2-ano">2º Ano</option>
+                        <option value="3-ano">3º Ano</option>
+                        <option value="4-ano">4º Ano</option>
+                        <option value="5-ano">5º Ano</option>
+                        <option value="6-ano">6º Ano</option>
+                        <option value="7-ano">7º Ano</option>
+                        <option value="8-ano">8º Ano</option>
+                        <option value="9-ano">9º Ano</option>
+                    </select>
                 </div>
 
                 <div class="form-control">

@@ -77,20 +77,20 @@
                     <form action="{{ route('logout') }}" method="get" class="inline">
                     @csrf
                         <button type="submit" class="px-5 py-2 rounded-full bg-Csecondary text-white font-medium hover:brightness-110 transition">
-                        Logout
+                        Sair
                         </button>
                     </form>
                 @else
 
                     <a href="{{route('login')}}"
                     class="px-5 py-2 rounded-full border-2 border-Cprimary text-Cprimary font-medium hover:bg-Cprimary hover:text-white transition">
-                        Log-in
+                        Entrar
                     </a>
 
                     <!-- CTA Principal -->
                     <a href="{{route('register')}}"
                     class="px-5 py-2 rounded-full bg-Csecondary text-white font-medium hover:brightness-110 transition">
-                        Sign-in
+                        Cadastrar-se
                     </a>
                     
                 @endauth
