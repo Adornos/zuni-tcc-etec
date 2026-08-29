@@ -47,6 +47,20 @@
             </a>
         </li>
 
+        {{-- Matrículas --}}
+        <li>
+            <a
+                href="{{ route('coordinator.teacher.index') }}"
+                class="hover:bg-white hover:text-Cprimary"
+            >
+                <img 
+                class="w-[2.2vmax] mr-[1vmax]" 
+                src="{{ asset('images/icons/teacher.svg') }}" 
+                />
+                Professores
+            </a>
+        </li>
+
         {{-- Cronogramas --}}
         <li>
             <a

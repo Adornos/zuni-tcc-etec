@@ -46,8 +46,7 @@ class GuardianController extends Controller
     public function registerStudentForm()
     {
         $student = new StudentController();
-                return view('guardian.dashboard', [
-            // 'dashboardInfo' => view('guardian.registered', compact('students'))
+        return view('guardian.dashboard', [
             'dashboardInfo' => $student->create()
         ]);
     }

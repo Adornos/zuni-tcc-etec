@@ -107,6 +107,13 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::put('/enrollments/{enrollment}/approve', [CoordinatorController::class, 'approveEnrollment'])->name('enrollment.approve');
     Route::put('/enrollments/{enrollment}/reject', [CoordinatorController::class, 'rejectEnrollment'])->name('enrollment.reject');
 
+    // Colocação de professores
+    Route::get('/teachers', [CoordinatorController::class, 'teachers'])->name('teacher.index');
+    Route::get('/teacher/register', [CoordinatorController::class, 'formTeacher'])->name('teacher.register');
+    Route::post('/teacher/register', [CoordinatorController::class, 'registerTeacher'])->name('teacher.store');
+    Route::get('/teacher/show/{teacher}', [CoordinatorController::class, 'showTeacher'])->name('teacher.show');
+    Route::put('/teacher/show/{teacher/edit', [CoordinatorController::class, 'editTeacher'])->name('teacher.edit');
+
     // Gerenciamento de horários (abordagem de grade)
     Route::get('/schedules', [CoordinatorController::class, 'schedules'])->name('schedules.index');
     Route::put('/schedules', [CoordinatorController::class, 'updateSchedules'])->name('schedules.update');

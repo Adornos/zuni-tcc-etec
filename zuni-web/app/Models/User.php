@@ -59,9 +59,20 @@ class User extends Authenticatable
     {
         return $this->role === UserRole::GUARDIAN;
     }
+
+    public function students(): HasMany
+    {
+        return $this->hasMany(StudentSheet::class, 'guardian_id');
+    }
+
     public function isStudent(): bool
     {
         return $this->role === UserRole::STUDENT;
+    }
+
+    public function studentSheet(): HasOne
+    {
+        return $this->hasOne(StudentSheet::class, 'student_id');
     }
 
     public function isTeacher(): bool
@@ -69,28 +80,31 @@ class User extends Authenticatable
         return $this->role === UserRole::TEACHER;
     }
 
+    public function teacherSheet(): HasOne
+    {
+        return $this->hasOne(TeacherSheet::class, 'teacher_id');
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === UserRole::ADMIN;
     }
-
-    public function students(): HasMany
+    public function isCoordinator(): bool
     {
-        return $this->hasMany(StudentSheet::class, 'guardian_id');
+        return $this->role === UserRole::COORDINATOR;
     }
+
+
 
     // public function Enrollments(): HasMany
     // {
     //     return $this->hasMany(Enrollment::class, 'guardian_id');
     // }
 
-    public function studentSheet(): HasOne
-    {
-        return $this->hasOne(StudentSheet::class, 'student_id');
-    }
+    
     public function report(): HasMany
     {
-        return $this->hasMany(Report::class, 'report_id');
+        return $this->hasMany(Reports::class, 'report_id');
     }
 
 

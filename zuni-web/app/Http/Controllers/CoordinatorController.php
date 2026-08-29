@@ -6,6 +6,7 @@ use App\Models\Enrollment;
 use App\Models\Reports;
 use App\Models\Schedule;
 use App\Models\User;
+use App\Models\TeacherSheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,44 +57,44 @@ class CoordinatorController extends Controller
     }
 
     public function searchEnrollments(Request $request)
-{
-    $query = Enrollment::query()
-        ->with('studentSheet');
+    {
+        $query = Enrollment::query()
+            ->with('studentSheet');
 
-    // Nome
-    if ($request->filled('name')) {
-        $name = $request->name;
+        // Nome
+        if ($request->filled('name')) {
+            $name = $request->name;
 
-        $query->whereHas('studentSheet', function ($q) use ($name) {
-            $q->where('name', 'like', "%{$name}%");
-        });
+            $query->whereHas('studentSheet', function ($q) use ($name) {
+                $q->where('name', 'like', "%{$name}%");
+            });
+        }
+
+        // Ano escolar
+        if ($request->filled('ano')) {
+            $query->whereHas('studentSheet', function ($q) use ($request) {
+                $q->where('school_year', $request->ano);
+            });
+        }
+
+        // Status
+        if ($request->filled('status')) {
+            $query->whereHas('studentSheet', function ($q) use ($request) {
+                $q->where('status', $request->status);
+            });
+        }
+
+        // // Turma
+        // if ($request->filled('turma')) {
+        //     $query->whereHas('studentSheet', function ($q) use ($request) {
+        //         $q->where('class', $request->turma);
+        //     });
+        // }
+
+        return response()->json(
+            $query->get()
+        );
     }
-
-    // Ano escolar
-    if ($request->filled('ano')) {
-        $query->whereHas('studentSheet', function ($q) use ($request) {
-            $q->where('school_year', $request->ano);
-        });
-    }
-
-    // Status
-    if ($request->filled('status')) {
-        $query->whereHas('studentSheet', function ($q) use ($request) {
-            $q->where('status', $request->status);
-        });
-    }
-
-    // // Turma
-    // if ($request->filled('turma')) {
-    //     $query->whereHas('studentSheet', function ($q) use ($request) {
-    //         $q->where('class', $request->turma);
-    //     });
-    // }
-
-    return response()->json(
-        $query->get()
-    );
-}
 
     public function showEnrollment($enrollment)
     {
@@ -140,6 +141,35 @@ class CoordinatorController extends Controller
 
         return redirect()->route('coordinator.enrollment.show', [
             'enrollment' => $enrollment->student_id,
+        ]);
+    }
+
+    public function teachers(){
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => view('coordinator.teacher.index')
+        ]);
+    }
+    public function formTeacher(){
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => view('coordinator.teacher.register')
+        ]);
+    }
+    public function registerTeacher(Request $request){
+
+        app(TeacherController::class)->store($request);
+        
+    }
+    public function showTeacher($teacher){
+
+        $teacherInfo = TeacherSheet::where('id', $teacher)->firstOrFail();
+
+        return view('coordinator.dashboard', [
+            'dashboardInfo' => view('coordinator.teacher.show', ['teacherInfo' => $teacherInfo])
+        ]);
+    }
+    public function editTeacher(TeacherSheet $teacher){
+        return redirect()->route('coordinator.teacher.show', [
+            'teacherId' => $teacher->id,
         ]);
     }
 

@@ -60,9 +60,10 @@
                         <span class="label-text">Graduação</span>
                     </label>
 
-                                        <select
+                    <select
                         name="class"
                         class="select select-bordered w-full"
+                        required
                     >
                         <option value="">Todos</option>
                         <option value="1-jardim">1º Jardim</option>
