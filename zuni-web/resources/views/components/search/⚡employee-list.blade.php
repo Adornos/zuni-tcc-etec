@@ -294,12 +294,7 @@ new class extends Component
 
         @empty
 
-            <div class="col-span-full text-center py-10">
-                <p class="text-base-content/60 mb-8">
-                    Nenhuma matrícula encontrada.
-                </p>
-                <a href="" class="text-white bg-Csecondary rounded-full p-4">CADASTRAR PROFESSOR</a>
-            </div>
+
 
         @endforelse
 

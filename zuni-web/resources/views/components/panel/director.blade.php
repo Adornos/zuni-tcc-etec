@@ -36,7 +36,7 @@
     {{-- Funcionários --}}
         <li>
             <a
-                href="{{ route('director.employee') }}"
+                href="{{ route('director.employee.index') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 

@@ -1,5 +1,4 @@
-<x-panel.director>
-<form action="{{ route('director.employee.store') }}" method="POST" class="space-y-8 col-span-4">
+<form action="{{ route('coordinator.teacher.store') }}" method="POST" class="space-y-8 col-span-4">
     @csrf
 
     {{-- ========================================================= --}}
@@ -24,47 +23,13 @@
                     <input
                         type="text"
                         name="name"
-                        value="{{ old('name', 'Mariana Oliveira Santos') }}"
+                        value="{{ old('name') }}"
                         placeholder="Ex.: Alex Anders Junior"
                         class="input input-bordered w-full"
                         required
                     />
 
                     @error('name')
-                        <span class="text-error text-sm mt-1">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-
-
-                {{-- Cargo / Role --}}
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text">Cargo *</span>
-                    </label>
-
-                    <select
-                        name="role"
-                        class="select select-bordered w-full"
-                        required
-                    >
-                        <option value="">Selecione o cargo</option>
-
-                        <option value="teacher" @selected(old('role') === 'teacher')>
-                            Professor
-                        </option>
-
-                        <option value="coordinator" @selected(old('role', 'coordinator') === 'coordinator')>
-                            Coordenador
-                        </option>
-
-                        <option value="director" @selected(old('role') === 'director')>
-                            Diretor
-                        </option>
-                    </select>
-
-                    @error('role')
                         <span class="text-error text-sm mt-1">
                             {{ $message }}
                         </span>
@@ -81,7 +46,7 @@
                     <input
                         type="date"
                         name="birth_date"
-                        value="{{ old('birth_date', '1988-04-17') }}"
+                        value="{{ old('birth_date') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -109,7 +74,7 @@
                             Masculino
                         </option>
 
-                        <option value="F" @selected(old('gender', 'F') === 'F')>
+                        <option value="F" @selected(old('gender') === 'F')>
                             Feminino
                         </option>
 
@@ -152,7 +117,7 @@
                     <input
                         type="text"
                         name="cpf"
-                        value="{{ old('cpf', '123.456.777-09') }}"
+                        value="{{ old('cpf') }}"
                         placeholder="000.000.000-00"
                         class="input input-bordered w-full"
                     />
@@ -174,7 +139,7 @@
                     <input
                         type="text"
                         name="rg"
-                        value="{{ old('rg', '45.666.912-3') }}"
+                        value="{{ old('rg') }}"
                         placeholder="00.000.000-0"
                         class="input input-bordered w-full"
                     />
@@ -189,7 +154,6 @@
             </div>
         </div>
     </div>
-
 
     {{-- ========================================================= --}}
     {{-- CONTATO --}}
@@ -213,8 +177,8 @@
                     <input
                         type="email"
                         name="email"
-                        value="{{ old('email', 'mariana.santos@zuni.test') }}"
-                        placeholder="funcionario@exemplo.com"
+                        value="{{ old('email') }}"
+                        placeholder="professor@exemplo.com"
                         class="input input-bordered w-full"
                         required
                     />
@@ -236,7 +200,7 @@
                     <input
                         type="tel"
                         name="phone"
-                        value="{{ old('phone', '(11) 98888-7777') }}"
+                        value="{{ old('phone') }}"
                         placeholder="(00) 00000-0000"
                         class="input input-bordered w-full"
                     />
@@ -275,7 +239,7 @@
                     <input
                         type="text"
                         name="formation"
-                        value="{{ old('formation', 'Licenciatura em Pedagogia') }}"
+                        value="{{ old('formation') }}"
                         placeholder="Ex.: Licenciatura em Pedagogia"
                         class="input input-bordered w-full"
                     />
@@ -297,7 +261,7 @@
                     <input
                         type="text"
                         name="specialization"
-                        value="{{ old('specialization', 'Gestão Escolar') }}"
+                        value="{{ old('specialization') }}"
                         placeholder="Ex.: Educação Infantil"
                         class="input input-bordered w-full"
                     />
@@ -319,7 +283,7 @@
                     <input
                         type="text"
                         name="registration"
-                        value="{{ old('registration', 'COORD2026001') }}"
+                        value="{{ old('registration') }}"
                         placeholder="Número de registro"
                         class="input input-bordered w-full"
                     />
@@ -341,7 +305,7 @@
                     <input
                         type="date"
                         name="hire_date"
-                        value="{{ old('hire_date', '2021-02-01') }}"
+                        value="{{ old('hire_date') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -379,7 +343,7 @@
                     <input
                         type="text"
                         name="street"
-                        value="{{ old('street', 'Rua das Acácias') }}"
+                        value="{{ old('street') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -400,7 +364,7 @@
                     <input
                         type="text"
                         name="number"
-                        value="{{ old('number', '245') }}"
+                        value="{{ old('number') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -421,7 +385,7 @@
                     <input
                         type="text"
                         name="district"
-                        value="{{ old('district', 'Vila Mariana') }}"
+                        value="{{ old('district') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -442,7 +406,7 @@
                     <input
                         type="text"
                         name="city"
-                        value="{{ old('city', 'São Paulo') }}"
+                        value="{{ old('city') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -463,7 +427,7 @@
                     <input
                         type="text"
                         name="state"
-                        value="{{ old('state', 'SP') }}"
+                        value="{{ old('state') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -501,9 +465,9 @@
                 <textarea
                     name="notes"
                     rows="5"
-                    placeholder="Informações adicionais sobre o funcionário..."
+                    placeholder="Informações adicionais sobre o professor..."
                     class="textarea textarea-bordered w-full"
-                >{{ old('notes', 'Coordenadora responsável pelo acompanhamento pedagógico das turmas do Ensino Fundamental.') }}</textarea>
+                >{{ old('notes') }}</textarea>
 
                 @error('notes')
                     <span class="text-error text-sm mt-1">
@@ -516,18 +480,14 @@
     </div>
 
 
-    {{-- ========================================================= --}}
-    {{-- BOTÃO --}}
-    {{-- ========================================================= --}}
 
     <div class="flex justify-end">
         <button
             type="submit"
             class="btn btn-primary"
         >
-            Cadastrar funcionário
+            Cadastrar professor
         </button>
     </div>
 
 </form>
-</x-panel.director>

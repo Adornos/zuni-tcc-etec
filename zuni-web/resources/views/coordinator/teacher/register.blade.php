@@ -23,7 +23,7 @@
                     <input
                         type="text"
                         name="name"
-                        value="{{ old('name') }}"
+                        value="{{ old('name', 'Rafael Martins de Oliveira') }}"
                         placeholder="Ex.: Alex Anders Junior"
                         class="input input-bordered w-full"
                         required
@@ -36,6 +36,8 @@
                     @enderror
                 </div>
 
+                {{--Role--}}
+                <input type="hidden" name="role" value="teacher">
 
                 {{-- Data de nascimento --}}
                 <div class="form-control">
@@ -46,7 +48,7 @@
                     <input
                         type="date"
                         name="birth_date"
-                        value="{{ old('birth_date') }}"
+                        value="{{ old('birth_date', '1992-07-18') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -56,7 +58,6 @@
                         </span>
                     @enderror
                 </div>
-
 
                 {{-- Gênero --}}
                 <div class="form-control">
@@ -70,7 +71,7 @@
                     >
                         <option value="">Selecione</option>
 
-                        <option value="M" @selected(old('gender') === 'M')>
+                        <option value="M" @selected(old('gender', 'M') === 'M')>
                             Masculino
                         </option>
 
@@ -117,7 +118,7 @@
                     <input
                         type="text"
                         name="cpf"
-                        value="{{ old('cpf') }}"
+                        value="{{ old('cpf', '529.847.316-20') }}"
                         placeholder="000.000.000-00"
                         class="input input-bordered w-full"
                     />
@@ -129,7 +130,6 @@
                     @enderror
                 </div>
 
-
                 {{-- RG --}}
                 <div class="form-control">
                     <label class="label">
@@ -139,7 +139,7 @@
                     <input
                         type="text"
                         name="rg"
-                        value="{{ old('rg') }}"
+                        value="{{ old('rg', '42.781.936-5') }}"
                         placeholder="00.000.000-0"
                         class="input input-bordered w-full"
                     />
@@ -154,6 +154,7 @@
             </div>
         </div>
     </div>
+
 
     {{-- ========================================================= --}}
     {{-- CONTATO --}}
@@ -177,7 +178,7 @@
                     <input
                         type="email"
                         name="email"
-                        value="{{ old('email') }}"
+                        value="{{ old('email', 'rafael.oliveira@zuni.test') }}"
                         placeholder="professor@exemplo.com"
                         class="input input-bordered w-full"
                         required
@@ -190,7 +191,6 @@
                     @enderror
                 </div>
 
-
                 {{-- Telefone --}}
                 <div class="form-control">
                     <label class="label">
@@ -200,7 +200,7 @@
                     <input
                         type="tel"
                         name="phone"
-                        value="{{ old('phone') }}"
+                        value="{{ old('phone', '(11) 98765-4321') }}"
                         placeholder="(00) 00000-0000"
                         class="input input-bordered w-full"
                     />
@@ -239,7 +239,7 @@
                     <input
                         type="text"
                         name="formation"
-                        value="{{ old('formation') }}"
+                        value="{{ old('formation', 'Licenciatura em Matemática') }}"
                         placeholder="Ex.: Licenciatura em Pedagogia"
                         class="input input-bordered w-full"
                     />
@@ -251,7 +251,6 @@
                     @enderror
                 </div>
 
-
                 {{-- Especialização --}}
                 <div class="form-control">
                     <label class="label">
@@ -261,7 +260,7 @@
                     <input
                         type="text"
                         name="specialization"
-                        value="{{ old('specialization') }}"
+                        value="{{ old('specialization', 'Educação Matemática') }}"
                         placeholder="Ex.: Educação Infantil"
                         class="input input-bordered w-full"
                     />
@@ -273,7 +272,6 @@
                     @enderror
                 </div>
 
-
                 {{-- Registro --}}
                 <div class="form-control">
                     <label class="label">
@@ -283,7 +281,7 @@
                     <input
                         type="text"
                         name="registration"
-                        value="{{ old('registration') }}"
+                        value="{{ old('registration', 'PROF2026007') }}"
                         placeholder="Número de registro"
                         class="input input-bordered w-full"
                     />
@@ -295,7 +293,6 @@
                     @enderror
                 </div>
 
-
                 {{-- Data de contratação --}}
                 <div class="form-control">
                     <label class="label">
@@ -305,7 +302,7 @@
                     <input
                         type="date"
                         name="hire_date"
-                        value="{{ old('hire_date') }}"
+                        value="{{ old('hire_date', '2023-02-01') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -343,7 +340,7 @@
                     <input
                         type="text"
                         name="street"
-                        value="{{ old('street') }}"
+                        value="{{ old('street', 'Rua das Palmeiras') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -354,7 +351,6 @@
                     @enderror
                 </div>
 
-
                 {{-- Número --}}
                 <div class="form-control md:col-span-2">
                     <label class="label">
@@ -364,7 +360,7 @@
                     <input
                         type="text"
                         name="number"
-                        value="{{ old('number') }}"
+                        value="{{ old('number', '318') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -375,7 +371,6 @@
                     @enderror
                 </div>
 
-
                 {{-- Bairro --}}
                 <div class="form-control md:col-span-2">
                     <label class="label">
@@ -385,7 +380,7 @@
                     <input
                         type="text"
                         name="district"
-                        value="{{ old('district') }}"
+                        value="{{ old('district', 'Vila Clementino') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -396,7 +391,6 @@
                     @enderror
                 </div>
 
-
                 {{-- Cidade --}}
                 <div class="form-control md:col-span-2">
                     <label class="label">
@@ -406,7 +400,7 @@
                     <input
                         type="text"
                         name="city"
-                        value="{{ old('city') }}"
+                        value="{{ old('city', 'São Paulo') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -417,7 +411,6 @@
                     @enderror
                 </div>
 
-
                 {{-- Estado --}}
                 <div class="form-control md:col-span-2">
                     <label class="label">
@@ -427,7 +420,7 @@
                     <input
                         type="text"
                         name="state"
-                        value="{{ old('state') }}"
+                        value="{{ old('state', 'SP') }}"
                         class="input input-bordered w-full"
                     />
 
@@ -467,7 +460,7 @@
                     rows="5"
                     placeholder="Informações adicionais sobre o professor..."
                     class="textarea textarea-bordered w-full"
-                >{{ old('notes') }}</textarea>
+                >{{ old('notes', 'Professor responsável pelas disciplinas de Matemática e acompanhamento de projetos de reforço escolar.') }}</textarea>
 
                 @error('notes')
                     <span class="text-error text-sm mt-1">
@@ -480,6 +473,9 @@
     </div>
 
 
+    {{-- ========================================================= --}}
+    {{-- BOTÃO --}}
+    {{-- ========================================================= --}}
 
     <div class="flex justify-end">
         <button
@@ -491,3 +487,4 @@
     </div>
 
 </form>
+

@@ -10,34 +10,21 @@ return new class extends Migration
     {
         Schema::create('coordinator_sheets', function (Blueprint $table) {
 
-            $table->id();
+        $table->id();
 
-            $table->foreignId('coordinator_id')->constrained('users')->cascadeOnDelete();
+        $table->foreignId('coordinator_id')->constrained('users')->cascadeOnDelete()->unique();
 
-            // Dados pessoais
-            $table->string('name');
-            $table->date('birth_date')->nullable();
-            $table->string('gender')->nullable();
+        $table->string('formation', 150)->nullable();
+        $table->string('specialization', 150)->nullable();
 
-            // Formação
-            $table->string('formation')->nullable();
+        $table->string('registration', 50)->nullable()->unique();
 
-            // Endereço
-            $table->string('street', 100)->nullable();
-            $table->string('number', 10)->nullable();
-            $table->string('district', 50)->nullable();
-            $table->string('city', 50)->nullable();
-            $table->string('state', 50)->nullable();
+        $table->date('hire_date')->nullable();
 
-            // Dados profissionais
-            $table->string('registration')->nullable();
-            $table->date('hire_date')->nullable();
+        $table->text('notes')->nullable();
 
-            // Status
-            $table->string('status')->default('active');
-
-            $table->timestamps();
-        });
+        $table->timestamps();
+    });
     }
 
     public function down(): void

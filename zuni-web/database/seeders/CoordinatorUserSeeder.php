@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\User;
 use App\Models\CoordinatorSheet;
+use App\Models\User;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class CoordinatorUserSeeder extends Seeder
@@ -14,27 +14,35 @@ class CoordinatorUserSeeder extends Seeder
         $user = User::firstOrCreate(
             ['username' => 'coordinator01'],
             [
-                'name' => 'Coordenador',
+                'name' => 'Coordenadora',
+                'email' => 'coordinator@zuni.test',
                 'password' => Hash::make('123456'),
                 'role' => 'coordinator',
+                'status' => 'active',
+
+                'cpf' => '987.654.321-00',
+                'rg' => '32.145.678-9',
+                'phone' => '(11) 97777-6666',
+
+                'birth_date' => '1988-04-17',
+                'gender' => 'F',
+
+                'street' => 'Rua das Acácias',
+                'number' => '245',
+                'district' => 'Vila Mariana',
+                'city' => 'São Paulo',
+                'state' => 'SP',
             ]
         );
 
         CoordinatorSheet::firstOrCreate(
             ['coordinator_id' => $user->id],
             [
-                'name' => $user->name,
-                'birth_date' => '1985-05-10',
-                'gender' => 'Masculino',
-                'formation' => 'Pedagogia',
-                'street' => 'Rua das Flores',
-                'number' => '100',
-                'district' => 'Centro',
-                'city' => 'São Paulo',
-                'state' => 'SP',
+                'formation' => 'Licenciatura em Pedagogia',
+                'specialization' => 'Gestão Escolar',
                 'registration' => 'COORD001',
-                'hire_date' => '2015-02-01',
-                'status' => 'active',
+                'hire_date' => '2021-02-01',
+                'notes' => 'Coordenadora responsável pelo acompanhamento pedagógico.',
             ]
         );
     }

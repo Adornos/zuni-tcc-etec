@@ -9,29 +9,22 @@ class DirectorSheet extends Model
 {
     protected $fillable = [
         'director_id',
-        'birth_date',
-        'gender',
         'formation',
-        'street',
-        'number',
-        'district',
-        'city',
-        'state',
+        'specialization',
         'registration',
         'hire_date',
-        'status',
+        'notes',
     ];
 
     protected function casts(): array
     {
         return [
-            'birth_date' => 'date',
             'hire_date' => 'date',
         ];
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'director_id');
     }
 }

@@ -2,10 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DirectorSheet;
-use App\Models\TeacherSheet;
+use App\Enums\UserRole;
+
+use App\Models\Enrollment;
+use App\Models\Reports;
+use App\Models\Schedule;
 use App\Models\User;
+use App\Models\DirectorSheet;
+
 use Illuminate\Http\Request;
+
+use Illuminate\Http\JsonResponse;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 class DirectorController extends Controller
 {
@@ -61,13 +73,20 @@ class DirectorController extends Controller
 
     public function registerEmployee(Request $request)
     {
-        return match ($request->role) {
-            'teacher' => app(TeacherController::class)->store($request),
-            'coordinator' => app(CoordinatorController::class)->store($request),
-            'director' => app(DirectorController::class)->store($request),
+        return app(EmployeeController::class)->store($request);
+    }
 
-            default => abort(422, 'Cargo inválido.'),
-        };
+    public function showEmployee(User $employee)
+    {
+        $employee->load([
+            'teacherSheet',
+            'coordinatorSheet',
+            'directorSheet',
+        ]);
+
+        return view('director.employee.show', [
+            'employee' => $employee,
+        ]);
     }
 
 
@@ -93,4 +112,5 @@ class DirectorController extends Controller
     {
         return view('director.chat');
     }
+
 }

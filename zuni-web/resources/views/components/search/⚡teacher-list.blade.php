@@ -15,7 +15,7 @@ new class extends Component
     public function teachers()
     {
         return TeacherSheet::query()
-            ->with('teacher')
+            ->with('user')
 
             ->when($this->name, function ($query) {
                 $query->where(
@@ -26,10 +26,12 @@ new class extends Component
             })
 
             ->when($this->status, function ($query) {
-                $query->where(
-                    'status',
-                    $this->status
-                );
+                $query->whereHas('user', function ($query) {
+                    $query->where(
+                        'status',
+                        $this->status
+                    );
+                });
             })
 
             ->get();
@@ -147,18 +149,18 @@ new class extends Component
                 <div class="card-body p-4 sm:p-5 md:p-6">
 
                     <h2 class="card-title text-base sm:text-lg">
-                        {{ $teacher->name }}
+                        {{ $teacher->user?->name }}
                     </h2>
 
                     <p class="text-xs sm:text-sm text-base-content/60">
-                        Student #{{ $teacher->teacher_id }}
+                        #{{ $teacher->teacher_id }}
                     </p>
 
                     <div class="divider my-2"></div>
 
                     <div class="flex justify-between gap-3">
                         <span class="text-sm text-base-content/60">
-                            Student ID
+                            ID
                         </span>
 
                         <span class="font-medium">
@@ -216,6 +218,10 @@ new class extends Component
             </div>
 
         @endforelse
+
+            <div class="col-span-full text-center py-10">
+                <a href="{{ route('coordinator.teacher.register') }}" class="text-white bg-Csecondary rounded-full p-4">CADASTRAR PROFESSOR</a>
+            </div>
 
     </div>
 

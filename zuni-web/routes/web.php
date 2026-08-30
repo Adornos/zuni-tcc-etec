@@ -70,7 +70,7 @@ Route::middleware(['auth', 'role:director'])
     Route::get('/profile', [DirectorController::class, 'profile'])->name('profile');
 
 
-    Route::get('/employee', [DirectorController::class, 'employees'])->name('employee');
+    Route::get('/employee', [DirectorController::class, 'employees'])->name('employee.index');
     Route::get('/employee/register', [DirectorController::class, 'formEmployee'])->name('employee.register');
     Route::post('/employee/register', [DirectorController::class, 'registerEmployee'])->name('employee.store');
     Route::get('/employee/show/{employee}', [DirectorController::class, 'showEmployee'])->name('employee.show');

@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
+
 use App\Models\Enrollment;
 use App\Models\Reports;
 use App\Models\Schedule;
 use App\Models\User;
 use App\Models\TeacherSheet;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
+use App\Models\CoordinatorSheet;
 use App\Models\StudentSheet;
+
+use Illuminate\Http\Request;
+
 use Illuminate\Http\JsonResponse;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class CoordinatorController extends Controller
 {
@@ -154,10 +161,9 @@ class CoordinatorController extends Controller
             'dashboardInfo' => view('coordinator.teacher.register')
         ]);
     }
-    public function registerTeacher(Request $request){
-
-        app(TeacherController::class)->store($request);
-        
+    public function registerTeacher(Request $request)
+    {
+        return app(EmployeeController::class)->store($request);
     }
     public function showTeacher($teacher){
 
@@ -317,4 +323,5 @@ class CoordinatorController extends Controller
 
         return redirect()->route('coordinator.reports.index');
     }
+
 }

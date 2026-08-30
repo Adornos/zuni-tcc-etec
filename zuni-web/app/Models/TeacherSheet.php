@@ -9,42 +9,21 @@ class TeacherSheet extends Model
 {
     protected $fillable = [
         'teacher_id',
-
-        'status',
-
-        'name',
-        'birth_date',
-        'gender',
-
-        'cpf',
-        'rg',
-
-        'phone',
-        'email',
-
         'formation',
         'specialization',
         'registration',
         'hire_date',
-
-        'street',
-        'number',
-        'district',
-        'city',
-        'state',
-
         'notes',
     ];
 
-    protected $casts = [
-        'birth_date' => 'date',
-        'hire_date' => 'date',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'hire_date' => 'date',
+        ];
+    }
 
-    /**
-     * TeacherSheet belongs to a Teacher (User)
-     */
-    public function teacher(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }

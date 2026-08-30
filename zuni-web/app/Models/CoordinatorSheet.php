@@ -9,23 +9,16 @@ class CoordinatorSheet extends Model
 {
     protected $fillable = [
         'coordinator_id',
-        'birth_date',
-        'gender',
         'formation',
-        'street',
-        'number',
-        'district',
-        'city',
-        'state',
+        'specialization',
         'registration',
         'hire_date',
-        'status',
+        'notes',
     ];
 
     protected function casts(): array
     {
         return [
-            'birth_date' => 'date',
             'hire_date' => 'date',
         ];
     }

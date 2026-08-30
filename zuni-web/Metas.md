@@ -41,9 +41,12 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 ## Dia 2 — Cadastro de coordenador
 
-- [ ] Cadastro de coordenador
-- [ ] Validação do cadastro
-- [ ] Testar permissões do coordenador
+- [x] Cadastro de coordenador
+- [x] Validação do cadastro
+- [x] Testar permissões do coordenador
+
+### Observações:
+- [ ] Verificar permissão de criação de funcionários nos formulários (evitar injection)
 
 ## Dia 3 — Criação de salas
 
