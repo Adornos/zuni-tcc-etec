@@ -10,4 +10,17 @@ enum UserRole: string
     case COORDINATOR = 'coordinator';
     case DIRECTOR = 'director';
     case ADMIN = 'admin';
+
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::TEACHER => 'Professor',
+            self::COORDINATOR => 'Coordenador',
+            self::DIRECTOR => 'Diretor',
+            self::STUDENT => 'Aluno',
+            self::GUARDIAN => 'Responsável',
+        };
+    }
+
 }

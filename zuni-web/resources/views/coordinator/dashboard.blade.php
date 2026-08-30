@@ -1,7 +1,7 @@
 <x-dashboard.layout>
 
-    <x-slot:panelTitle>Área do Responsável</x-slot:panelTitle>
-    <x-slot:panelMessage>Seja bem-vindo à área do reposnsável do sistema Zuni!</x-slot:panelMessage>
+    <x-slot:panelTitle>Área do Coordenador</x-slot:panelTitle>
+    <x-slot:panelMessage>Seja bem-vindo à área do coordenador do sistema Zuni!</x-slot:panelMessage>
 
 
     <x-slot:aside>

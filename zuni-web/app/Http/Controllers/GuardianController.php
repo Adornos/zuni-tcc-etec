@@ -17,7 +17,6 @@ class GuardianController extends Controller
     {
         return view('guardian.dashboard', [
             'dashboardInfo' => view('guardian.panel')
-            
         ]);
     }
     public function profile()

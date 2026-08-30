@@ -60,34 +60,27 @@ Route::middleware(['auth', 'role:teacher'])
 
 });
 
-// Route::middleware(['auth', 'role:director'])
-//     ->prefix('director')
-//     ->name('director.')
-//     ->group(function () {
+Route::middleware(['auth', 'role:director'])
+    ->prefix('director')
+    ->name('director.')
+    ->group(function () {
 
-//     // Rotas do Diretor
-//     Route::get('/', [DirectorController::class, 'index'])->name('index');
-//     Route::get('/profile', [DirectorController::class, 'profile'])->name('profile');
 
-//     Route::get('/forum', [DirectorController::class, 'forum'])->name('forum');
-//     Route::get('/chat', [DirectorController::class, 'chat'])->name('chat');
+    Route::get('/', [DirectorController::class, 'index'])->name('index');
+    Route::get('/profile', [DirectorController::class, 'profile'])->name('profile');
 
-//     // Gerenciamento de professores
-//     Route::get('/teachers', [DirectorController::class, 'teachers'])->name('teachers.index');
-//     Route::get('/teachers/{teacher}', [DirectorController::class, 'showTeacher'])->name('teachers.show');
-//     Route::post('/teachers', [DirectorController::class, 'storeTeacher'])->name('teachers.store');
-//     Route::put('/teachers/{teacher}', [DirectorController::class, 'updateTeacher'])->name('teachers.update');
-//     Route::delete('/teachers/{teacher}', [DirectorController::class, 'destroyTeacher'])->name('teachers.destroy');
 
-//     // Relatórios (Diretor também pode criar/gerenciar)
-//     Route::get('/reports', [DirectorController::class, 'reports'])->name('reports.index');
-//     Route::get('/reports/create', [DirectorController::class, 'createReport'])->name('reports.create');
-//     Route::post('/reports', [DirectorController::class, 'storeReport'])->name('reports.store');
-//     Route::get('/reports/{report}/edit', [DirectorController::class, 'editReport'])->name('reports.edit');
-//     Route::put('/reports/{report}', [DirectorController::class, 'updateReport'])->name('reports.update');
-//     Route::delete('/reports/{report}', [DirectorController::class, 'destroyReport'])->name('reports.destroy');
+    Route::get('/employee', [DirectorController::class, 'employees'])->name('employee');
+    Route::get('/employee/register', [DirectorController::class, 'formEmployee'])->name('employee.register');
+    Route::post('/employee/register', [DirectorController::class, 'registerEmployee'])->name('employee.store');
+    Route::get('/employee/show/{employee}', [DirectorController::class, 'showEmployee'])->name('employee.show');
+    Route::put('/employee/show/{employee}', [DirectorController::class, 'editEmployee'])->name('employee.edit');
 
-// });
+
+    Route::get('/forum', [DirectorController::class, 'forum'])->name('forum');
+    Route::get('/chat', [DirectorController::class, 'chat'])->name('chat');
+
+});
 
 Route::middleware(['auth', 'role:coordinator'])
     ->prefix('coordinator')
@@ -112,7 +105,7 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/teacher/register', [CoordinatorController::class, 'formTeacher'])->name('teacher.register');
     Route::post('/teacher/register', [CoordinatorController::class, 'registerTeacher'])->name('teacher.store');
     Route::get('/teacher/show/{teacher}', [CoordinatorController::class, 'showTeacher'])->name('teacher.show');
-    Route::put('/teacher/show/{teacher/edit', [CoordinatorController::class, 'editTeacher'])->name('teacher.edit');
+    Route::put('/teacher/show/{teacher}/edit', [CoordinatorController::class, 'editTeacher'])->name('teacher.edit');
 
     // Gerenciamento de horários (abordagem de grade)
     Route::get('/schedules', [CoordinatorController::class, 'schedules'])->name('schedules.index');

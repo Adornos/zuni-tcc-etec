@@ -94,6 +94,21 @@ class User extends Authenticatable
         return $this->role === UserRole::COORDINATOR;
     }
 
+    public function coordinatorSheet(): HasOne
+    {
+        return $this->hasOne(CoordinatorSheet::class, 'coordinator_id');
+    }
+
+    public function isDirector(): bool
+    {
+        return $this->role === UserRole::DIRECTOR;
+    }
+
+    public function directorSheet(): HasOne
+    {
+        return $this->hasOne(DirectorSheet::class, 'director_id');
+    }
+
 
 
     // public function Enrollments(): HasMany
@@ -107,6 +122,16 @@ class User extends Authenticatable
         return $this->hasMany(Reports::class, 'report_id');
     }
 
+
+    public function roleSheet()
+    {
+        return match ($this->role) {
+            UserRole::TEACHER => $this->teacherSheet(),
+            UserRole::COORDINATOR => $this->coordinatorSheet(),
+            UserRole::DIRECTOR => $this->directorSheet(),
+            default => null,
+        };
+    }
 
 
 

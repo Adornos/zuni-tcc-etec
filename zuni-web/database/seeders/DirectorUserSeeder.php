@@ -4,27 +4,27 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\CoordinatorSheet;
+use App\Models\DirectorSheet;
 use Illuminate\Support\Facades\Hash;
 
-class CoordinatorUserSeeder extends Seeder
+class DirectorUserSeeder extends Seeder
 {
     public function run(): void
     {
         $user = User::firstOrCreate(
-            ['username' => 'coordinator01'],
+            ['username' => 'director01'],
             [
-                'name' => 'Coordenador',
+                'name' => 'Diretor',
                 'password' => Hash::make('123456'),
-                'role' => 'coordinator',
+                'role' => 'director',
             ]
         );
 
-        CoordinatorSheet::firstOrCreate(
-            ['coordinator_id' => $user->id],
+        DirectorSheet::firstOrCreate(
+            ['director_id' => $user->id],
             [
                 'name' => $user->name,
-                'birth_date' => '1985-05-10',
+                'birth_date' => '1980-03-15',
                 'gender' => 'Masculino',
                 'formation' => 'Pedagogia',
                 'street' => 'Rua das Flores',
@@ -32,8 +32,8 @@ class CoordinatorUserSeeder extends Seeder
                 'district' => 'Centro',
                 'city' => 'São Paulo',
                 'state' => 'SP',
-                'registration' => 'COORD001',
-                'hire_date' => '2015-02-01',
+                'registration' => 'DIR001',
+                'hire_date' => '2010-02-01',
                 'status' => 'active',
             ]
         );
