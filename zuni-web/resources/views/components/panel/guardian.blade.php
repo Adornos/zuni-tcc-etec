@@ -1,7 +1,7 @@
-<x-dashboard.layout>
+<x-panel.layout>
 
-    <x-slot:panelTitle>Área do Professor</x-slot:panelTitle>
-    <x-slot:panelMessage>Bem-vindo à área do professor do sistema Zuni!</x-slot:panelMessage>
+    <x-slot:panelTitle>Área do Responsável</x-slot:panelTitle>
+    <x-slot:panelMessage>Seja bem-vindo à área do reposnsável do sistema Zuni!</x-slot:panelMessage>
 
 
     <x-slot:aside>
@@ -15,14 +15,14 @@
                 class="w-[2.2vmax] mr-[1vmax] rounded-full " 
                 src="https://ui-avatars.com/api/?name={{ auth()->user()->name[0] ?? 'Sem nome' }}" 
                 />
-                {{ auth()->user()->name }}
+                {{auth()->user()->name}}
             </a>
         </li>
 
     {{-- Dashboard --}}
         <li>
             <a
-                href="{{ route('teacher.index') }}"
+                href="{{ route('guardian.index') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 
@@ -36,21 +36,21 @@
         {{-- Cadastros --}}
         <li>
             <a
-                href="{{ route('teacher.schedule') }}"
+                href="{{ route('guardian.registered') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 
                 class="w-[2.2vmax] mr-[1vmax]" 
-                src="{{ asset('images/icons/schedule.svg') }}" 
+                src="{{ asset('images/icons/enroll.svg') }}" 
                 />
-                Cronograma
+                Cadastros
             </a>
         </li>
 
         {{-- Mural --}}
         <li>
             <a
-                href="{{ route('teacher.forum') }}"
+                href="{{ route('guardian.forum') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 
@@ -64,7 +64,7 @@
         {{-- Chat --}}
         <li>
             <a
-                href="{{ route('teacher.chat') }}"
+                href="{{ route('guardian.chat') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 
@@ -76,7 +76,7 @@
         </li> 
     </x-slot:aside>
     
-    <x-slot:dashboardInfo>{!! $dashboardInfo !!}</x-slot:dashboardInfo>
+    {!! $slot !!}
     
 
-</x-dashboard.layout>
+</x-panel.layout>

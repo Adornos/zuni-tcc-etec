@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserRole;
-
+use App\Enums\UserStatus;
 use App\Models\Enrollment;
-use App\Models\Reports;
+use App\Models\Report;
 use App\Models\Schedule;
 use App\Models\User;
 use App\Models\TeacherSheet;
@@ -24,43 +24,40 @@ class CoordinatorController extends Controller
 {
     public function index()
     {
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => view('coordinator.panel')
-            
-        ]);
+        return  view('coordinator.panel');
+        
     }
     public function profile()
     {
         $user = Auth::user();
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => view('coordinator.profile', ['profile' => $user])
-        ]);
+        
+            return view('coordinator.profile', ['profile' => $user]);
+        
     }
 
     public function forum()
     {
-       return view('coordinator.dashboard', [
-            'dashboardInfo' => view('coordinator.forum')
-        ]);
+       
+            return view('coordinator.forum');
+        
     }
 
     public function chat()
     {
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => view('coordinator.chat')
-        ]);
+        
+            return view('coordinator.chat');
+        
     }
 
     // Aprovação de matrículas
-    public function enrollments()
+    public function students()
     {
-        $enrollments = StudentSheet::where('status', 'pending')->get(['id', 'student_id', 'name', 'status']);
 
-        // Validar dados de $enrollments para disponibilizar depois.
+        // Validar dados de $students para disponibilizar depois.
 
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => view('coordinator.enrollments', compact('enrollments'))
-        ]);
+        
+            return view('coordinator.student.index');
+        
     }
 
     public function searchEnrollments(Request $request)
@@ -103,48 +100,47 @@ class CoordinatorController extends Controller
         );
     }
 
-    public function showEnrollment($enrollment)
+    public function showStudent($student)
     {
 
-        $enrollmentInfo = StudentSheet::where('id', $enrollment)->firstOrFail();
+        $studentInfo = StudentSheet::where('id', $student)->firstOrFail();
 
-        return view('coordinator.dashboard',[ 
-            'dashboardInfo' => view('coordinator.enrollment.info', ['enrollmentInfo' => $enrollmentInfo])
-            ]);
+        return view('coordinator.student.show', ['studentSheet' => $studentInfo]);
+            
     }
 
-    public function approveEnrollment(Request $request, Enrollment $enrollment)
+    public function approveEnrollment(Enrollment $enrollment)
     {
 
-        // Atualiza o processo de matrícula
+
         $enrollment->update([
-            'reviewed_by' => $request->user()->id,
+            'reviewed_by' => auth()->id(),
             'reviewed_at' => now(),
         ]);
 
-        // Atualiza a ficha do aluno
-        $enrollment->studentSheet->update([
-            'status' => 'active',
-        ]);
+        $user = $enrollment->studentSheet->user;
+
+        $user->status = UserStatus::ACTIVE;
+        $user->save();
 
         return redirect()->route('coordinator.enrollment.show', [
             'enrollment' => $enrollment->student_id,
         ]);
     }
 
-    public function rejectEnrollment(Request $request, Enrollment $enrollment)
+    public function rejectEnrollment(Enrollment $enrollment)
     {
 
-        // Atualiza o processo de matrícula
+
         $enrollment->update([
-            'reviewed_by' => $request->user()->id,
+            'reviewed_by' => auth()->id(),
             'reviewed_at' => now(),
         ]);
 
-        // Atualiza a ficha do aluno
-        $enrollment->studentSheet->update([
-            'status' => 'inactive',
-        ]);
+        $user = $enrollment->studentSheet->user;
+        
+        $user->status = UserStatus::INACTIVE;
+        $user->save();
 
         return redirect()->route('coordinator.enrollment.show', [
             'enrollment' => $enrollment->student_id,
@@ -152,14 +148,14 @@ class CoordinatorController extends Controller
     }
 
     public function teachers(){
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => view('coordinator.teacher.index')
-        ]);
+        
+        return view('coordinator.teacher.index');
+        
     }
     public function formTeacher(){
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => view('coordinator.teacher.register')
-        ]);
+        
+        return view('coordinator.teacher.register');
+        
     }
     public function registerTeacher(Request $request)
     {
@@ -169,9 +165,9 @@ class CoordinatorController extends Controller
 
         $teacherInfo = TeacherSheet::where('id', $teacher)->firstOrFail();
 
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => view('coordinator.teacher.show', ['teacherInfo' => $teacherInfo])
-        ]);
+
+        return view('coordinator.teacher.show', ['teacherInfo' => $teacherInfo]);
+
     }
     public function editTeacher(TeacherSheet $teacher){
         return redirect()->route('coordinator.teacher.show', [
@@ -184,10 +180,8 @@ class CoordinatorController extends Controller
     {
         $schedules = Schedule::with('teacher', 'student')->get();
 
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => view('coordinator.schedules'), 
-            'schedules' => $schedules
-        ]);
+        return view('coordinator.schedules');
+
     }
 
     public function updateSchedules(Request $request)
@@ -217,32 +211,27 @@ class CoordinatorController extends Controller
     {
         $schedules = Schedule::where('student_id', $student->id)->get();
 
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => 'coordinator.schedules.student', 
-            compact('student', 'schedules')
-            ]);
+        return view('coordinator.schedules.student');
+
     }
 
     public function teacherSchedule(User $teacher)
     {
         $schedules = Schedule::where('teacher_id', $teacher->id)->get();
 
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => 'coordinator.schedules.teacher', 
-            compact('teacher', 'schedules')
-            ]);
+        
+        return view('coordinator.schedules.teacher');
+
     }
 
     // TRATAMENTO EDE RELATÓRIOS
     
     public function reports()
     {
-        $reports = Reports::latest()->paginate(20);
+        $reports = Report::latest()->paginate(20);
 
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => view('coordinator.reports.index', 
-            compact('reports'))
-            ]);
+        return view('coordinator.reports.index');
+
     }
 
     public function searchItems($index) : JsonResponse
@@ -251,7 +240,7 @@ class CoordinatorController extends Controller
 
             1 => response()->json([
                 'type' => 'general',
-                'data' => Reports::query()->get(),
+                'data' => Report::query()->get(),
             ]),
 
             2 => response()->json([
@@ -274,9 +263,7 @@ class CoordinatorController extends Controller
 
     public function createReport()
     {
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => 'coordinator.reports.create'
-            ]);
+        return view('coordinator.reports.create');
     }
 
     public function storeReport(Request $request)
@@ -290,20 +277,18 @@ class CoordinatorController extends Controller
 
         $validated['author_id'] = $request->user()->id;
 
-        Reports::create($validated);
+        Report::create($validated);
 
         return redirect()->route('coordinator.reports.index');
     }
 
-    public function editReport(Reports $report)
+    public function editReport(Report $report)
     {
-        return view('coordinator.dashboard', [
-            'dashboardInfo' => 'coordinator.reports.edit',
-            compact('report')
-            ]);
+        return view('coordinator.reports.edit');
+
     }
 
-    public function updateReport(Request $request, Reports $report)
+    public function updateReport(Request $request, Report $report)
     {
         $validated = $request->validate([
             'title' => ['sometimes', 'string', 'max:255'],
@@ -317,7 +302,7 @@ class CoordinatorController extends Controller
         return redirect()->route('coordinator.reports.index');
     }
 
-    public function destroyReport(Reports $report)
+    public function destroyReport(Report $report)
     {
         $report->delete();
 

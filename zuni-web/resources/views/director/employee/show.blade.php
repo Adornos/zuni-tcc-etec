@@ -119,7 +119,7 @@
                             text-[.8vmax]
                             font-semibold
 
-                            {{ match($employee->status) {
+                            {{ match($employee->status->value) {
                                 'pending' => 'badge-warning',
                                 'active' => 'badge-success',
                                 'inactive' => 'badge-error',
@@ -130,13 +130,7 @@
 
                             <span class="mr-[.3vmax] w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
 
-                            {{ match($employee->status) {
-                                'pending' => 'Pendente',
-                                'active' => 'Ativo',
-                                'inactive' => 'Inativo',
-                                'suspended' => 'Suspenso',
-                                default => ucfirst($employee->status),
-                            } }}
+                            {{ $employee->status->label() }}
 
                         </span>
 
@@ -446,7 +440,7 @@
                             text-[.8vmax]
                             font-semibold
 
-                            {{ match($employee->status) {
+                            {{ match($employee->status->value) {
                                 'pending' => 'badge-warning',
                                 'active' => 'badge-success',
                                 'inactive' => 'badge-error',
@@ -457,13 +451,7 @@
 
                             <span class="mr-[.3vmax] w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
 
-                            {{ match($employee->status) {
-                                'pending' => 'Pendente',
-                                'active' => 'Ativo',
-                                'inactive' => 'Inativo',
-                                'suspended' => 'Suspenso',
-                                default => ucfirst($employee->status),
-                            } }}
+                            {{ $employee->status->label() }}
 
                         </span>
 

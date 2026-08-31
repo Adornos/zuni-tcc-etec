@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Enums\UserRole;
+use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\Models\StudentSheet;
@@ -51,6 +52,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'birth_date' => 'date',
+            'status' => UserStatus::class,
             'role' => UserRole::class,
         ];
     }
@@ -120,7 +122,7 @@ class User extends Authenticatable
     
     public function report(): HasMany
     {
-        return $this->hasMany(Reports::class, 'report_id');
+        return $this->hasMany(Report::class, 'report_id');
     }
 
 

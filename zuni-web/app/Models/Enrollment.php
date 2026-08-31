@@ -20,13 +20,6 @@ class Enrollment extends Model
         'reviewed_at',
     ];
 
-    //REVISAR ESSAS CONEXOES
-
-    public function student()
-    {
-        return $this->belongsTo(User::class, 'student_id');
-    }
-
     public function studentSheet()
     {
         return $this->belongsTo(StudentSheet::class, 'sheet_id');

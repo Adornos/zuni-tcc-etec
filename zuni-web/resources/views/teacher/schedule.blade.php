@@ -1,4 +1,4 @@
-
+<x-panel.teacher>
     {{-- <table class="min-w-full border-collapse text-sm"> --}}
     <table class="row-span-4 col-span-4">
 
@@ -270,3 +270,4 @@
 
         </tbody>
     </table>
+</x-panel.teacher>

@@ -37,7 +37,7 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 ### Observações:
 - [ ] Finalização da edição do cadastro pelo professor
-- [ ] Padrõnização de diretórios (Uniformização dos nomes e importações dos components do painel)
+- [x] Padrõnização de diretórios (Uniformização dos nomes e importações dos components do painel)
 
 ## Dia 2 — Cadastro de coordenador
 
@@ -47,16 +47,21 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 ### Observações:
 - [ ] Verificar permissão de criação de funcionários nos formulários (evitar injection)
-- [ ] Uniformizar status e outras informações em StudentSheets
-- [ ] Mudar cor de status conforme o próprio status nas views do aluno
+- [x] Uniformizar status e outras informações em StudentSheets
+- [x] Mudar cor de status conforme o próprio status nas views do aluno
 - [ ] Resolver formulário que indica "Não informado" em vez de "Não"
-- [ ] Resolver transcrição do dado do banco para linguagem real com os métodos do enum
+- [x] Resolver transcrição do dado do banco para linguagem real com os métodos do enum
 
 ## Dia 3 — Criação de salas
 
 - [ ] Criação de salas
 - [ ] Definir relacionamento sala ↔ alunos
 - [ ] Definir relacionamento sala ↔ professor
+
+### Observações:
+
+- [ ] Testar o funcionamento de todas as telas
+- [ ] Testar o funcionamento do campo de perfil de todos os usuários
 
 ## Dia 4 — Atribuição de alunos
 

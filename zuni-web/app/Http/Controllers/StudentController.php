@@ -69,6 +69,14 @@ class StudentController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'birth_date' => 'nullable|date',
+            'gender' => 'nullable|in:M,F,O',
+
+            'street' => 'nullable|string|max:100',
+            'number' => 'nullable|string|max:10',
+            'district' => 'nullable|string|max:50',
+            'city' => 'nullable|string|max:50',
+            'state' => 'nullable|string|max:50',
         ]);
 
         $validated['password'] = 'zuni2026';
@@ -88,16 +96,7 @@ class StudentController extends Controller
         $user = auth()->user();
 
         $studentSheet_validated = $request->validate([
-            'birth_date' => 'nullable|date',
-            'gender' => 'nullable|in:M,F,O',
             'class' => 'nullable|string|max:50',
-            'age' => 'nullable|integer',
-
-            'street' => 'nullable|string|max:100',
-            'number' => 'nullable|string|max:10',
-            'district' => 'nullable|string|max:50',
-            'city' => 'nullable|string|max:50',
-            'state' => 'nullable|string|max:50',
 
             'neurodivergent' => 'nullable|boolean',
             'allergy' => 'nullable|boolean',
@@ -111,7 +110,6 @@ class StudentController extends Controller
         $response = $studentUser->studentSheet()->create([
             ...$studentSheet_validated,
             'guardian_id' => $user->id,
-            'name' => $studentUser->name,
         ]);
 
         // dd($response);

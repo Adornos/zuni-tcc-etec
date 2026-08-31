@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\UserRole;
 
 use App\Models\Enrollment;
-use App\Models\Reports;
+use App\Models\Report;
 use App\Models\Schedule;
 use App\Models\User;
 use App\Models\DirectorSheet;

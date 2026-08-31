@@ -15,29 +15,16 @@ class GuardianController extends Controller
      */
     public function index()
     {
-        return view('guardian.dashboard', [
-            'dashboardInfo' => view('guardian.panel')
-        ]);
+        return view('guardian.panel');
     }
     public function profile()
     {
         $user = Auth::user();
-        return view('guardian.dashboard', [
-            'dashboardInfo' => view('guardian.profile', ['profile' => $user])
-        ]);
+        return view('guardian.profile', ['profile' => $user]);
     }
     public function registered()
     {
-
-        $students = auth()->user()->students()->latest()->get() ?? [];
-        
-
-        return view('guardian.dashboard', [
-
-            'dashboardInfo' => view('guardian.registered', [
-                'students' => $students,
-            ])
-        ]);
+        return view('guardian.student.index');
     }
     /**
      * Show the form for creating a new resource.
@@ -45,9 +32,7 @@ class GuardianController extends Controller
     public function registerStudentForm()
     {
         $student = new StudentController();
-        return view('guardian.dashboard', [
-            'dashboardInfo' => $student->create()
-        ]);
+        return $student->create();
     }
     /**
      * Store a newly created resource in storage.
@@ -59,15 +44,11 @@ class GuardianController extends Controller
 
     public function forum()
     {
-        return view('guardian.dashboard', [
-            'dashboardInfo' => view('guardian.forum')
-        ]);
+        return view('guardian.forum');
     }
     public function chat()
     {
-        return view('guardian.dashboard', [
-            'dashboardInfo' => view('guardian.chat')
-        ]);
+        return view('guardian.chat');
     }
 
     /**

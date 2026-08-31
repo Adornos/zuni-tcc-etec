@@ -1,4 +1,4 @@
-<x-dashboard.layoutRefactored>
+<x-panel.layout>
 
     <x-slot:panelTitle>Área do Diretor</x-slot:panelTitle>
     <x-slot:panelMessage>Bem-vindo à área do diretor do sistema Zuni!</x-slot:panelMessage>
@@ -79,4 +79,4 @@
     
     {!! $slot !!}
 
-</x-dashboard.layout>
+</x-panel.layout>

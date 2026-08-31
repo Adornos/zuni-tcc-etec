@@ -174,7 +174,7 @@ new class extends Component
                         </span>
 
                         <span class="font-medium">
-                            {{ $teacher->status }}
+                            {{ $teacher->user->status->label() }}
                         </span>
                     </div>
 
@@ -201,7 +201,6 @@ new class extends Component
                                 →
                             </span>
                         </a>
-
                     </div>
 
                 </div>

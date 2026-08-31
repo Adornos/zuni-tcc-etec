@@ -1,7 +1,7 @@
-<x-dashboard.layout>
+<x-panel.layout>
 
-    <x-slot:panelTitle>Área do Responsável</x-slot:panelTitle>
-    <x-slot:panelMessage>Seja bem-vindo à área do reposnsável do sistema Zuni!</x-slot:panelMessage>
+    <x-slot:panelTitle>Área do Coordenador</x-slot:panelTitle>
+    <x-slot:panelMessage>Seja bem-vindo à área do coordenador do sistema Zuni!</x-slot:panelMessage>
 
 
     <x-slot:aside>
@@ -22,7 +22,7 @@
     {{-- Dashboard --}}
         <li>
             <a
-                href="{{ route('guardian.index') }}"
+                href="{{ route('coordinator.index') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 
@@ -33,24 +33,66 @@
             </a>
         </li>
 
-        {{-- Cadastros --}}
+        {{-- Matrículas --}}
         <li>
             <a
-                href="{{ route('guardian.registered') }}"
+                href="{{ route('coordinator.students.index') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 
                 class="w-[2.2vmax] mr-[1vmax]" 
                 src="{{ asset('images/icons/enroll.svg') }}" 
                 />
-                Cadastros
+                Matrículas
+            </a>
+        </li>
+
+        {{-- Matrículas --}}
+        <li>
+            <a
+                href="{{ route('coordinator.teacher.index') }}"
+                class="hover:bg-white hover:text-Cprimary"
+            >
+                <img 
+                class="w-[2.2vmax] mr-[1vmax]" 
+                src="{{ asset('images/icons/teacher.svg') }}" 
+                />
+                Professores
+            </a>
+        </li>
+
+        {{-- Cronogramas --}}
+        <li>
+            <a
+                href="{{ route('coordinator.schedules.index') }}"
+                class="hover:bg-white hover:text-Cprimary"
+            >
+                <img 
+                class="w-[2.2vmax] mr-[1vmax]" 
+                src="{{ asset('images/icons/schedule.svg') }}" 
+                />
+                Cronogramas
+            </a>
+        </li>
+
+        {{-- Relatórios --}}
+        <li>
+            <a
+                href="{{ route('coordinator.reports.index') }}"
+                class="hover:bg-white hover:text-Cprimary"
+            >
+                <img 
+                class="w-[2.2vmax] mr-[1vmax]" 
+                src="{{ asset('images/icons/reports.svg') }}" 
+                />
+                Relatórios
             </a>
         </li>
 
         {{-- Mural --}}
         <li>
             <a
-                href="{{ route('guardian.forum') }}"
+                href="{{ route('coordinator.forum') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 
@@ -64,7 +106,7 @@
         {{-- Chat --}}
         <li>
             <a
-                href="{{ route('guardian.chat') }}"
+                href="{{ route('coordinator.chat') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 
@@ -76,7 +118,6 @@
         </li> 
     </x-slot:aside>
     
-    <x-slot:dashboardInfo>{!! $dashboardInfo !!}</x-slot:dashboardInfo>
-    
+    {!! $slot !!}
 
-</x-dashboard.layout>
+</x-panel.layout>

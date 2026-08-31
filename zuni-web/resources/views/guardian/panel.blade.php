@@ -1,3 +1,4 @@
+<x-panel.guardian>
     {{-- Cadastrados (Crianças) --}}
     <div class="card bg-base-100 shadow-md row-span-2 flex-col items-center flex-wrap">
     <div class="card-body flex justify-center gap-[3vmax]">
@@ -63,3 +64,4 @@
             </span>
         </div>
     </div>
+</x-panel.guardian>

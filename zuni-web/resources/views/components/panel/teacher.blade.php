@@ -1,7 +1,7 @@
-<x-dashboard.layoutRefactored>
+<x-panel.layout>
 
-    <x-slot:panelTitle>Área do Diretor</x-slot:panelTitle>
-    <x-slot:panelMessage>Bem-vindo à área do diretor do sistema Zuni!</x-slot:panelMessage>
+    <x-slot:panelTitle>Área do Professor</x-slot:panelTitle>
+    <x-slot:panelMessage>Bem-vindo à área do professor do sistema Zuni!</x-slot:panelMessage>
 
 
     <x-slot:aside>
@@ -22,7 +22,7 @@
     {{-- Dashboard --}}
         <li>
             <a
-                href="{{ route('director.index') }}"
+                href="{{ route('teacher.index') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 
@@ -33,10 +33,24 @@
             </a>
         </li>
 
+        {{-- Cadastros --}}
+        <li>
+            <a
+                href="{{ route('teacher.schedule') }}"
+                class="hover:bg-white hover:text-Cprimary"
+            >
+                <img 
+                class="w-[2.2vmax] mr-[1vmax]" 
+                src="{{ asset('images/icons/schedule.svg') }}" 
+                />
+                Cronograma
+            </a>
+        </li>
+
         {{-- Mural --}}
         <li>
             <a
-                href="{{ route('director.forum') }}"
+                href="{{ route('teacher.forum') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 
@@ -50,7 +64,7 @@
         {{-- Chat --}}
         <li>
             <a
-                href="{{ route('director.chat') }}"
+                href="{{ route('teacher.chat') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 
@@ -63,5 +77,6 @@
     </x-slot:aside>
     
     {!! $slot !!}
+    
 
-</x-dashboard.layout>
+</x-panel.layout>

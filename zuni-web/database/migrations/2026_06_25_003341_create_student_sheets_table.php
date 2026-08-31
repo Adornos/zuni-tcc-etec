@@ -9,44 +9,27 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student_sheets', function (Blueprint $table) {
-            
+
             $table->id();
 
-            // Student user
-            $table->foreignId('student_id')
-                ->constrained('users')
-                ->cascadeOnDelete();
+            // Usuário aluno
+            $table->foreignId('student_id')->constrained('users')->cascadeOnDelete()->unique();
 
-            // Guardian eho registered
-            $table->foreignId('guardian_id')
-                ->constrained('users')
-                ->cascadeOnDelete();
+            // Responsável pelo aluno
+            $table->foreignId('guardian_id')->constrained('users')->cascadeOnDelete();
 
-            // Student status in the system
-            $table->enum('status', ['pending', 'active', 'inactive', 'suspended'])->default('pending');
+            // Dados específicos do aluno
+            $table->string('class', 50)->nullable();
 
-            // Student data
-            $table->string('name', 100);
-            $table->date('birth_date')->nullable();
-
-            $table->enum('gender', ['M', 'F', 'O'])->nullable();
-
-            $table->string('class', 50)->nullable(); // e.g. "3rd Grade A"
             $table->integer('age')->nullable();
 
-            // Address
-            $table->string('street', 100)->nullable();
-            $table->string('number', 10)->nullable();
-            $table->string('district', 50)->nullable();
-            $table->string('city', 50)->nullable();
-            $table->string('state', 50)->nullable();
-
-            // Special conditions
+            // Necessidades específicas
             $table->boolean('neurodivergent')->nullable();
             $table->boolean('allergy')->nullable();
             $table->boolean('food_restriction')->nullable();
             $table->boolean('special_care')->nullable();
 
+            // Informações adicionais
             $table->text('notes')->nullable();
 
             $table->timestamps();
@@ -55,6 +38,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('student_sheets');
     }
 };

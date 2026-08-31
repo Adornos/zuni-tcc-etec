@@ -95,10 +95,10 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/chat', [CoordinatorController::class, 'chat'])->name('chat');
 
     // Aprovação de matrículas
-    Route::get('/enrollments', [CoordinatorController::class, 'enrollments'])->name('enrollments.index');
-    Route::get('/enrollments/{enrollment}', [CoordinatorController::class, 'showEnrollment'])->name('enrollment.show');
-    Route::put('/enrollments/{enrollment}/approve', [CoordinatorController::class, 'approveEnrollment'])->name('enrollment.approve');
-    Route::put('/enrollments/{enrollment}/reject', [CoordinatorController::class, 'rejectEnrollment'])->name('enrollment.reject');
+    Route::get('/students', [CoordinatorController::class, 'students'])->name('students.index');
+    Route::get('/students/{enrollment}', [CoordinatorController::class, 'showStudent'])->name('enrollment.show');
+    Route::put('/students/{enrollment}/approve', [CoordinatorController::class, 'approveEnrollment'])->name('enrollment.approve');
+    Route::put('/students/{enrollment}/reject', [CoordinatorController::class, 'rejectEnrollment'])->name('enrollment.reject');
 
     // Colocação de professores
     Route::get('/teachers', [CoordinatorController::class, 'teachers'])->name('teacher.index');

@@ -18,39 +18,27 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return view('teacher.dashboard', [
-
-            'dashboardInfo' => view('teacher.panel')
-            
-        ]);
+        return view('teacher.panel');
     }
     public function profile()
     {
         $user = Auth::user();
-        return view('teacher.dashboard', [
-            'dashboardInfo' => view('teacher.profile', ['profile' => $user])
-        ]);
+        return view('teacher.profile', ['profile' => $user]);
     }
 
     public function schedule()
     {
         $user = Auth::user();
-        return view('teacher.dashboard', [
-            'dashboardInfo' => view('teacher.schedule', ['profile' => $user])
-        ]);
+        return view('teacher.schedule', ['profile' => $user]);
     }
 
     public function forum()
     {
-        return view('teacher.dashboard', [
-            'dashboardInfo' => view('teacher.forum')
-        ]);
+        return view('teacher.forum');
     }
     public function chat()
     {
-        return view('teacher.dashboard', [
-            'dashboardInfo' => view('teacher.chat')
-        ]);
+        return view('teacher.chat');
     }
 
     /**
