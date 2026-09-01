@@ -59,6 +59,20 @@
                 />
                 Professores
             </a>
+
+        </li>
+        {{-- Salas --}}
+        <li>
+            <a
+                href="{{ route('coordinator.classroom.index') }}"
+                class="hover:bg-white hover:text-Cprimary"
+            >
+                <img 
+                class="w-[2.2vmax] mr-[1vmax]" 
+                src="{{ asset('images/icons/classroom.svg') }}" 
+                />
+                Salas de Aula
+            </a>
         </li>
 
         {{-- Cronogramas --}}
@@ -78,7 +92,7 @@
         {{-- Relatórios --}}
         <li>
             <a
-                href="{{ route('coordinator.reports.index') }}"
+                href="{{ route('coordinator.report.index') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 

@@ -8,7 +8,6 @@
             {{-- ========================================================= --}}
     
             <div class="card bg-base-100 shadow-md col-span-1 md:col-span-12">
-    
                 <div class="card-body p-[1.5vmax]">
     
                     <div class="flex flex-col gap-[1.5vmax] md:flex-row md:items-center md:justify-between">
@@ -87,7 +86,7 @@
                                         font-bold
                                         text-primary-dark
                                     ">
-                                        {{ $teacherInfo->name }}
+                                        {{ $teacherInfo->user->name }}
                                     </h1>
     
                                     <div class="flex flex-wrap items-center gap-x-[.5vmax] gap-y-[.2vmax]">
@@ -146,7 +145,7 @@
                                 text-[.8vmax]
                                 font-semibold
     
-                                {{ match($teacherInfo->status) {
+                                {{ match($teacherInfo->user->status->value) {
                                     'pending' => 'badge-warning',
                                     'active' => 'badge-success',
                                     'inactive' => 'badge-error',
@@ -157,13 +156,7 @@
     
                                 <span class="mr-[.3vmax] w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
     
-                                {{ match($teacherInfo->status) {
-                                    'pending' => 'Pendente',
-                                    'active' => 'Ativo',
-                                    'inactive' => 'Inativo',
-                                    'suspended' => 'Suspenso',
-                                    default => ucfirst($teacherInfo->status),
-                                } }}
+                                {{ $teacherInfo->user->status->label() }}
     
                             </span>
     
@@ -231,7 +224,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $teacherInfo->name }}
+                                {{ $teacherInfo->user->name }}
                             </p>
     
                         </div>
@@ -538,7 +531,7 @@
                                 text-[.8vmax]
                                 font-semibold
     
-                                {{ match($teacherInfo->status) {
+                                {{ match($teacherInfo->user->status->value) {
                                     'pending' => 'badge-warning',
                                     'active' => 'badge-success',
                                     'inactive' => 'badge-error',
@@ -549,13 +542,7 @@
     
                                 <span class="mr-[.3vmax] w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
     
-                                {{ match($teacherInfo->status) {
-                                    'pending' => 'Pendente',
-                                    'active' => 'Ativo',
-                                    'inactive' => 'Inativo',
-                                    'suspended' => 'Suspenso',
-                                    default => ucfirst($teacherInfo->status),
-                                } }}
+                                {{$teacherInfo->user->status->label()}}
     
                             </span>
     

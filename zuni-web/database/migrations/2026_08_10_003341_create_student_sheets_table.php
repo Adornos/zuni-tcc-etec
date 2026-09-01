@@ -19,7 +19,8 @@ return new class extends Migration
             $table->foreignId('guardian_id')->constrained('users')->cascadeOnDelete();
 
             // Dados específicos do aluno
-            $table->string('class', 50)->nullable();
+            $table->foreignId('classroom_id')->nullable()->constrained('classrooms')->nullOnDelete();
+
 
             $table->integer('age')->nullable();
 
