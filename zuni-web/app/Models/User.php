@@ -33,6 +33,9 @@ class User extends Authenticatable
         'registration_number',
         'email',
         'cpf',
+        'rg',
+        'birth_date',
+        'phone',
         'password',
         'role',
     ];

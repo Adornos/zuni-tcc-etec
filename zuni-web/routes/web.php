@@ -23,6 +23,7 @@ Route::middleware(['auth', 'role:guardian'])
     // Rotas dos Responsáveis
     Route::get('/', [GuardianController::class, 'index'])->name('index');
     Route::get('/profile', [GuardianController::class, 'profile'])->name('profile');
+    Route::put('/profile', [GuardianController::class, 'profileSave'])->name('profile.save');
 
     Route::get('/registered', [GuardianController::class, 'registered'])->name('registered');
     Route::get('/register', [GuardianController::class, 'registerStudentForm'])->name('student.register');
@@ -46,6 +47,7 @@ Route::middleware(['auth', 'role:teacher'])
     // Rotas dos Responsáveis
     Route::get('', [TeacherController::class, 'index'])->name('index');
     Route::get('/profile', [TeacherController::class, 'profile'])->name('profile');
+    Route::put('/profile', [TeacherController::class, 'profileSave'])->name('profile.save');
 
     Route::get('/schedule', [TeacherController::class, 'schedule'])->name('schedule');
 
