@@ -25,6 +25,17 @@ class TeacherController extends Controller
         $user = Auth::user();
         return view('teacher.profile', ['profile' => $user]);
     }
+    public function profileSave(Request $request)
+    {
+
+        $user = Auth::user();
+        abort_unless($user->role === UserRole::TEACHER, 403, 'Acesso negado.');
+
+        app(EmployeeController::class)->update($request, $user);
+        
+        return redirect()->back()->with('status', 'Perfil atualizado com sucesso!');
+
+    }
 
     public function schedule()
     {
