@@ -1,5 +1,6 @@
 <x-panel.director>
-<form action="{{ route('director.employee.store') }}" method="POST" class="space-y-8 col-span-4">
+<form action="{{ route('director.employee.store') }}" method=" " class="space-y-8 col-span-4">
+    @method('PUT')
     @csrf
 
     {{-- ========================================================= --}}

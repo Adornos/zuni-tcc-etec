@@ -140,4 +140,77 @@ class EmployeeController extends Controller
         };
         }
     
+
+    public function update(Request $request, User $employee)
+    {
+
+        $validated = $request->validate([
+
+            // User
+            'name' => ['nullable', 'string', 'max:255'],
+            'email' => ['nullable','email','max:255','unique:users,email,' . $employee->id,],
+            'role' => ['nullable','in:teacher,coordinator,director',],
+            'cpf' => ['nullable','string','max:14','unique:users,cpf,' . $employee->id,],
+            'rg' => ['nullable','string','max:20','unique:users,rg,' . $employee->id,],
+            'phone' => ['nullable','string','max:20',],
+            'birth_date' => ['nullable','date',],
+            'gender' => ['nullable','in:M,F,O',],
+            'password' => ['nullable','string','min:8','confirmed',],
+
+            // Formação
+            'formation' => ['nullable','string','max:150',],
+            'specialization' => ['nullable','string','max:150',],
+            'registration' => ['nullable','string','max:50',],
+            'hire_date' => ['nullable','date',],
+
+            // Endereço
+            'street' => ['nullable','string','max:100',],
+            'number' => ['nullable','string','max:10',],
+            'district' => ['nullable','string','max:50',],
+            'city' => ['nullable','string','max:50',],
+            'state' => ['nullable','string','max:50',],
+
+            // Informações adicionais
+            'notes' => ['nullable','string',],
+        ]);
+
+
+        if (empty($validated['password'])) {
+            unset($validated['password']);
+        }
+
+        $employee->update([
+            'name' => $validated['name'] ?? NULL,
+            'email' => $validated['email'] ?? NULL,
+            'role' => UserRole::from($validated['role']) ?? NULL,
+            'password' => Hash::make($validated['password'] ?? NULL),
+
+            'cpf' => $validated['cpf'] ?? null,
+            'rg' => $validated['rg'] ?? null,
+            'phone' => $validated['phone'] ?? null,
+
+            'birth_date' => $validated['birth_date'] ?? null,
+            'gender' => $validated['gender'] ?? null,
+
+            'street' => $validated['street'] ?? null,
+            'number' => $validated['number'] ?? null,
+            'district' => $validated['district'] ?? null,
+            'city' => $validated['city'] ?? null,
+            'state' => $validated['state'] ?? null,
+        ]);
+
+        $this->linkSheet($employee, $validated);
+
+        return match (auth()->user()->role) {
+
+            UserRole::DIRECTOR => redirect()
+                ->route('director.employee.index')->with('success', 'Funcionário atualizado com sucesso.'),
+
+            UserRole::COORDINATOR => redirect()
+                ->route('coordinator.teacher.index')->with('success', 'Professor atualizado com sucesso.'),
+
+            UserRole::TEACHER => redirect()
+                ->route('teacher.profile')->with('success', 'Perfil atualizado com sucesso.'),
+        };
+    }
 }
