@@ -62,7 +62,7 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 - [ ] Testar o funcionamento de todas as telas
 - [ ] Testar o funcionamento do campo de perfil de todos os usuários
-- [ ] Padronizar série dos alunos e das sals
+- [ ] Padronizar série dos alunos e das salas
 
 ## Dia 4 — Atribuição de alunos
 
