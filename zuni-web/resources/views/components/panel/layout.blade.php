@@ -19,113 +19,112 @@
         
         <div class="drawer-content flex flex-col min-h-screen">
             {{-- Header --}}
-          {{-- Header --}}
-<header class="bg-base-100 border-b px-4 py-3 sm:px-6 flex items-center justify-between gap-4">
+            <header class="bg-base-100 border-b px-4 py-3 sm:px-6 flex items-center justify-between gap-4">
 
-    {{-- Menu Mobile --}}
-    <label for="sidebar-drawer" class="btn btn-ghost btn-circle lg:hidden shrink-0">
-        <img src="{{ asset('images/icons/gear.svg') }}" class="w-5 h-5" alt="Menu" />
-    </label>
+                {{-- Menu Mobile --}}
+                <label for="sidebar-drawer" class="btn btn-ghost btn-circle lg:hidden shrink-0">
+                    <img src="{{ asset('images/icons/gear.svg') }}" class="w-5 h-5" alt="Menu" />
+                </label>
 
-    {{-- Título --}}
-    <div class="min-w-0 flex-1">
-        <h1 class="text-lg font-bold uppercase tracking-tight sm:text-xl md:text-2xl">
-            {!! $panelTitle ?? 'Painel' !!}
-        </h1>
+                {{-- Título --}}
+                <div class="min-w-0 flex-1">
+                    <h1 class="text-lg font-bold uppercase tracking-tight sm:text-xl md:text-2xl">
+                        {!! $panelTitle ?? 'Painel' !!}
+                    </h1>
 
-        <p class="mt-0.5 truncate text-xs text-base-content/50 sm:text-sm">
-            {!! $panelMessage ?? 'Bem-vindo ao seu painel de controle.' !!}
-        </p>
-    </div>
-
-    {{-- Ações --}}
-    <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-
-        {{-- Notificações --}}
-        <button
-            onclick="toggleNotifications()"
-            class="btn btn-ghost btn-circle btn-sm sm:btn-md"
-            aria-label="Notificações"
-        >
-            <div class="indicator">
-                <span class="indicator-item badge badge-error badge-xs sm:badge-sm">
-                    3
-                </span>
-
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="#FFAE00"
-                    class="size-5 sm:size-6"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.05c0 .243 0 .486-.002.729A8.967 8.967 0 013.69 15.77a23.848 23.848 0 005.454 1.31m5.713 0a24.255 24.255 0 01-5.713 0m5.713 0a3 3 0 11-5.713 0"
-                    />
-                </svg>
-            </div>
-        </button>
-
-        {{-- Perfil --}}
-        <div class="hidden sm:block dropdown dropdown-end" tabindex="0" role="button">
-            <div class="avatar flex cursor-pointer items-center gap-2 rounded-xl bg-base-100 p-1.5 md:p-2">
-
-                <div class="w-9 rounded-full md:w-10">
-                    <img
-                        src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name ?? 'Sem nome') }}"
-                        alt="Avatar"
-                    />
+                    <p class="mt-0.5 truncate text-xs text-base-content/50 sm:text-sm">
+                        {!! $panelMessage ?? 'Bem-vindo ao seu painel de controle.' !!}
+                    </p>
                 </div>
 
-                <div class="hidden min-w-0 md:block">
-                    <div class="flex items-center gap-1">
-                        <p class="max-w-32 truncate text-sm font-medium">
-                            {{ auth()->user()->name ?? 'Sem nome' }}
-                        </p>
+                {{-- Ações --}}
+                <div class="flex items-center gap-2 sm:gap-3 shrink-0">
 
-                        <img
-                            src="{{ asset('images/icons/chevronDown.svg') }}"
-                            class="h-3 w-3"
-                            alt=""
-                        />
+                    {{-- Notificações --}}
+                    <button
+                        onclick="toggleNotifications()"
+                        class="btn btn-ghost btn-circle btn-sm sm:btn-md"
+                        aria-label="Notificações"
+                    >
+                        <div class="indicator">
+                            <span class="indicator-item badge badge-error badge-xs sm:badge-sm">
+                                3
+                            </span>
+
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="#FFAE00"
+                                class="size-5 sm:size-6"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.05c0 .243 0 .486-.002.729A8.967 8.967 0 013.69 15.77a23.848 23.848 0 005.454 1.31m5.713 0a24.255 24.255 0 01-5.713 0m5.713 0a3 3 0 11-5.713 0"
+                                />
+                            </svg>
+                        </div>
+                    </button>
+
+                    {{-- Perfil --}}
+                    <div class="hidden sm:block dropdown dropdown-end flex" tabindex="0" role="button">
+                        <div class="avatar flex cursor-pointer items-center gap-2 rounded-xl bg-base-100 p-1.5 md:p-2">
+
+                            <div class="w-9 rounded-full md:w-10">
+                                <img
+                                    src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name ?? 'Sem nome') }}"
+                                    alt="Avatar"
+                                />
+                            </div>
+
+                            <div class="hidden min-w-0 md:block">
+                                <div class="flex items-center gap-1">
+                                    <p class="max-w-32 truncate text-sm font-medium">
+                                        {{ auth()->user()->name ?? 'Sem nome' }}
+                                    </p>
+
+                                    <img
+                                        src="{{ asset('images/icons/chevronDown.svg') }}"
+                                        class="h-3 w-3"
+                                        alt=""
+                                    />
+                                </div>
+
+                                <small class="block max-w-32 truncate text-[10px] text-Ctext-muted">
+                                    {{ auth()->user()->email ?? 'sem email' }}
+                                </small>
+                            </div>
+
+                        </div>
+
+                        <ul
+                            tabindex="0"
+                            class="dropdown-content menu bg-base-100 rounded-box z-10 mt-2 w-52 p-2 shadow-lg"
+                        >
+                            <li>
+                                <a href="{{ route(auth()->user()->role->value.'.profile') }}">
+                                    Meu Perfil
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="text-error" href="{{ route('logout') }}">
+                                    Sair
+                                    <img
+                                        loading="lazy"
+                                        src="{{ asset('images/icons/logout-red.svg') }}"
+                                        class="ml-auto w-4"
+                                        alt=""
+                                    />
+                                </a>
+                            </li>
+                        </ul>
                     </div>
 
-                    <small class="block max-w-32 truncate text-[10px] text-Ctext-muted">
-                        {{ auth()->user()->email ?? 'sem email' }}
-                    </small>
                 </div>
-
-            </div>
-
-            <ul
-                tabindex="0"
-                class="dropdown-content menu bg-base-100 rounded-box z-10 mt-2 w-52 p-2 shadow-lg"
-            >
-                <li>
-                    <a href="{{ route(auth()->user()->role->value.'.profile') }}">
-                        Meu Perfil
-                    </a>
-                </li>
-
-                <li>
-                    <a class="text-error" href="{{ route('logout') }}">
-                        Sair
-                        <img
-                            loading="lazy"
-                            src="{{ asset('images/icons/logout-red.svg') }}"
-                            class="ml-auto w-4"
-                            alt=""
-                        />
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-</header>
+            </header>
 
             {{-- Main Content --}}
             <main class="flex-1 bg-base-200 p-4 md:p-6 overflow-auto">

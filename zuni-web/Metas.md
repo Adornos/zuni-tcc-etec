@@ -36,7 +36,7 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 - [x] Testar login/acesso do professor
 
 ### Observações:
-- [ ] Finalização da edição do cadastro pelo professor
+- [x] Finalização da edição do cadastro pelo professor
 - [x] Padrõnização de diretórios (Uniformização dos nomes e importações dos components do painel)
 
 ## Dia 2 — Cadastro de coordenador
@@ -62,13 +62,19 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 - [ ] Testar o funcionamento de todas as telas
 - [ ] Testar o funcionamento do campo de perfil de todos os usuários
-- [ ] Padronizar série dos alunos e das sals
+- [ ] Padronizar série dos alunos e das salas
 
 ## Dia 4 — Atribuição de alunos
 
+- [x] Visualização dos professores por sala
 - [ ] Atribuição de professores às salas
 - [ ] Atribuição de alunos às salas
 - [ ] Visualização dos alunos por sala
+
+### Observações:
+
+- [ ]  Testar funcionamento da paginação
+- [ ]  Verificar a visualização do professor atribuído direto na tela de classe
 
 ## Dia 5 — Atribuição de aulas
 
