@@ -76,7 +76,7 @@
                 <!-- Data de nascimento -->
                 <label class="floating-label">
                     <input name="birth_date" type="date" class="input input-bordered w-full"
-                        value="{{ old('birth_date', $profile->birth_date) }}">
+                        value="{{ \Carbon\Carbon::parse($profile->birth_date)->format('Y-m-d') }}">
                     <span>Data de nascimento</span>
                 </label>
 
@@ -145,7 +145,16 @@
                 </label>
     
             </div>
-    
+
+            <!-- NÃO RETIRAR -->
+            <label class="floating-label hidden">
+                <select name="role" class="input input-bordered w-full">
+                    <option value="{{$profile->role->value}}">{{$profile->role->label()}}</option>
+                </select>
+                <span>Função</span>
+            </label>
+
+
             <div class="card-actions justify-end mt-8">
     
                 <button class="px-5 py-2 rounded-full border-2 border-Cprimary text-Cprimary font-medium hover:bg-Cprimary hover:text-white transition" >

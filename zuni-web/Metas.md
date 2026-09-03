@@ -36,7 +36,7 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 - [x] Testar login/acesso do professor
 
 ### Observações:
-- [ ] Finalização da edição do cadastro pelo professor
+- [x] Finalização da edição do cadastro pelo professor
 - [x] Padrõnização de diretórios (Uniformização dos nomes e importações dos components do painel)
 
 ## Dia 2 — Cadastro de coordenador
