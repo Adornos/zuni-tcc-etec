@@ -54,17 +54,19 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 ## Dia 3 — Criação de salas
 
-- [ ] Criação de salas
-- [ ] Definir relacionamento sala ↔ alunos
-- [ ] Definir relacionamento sala ↔ professor
+- [x] Criação de salas
+- [x] Definir relacionamento sala ↔ alunos
+- [x] Definir relacionamento sala ↔ professor
 
 ### Observações:
 
 - [ ] Testar o funcionamento de todas as telas
 - [ ] Testar o funcionamento do campo de perfil de todos os usuários
+- [ ] Padronizar série dos alunos e das salas
 
 ## Dia 4 — Atribuição de alunos
 
+- [ ] Atribuição de professores às salas
 - [ ] Atribuição de alunos às salas
 - [ ] Visualização dos alunos por sala
 

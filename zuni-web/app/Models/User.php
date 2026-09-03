@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Enums\UserRole;
 use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -91,6 +92,21 @@ class User extends Authenticatable
         return $this->hasOne(TeacherSheet::class, 'teacher_id');
     }
 
+    public function classrooms(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Classroom::class,
+            'classroom_teacher', 
+            'teacher_id', 
+            'classroom_id'
+            );
+    }
+
+    public function classroom(): HasOne
+    {
+        return $this->hasOne(TeacherSheet::class, 'teacher_id');
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === UserRole::ADMIN;
@@ -114,14 +130,6 @@ class User extends Authenticatable
     {
         return $this->hasOne(DirectorSheet::class, 'director_id');
     }
-
-
-
-    // public function Enrollments(): HasMany
-    // {
-    //     return $this->hasMany(Enrollment::class, 'guardian_id');
-    // }
-
     
     public function report(): HasMany
     {

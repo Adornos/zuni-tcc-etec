@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Logout;
 use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\CoordinatorController;
+use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\GuardianController;
 use App\Http\Controllers\StudentController;
@@ -109,6 +110,17 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/teacher/show/{teacher}', [CoordinatorController::class, 'showTeacher'])->name('teacher.show');
     Route::put('/teacher/show/{teacher}/edit', [CoordinatorController::class, 'editTeacher'])->name('teacher.edit');
 
+    // Criação de salas
+    Route::get('/classrooms', [ClassroomController::class, 'index'])->name('classroom.index');
+    Route::get('/classroom/register', [ClassroomController::class, 'create'])->name('classroom.create');
+    Route::post('/classroom/register', [ClassroomController::class, 'store'])->name('classroom.store');
+    Route::get('/classroom/show/{classroom}', [ClassroomController::class, 'show'])->name('classroom.show');
+    Route::put('/classroom/show/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
+    Route::get('/classroom/show/{classroom}/teachers', [ClassroomController::class, 'teachers'])->name('classroom.teachers');
+    Route::put('/classroom/show/{classroom}/teachers', [ClassroomController::class, 'assignTeachers'])->name('classroom.teachers.update');
+    Route::put('/classroom/show/{classroom}/students', [ClassroomController::class, 'students'])->name('classroom.students');
+
+
     // Gerenciamento de horários (abordagem de grade)
     Route::get('/schedules', [CoordinatorController::class, 'schedules'])->name('schedules.index');
     Route::put('/schedules', [CoordinatorController::class, 'updateSchedules'])->name('schedules.update');
@@ -116,12 +128,12 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/schedules/teachers/{teacher}', [CoordinatorController::class, 'teacherSchedule'])->name('schedules.teacher');
 
     // Relatórios (internos: para docentes | externos: para responsáveis)
-    Route::get('/reports', [CoordinatorController::class, 'reports'])->name('reports.index');
-    Route::get('/reports/create', [CoordinatorController::class, 'createReport'])->name('reports.create');
-    Route::post('/reports', [CoordinatorController::class, 'storeReport'])->name('reports.store');
-    Route::get('/reports/{report}/edit', [CoordinatorController::class, 'editReport'])->name('reports.edit');
-    Route::put('/reports/{report}', [CoordinatorController::class, 'updateReport'])->name('reports.update');
-    Route::delete('/reports/{report}', [CoordinatorController::class, 'destroyReport'])->name('reports.destroy');
+    Route::get('/reports', [CoordinatorController::class, 'reports'])->name('report.index');
+    Route::get('/reports/create', [CoordinatorController::class, 'createReport'])->name('report.create');
+    Route::post('/reports', [CoordinatorController::class, 'storeReport'])->name('report.store');
+    Route::get('/reports/{report}/edit', [CoordinatorController::class, 'editReport'])->name('report.edit');
+    Route::put('/reports/{report}', [CoordinatorController::class, 'updateReport'])->name('report.update');
+    Route::delete('/reports/{report}', [CoordinatorController::class, 'destroyReport'])->name('report.destroy');
 
 });
 

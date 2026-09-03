@@ -13,7 +13,7 @@ class StudentSheet extends Model
         'student_id',
         'guardian_id',
 
-        'class',
+        'class_id',
         'age',
 
         'neurodivergent',
@@ -53,6 +53,13 @@ class StudentSheet extends Model
     public function enrollment(): HasOne
     {
         return $this->hasOne(Enrollment::class, 'sheet_id');
+    }
+    /**
+     * Class
+     */
+    public function class(): HasOne
+    {
+        return $this->hasOne(Classroom::class, 'sheet_id');
     }
 
     /**
