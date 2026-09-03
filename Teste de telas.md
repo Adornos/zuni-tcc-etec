@@ -7,20 +7,24 @@
 
 ## Autenticação
 
-- [V] `auth/login.blade.php` 
+- [V] `auth/login.blade.php` mas não adaptada ao mobile
 - [V] `auth/register.blade.php` //deve apresentar um erro ao cadastrrar um aluno com cpf igual
 
 ### Painéis
 
 - [ ] `components/panel/coordinator.blade.php` //"ver mais" não funciona, "ir para a programação" não funciona, rendimento e relatório igualmente, não adaptado ao mobile
 - [V] `components/panel/director.blade.php`
-- [ ] `components/panel/guardian.blade.php` //design provavelmente incompleto, mas funcional, e talvez seja necessário exibir mais informações sobre a criança
+
+
+- [ ] `components/panel/guardian.blade.php` //design provavelmente incompleto, mas funcional, e talvez seja necessário exibir mais informações sobre a criança, cadastro de criança não adaptado ao mobile, erro SQLSTATE[42S22]: Column not found: 1054 Unknown column 'classrooms.sheet_id' in 'where clause' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: zuni_web, SQL: select * from `classrooms` where `classrooms`.`sheet_id` = 1 and `classrooms`.`sheet_id` is not null limit 1) ao tentar criar uma criança
+
+
 - [ ] `components/panel/layout.blade.php`
-- [ ] `components/panel/teacher.blade.php` //maior parte dos botões nao funcionam, sem cores
+- [ ] `components/panel/teacher.blade.php` //maior parte dos botões nao funcionam, sem cores, não adaptado ao mobile
 
 ### Busca
 
-- [ ] `components/search/employee-list.blade.php`
+- [V] `components/search/employee-list.blade.php` seria ideal conseguir alterar os status dos funcionarios
 - [V] `components/search/student-list.blade.php` verificar com mais calma se todas as variáveis são exibidas
 - [ ] `components/search/teacher-list.blade.php` //apresenta falhas
 
@@ -28,9 +32,9 @@
 
 - [X] `coordinator/chat.php`
 - [X] `coordinator/forum.php`
-- [ ] `coordinator/panel.blade.php`
+- [ ] `coordinator/panel.blade.php` nao adaptado ao mobile
 - [ ] `coordinator/profile.blade.php` não exibe o CSS
-- [V] `coordinator/schedules.blade.php`
+- [V] `coordinator/schedules.blade.php` não adaptado ao mobile + precisa ser funcional e não apenas visual
 
 ### Relatórios
 
@@ -43,26 +47,28 @@
 
 ### Professores
 
-- [ ] `coordinator/teacher/index.blade.php`
-- [ ] `coordinator/teacher/register.blade.php`
-- [ ] `coordinator/teacher/show.blade.php`
+- [ ] `coordinator/teacher/index.blade.php` ?
+- [V] `coordinator/teacher/register.blade.php` 
+- [ ] `coordinator/teacher/show.blade.php` // não parece ser possível excluir um professor, endereço e algumas outras informações não são exibidos, crasha quando coloca telefone/matrícula e registro iguais
 
 ## Diretor
 
-- [ ] `director/index.blade.php`
+- [V] `director/index.blade.php`
+
+PROFILE NAO FUNCIONA!!
 
 ### Funcionários
 
-- [ ] `director/employee/index.blade.php`
-- [ ] `director/employee/register.blade.php`
-- [ ] `director/employee/show.blade.php`
+- [V] `director/employee/index.blade.php`
+- [ ] `director/employee/register.blade.php` //vale a pena dar uma olhada mais a fundo mas não parece registrar novos usuários
+- [V] `director/employee/show.blade.php`
 
 ## Responsável
 
-- [ ] `guardian/chat.blade.php`
-- [ ] `guardian/forum.blade.php`
-- [ ] `guardian/panel.blade.php`
-- [ ] `guardian/profile.blade.php`
+- [X] `guardian/chat.blade.php`
+- [X] `guardian/forum.blade.php`
+- [V] `guardian/panel.blade.php` parece design incompleto e adaptar ao celular
+- [V] `guardian/profile.blade.php`
 
 ### Alunos
 
