@@ -66,9 +66,15 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 ## Dia 4 — Atribuição de alunos
 
+- [x] Visualização dos professores por sala
 - [ ] Atribuição de professores às salas
 - [ ] Atribuição de alunos às salas
 - [ ] Visualização dos alunos por sala
+
+### Observações:
+
+- [ ]  Testar funcionamento da paginação
+- [ ]  Verificar a visualização do professor atribuído direto na tela de classe
 
 ## Dia 5 — Atribuição de aulas
 

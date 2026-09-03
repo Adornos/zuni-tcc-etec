@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classroom;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
@@ -47,6 +48,28 @@ class ClassroomController extends Controller
             ->with('success', 'Turma criada com sucesso.');
     }
 
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Classroom $classroom)
+    {
+        return view('coordinator.classroom.show', ['classroom' => $classroom]);
+    }
+
+    public function teachers(Classroom $classroom)
+    {
+
+        $teachers = User::where('role', 'teacher')->orderBy('name')->paginate(10);
+        
+
+
+        return view('coordinator.classroom.teachers', [
+            'classroom' => $classroom,
+            'teachers' => $teachers,
+        ]);
+    }
+
     public function assignTeachers(Request $request, Classroom $classroom) 
     {
         $validated = $request->validate([
@@ -61,14 +84,6 @@ class ClassroomController extends Controller
         return redirect()
             ->back()
             ->with('success', 'Professores atribuídos com sucesso.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Classroom $classroom)
-    {
-        return view('coordinator.classroom.show', ['classroom' => $classroom]);
     }
 
     /**

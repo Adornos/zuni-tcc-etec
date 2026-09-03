@@ -110,7 +110,7 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/teacher/show/{teacher}', [CoordinatorController::class, 'showTeacher'])->name('teacher.show');
     Route::put('/teacher/show/{teacher}/edit', [CoordinatorController::class, 'editTeacher'])->name('teacher.edit');
 
-    // Criação de salas
+    // Criação e gerenciamento de salas
     Route::get('/classrooms', [ClassroomController::class, 'index'])->name('classroom.index');
     Route::get('/classroom/register', [ClassroomController::class, 'create'])->name('classroom.create');
     Route::post('/classroom/register', [ClassroomController::class, 'store'])->name('classroom.store');
