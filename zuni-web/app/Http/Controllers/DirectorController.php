@@ -41,9 +41,10 @@ class DirectorController extends Controller
 
     public function profile()
     {
-        $director = auth()->user()->directorSheet;
-
-        return view('director.profile', compact('director'));
+        $user = Auth::user();
+        
+            return view('director.profile', ['profile' => $user]);
+        
     }
 
 

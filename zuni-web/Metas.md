@@ -60,21 +60,21 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 ### Observações:
 
-- [ ] Testar o funcionamento de todas as telas
-- [ ] Testar o funcionamento do campo de perfil de todos os usuários
+- [x] Testar o funcionamento de todas as telas
+- [x] Testar o funcionamento do campo de perfil de todos os usuários
 - [ ] Padronizar série dos alunos e das salas
 
 ## Dia 4 — Atribuição de alunos
 
 - [x] Visualização dos professores por sala
-- [ ] Atribuição de professores às salas
-- [ ] Atribuição de alunos às salas
-- [ ] Visualização dos alunos por sala
+- [x] Atribuição de professores às salas
+- [x] Atribuição de alunos às salas
+- [x] Visualização dos alunos por sala
 
 ### Observações:
 
-- [ ]  Testar funcionamento da paginação
-- [ ]  Verificar a visualização do professor atribuído direto na tela de classe
+- [x]  Testar funcionamento da paginação
+- [x]  Verificar a visualização do professor atribuído direto na tela de classe
 
 ## Dia 5 — Atribuição de aulas
 
