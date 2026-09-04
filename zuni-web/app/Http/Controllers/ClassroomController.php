@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\StudentSheet;
 use App\Models\Classroom;
+
+use App\Enums\UserRole;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class ClassroomController extends Controller
 {
@@ -97,11 +102,19 @@ class ClassroomController extends Controller
      */
     public function students(Classroom $classroom)
     {
-        $students = $classroom->students()->paginate(25);
+        $classroom->load([
+            'students.user',
+            'teachers',
+        ]);
+
+        $availableStudents = StudentSheet::with('user')
+            ->whereNull('classroom_id')
+            ->get()
+            ->sortBy('user.name');
 
         return view('coordinator.classroom.students', [
             'classroom' => $classroom,
-            'students' => $students,
+            'availableStudents' => $availableStudents,
         ]);
     }
 
@@ -109,23 +122,51 @@ class ClassroomController extends Controller
     /**
      * Assimilação de alunos às salas
      */
-    public function assignStudents(Request $request, Classroom $classroom) 
+    public function assignStudents(Request $request, Classroom $classroom)
     {
         $validated = $request->validate([
-            'students' => ['array'],
+            'students' => ['nullable', 'array'],
+
             'students.*' => [
-                'exists:users,id'
+                'integer',
+                Rule::exists('users', 'id')
+                    ->where('role', UserRole::STUDENT->value),
             ],
         ]);
 
-        StudentSheet::whereIn('id', $validated)
-            ->update([
-                'classroom_id' => $classroom->id,
-            ]);
+        $studentIds = $validated['students'] ?? [];
+
+        DB::transaction(function () use ($studentIds, $classroom) {
+
+            /*
+            * Alunos que já pertencem à turma atual,
+            * mas foram desmarcados, deixam a turma.
+            */
+            StudentSheet::where('classroom_id', $classroom->id)
+                ->when(
+                    !empty($studentIds),
+                    fn ($query) => $query->whereNotIn('student_id', $studentIds)
+                )
+                ->update([
+                    'classroom_id' => null,
+                ]);
+
+            /*
+            * Os alunos selecionados passam a pertencer
+            * à turma atual.
+            *
+            * Se algum deles estava em outra turma,
+            * ele será deslocado para esta.
+            */
+            StudentSheet::whereIn('student_id', $studentIds)
+                ->update([
+                    'classroom_id' => $classroom->id,
+                ]);
+        });
 
         return redirect()
             ->route('coordinator.classroom.show', $classroom->id)
-            ->with('success', 'Professores atribuídos com sucesso.');
+            ->with('success', 'Alunos da turma atualizados com sucesso.');
     }
 
     /**

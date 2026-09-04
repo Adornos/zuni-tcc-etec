@@ -258,7 +258,7 @@ new class extends Component
     
                                 <p class="text-sm sm:text-base text-base-content/60">
     
-                                    {{ $student->class ?? 'Turma não definida' }}
+                                    {{ $student->classroom_id ?? 'Turma não definida' }}
     
                                     @if (!empty($student->shift))
                                         • {{ $student->shift }}
