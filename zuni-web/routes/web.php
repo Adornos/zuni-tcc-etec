@@ -118,7 +118,8 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::put('/classroom/show/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
     Route::get('/classroom/show/{classroom}/teachers', [ClassroomController::class, 'teachers'])->name('classroom.teachers');
     Route::put('/classroom/show/{classroom}/teachers', [ClassroomController::class, 'assignTeachers'])->name('classroom.teachers.update');
-    Route::put('/classroom/show/{classroom}/students', [ClassroomController::class, 'students'])->name('classroom.students');
+    Route::get('/classroom/show/{classroom}/students', [ClassroomController::class, 'students'])->name('classroom.students');
+    Route::put('/classroom/show/{classroom}/students', [ClassroomController::class, 'assignStudents'])->name('classroom.students.update');
 
 
     // Gerenciamento de horários (abordagem de grade)

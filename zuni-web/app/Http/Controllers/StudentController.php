@@ -113,9 +113,6 @@ class StudentController extends Controller
         ]);
 
         // dd($response);
-
-        
-
         
     }
     /**
@@ -139,7 +136,7 @@ class StudentController extends Controller
 
         abort_unless($user->isGuardian(), 403);
         
-        
+        dd($request);
         
         DB::transaction(function () use ($request) {
             

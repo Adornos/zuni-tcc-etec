@@ -31,10 +31,10 @@ class Classroom extends Model
     public function teachers(): BelongsToMany
     {
         return $this->belongsToMany(
-            Classroom::class,
+            User::class,
             'classroom_teacher', 
-            'teacher_id', 
-            'classroom_id'
+            'classroom_id',
+            'teacher_id',
             );
     }
 

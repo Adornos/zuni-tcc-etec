@@ -67,6 +67,8 @@
                             @case('student')    href="{{ route('student.index') }}"     @break 
                             @case('guardian')   href="{{ route('guardian.index') }}"    @break 
                             @case('teacher')    href="{{ route('teacher.index') }}"     @break 
+                            @case('coordinator')    href="{{ route('coordinator.index') }}"     @break 
+                            @case('director')    href="{{ route('director.index') }}"     @break 
                             @case('admin')      href="{{ route('admin.index') }}"       @break 
                         @endswitch
                         class="px-5 py-2 rounded-full border-2 border-Cprimary text-Cprimary font-medium hover:bg-Cprimary hover:text-white transition"

@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             GuardianUserSeeder::class,
 
             GeneralTeacherSeeder::class,
+            GeneralStudentSeeder::class
         ]);
 
     }

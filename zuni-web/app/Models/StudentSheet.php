@@ -6,15 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StudentSheet extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'student_id',
         'guardian_id',
+        'classroom_id',
+        'registration_number',
 
-        'class_id',
-        'age',
+        'sociability',
+        'autonomy',
+        'engagement',
+        'communication',
+        'motor_development',
 
         'neurodivergent',
         'allergy',
@@ -24,12 +32,21 @@ class StudentSheet extends Model
         'notes',
     ];
 
-    protected $casts = [
-        'neurodivergent' => 'boolean',
-        'allergy' => 'boolean',
-        'food_restriction' => 'boolean',
-        'special_care' => 'boolean',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'sociability' => 'decimal:2',
+            'autonomy' => 'decimal:2',
+            'engagement' => 'decimal:2',
+            'communication' => 'decimal:2',
+            'motor_development' => 'decimal:2',
+
+            'neurodivergent' => 'boolean',
+            'allergy' => 'boolean',
+            'food_restriction' => 'boolean',
+            'special_care' => 'boolean',
+        ];
+    }
 
     /**
      * Student User

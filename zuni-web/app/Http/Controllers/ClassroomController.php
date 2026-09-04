@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Classroom;
 use App\Models\User;
+use App\Models\StudentSheet;
+use App\Models\Classroom;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
@@ -39,30 +40,31 @@ class ClassroomController extends Controller
             'capacity' => ['nullable', 'integer', 'min:1'],
         ]);
 
-        Classroom::create($validated);
+        $classroom = Classroom::create($validated);
 
         //Route::current()->getPrefix()
 
         return redirect()
-            ->back()
+            ->route('coordinator.classroom.show', $classroom->id)
             ->with('success', 'Turma criada com sucesso.');
     }
 
 
     /**
-     * Display the specified resource.
+     * Visualização de informações da sala
      */
     public function show(Classroom $classroom)
     {
         return view('coordinator.classroom.show', ['classroom' => $classroom]);
     }
 
+    /**
+     * Visualização dos Professores de uma sala
+     */
     public function teachers(Classroom $classroom)
     {
 
         $teachers = User::where('role', 'teacher')->orderBy('name')->paginate(10);
-        
-
 
         return view('coordinator.classroom.teachers', [
             'classroom' => $classroom,
@@ -70,6 +72,10 @@ class ClassroomController extends Controller
         ]);
     }
 
+
+    /**
+     * Assimilação de professores às salas
+     */
     public function assignTeachers(Request $request, Classroom $classroom) 
     {
         $validated = $request->validate([
@@ -82,7 +88,43 @@ class ClassroomController extends Controller
         $classroom->teachers()->sync($validated['teachers'] ?? []);
 
         return redirect()
-            ->back()
+            ->route('coordinator.classroom.show', $classroom->id)
+            ->with('success', 'Professores atribuídos com sucesso.');
+    }
+
+    /**
+     * Visualização dos Alunos de uma sala
+     */
+    public function students(Classroom $classroom)
+    {
+        $students = $classroom->students()->paginate(25);
+
+        return view('coordinator.classroom.students', [
+            'classroom' => $classroom,
+            'students' => $students,
+        ]);
+    }
+
+
+    /**
+     * Assimilação de alunos às salas
+     */
+    public function assignStudents(Request $request, Classroom $classroom) 
+    {
+        $validated = $request->validate([
+            'students' => ['array'],
+            'students.*' => [
+                'exists:users,id'
+            ],
+        ]);
+
+        StudentSheet::whereIn('id', $validated)
+            ->update([
+                'classroom_id' => $classroom->id,
+            ]);
+
+        return redirect()
+            ->route('coordinator.classroom.show', $classroom->id)
             ->with('success', 'Professores atribuídos com sucesso.');
     }
 
