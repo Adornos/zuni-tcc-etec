@@ -58,7 +58,7 @@ new class extends Component
             // Filtro por turma
             $query->when($this->class, function ($query) {
                 $query->where(
-                    'class',
+                    'classroom',
                     $this->class
                 );
             });
@@ -208,7 +208,12 @@ new class extends Component
                 wire:key="student-{{ $student->id }}"
                 class="card bg-base-100"
             >
-                <a href="{{route('coordinator.enrollment.show', ['enrollment' => $student->enrollment])}}">
+                <a @switch(auth()->user()->role->value)
+                            @case('guardian')   href="{{ route('guardian.student.show', $student->user->id) }}"    @break 
+                            @case('teacher')    href="{{ route('teacher.student.show', $student->user->id) }}"     @break 
+                            @case('coordinator')    href="{{ route('coordinator.student.show', $student->user->id) }}"     @break 
+                        @endswitch"
+                        >
                     <div
                         class="
                             card-body
@@ -222,6 +227,11 @@ new class extends Component
                             shadow-[0_0_20px_rgba(0,0,0,0.15)]
                             p-5
                             sm:p-6
+                            transition
+                            
+                            hover:shadow-[0_0_20px_rgba(0,0,0,0.4)]
+                            
+
                         "
                     >
     
@@ -258,10 +268,10 @@ new class extends Component
     
                                 <p class="text-sm sm:text-base text-base-content/60">
     
-                                    {{ $student->classroom_id ?? 'Turma não definida' }}
+                                    {{ $student->classroom->name ?? 'Turma não definida' }}
     
-                                    @if (!empty($student->shift))
-                                        • {{ $student->shift }}
+                                    @if (!empty($student->classroom->shift))
+                                        • {{ $student->classroom->shift }}
                                     @endif
     
                                 </p>
@@ -378,7 +388,11 @@ new class extends Component
                     </div>
                     <div class="card-actions justify-end mt-4"> 
                         <a
-                        href="{{ route( 'coordinator.enrollment.show', $student->id ) }}"
+                         @switch(auth()->user()->role->value)
+                            @case('guardian')   href="{{ route('guardian.index') }}"    @break 
+                            @case('teacher')    href="{{ route('teacher.index') }}"     @break 
+                            @case('coordinator')    href="{{ route('coordinator.index') }}"     @break 
+                        @endswitch
                         class=" btn btn-sm sm:btn-md text-white bg-Cprimary w-full sm:w-auto "
                         > 
                             Mais informações 

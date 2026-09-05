@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\Enrollment;
+use App\Models\User;
 
 
 class GuardianController extends Controller
@@ -54,9 +55,9 @@ class GuardianController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $student)
     {
-        //
+
     }
 
     /**

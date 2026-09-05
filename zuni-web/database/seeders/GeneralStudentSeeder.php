@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\UserRole;
+use App\Enums\UserStatus;
 use App\Models\Classroom;
 use App\Models\StudentSheet;
 use App\Models\User;
@@ -123,6 +124,8 @@ class GeneralStudentSeeder extends Seeder
                     'password' => Hash::make('123456'),
 
                     'role' => UserRole::STUDENT,
+
+                    'status' => UserStatus::ACTIVE
                 ]);
 
                 /*

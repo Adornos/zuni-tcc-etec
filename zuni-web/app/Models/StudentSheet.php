@@ -72,11 +72,11 @@ class StudentSheet extends Model
         return $this->hasOne(Enrollment::class, 'sheet_id');
     }
     /**
-     * Class
+     * Classroom
      */
-    public function class(): HasOne
+    public function classroom(): BelongsTo
     {
-        return $this->hasOne(Classroom::class, 'sheet_id');
+        return $this->belongsTo(Classroom::class, 'classroom_id');
     }
 
     /**

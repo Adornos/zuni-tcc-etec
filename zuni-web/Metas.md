@@ -84,9 +84,9 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 ## Dia 6 — Tela do responsável
 
-- [ ] Edição de cadastro
-- [ ] Visualização de aluno
-- [ ] Visualização de proficiências por aluno
+- [X] Edição de cadastro do aluno pelo responsável
+- [x] Visualização de aluno
+- [x] Visualização de proficiências por aluno
 
 ## Dia 7 — 🔄 Revisão
 

@@ -33,9 +33,11 @@ Route::middleware(['auth', 'role:guardian'])
     Route::get('/chat', [GuardianController::class, 'chat'])->name('chat');
 
     // Perfil do aluno (acesso mediado pelo responsável)
-    Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
-    Route::get('/students/{student}/schedule', [StudentController::class, 'schedule'])->name('students.schedule');
-    Route::get('/students/{student}/reports', [StudentController::class, 'reports'])->name('students.reports');
+    Route::get('/students/{student}', [StudentController::class, 'show'])->name('student.show');
+    Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name('student.edit');
+    Route::put('/students/{student}', [StudentController::class, 'update'])->name('student.update');
+    Route::get('/students/{student}/schedule', [StudentController::class, 'schedule'])->name('student.schedule');
+    Route::get('/students/{student}/reports', [StudentController::class, 'reports'])->name('student.reports');
 
 });
 
