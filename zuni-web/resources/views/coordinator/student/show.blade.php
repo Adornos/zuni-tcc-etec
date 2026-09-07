@@ -1,5 +1,5 @@
 <x-panel.coordinator>
-    <div class="card bg-base-200 h-fit shadow-xl p-6 col-span-4">
+    <div class="card bg-base-200 h-fit shadow-xl p-6 col-span-4 row-span-4">
     
         <div class="grid grid-cols-1 gap-[1vmax] ">
     
@@ -89,16 +89,9 @@
     
     
                                     <span class="font-semibold">
-                                        1º Ano
+                                        {{ $studentSheet->classroom->name }}
                                     </span>
-    
-                                    <span class="text-base-content/40">
-                                        •
-                                    </span>
-    
-                                    <span class="text-base-content/60">
-                                        Turma {{ $studentSheet->classroom }}
-                                    </span>
+
     
                                     <span class="text-base-content/40">
                                         •
@@ -118,7 +111,7 @@
                                     <span class="text-base-content/60">
                                         Sexo:
                                         <strong class="text-base-content">
-                                            {{ $studentSheet->gender }}
+                                            {{ $studentSheet->user->gender }}
                                         </strong>
                                     </span>
     
@@ -255,7 +248,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $studentSheet->gender }}
+                                {{ $studentSheet->user->gender }}
                             </p>
     
                         </div>
@@ -269,7 +262,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                1º Ano
+                                {{ $studentSheet->class?->grade ?? "Não atribuído"}}
                             </p>
     
                         </div>
@@ -283,7 +276,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $studentSheet->classroom }}
+                                {{ $studentSheet->class?->name ?? "Sem Turma"}}
                             </p>
     
                         </div>
@@ -456,17 +449,17 @@
                     <div class="mt-[1.5vmax]">
     
                         <p class="text-[1vmax] font-medium">
-                            {{ $studentSheet->street }},
-                            {{ $studentSheet->number }}
+                            {{ $studentSheet->user->street }},
+                            {{ $studentSheet->user->number }}
                         </p>
     
                         <p class="text-[1vmax] mt-[.2vmax]">
-                            {{ $studentSheet->district }}
+                            {{ $studentSheet->user->district }}
                         </p>
     
                         <p class="text-[.9vmax] text-base-content/60 mt-[.2vmax]">
-                            {{ $studentSheet->city }} —
-                            {{ $studentSheet->state }}
+                            {{ $studentSheet->user->city }} —
+                            {{ $studentSheet->user->state }}
                         </p>
     
                     </div>
@@ -553,7 +546,7 @@
     
     
                             <p class="text-[.9vmax] font-semibold">
-                                Última atualização
+                                Última atualização : {{ $studentSheet->enrollment->reviewer->name}}
                             </p>
     
                             <p class="text-[.75vmax] text-base-content/60">
@@ -683,7 +676,7 @@
                             </p>
     
                             <p class="text-[.9vmax] mt-[.2vmax]">
-                                {{ $studentSheet->neurodivergent ?: 'Não informado' }}
+                                {{ $studentSheet->neurodivergent?: 'Não informado' }}
                             </p>
                         </div>
     
@@ -694,7 +687,7 @@
                             </p>
     
                             <p class="text-[.9vmax] mt-[.2vmax]">
-                                {{ $studentSheet->allergy ?: 'Não informado' }}
+                                {{ $studentSheet->allergy?: 'Não informado' }}
                             </p>
                         </div>
     

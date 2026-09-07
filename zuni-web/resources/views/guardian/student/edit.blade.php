@@ -135,7 +135,7 @@
                                     >
 
                                         <option value="">
-                                            Não informado
+                                            {{old('gender', $student->gender)}}
                                         </option>
 
                                         <option

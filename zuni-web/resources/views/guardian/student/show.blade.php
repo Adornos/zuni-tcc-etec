@@ -106,7 +106,7 @@
                                     </span>
 
                                     <span class="badge badge-outline">
-                                        {{ $sheet?->age ?? '—' }} anos
+                                        {{ $student->age ?? '—' }} anos
                                     </span>
 
                                     <span class="badge badge-outline">
@@ -190,7 +190,7 @@
                                 </p>
 
                                 <p class="font-semibold mt-1">
-                                    {{ $sheet?->age ?? 'Não informado' }} anos
+                                    {{ $student->age ?? 'Não informado' }} anos
                                 </p>
                             </div>
 

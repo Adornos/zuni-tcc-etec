@@ -257,8 +257,8 @@
             <aside class="bg-Csecondary text-primary-content flex flex-col min-h-screen">
 
                 {{-- Logo --}}
-                <div class="flex justify-center py-6 md:py-8">
-                    <img src="{{ asset('images/logo_white.svg') }}" alt="Logo" class="h-[2vmax] md:h-[2.5vmax]">
+                <div class="flex justify-center mt-6 md:mt-8 mb-6 md:mb-8 w-full h-8">
+                    <img src="{{ asset('images/logo_white.svg') }}" alt="Logo" class="">
                 </div>
 
                 {{-- Navegação --}}
@@ -283,7 +283,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ route('logout') }}" class="text-error">
+                            <a href="{{ route('logout') }}" >
                                 <img src="{{ asset('images/icons/logout.svg') }}" class="w-4 md:w-5 mr-2 md:mr-3" alt=""/>
                                 Encerrar sessão
                             </a>

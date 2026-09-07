@@ -36,7 +36,7 @@
         {{-- Matrículas --}}
         <li>
             <a
-                href="{{ route('coordinator.students.index') }}"
+                href="{{ route('coordinator.student.index') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 

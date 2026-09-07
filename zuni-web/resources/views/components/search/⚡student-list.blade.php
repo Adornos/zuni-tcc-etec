@@ -1,7 +1,10 @@
 <?php
 
 use App\Models\StudentSheet;
+use App\Models\User;
+use App\Models\Classroom;
 use App\Enums\UserRole;
+use GuzzleHttp\Psr7\Query;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -20,6 +23,12 @@ new class extends Component
             UserRole::COORDINATOR,
             UserRole::DIRECTOR,
         ]);
+    }
+
+    #[Computed]
+    public function classrooms()
+    {
+        return Classroom::select('id', 'name')->get();
     }
 
     #[Computed]
@@ -56,12 +65,34 @@ new class extends Component
             });
 
             // Filtro por turma
-            $query->when($this->class, function ($query) {
-                $query->where(
-                    'classroom',
-                    $this->class
-                );
+            $query->when($this->class === 'null', function ($query) {
+                $query->whereNull('classroom_id');
             });
+
+            $query->when(
+                $this->class && $this->class !== 'null',
+                function ($query) {
+                    $query->where('classroom_id', $this->class);
+                }
+            );
+
+            // Filtro de ordem alfabética
+            $query->when(
+                $this->class === '' || $this->class === 'null',
+                function ($query) {
+                    $query->orderByDesc('student_sheets.id');
+                },
+                function ($query) {
+                    $query->orderBy(
+                        User::select('name')
+                            ->whereColumn(
+                                'users.id',
+                                'student_sheets.student_id'
+                            ),
+                        'asc'
+                    );
+                }
+            );
 
         } else {
 
@@ -168,9 +199,13 @@ new class extends Component
                         class="select select-bordered w-full"
                     >
                         <option value="">Todas</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
+                        <option value="null">Nenhuma</option>
+
+                        @foreach ($this->classrooms as $classroom)
+                            <option value="{{ $classroom->id }}">
+                                {{ $classroom->name }}
+                            </option>
+                        @endforeach
                     </select>
 
                 </div>
@@ -208,11 +243,7 @@ new class extends Component
                 wire:key="student-{{ $student->id }}"
                 class="card bg-base-100"
             >
-                <a @switch(auth()->user()->role->value)
-                            @case('guardian')   href="{{ route('guardian.student.show', $student->user->id) }}"    @break 
-                            @case('teacher')    href="{{ route('teacher.student.show', $student->user->id) }}"     @break 
-                            @case('coordinator')    href="{{ route('coordinator.student.show', $student->user->id) }}"     @break 
-                        @endswitch"
+                <a href="{{ route('guardian.student.show', $student->user->id) }}"
                         >
                     <div
                         class="
@@ -254,7 +285,7 @@ new class extends Component
     
     
                             {{-- INFORMAÇÕES --}}
-                            <div class="min-w-0">
+                            <div class="min-w-0 px-4">
     
                                 <h2 class="
                                     text-xl
@@ -302,9 +333,9 @@ new class extends Component
     
                         {{-- LADO DIREITO --}}
                         <div class="
-                            text-center
+                            text-right
                             md:text-right
-                            w-full
+                            w-fit
                             md:w-auto
                             shrink-0
                         ">
@@ -389,9 +420,8 @@ new class extends Component
                     <div class="card-actions justify-end mt-4"> 
                         <a
                          @switch(auth()->user()->role->value)
-                            @case('guardian')   href="{{ route('guardian.index') }}"    @break 
-                            @case('teacher')    href="{{ route('teacher.index') }}"     @break 
-                            @case('coordinator')    href="{{ route('coordinator.index') }}"     @break 
+                            @case('teacher')    href="{{ route('teacher.student.show', $student) }}"     @break 
+                            @case('coordinator')    href="{{ route('coordinator.student.show', $student) }}"     @break 
                         @endswitch
                         class=" btn btn-sm sm:btn-md text-white bg-Cprimary w-full sm:w-auto "
                         > 

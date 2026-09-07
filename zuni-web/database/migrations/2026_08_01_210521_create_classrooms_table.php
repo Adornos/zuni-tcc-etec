@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Enums\ClassroomGrade;
+
 return new class extends Migration
 {
     public function up(): void
@@ -15,7 +17,7 @@ return new class extends Migration
             $table->string('name', 50);
 
             // Ano/série
-            $table->string('grade', 50);
+            $table->enum('grade', ClassroomGrade::cases());
 
             // Período
             $table->enum('shift', ['morning','afternoon','full_time','evening',])->nullable();

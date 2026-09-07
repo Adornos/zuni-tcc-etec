@@ -83,11 +83,36 @@ class StudentController extends Controller
         $validated['password'] = 'zuni2026';
 
         return User::create([
-            'name' => $validated['name'],
+            
+            ...$validated,
+
             'username' => $this->generateUsername(),
             'password' => Hash::make($validated['password']),
             'role' => 'student',
+
         ]);
+    }
+
+    
+    /**
+     * Gera o registrarion_number da StudentSheet
+     */
+    private static function generateRegistrationNumber(): string
+    {
+        $year = now()->year;
+
+        $lastNumber = StudentSheet::where('registration_number', 'like', "ALU-{$year}-%")
+            ->orderByDesc('registration_number')
+            ->value('registration_number');
+
+        if ($lastNumber) {
+            $number = (int) substr($lastNumber, -4);
+            $number++;
+        } else {
+            $number = 1;
+        }
+
+        return sprintf('ALU-%d-%04d', $year, $number);
     }
     /**
      * Faz o link entre o usuário Student e sua StudentSheet
@@ -111,6 +136,7 @@ class StudentController extends Controller
         $response = $studentUser->studentSheet()->create([
             ...$studentSheet_validated,
             'guardian_id' => $user->id,
+            'registration_number' => self::generateRegistrationNumber(),
         ]);
 
         // dd($response);
@@ -143,7 +169,7 @@ class StudentController extends Controller
             try{
 
             $studentUser = $this->registerStudent($request);
-                        
+                      
             $this->linkStudentSheet($request, $studentUser);
             $this->linkStudentEnroll($studentUser->studentSheet);
             

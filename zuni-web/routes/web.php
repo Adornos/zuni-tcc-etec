@@ -100,8 +100,8 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/chat', [CoordinatorController::class, 'chat'])->name('chat');
 
     // Aprovação de matrículas
-    Route::get('/students', [CoordinatorController::class, 'students'])->name('students.index');
-    Route::get('/students/{enrollment}', [CoordinatorController::class, 'showStudent'])->name('enrollment.show');
+    Route::get('/students', [CoordinatorController::class, 'students'])->name('student.index');
+    Route::get('/students/{enrollment}', [CoordinatorController::class, 'showStudent'])->name('student.show');
     Route::put('/students/{enrollment}/approve', [CoordinatorController::class, 'approveEnrollment'])->name('enrollment.approve');
     Route::put('/students/{enrollment}/reject', [CoordinatorController::class, 'rejectEnrollment'])->name('enrollment.reject');
 
@@ -140,7 +140,7 @@ Route::middleware(['auth', 'role:coordinator'])
 
 });
 
-// Login Routes
+// Login Route
 
 Route::view('/login', 'auth.login')
     ->middleware('guest')
@@ -149,7 +149,7 @@ Route::view('/login', 'auth.login')
 Route::post('/login', Login::class)
     ->middleware('guest');
 
-// Register Routes
+// Register Route
 Route::view('/register', 'auth.register')
     ->middleware('guest')
     ->name('register') ;

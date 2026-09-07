@@ -84,16 +84,22 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 ## Dia 6 — Tela do responsável
 
-- [X] Edição de cadastro do aluno pelo responsável
+- [x] Edição de cadastro do aluno pelo responsável
 - [x] Visualização de aluno
 - [x] Visualização de proficiências por aluno
 
 ## Dia 7 — 🔄 Revisão
 
-- [ ] Testar cadastros
-- [ ] Testar relacionamentos
+- [x] Testar cadastros
+- [x] Testar relacionamentos
 - [ ] Corrigir bugs da semana
-- [ ] Atualizar checklist
+- [x] Atualizar checklist
+
+### Observações:
+
+- [ ] Finalizar/Normalizar Profiles e a edição deles (separar visualização de edit)
+- [ ] Planejar atribuição de aulas
+- [ ] Planejar funcionamento do fórum
 
 ### 🎯 Resultado esperado
 
