@@ -25,10 +25,7 @@
                 href="{{ route('guardian.index') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
-                <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
-                src="{{ asset('images/icons/dashboard.svg') }}" 
-                />
+                <x-svg.icon.forum class="mr-[1vmax]" />
                 Dashboard
             </a>
         </li>
@@ -39,10 +36,7 @@
                 href="{{ route('guardian.registered') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
-                <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
-                src="{{ asset('images/icons/enroll.svg') }}" 
-                />
+                <x-svg.icon.enroll class="mr-[1vmax]" />
                 Cadastros
             </a>
         </li>
@@ -53,10 +47,7 @@
                 href="{{ route('guardian.forum') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
-                <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
-                src="{{ asset('images/icons/forum.svg') }}" 
-                />
+                <x-svg.icon.forum class="mr-[1vmax]" />
                 Mural
             </a>
         </li>
@@ -67,10 +58,7 @@
                 href="{{ route('guardian.chat') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
-                <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
-                src="{{ asset('images/icons/chat.svg') }}" 
-                />
+                <x-svg.icon.chat class="mr-[1vmax]" />
                 Chat
             </a>
         </li> 

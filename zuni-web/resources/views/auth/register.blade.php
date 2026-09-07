@@ -48,8 +48,10 @@
                         <input
                             type="text"
                             name="cpf"
+                            x-data
+                            x-mask="999.999.999-99"
                             placeholder="000.000.000-00"
-                            value="{{ old('cpf') ?? '123.456.789-12'}}"
+                            value="{{ old('cpf') ?? '12345678912'}}"
                             class="input input-bordered w-full @error('cpf') input-error @enderror"
                             required
                         >
@@ -70,6 +72,8 @@
                         <input
                             type="text"
                             name="phone"
+                            x-data
+                            x-mask="(99) 99999-9999"
                             placeholder="(13) 99999-9999"
                             value="{{ old('phone') ?? '(13) 99999-9999'}}"
                             class="input input-bordered w-full @error('phone') input-error @enderror"

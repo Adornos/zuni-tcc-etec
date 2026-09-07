@@ -174,6 +174,9 @@
                                     <input
                                         type="text"
                                         name="cpf"
+                                        x-data
+                                        x-mask="999.999.999-99"
+                                        placeholder="990.999.999-99"
                                         value="{{ old('cpf', $student->cpf) }}"
                                         class="input input-bordered w-full"
                                     >
@@ -191,6 +194,9 @@
                                     <input
                                         type="text"
                                         name="rg"
+                                        x-data
+                                        x-mask="99.999.999-9"
+                                        placeholder="99.999.999-9"
                                         value="{{ old('rg', $student->rg) }}"
                                         class="input input-bordered w-full"
                                     >
@@ -208,6 +214,9 @@
                                     <input
                                         type="text"
                                         name="phone"
+                                        x-data
+                                        x-mask="(99) 99999-9999"
+                                        placeholder="(99) 99999-9999"
                                         value="{{ old('phone', $student->phone) }}"
                                         class="input input-bordered w-full"
                                     >
@@ -225,6 +234,7 @@
                                     <input
                                         type="email"
                                         name="email"
+                                        placeholder="email@email.com"
                                         value="{{ old('email', $student->email) }}"
                                         class="input input-bordered w-full"
                                     >

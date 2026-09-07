@@ -1,5 +1,17 @@
-<x-panel.teacher>
+<x-panel.guardian>
     @props(['profile'])
+    <form action="" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+
+    <input
+        type="file"
+        name="photo"
+        accept="image/*"
+    >
+
+    <button type="submit">Salvar</button>
+</form>
     
     <form action="{{ route('teacher.profile.save') }}" method="post" class="card bg-base-100 shadow-md col-span-4 row-span-4">
         @method('put')
@@ -172,4 +184,4 @@
     </div>
 
     </form>
-</x-panel.teacher>
+</x-panel.guardian>

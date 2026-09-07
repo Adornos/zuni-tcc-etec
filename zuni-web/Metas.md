@@ -62,7 +62,7 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 - [x] Testar o funcionamento de todas as telas
 - [x] Testar o funcionamento do campo de perfil de todos os usuários
-- [ ] Padronizar série dos alunos e das salas
+- [x] Padronizar série dos alunos e das salas
 
 ## Dia 4 — Atribuição de alunos
 
@@ -97,6 +97,7 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 ### Observações:
 
+- [x] Dinamização dos ícones (agora components do blade)
 - [ ] Finalizar/Normalizar Profiles e a edição deles (separar visualização de edit)
 - [ ] Planejar atribuição de aulas
 - [ ] Planejar funcionamento do fórum

@@ -226,6 +226,14 @@ class StudentController extends Controller
             404
         );
 
+        // Retirar Máscaras
+        $request->merge([
+            'cpf' => preg_replace('/\D/', '', $request->cpf),
+            'rg' => preg_replace('/\D/', '', $request->rg),
+            'phone' => preg_replace('/\D/', '', $request->phone),
+        ]);
+
+
         $validated = $request->validate([
 
             // User
@@ -251,6 +259,7 @@ class StudentController extends Controller
 
             'notes' => ['nullable', 'string'],
         ]);
+
 
         DB::transaction(function () use ($student, $validated) {
 

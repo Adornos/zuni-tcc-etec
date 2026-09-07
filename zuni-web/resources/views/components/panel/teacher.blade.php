@@ -53,10 +53,7 @@
                 href="{{ route('teacher.forum') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
-                <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
-                src="{{ asset('images/icons/forum.svg') }}" 
-                />
+                <x-svg.icon.forum class="text-white" />
                 Mural
             </a>
         </li>
@@ -67,10 +64,7 @@
                 href="{{ route('teacher.chat') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
-                <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
-                src="{{ asset('images/icons/chat.svg') }}" 
-                />
+                <x-svg.icon.chat class="text-white" />
                 Chat
             </a>
         </li> 

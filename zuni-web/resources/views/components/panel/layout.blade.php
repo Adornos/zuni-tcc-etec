@@ -258,7 +258,7 @@
 
                 {{-- Logo --}}
                 <div class="flex justify-center mt-6 md:mt-8 mb-6 md:mb-8 w-full h-8">
-                    <img src="{{ asset('images/logo_white.svg') }}" alt="Logo" class="">
+                    <x-svg.logo.mark class="size-8 text-white" />
                 </div>
 
                 {{-- Navegação --}}
@@ -277,14 +277,14 @@
                     <ul class="menu w-full text-sm md:text-base">
                         <li>
                             <a href="#">
-                                <img src="{{ asset('images/icons/config.svg') }}" class="w-4 md:w-5 mr-2 md:mr-3" alt=""/>
+                                <x-svg.icon.config class="text-white" />
                                 Configurações
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ route('logout') }}" >
-                                <img src="{{ asset('images/icons/logout.svg') }}" class="w-4 md:w-5 mr-2 md:mr-3" alt=""/>
+                                <x-svg.icon.logout class="text-white" />
                                 Encerrar sessão
                             </a>
                         </li>
