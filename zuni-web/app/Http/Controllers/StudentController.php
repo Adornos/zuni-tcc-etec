@@ -18,7 +18,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
+        /** @var User $user */
+        $user = Auth::user();
 
         abort_unless($user->isGuardian(), 403);
 
@@ -32,7 +33,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $user = auth()->user();
+        /** @var User $user */
+        $user = Auth::user();
 
         abort_unless($user->isGuardian(), 403);
 
@@ -119,7 +121,8 @@ class StudentController extends Controller
      */
     private function linkStudentSheet(Request $request, User $studentUser){
 
-        $user = auth()->user();
+        /** @var User $user */
+        $user = Auth::user();
 
         $studentSheet_validated = $request->validate([
             'class' => 'nullable|string|max:50',
@@ -159,7 +162,8 @@ class StudentController extends Controller
     public function store(Request $request)
     {
 
-        $user = auth()->user();
+        /** @var User $user */
+        $user = Auth::user();
 
         abort_unless($user->isGuardian(), 403);
         
@@ -304,7 +308,8 @@ class StudentController extends Controller
      */
     public function destroy(User $student)
     {
-        $user = auth()->user();
+        /** @var User $user */
+        $user = Auth::user();
 
         abort_unless($user->isGuardian(), 403);
 
