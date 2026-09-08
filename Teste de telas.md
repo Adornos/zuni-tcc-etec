@@ -2,7 +2,7 @@
 
 ## Geral
 
-- [ ] `home.blade.php` // não está adaptada para celular // *Sobre Nós Companhia Parceiros ▼ Ajuda* não funcionam (e a navbar em geral)
+- [ ] `home.blade.php` // não está adaptada para celular // com*Sobre Nós Companhia Parceiros ▼ Ajuda* não funcionam (e a navbar em geral)
 - [ ] `welcome.blade.php`?
 
 ## Autenticação
