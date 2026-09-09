@@ -20,11 +20,13 @@ class TeacherController extends Controller
     {
         return view('teacher.panel');
     }
+    
     public function profile()
     {
         $user = Auth::user();
         return view('teacher.profile', ['profile' => $user]);
     }
+
     public function profileSave(Request $request)
     {
 
@@ -45,25 +47,29 @@ class TeacherController extends Controller
 
     public function forum()
     {
-        return view('teacher.forum');
+        return view('pages.forum.index');
     }
     public function chat()
     {
-        return view('teacher.chat');
+        return view('pages.chat.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(TeacherSheet $teacher)
+    public function show(User $teacher)
     {
-        //
+
+        $teacher->load('teacherSheet');
+
+        return view('pages.teacher.show', ['teacherInfo' => $teacher]);    
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TeacherSheet $teacher)
+    public function edit(User $teacher)
     {
         //
     }
@@ -71,7 +77,7 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TeacherSheet $teacher)
+    public function update(Request $request, User $teacher)
     {
         //
     }
@@ -79,7 +85,7 @@ class TeacherController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TeacherSheet $teacher)
+    public function destroy(User $teacher)
     {
         //
     }

@@ -23,7 +23,7 @@
 
                 {{-- Menu Mobile --}}
                 <label for="sidebar-drawer" class="btn btn-ghost btn-circle lg:hidden shrink-0">
-                    <img src="{{ asset('images/icons/gear.svg') }}" class="w-5 h-5" alt="Menu" />
+                        <img src="{{ asset('images/icons/gear.svg') }}" class="w-5 h-5" alt="Menu" />
                 </label>
 
                 {{-- Título --}}
@@ -211,23 +211,17 @@
                             {{-- Sair --}}
                             <li>
 
-                                <a
-                                    href="{{ route('logout') }}"
-                                    class="gap-3 rounded-xl text-error hover:bg-error/10 hover:text-error"
-                                >
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
 
-                                    <img
-                                        loading="lazy"
-                                        src="{{ asset('images/icons/logout-red.svg') }}"
-                                        class="w-4"
-                                        alt=""
+                                    <button
+                                        type="submit"
+                                        class="flex items-center gap-2 bg-transparent border-0 p-0 text-Csecondary cursor-pointer"
                                     >
-
-                                    <span>
+                                        <x-svg.icon.logout class="text-Csecondary" />
                                         Sair
-                                    </span>
-
-                                </a>
+                                    </button>
+                                </form>
 
                             </li>
 
@@ -258,7 +252,9 @@
 
                 {{-- Logo --}}
                 <div class="flex justify-center mt-6 md:mt-8 mb-6 md:mb-8 w-full h-8">
-                    <x-svg.logo.mark class="size-8 text-white" />
+                    <a href="/">
+                        <x-svg.logo.mark class="size-8 text-white hover:text-Cprimary transition" />
+                    </a>
                 </div>
 
                 {{-- Navegação --}}
@@ -283,10 +279,17 @@
                         </li>
 
                         <li>
-                            <a href="{{ route('logout') }}" >
-                                <x-svg.icon.logout class="text-white" />
-                                Encerrar sessão
-                            </a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+
+                                <button
+                                    type="submit"
+                                    class="flex items-center gap-2 bg-transparent border-0 p-0 text-white cursor-pointer"
+                                >
+                                    <x-svg.icon.logout class="text-white" />
+                                    Encerrar sessão
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </div>

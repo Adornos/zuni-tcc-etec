@@ -420,8 +420,8 @@ new class extends Component
                     <div class="card-actions justify-end mt-4"> 
                         <a
                          @switch(auth()->user()->role->value)
-                            @case('teacher')    href="{{ route('teacher.student.show', $student) }}"     @break 
-                            @case('coordinator')    href="{{ route('coordinator.student.show', $student) }}"     @break 
+                            @case('teacher')    href="{{ route('teacher.student.show', $student->user) }}"     @break 
+                            @case('coordinator')    href="{{ route('coordinator.student.show', $student->user) }}"     @break 
                         @endswitch
                         class=" btn btn-sm sm:btn-md text-white bg-Cprimary w-full sm:w-auto "
                         > 

@@ -7,10 +7,26 @@ use Livewire\Component;
 
 new class extends Component
 {
+    /* Parametros de todos os Employees */
+
     public string $role = '';
     public string $name = '';
     public string $email = '';
     public string $status = '';
+
+    /* Parâmetros exclusivos do Professor (WIP) */
+
+    public string $classroomGrade = '';
+    public string $classroomName = '';
+
+
+    /**
+     * Verifica se a busca deve ser por todos os Employees ou apenas pelo Professor
+     */
+    public function searchTeachersOnly(): bool
+    {
+        return in_array(Auth::user()->role, [ UserRole::COORDINATOR ]);
+    }
 
     #[Computed]
     public function users()
@@ -22,11 +38,11 @@ new class extends Component
                 UserRole::GUARDIAN->value,
             ])
 
-            ->when($this->role, function ($query){
+            ->when($this->searchTeachersOnly() || $this->role, function ($query){
                 $query->where(
                     'role',
                     'like',
-                    $this->role
+                    $this->searchTeachersOnly() ? 'teacher' : $this->role
                 );
             })
 
@@ -47,19 +63,14 @@ new class extends Component
             })
 
             ->when($this->status, function ($query) {
-                $query->where(function ($query) {
-                    $query
-                        ->whereHas('teacherSheet', function ($query) {
-                            $query->where('status', $this->status);
-                        })
-                        ->orWhereHas('coordinatorSheet', function ($query) {
-                            $query->where('status', $this->status);
-                        })
-                        ->orWhereHas('directorSheet', function ($query) {
-                            $query->where('status', $this->status);
-                        });
-                });
+                $query->where(
+                    'status',
+                    'like',
+                    '%' . $this->status . '%'
+                );
             })
+
+        
 
             ->get();
     }
@@ -117,9 +128,26 @@ new class extends Component
 
             </div>
 
+            {{-- Email (Não estou a usar) --}}
+            <div class="form-control" hidden>
+
+                <label class="label">
+                    <span class="label-text">
+                        Email
+                    </span>
+                </label>
+
+                <input
+                    type="email"
+                    wire:model.live.debounce.300ms="email"
+                    placeholder="funcionario@email.com"
+                    class="input input-bordered w-full"
+                >
+
+            </div>
 
             {{-- Tipo de funcionário --}}
-            <div class="form-control">
+            <div class="form-control" {{ $this->searchTeachersOnly() ? 'hidden' : '' }}>
 
                 <label class="label">
                     <span class="label-text">
@@ -136,6 +164,43 @@ new class extends Component
                     <option value="coordinator">Coordenador</option>
                     <option value="director">Diretor</option>
                 </select>
+
+            </div>
+
+            {{-- Ano da sala do Professor --}}
+            <div class="form-control" {{ $this->searchTeachersOnly() ? '' : 'hidden' }}>
+
+                <label class="label">
+                    <span class="label-text">
+                        Ano (WIP)
+                    </span>
+                </label>
+
+                <select
+                    wire:model.live="classroomGrade"
+                    class="select select-bordered w-full"
+                >
+                    <option value="">Todos</option>
+                    
+                </select>
+
+            </div>
+
+            {{-- Turma do Professor --}}
+            <div class="form-control" {{ $this->searchTeachersOnly() ? '' : 'hidden' }}>
+
+                <label class="label">
+                    <span class="label-text">
+                        Turma (WIP)
+                    </span>
+                </label>
+
+                <input
+                    type="text"
+                    wire:model.live.debounce.300ms="classroomName"
+                    placeholder="Nome da turma"
+                    class="input input-bordered w-full"
+                >
 
             </div>
 
@@ -159,6 +224,8 @@ new class extends Component
                 </select>
 
             </div>
+
+            
 
         </div>
 
@@ -265,10 +332,13 @@ new class extends Component
                     <div class="card-actions justify-end mt-4">
 
                         <a
-                            href="{{ route(
-                                'director.employee.show',
-                                $user->id
-                            ) }}"
+                        @if($this->searchTeachersOnly()){
+                            href="{{ route( 'coordinator.teacher.show', $user ) }}"
+                        } 
+                        @else{
+                            href="{{ route( 'director.employee.show', $user ) }}"
+                        }
+                        @endif
                             class="
                                 btn
                                 btn-sm

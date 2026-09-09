@@ -12,7 +12,7 @@ use App\Models\studentSheet;
 
 class Enrollment extends Model
 {
-    protected $primaryKey = 'student_id';
+    protected $primaryKey = 'sheet_id';
 
     protected $fillable = [
         'sheet_id',

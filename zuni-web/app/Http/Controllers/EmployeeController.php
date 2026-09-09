@@ -6,72 +6,20 @@ use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class EmployeeController extends Controller
 {
-    private static function generateUsername(string $name): string
+    public function index()
     {
-        $parts = preg_split('/\s+/', trim($name));
 
-        $ignored = ['da', 'de', 'do', 'das', 'dos', 'e'];
-
-        $parts = array_values(array_filter($parts, function ($part) use ($ignored) {
-            return !in_array(strtolower($part), $ignored);
-        }));
-
-        $firstName = strtolower($parts[0]);
-        $lastName = strtolower(end($parts));
-
-        // Remove acentos
-        $firstName = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $firstName);
-        $lastName = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $lastName);
-
-        $baseUsername = "{$firstName}.{$lastName}";
-        $username = $baseUsername;
-
-        $counter = 2;
-
-        while (User::where('username', $username)->exists()) {
-            $username = "{$baseUsername}.{$counter}";
-            $counter++;
-        }
-
-        return $username;
-    }
-
-    private function linkSheet(User $user, array $data): void
-    {
-        match ($user->role) {
-
-            UserRole::TEACHER =>
-                $user->teacherSheet()->create([
-                    'formation' => $data['formation'] ?? null,
-                    'specialization' => $data['specialization'] ?? null,
-                    'registration' => $data['registration'] ?? null,
-                    'hire_date' => $data['hire_date'] ?? null,
-                    'notes' => $data['notes'] ?? null,
-                ]),
-
-            UserRole::COORDINATOR =>
-                $user->coordinatorSheet()->create([
-                    'formation' => $data['formation'] ?? null,
-                    'specialization' => $data['specialization'] ?? null,
-                    'registration' => $data['registration'] ?? null,
-                    'hire_date' => $data['hire_date'] ?? null,
-                    'notes' => $data['notes'] ?? null,
-                ]),
-
-            UserRole::DIRECTOR =>
-                $user->directorSheet()->create([
-                    'formation' => $data['formation'] ?? null,
-                    'specialization' => $data['specialization'] ?? null,
-                    'registration' => $data['registration'] ?? null,
-                    'hire_date' => $data['hire_date'] ?? null,
-                    'notes' => $data['notes'] ?? null,
-                ]),
-
-            default => abort(422, 'Cargo inválido.'),
+        return match (Auth::user()->role) {
+            UserRole::COORDINATOR => view('pages.teacher.index'),
+            UserRole::DIRECTOR => view('pages.employee.index'),
+            default => abort(403),
         };
+
     }
 
     public function store(Request $request)
@@ -138,8 +86,7 @@ class EmployeeController extends Controller
             UserRole::COORDINATOR => redirect()
                 ->route('coordinator.teacher.index')->with('success', 'Professor criado com sucesso.'),
         };
-        }
-    
+    }
 
     public function update(Request $request, User $employee)
     {
@@ -211,6 +158,71 @@ class EmployeeController extends Controller
 
             UserRole::TEACHER => redirect()
                 ->route('teacher.profile')->with('success', 'Perfil atualizado com sucesso.'),
+        };
+    }
+
+    private static function generateUsername(string $name): string
+    {
+        $parts = preg_split('/\s+/', trim($name));
+
+        $ignored = ['da', 'de', 'do', 'das', 'dos', 'e'];
+
+        $parts = array_values(array_filter($parts, function ($part) use ($ignored) {
+            return !in_array(strtolower($part), $ignored);
+        }));
+
+        $firstName = strtolower($parts[0]);
+        $lastName = strtolower(end($parts));
+
+        // Remove acentos
+        $firstName = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $firstName);
+        $lastName = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $lastName);
+
+        $baseUsername = "{$firstName}.{$lastName}";
+        $username = $baseUsername;
+
+        $counter = 2;
+
+        while (User::where('username', $username)->exists()) {
+            $username = "{$baseUsername}.{$counter}";
+            $counter++;
+        }
+
+        return $username;
+    }
+
+    private function linkSheet(User $user, array $data): void
+    {
+        match ($user->role) {
+
+            UserRole::TEACHER =>
+                $user->teacherSheet()->create([
+                    'formation' => $data['formation'] ?? null,
+                    'specialization' => $data['specialization'] ?? null,
+                    'registration' => $data['registration'] ?? null,
+                    'hire_date' => $data['hire_date'] ?? null,
+                    'notes' => $data['notes'] ?? null,
+                ]),
+
+            UserRole::COORDINATOR =>
+                $user->coordinatorSheet()->create([
+                    'formation' => $data['formation'] ?? null,
+                    'specialization' => $data['specialization'] ?? null,
+                    'registration' => $data['registration'] ?? null,
+                    'hire_date' => $data['hire_date'] ?? null,
+                    'notes' => $data['notes'] ?? null,
+                ]),
+
+            UserRole::DIRECTOR =>
+                $user->directorSheet()->create([
+                    'formation' => $data['formation'] ?? null,
+                    'specialization' => $data['specialization'] ?? null,
+                    'registration' => $data['registration'] ?? null,
+                    'hire_date' => $data['hire_date'] ?? null,
+                    'notes' => $data['notes'] ?? null,
+                ]),
+
+            default => abort(422, 'Cargo inválido.'),
         };
     }
 }

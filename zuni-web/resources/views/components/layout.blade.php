@@ -11,7 +11,7 @@
 </head>
 
 <body class="min-h-screen flex flex-col bg-white font-sans">
-    <header class="w-full px-8 py-4 bg-linear-to-b from-white to-transparent">
+    <header class="w-full px-8 py-4 bg-linear-to-b from-white to-transparent sticky">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
 
             <!-- Logo -->
@@ -74,7 +74,7 @@
                         {{  auth()->user()->name }}
                         </a>
                     </span>
-                    <form action="{{ route('logout') }}" method="get" class="inline">
+                    <form action="{{ route('logout') }}" method="post" class="inline">
                     @csrf
                         <button type="submit" class="px-5 py-2 rounded-full bg-Csecondary text-white font-medium hover:brightness-110 transition">
                         Sair

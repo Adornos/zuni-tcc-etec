@@ -35,32 +35,32 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <div class="text-center p-6 rounded-4xl bg-gray-50 shadow-[4px_4px_20px_rgba(0,0,0,0.3)]">
-                <h3 class="text-xl font-semibold text-Ctext mb-3">
-                Contato Direto com os professores
-                </h3>
-                <p class="text-Ctext leading-relaxed">
-                No Zuni é possível os pais dos alunos mandarem mensagens diretamente com os professores em tempo real para tirar dúvidas, de forma fácil, simples e prática
-                </p>
-            </div>
+                <div class="text-center p-6 rounded-4xl bg-gray-50 shadow-[4px_4px_20px_rgba(0,0,0,0.3)]">
+                    <h3 class="text-xl font-semibold text-Ctext mb-3">
+                        Contato Direto com os professores
+                    </h3>
+                    <p class="text-Ctext leading-relaxed">
+                        No Zuni é possível os pais dos alunos mandarem mensagens diretamente com os professores em tempo real para tirar dúvidas, de forma fácil, simples e prática
+                    </p>
+                </div>
 
-            <div class="text-center p-6 rounded-4xl bg-gray-50 shadow-[4px_4px_20px_rgba(0,0,0,0.3)]">
-                <h3 class="text-xl font-semibold text-Ctext mb-3">
-                Sistema próprio pra cantina!
-                </h3>
-                <p class="text-Ctext leading-relaxed">
-                As escolas que utilizam o nosso sistema possuem um próprio sistema para pagamento dos lanches, utilizando créditos digitais adicionados pelos pais dentro do próprio aplicativo Zuni, otimizando o tempo de lanche dos pequenos e facilitando a organização da cantina.
-                </p>
-            </div>
+                <div class="text-center p-6 rounded-4xl bg-gray-50 shadow-[4px_4px_20px_rgba(0,0,0,0.3)]">
+                    <h3 class="text-xl font-semibold text-Ctext mb-3">
+                        Sistema próprio pra cantina!
+                    </h3>
+                    <p class="text-Ctext leading-relaxed">
+                        As escolas que utilizam o nosso sistema possuem um próprio sistema para pagamento dos lanches, utilizando créditos digitais adicionados pelos pais dentro do próprio aplicativo Zuni, otimizando o tempo de lanche dos pequenos e facilitando a organização da cantina.
+                    </p>
+                </div>
 
-            <div class="text-center p-6 rounded-4xl bg-gray-50 shadow-[4px_4px_20px_rgba(0,0,0,0.3)]">
-                <h3 class="text-xl font-semibold text-Ctext mb-3">
-                Contato Direto com os professores
-                </h3>
-                <p class="text-Ctext leading-relaxed">
-                No Zuni é possível os pais dos alunos mandarem mensagens diretamente com os professores em tempo real para tirar dúvidas, de forma fácil, simples e prática
-                </p>
-            </div>
+                <div class="text-center p-6 rounded-4xl bg-gray-50 shadow-[4px_4px_20px_rgba(0,0,0,0.3)]">
+                    <h3 class="text-xl font-semibold text-Ctext mb-3">
+                        Contato Direto com os professores
+                    </h3>
+                    <p class="text-Ctext leading-relaxed">
+                        No Zuni é possível os pais dos alunos mandarem mensagens diretamente com os professores em tempo real para tirar dúvidas, de forma fácil, simples e prática
+                    </p>
+                </div>
 
             </div>
         </div>

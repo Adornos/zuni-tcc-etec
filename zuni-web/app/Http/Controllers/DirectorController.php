@@ -59,7 +59,7 @@ class DirectorController extends Controller
      */
     public function employees(){
 
-        return view('director.employee.index');
+        return view('pages.employee.index');
 
     }
 
@@ -68,7 +68,7 @@ class DirectorController extends Controller
      */
     public function formEmployee(){
 
-        return view('director.employee.register');
+        return view('pages.employee.register');
 
     }
 
@@ -85,7 +85,7 @@ class DirectorController extends Controller
             'directorSheet',
         ]);
 
-        return view('director.employee.show', [
+        return view('pages.employee.show', [
             'employee' => $employee,
         ]);
     }
@@ -99,7 +99,7 @@ class DirectorController extends Controller
 
     public function forum()
     {
-        return view('director.forum');
+        return view('pages.forum.index');
     }
 
 
@@ -111,7 +111,7 @@ class DirectorController extends Controller
 
     public function chat()
     {
-        return view('director.chat');
+        return view('pages.chat.index');
     }
 
 }

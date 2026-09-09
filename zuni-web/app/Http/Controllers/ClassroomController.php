@@ -19,7 +19,7 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        return view('coordinator.classroom.index');
+        return view('pages.classroom.index');
     }
 
     /**
@@ -27,7 +27,7 @@ class ClassroomController extends Controller
      */
     public function create()
     {
-        return view('coordinator.classroom.register');
+        return view('pages.classroom.register');
     }
 
     /**
@@ -60,7 +60,7 @@ class ClassroomController extends Controller
      */
     public function show(Classroom $classroom)
     {
-        return view('coordinator.classroom.show', ['classroom' => $classroom]);
+        return view('pages.classroom.show', ['classroom' => $classroom]);
     }
 
     /**
@@ -71,7 +71,7 @@ class ClassroomController extends Controller
 
         $teachers = User::where('role', 'teacher')->orderBy('name')->paginate(10);
 
-        return view('coordinator.classroom.teachers', [
+        return view('pages.classroom.teachers', [
             'classroom' => $classroom,
             'teachers' => $teachers,
         ]);
@@ -112,7 +112,7 @@ class ClassroomController extends Controller
             ->get()
             ->sortBy('user.name');
 
-        return view('coordinator.classroom.students', [
+        return view('pages.classroom.students', [
             'classroom' => $classroom,
             'availableStudents' => $availableStudents,
         ]);

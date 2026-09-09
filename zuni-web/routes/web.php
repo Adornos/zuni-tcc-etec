@@ -12,6 +12,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ZuniController;
 use Illuminate\Support\Facades\Route;
 use App\Enums\UserRole;
+use App\Http\Controllers\EmployeeController;
 
 Route::get('/', [ZuniController::class, 'index']);
 
@@ -25,19 +26,19 @@ Route::middleware(['auth', 'role:guardian'])
     Route::get('/profile', [GuardianController::class, 'profile'])->name('profile');
     Route::put('/profile', [GuardianController::class, 'profileSave'])->name('profile.save');
 
-    Route::get('/registered', [GuardianController::class, 'registered'])->name('registered');
-    Route::get('/register', [GuardianController::class, 'registerStudentForm'])->name('student.register');
-    Route::post('/register', [GuardianController::class, 'registerStudent'])->name('student.store');
+    Route::get('/student', [GuardianController::class, 'registered'])->name('student.index');
+    Route::get('/student/register', [GuardianController::class, 'registerStudentForm'])->name('student.register');
+    Route::post('/student/register', [GuardianController::class, 'registerStudent'])->name('student.store');
 
     Route::get('/forum', [GuardianController::class, 'forum'])->name('forum');
     Route::get('/chat', [GuardianController::class, 'chat'])->name('chat');
 
     // Perfil do aluno (acesso mediado pelo responsável)
-    Route::get('/students/{student}', [StudentController::class, 'show'])->name('student.show');
-    Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name('student.edit');
-    Route::put('/students/{student}', [StudentController::class, 'update'])->name('student.update');
-    Route::get('/students/{student}/schedule', [StudentController::class, 'schedule'])->name('student.schedule');
-    Route::get('/students/{student}/reports', [StudentController::class, 'reports'])->name('student.reports');
+    Route::get('/student/{student}', [StudentController::class, 'show'])->name('student.show');
+    Route::get('/student/{student}/edit', [StudentController::class, 'edit'])->name('student.edit');
+    Route::put('/student/{student}', [StudentController::class, 'update'])->name('student.update');
+    Route::get('/student/{student}/schedule', [StudentController::class, 'schedule'])->name('student.schedule');
+    Route::get('/student/{student}/reports', [StudentController::class, 'reports'])->name('student.reports');
 
 });
 
@@ -100,17 +101,17 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/chat', [CoordinatorController::class, 'chat'])->name('chat');
 
     // Aprovação de matrículas
-    Route::get('/students', [CoordinatorController::class, 'students'])->name('student.index');
-    Route::get('/students/{enrollment}', [CoordinatorController::class, 'showStudent'])->name('student.show');
-    Route::put('/students/{enrollment}/approve', [CoordinatorController::class, 'approveEnrollment'])->name('enrollment.approve');
-    Route::put('/students/{enrollment}/reject', [CoordinatorController::class, 'rejectEnrollment'])->name('enrollment.reject');
+    Route::get('/students', [StudentController::class, 'index'])->name('student.index');
+    Route::get('/students/{student}', [StudentController::class, 'show'])->name('student.show');
+    Route::put('/students/{enrollment}/approve', [CoordinatorController::class, 'approveEnrollment'])->name('student.approve');
+    Route::put('/students/{enrollment}/reject', [CoordinatorController::class, 'rejectEnrollment'])->name('student.reject');
 
-    // Colocação de professores
-    Route::get('/teachers', [CoordinatorController::class, 'teachers'])->name('teacher.index');
-    Route::get('/teacher/register', [CoordinatorController::class, 'formTeacher'])->name('teacher.register');
-    Route::post('/teacher/register', [CoordinatorController::class, 'registerTeacher'])->name('teacher.store');
-    Route::get('/teacher/show/{teacher}', [CoordinatorController::class, 'showTeacher'])->name('teacher.show');
-    Route::put('/teacher/show/{teacher}/edit', [CoordinatorController::class, 'editTeacher'])->name('teacher.edit');
+    // Cadastro e gerenciamento de professores
+    Route::get('/teachers', [EmployeeController::class, 'index'])->name('teacher.index');
+    Route::get('/teacher/register', [EmployeeController::class, 'formTeacher'])->name('teacher.register');
+    Route::post('/teacher/register', [EmployeeController::class, 'registerTeacher'])->name('teacher.store');
+    Route::get('/teacher/show/{teacher}', [TeacherController::class, 'show'])->name('teacher.show');
+    Route::put('/teacher/show/{teacher}/edit', [TeacherController::class, 'update'])->name('teacher.edit');
 
     // Criação e gerenciamento de salas
     Route::get('/classrooms', [ClassroomController::class, 'index'])->name('classroom.index');
@@ -160,5 +161,5 @@ Route::post('/register', Register::class)
 
 // Logout
 
-Route::get('/logout', Logout::class)
+Route::post('/logout', Logout::class)
     ->middleware('auth')->name('logout');

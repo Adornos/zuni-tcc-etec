@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use App\Models\Student;
 use App\Models\StudentSheet;
 use App\Models\User;
@@ -14,18 +15,49 @@ use Illuminate\Validation\Rule;
 class StudentController extends Controller
 {
     /**
-     * Lista apenas os alunos do guardian logado
+     * Lista os alunos conforme o role do usuário.
+     * Para o coordenador: Todos os alunos do sistema (pesquisa incluída)
+     * Para o responsável: Apenas os alunos que este cadastrou
      */
     public function index()
     {
         /** @var User $user */
         $user = Auth::user();
 
-        abort_unless($user->isGuardian(), 403);
-
         $students = $user->students()->latest()->get();
 
-        return view('students.index', compact('students'));
+        return view('pages.student.index', compact('students'));
+    }
+    
+    /**
+     * Mostrar student específico (somente do guardian)
+     */
+    public function show(User $student)
+    {
+
+        abort_unless($student->role === UserRole::STUDENT, 404);
+
+        $student->load([
+            'studentSheet.guardian',
+            'studentSheet.classroom',
+        ]);
+
+        return view('pages.student.show', ['student' => $student]);
+    }
+
+    /**
+     * Form edição
+     */
+    public function edit(User $student)
+    {
+        abort_unless($student->role->value === 'student', 404);
+
+        $student->load([
+            'studentSheet.guardian',
+            'studentSheet.classroom',
+        ]);
+
+        return view('pages.student.edit', compact('student'));
     }
 
     /**
@@ -38,122 +70,7 @@ class StudentController extends Controller
 
         abort_unless($user->isGuardian(), 403);
 
-        return view('guardian.student.register');
-    }
-    
-    /**
-     * Gera o Username / Nº Matricula do Student
-     *
-     * @return string
-     */
-    private function generateUsername(): string
-    {
-        $year = now()->year;
-        $schoolNumber = '01';
-
-        $lastStudent = User::where('role', 'student')
-            ->where('username', 'like', "{$year}{$schoolNumber}%")
-            ->orderByDesc('username')
-            ->first();
-
-        $nextSequence = $lastStudent
-            ? ((int) substr($lastStudent->username, -4)) + 1
-            : 1;
-
-        return $year
-            . $schoolNumber
-            . str_pad($nextSequence, 4, '0', STR_PAD_LEFT);
-    }
-
-    /**
-     * Registra o Usuario Student que pertence a um Usuario Guardian
-     */
-    private function registerStudent(Request $request): User
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'birth_date' => 'nullable|date',
-            'gender' => 'nullable|in:M,F,O',
-
-            'street' => 'nullable|string|max:100',
-            'number' => 'nullable|string|max:10',
-            'district' => 'nullable|string|max:50',
-            'city' => 'nullable|string|max:50',
-            'state' => 'nullable|string|max:50',
-        ]);
-
-        $validated['password'] = 'zuni2026';
-
-        return User::create([
-            
-            ...$validated,
-
-            'username' => $this->generateUsername(),
-            'password' => Hash::make($validated['password']),
-            'role' => 'student',
-
-        ]);
-    }
-
-    
-    /**
-     * Gera o registrarion_number da StudentSheet
-     */
-    private static function generateRegistrationNumber(): string
-    {
-        $year = now()->year;
-
-        $lastNumber = StudentSheet::where('registration_number', 'like', "ALU-{$year}-%")
-            ->orderByDesc('registration_number')
-            ->value('registration_number');
-
-        if ($lastNumber) {
-            $number = (int) substr($lastNumber, -4);
-            $number++;
-        } else {
-            $number = 1;
-        }
-
-        return sprintf('ALU-%d-%04d', $year, $number);
-    }
-    /**
-     * Faz o link entre o usuário Student e sua StudentSheet
-     */
-    private function linkStudentSheet(Request $request, User $studentUser){
-
-        /** @var User $user */
-        $user = Auth::user();
-
-        $studentSheet_validated = $request->validate([
-            'class' => 'nullable|string|max:50',
-
-            'neurodivergent' => 'nullable|boolean',
-            'allergy' => 'nullable|boolean',
-            'food_restriction' => 'nullable|boolean',
-            'special_care' => 'nullable|boolean',
-
-            'notes' => 'nullable|string',
-        ]);
-
-
-        $response = $studentUser->studentSheet()->create([
-            ...$studentSheet_validated,
-            'guardian_id' => $user->id,
-            'registration_number' => self::generateRegistrationNumber(),
-        ]);
-
-        // dd($response);
-        
-    }
-    /**
-     * Faz o link entre o a StudentSheet e sua Enrollment
-     */
-    private function linkStudentEnroll(StudentSheet $studentSheet){
-
-        $studentSheet->Enrollment()->create([
-            'sheet_id' => $studentSheet->id,
-        ]);
-        
+        return view('pages.student.register');
     }
 
     /**
@@ -188,36 +105,6 @@ class StudentController extends Controller
         return redirect()
             ->route('guardian.registered')
             ->with('success', 'Student created successfully.');
-    }
-
-    /**
-     * Mostrar student específico (somente do guardian)
-     */
-    public function show(User $student)
-    {
-        abort_unless($student->role->value === 'student', 404);
-
-        $student->load([
-            'studentSheet.guardian',
-            'studentSheet.classroom',
-        ]);
-
-        return view('guardian.student.show', compact('student'));
-    }
-
-    /**
-     * Form edição
-     */
-    public function edit(User $student)
-    {
-        abort_unless($student->role->value === 'student', 404);
-
-        $student->load([
-            'studentSheet.guardian',
-            'studentSheet.classroom',
-        ]);
-
-        return view('guardian.student.edit', compact('student'));
     }
 
     /**
@@ -320,5 +207,123 @@ class StudentController extends Controller
         return redirect()
             ->route('students.index')
             ->with('success', 'Student deleted successfully.');
+    }
+    
+    /**
+     * Gera o Username / Nº Matricula do Student
+     *
+     * @return string
+     */
+    private function generateUsername(): string
+    {
+        $year = now()->year;
+        $schoolNumber = '01';
+
+        $lastStudent = User::where('role', 'student')
+            ->where('username', 'like', "{$year}{$schoolNumber}%")
+            ->orderByDesc('username')
+            ->first();
+
+        $nextSequence = $lastStudent
+            ? ((int) substr($lastStudent->username, -4)) + 1
+            : 1;
+
+        return $year
+            . $schoolNumber
+            . str_pad($nextSequence, 4, '0', STR_PAD_LEFT);
+    }
+
+    /**
+     * Registra o Usuario Student que pertence a um Usuario Guardian
+     */
+    private function registerStudent(Request $request): User
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'birth_date' => 'nullable|date',
+            'gender' => 'nullable|in:M,F,O',
+
+            'street' => 'nullable|string|max:100',
+            'number' => 'nullable|string|max:10',
+            'district' => 'nullable|string|max:50',
+            'city' => 'nullable|string|max:50',
+            'state' => 'nullable|string|max:50',
+        ]);
+
+        $validated['password'] = 'zuni2026';
+
+        return User::create([
+            
+            ...$validated,
+
+            'username' => $this->generateUsername(),
+            'password' => Hash::make($validated['password']),
+            'role' => 'student',
+
+        ]);
+    }
+    
+    /**
+     * Gera o registrarion_number da StudentSheet
+     */
+    private static function generateRegistrationNumber(): string
+    {
+        $year = now()->year;
+
+        $lastNumber = StudentSheet::where('registration_number', 'like', "ALU-{$year}-%")
+            ->orderByDesc('registration_number')
+            ->value('registration_number');
+
+        if ($lastNumber) {
+            $number = (int) substr($lastNumber, -4);
+            $number++;
+        } else {
+            $number = 1;
+        }
+
+        return sprintf('ALU-%d-%04d', $year, $number);
+    }
+
+    /**
+     * Faz o link entre o usuário Student e sua StudentSheet
+     */
+    private function linkStudentSheet(Request $request, User $studentUser)
+    {
+
+        /** @var User $user */
+        $user = Auth::user();
+
+        $studentSheet_validated = $request->validate([
+            'class' => 'nullable|string|max:50',
+
+            'neurodivergent' => 'nullable|boolean',
+            'allergy' => 'nullable|boolean',
+            'food_restriction' => 'nullable|boolean',
+            'special_care' => 'nullable|boolean',
+
+            'notes' => 'nullable|string',
+        ]);
+
+
+        $response = $studentUser->studentSheet()->create([
+            ...$studentSheet_validated,
+            'guardian_id' => $user->id,
+            'registration_number' => self::generateRegistrationNumber(),
+        ]);
+
+        // dd($response);
+        
+    }
+
+    /**
+     * Faz o link entre o a StudentSheet e sua Enrollment
+     */
+    private function linkStudentEnroll(StudentSheet $studentSheet)
+    {
+
+        $studentSheet->Enrollment()->create([
+            'sheet_id' => $studentSheet->id,
+        ]);
+        
     }
 }
