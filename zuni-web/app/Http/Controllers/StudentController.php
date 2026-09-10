@@ -165,11 +165,12 @@ class StudentController extends Controller
      */
     public function show(User $student)
     {
+
         $user = auth()->user();
 
         abort_unless($user->isGuardian(), 403);
 
-        abort_unless($student->user_id === $user->id, 403);
+        abort_unless($student->guardian_id === $user->id, 403);
 
         return view('students.show', compact('student'));
     }

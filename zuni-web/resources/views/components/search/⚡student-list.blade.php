@@ -208,7 +208,7 @@ new class extends Component
                 wire:key="student-{{ $student->id }}"
                 class="card bg-base-100"
             >
-                <a href="{{route('coordinator.enrollment.show', ['enrollment' => $student->enrollment])}}">
+                <a href="{{route('guardian.students.show', ['student' => $student->user])}}">
                     <div
                         class="
                             card-body
@@ -258,7 +258,7 @@ new class extends Component
     
                                 <p class="text-sm sm:text-base text-base-content/60">
     
-                                    {{ $student->class ?? 'Turma não definida' }}
+                                    {{ $student->classroom ?? 'Turma não definida' }}
     
                                     @if (!empty($student->shift))
                                         • {{ $student->shift }}

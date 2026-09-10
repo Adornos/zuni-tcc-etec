@@ -105,6 +105,10 @@ class CoordinatorController extends Controller
 
         $studentInfo = StudentSheet::where('id', $student)->firstOrFail();
 
+        $studentInfo->load('enrollment');
+
+        dd($studentInfo->enrollment);
+
         return view('coordinator.student.show', ['studentSheet' => $studentInfo]);
             
     }
