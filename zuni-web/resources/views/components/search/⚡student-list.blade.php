@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\StudentSheet;
 use App\Models\User;
 use App\Models\Classroom;
@@ -19,7 +20,7 @@ new class extends Component
      */
     public function canSearchAllStudents(): bool
     {
-        return in_array(auth()->user()->role, [
+        return in_array(Auth::user()->role, [
             UserRole::COORDINATOR,
             UserRole::DIRECTOR,
         ]);
@@ -35,7 +36,7 @@ new class extends Component
     public function students()
     {
         $query = StudentSheet::query()
-            ->with('user');
+            ->with(['user', 'classroom']);
 
         /*
          * COORDINATOR e DIRECTOR
@@ -93,6 +94,7 @@ new class extends Component
                     );
                 }
             );
+            $query;
 
         } else {
 
@@ -102,16 +104,18 @@ new class extends Component
              */
             $query->where(
                 'guardian_id',
-                auth()->id()
-            );
+                Auth::id()
+            )->orderByDesc('id');
         }
 
-        return $query->get();
+        return $query->paginate(32);
     }
 };
 ?>
 
 <div>
+
+    
 
     {{-- FILTROS --}}
     @if ($this->canSearchAllStudents())
@@ -218,22 +222,22 @@ new class extends Component
 
     @if (auth()->user()->isGuardian())
 
-    <div class="flex justify-end mb-6">
+        <div class="flex justify-end mb-6">
 
-        <a
-            href="{{ route('guardian.student.register') }}"
-            class="btn bg-Csecondary text-white"
-        >
-            + Adicionar criança
-        </a>
+            <a
+                href="{{ route('guardian.student.register') }}"
+                class="btn bg-Csecondary text-white"
+            >
+                + Adicionar criança
+            </a>
 
-    </div>
+        </div>
 
     @endif
 
 
 
-    {{-- RESULTADOS --}}
+    {{-- RESULTADOS RESPONSÁVEL --}}
     <div class="flex flex-col gap-4">
 
     @if (auth()->user()->isGuardian())
@@ -397,46 +401,47 @@ new class extends Component
 
     @else 
 
-    {{-- RESULTADOS --}} 
-    <div
-        class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 "> 
-        @forelse ($this->students as $student) 
-            <div 
-            wire:key="student-{{ $student->id }}"
-            class=" card bg-base-100 border border-base-200 shadow-sm transition-shadow hover:shadow-md h-fit "
-            >
-                <div class="card-body p-4 sm:p-5 md:p-6">
-                    <h2 class="card-title text-base sm:text-lg"> {{ $student->user->name }} </h2>
-                    <p class="text-xs sm:text-sm text-base-content/60"> Student #{{ $student->student_id }} </p>
-                    <div class="divider my-2"></div>
-                    <div class="flex justify-between gap-3">
-                        <span class="text-sm text-base-content/60"> Student ID </span>
-                        <span class="font-medium"> {{ $student->student_id }} </span> 
+        {{-- RESULTADOS --}} 
+        <div
+            class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 "> 
+            @forelse ($this->students as $student) 
+                <div 
+                wire:key="student-{{ $student->id }}"
+                class=" card bg-base-100 border border-base-200 shadow-sm transition-shadow hover:shadow-md h-fit "
+                >
+                    <div class="card-body p-4 sm:p-5 md:p-6">
+                        <h2 class="card-title text-base sm:text-lg"> {{ $student->user->name }} </h2>
+                        <p class="text-xs sm:text-sm text-base-content/60"> Student #{{ $student->student_id }} </p>
+                        <div class="divider my-2"></div>
+                        <div class="flex justify-between gap-3">
+                            <span class="text-sm text-base-content/60"> Student ID </span>
+                            <span class="font-medium"> {{ $student->student_id }} </span> 
+                        </div>
+                        <div class="flex justify-between gap-3">
+                            <span class="text-sm text-base-content/60"> Status </span>
+                            <span class="font-medium"> {{ $student->user->status->value }} </span>
+                        </div>
+                        <div class="card-actions justify-end mt-4"> 
+                            <a
+                            @switch(auth()->user()->role->value)
+                                @case('teacher')    href="{{ route('teacher.student.show', $student->user) }}"     @break 
+                                @case('coordinator')    href="{{ route('coordinator.student.show', $student->user) }}"     @break 
+                            @endswitch
+                            class=" btn btn-sm sm:btn-md text-white bg-Cprimary w-full sm:w-auto "
+                            > 
+                                Mais informações 
+                                <span aria-hidden="true"> → </span> 
+                            </a> 
+                        </div>
                     </div>
-                    <div class="flex justify-between gap-3">
-                        <span class="text-sm text-base-content/60"> Status </span>
-                        <span class="font-medium"> {{ $student->user->status->value }} </span>
-                    </div>
-                    <div class="card-actions justify-end mt-4"> 
-                        <a
-                         @switch(auth()->user()->role->value)
-                            @case('teacher')    href="{{ route('teacher.student.show', $student->user) }}"     @break 
-                            @case('coordinator')    href="{{ route('coordinator.student.show', $student->user) }}"     @break 
-                        @endswitch
-                        class=" btn btn-sm sm:btn-md text-white bg-Cprimary w-full sm:w-auto "
-                        > 
-                            Mais informações 
-                            <span aria-hidden="true"> → </span> 
-                        </a> 
-                    </div>
-                </div>
+                </div> 
+            @empty 
+            <div class="col-span-full text-center py-10">
+                <p class="text-base-content/60"> Nenhum aluno encontrado. </p>
             </div> 
-        @empty 
-        <div class="col-span-full text-center py-10">
-            <p class="text-base-content/60"> Nenhum aluno encontrado. </p>
-        </div> 
-        @endforelse 
-    </div>
+            @endforelse 
+        </div>
+        {{ $this->students->links() }}
     
     @endif
     </div>

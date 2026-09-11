@@ -24,9 +24,7 @@ class StudentController extends Controller
         /** @var User $user */
         $user = Auth::user();
 
-        $students = $user->students()->latest()->get();
-
-        return view('pages.student.index', compact('students'));
+        return view('pages.student.index');
     }
     
     /**
@@ -40,6 +38,7 @@ class StudentController extends Controller
         $student->load([
             'studentSheet.guardian',
             'studentSheet.classroom',
+            'studentSheet.enrollment'
         ]);
 
         return view('pages.student.show', ['student' => $student]);
@@ -103,8 +102,8 @@ class StudentController extends Controller
             
 
         return redirect()
-            ->route('guardian.registered')
-            ->with('success', 'Student created successfully.');
+            ->route('guardian.student.index')
+            ->with('success', 'Aluno cadastrado com sucesso!');
     }
 
     /**

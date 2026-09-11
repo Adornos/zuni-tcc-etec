@@ -27,3 +27,7 @@
 
     --font-Sans: 'Poppins';
 }
+
+[x-cloak] {
+    display: none !important;
+}

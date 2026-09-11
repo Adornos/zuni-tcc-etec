@@ -25,13 +25,15 @@ Route::middleware(['auth', 'role:guardian'])
     Route::get('/', [GuardianController::class, 'index'])->name('index');
     Route::get('/profile', [GuardianController::class, 'profile'])->name('profile');
     Route::put('/profile', [GuardianController::class, 'profileSave'])->name('profile.save');
-
-    Route::get('/student', [GuardianController::class, 'registered'])->name('student.index');
-    Route::get('/student/register', [GuardianController::class, 'registerStudentForm'])->name('student.register');
-    Route::post('/student/register', [GuardianController::class, 'registerStudent'])->name('student.store');
-
+    
     Route::get('/forum', [GuardianController::class, 'forum'])->name('forum');
     Route::get('/chat', [GuardianController::class, 'chat'])->name('chat');
+
+    // Cadastro de aluno
+    Route::get('/student', [StudentController::class, 'index'])->name('student.index');
+    Route::get('/student/register', [StudentController::class, 'create'])->name('student.register');
+    Route::post('/student/register', [StudentController::class, 'store'])->name('student.store');
+
 
     // Perfil do aluno (acesso mediado pelo responsável)
     Route::get('/student/{student}', [StudentController::class, 'show'])->name('student.show');
@@ -49,8 +51,9 @@ Route::middleware(['auth', 'role:teacher'])
 
     // Rotas dos Responsáveis
     Route::get('', [TeacherController::class, 'index'])->name('index');
-    Route::get('/profile', [TeacherController::class, 'profile'])->name('profile');
-    Route::put('/profile', [TeacherController::class, 'profileSave'])->name('profile.save');
+    Route::get('/profile', [TeacherController::class, 'show'])->name('profile');
+    Route::get('/profile/edit', [TeacherController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [TeacherController::class, 'update'])->name('profile.update');
 
     Route::get('/schedule', [TeacherController::class, 'schedule'])->name('schedule');
 

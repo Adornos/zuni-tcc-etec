@@ -238,4 +238,4 @@
         </div>
     
     </form>
-<x-dynamic-component :component="'panel.' . auth()->user()->role->value">
+</x-dynamic-component>

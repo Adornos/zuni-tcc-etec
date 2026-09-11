@@ -18,8 +18,7 @@ return [
     'defaults' => [
         'guard' => env('AUTH_GUARD', 'web'),
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
-    ],
-
+        ],
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -113,5 +112,11 @@ return [
     */
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
+
+    /*
+    | Make Password validation with parameter like: more than 8 caracters, one Uppercase letter...
+     */
+    'password_strict_validation' => env('PASSWORD_STRICT_VALIDATION', true),
+
 
 ];

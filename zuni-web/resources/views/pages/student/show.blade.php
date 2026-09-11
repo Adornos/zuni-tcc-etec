@@ -1,4 +1,4 @@
-<x-dynamic-component :component="'panel.' . auth()->user()->role->value" >
+<x-dynamic-component :component="'panel.' . auth()->user()->role->value">
 
 
     @php
