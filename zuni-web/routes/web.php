@@ -9,6 +9,7 @@ use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\GuardianController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ZuniController;
 use Illuminate\Support\Facades\Route;
 use App\Enums\UserRole;
@@ -49,23 +50,33 @@ Route::middleware(['auth', 'role:teacher'])
     ->name('teacher.')
     ->group(function () {
 
-    // Rotas dos Responsáveis
+    // Rotas dos Professores
     Route::get('', [TeacherController::class, 'index'])->name('index');
     Route::get('/profile', [TeacherController::class, 'show'])->name('profile');
     Route::get('/profile/edit', [TeacherController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [TeacherController::class, 'update'])->name('profile.update');
-
     Route::get('/schedule', [TeacherController::class, 'schedule'])->name('schedule');
-
     Route::get('/forum', [TeacherController::class, 'forum'])->name('forum');
     Route::get('/chat', [TeacherController::class, 'chat'])->name('chat');
 
-    // Relatórios internos (feitos para os docentes)
-    Route::get('/reports', [TeacherController::class, 'reports'])->name('reports.index');
-    Route::get('/reports/{report}', [TeacherController::class, 'showReport'])->name('reports.show');
+    // Gerenciamento e Visualização de salas
+    Route::get('/classrooms', [ClassroomController::class, 'index'])->name('classroom.index');
+    Route::get('/classroom/show/{classroom}', [ClassroomController::class, 'show'])->name('classroom.show');
+    Route::put('/classroom/show/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
+    Route::get('/classroom/show/{classroom}/students', [ClassroomController::class, 'students'])->name('classroom.students');
 
-    // Route::put('/guardian', [TeacherController::class, 'update']);
-    // Route::delete('/guardian', [TeacherController::class, 'destroy']);
+    // Avaliação e Visualização de alunos
+    Route::get('/students', [StudentController::class, 'index'])->name('student.index');
+    Route::get('/students/{student}', [StudentController::class, 'show'])->name('student.show');
+
+    // Relatórios internos de salas e alunos
+    Route::get('/reports', [ReportController::class, 'index'])->name('report.index');
+    Route::get('/reports/create', [ReportController::class, 'create'])->name('report.create');
+    Route::post('/reports', [ReportController::class, 'store'])->name('report.store');
+    Route::get('/reports/{report}', [ReportController::class, 'show'])->name('report.show');
+    Route::get('/reports/{report}/edit', [ReportController::class, 'edit'])->name('report.edit');
+    Route::put('/reports/{report}', [ReportController::class, 'update'])->name('report.update');
+    Route::delete('/reports/{report}', [ReportController::class, 'destroy'])->name('report.destroy');
 
 });
 
@@ -99,7 +110,6 @@ Route::middleware(['auth', 'role:coordinator'])
     // Rotas da Coordenação
     Route::get('/', [CoordinatorController::class, 'index'])->name('index');
     Route::get('/profile', [CoordinatorController::class, 'profile'])->name('profile');
-
     Route::get('/forum', [CoordinatorController::class, 'forum'])->name('forum');
     Route::get('/chat', [CoordinatorController::class, 'chat'])->name('chat');
 
@@ -135,12 +145,13 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/schedules/teachers/{teacher}', [CoordinatorController::class, 'teacherSchedule'])->name('schedules.teacher');
 
     // Relatórios (internos: para docentes | externos: para responsáveis)
-    Route::get('/reports', [CoordinatorController::class, 'reports'])->name('report.index');
-    Route::get('/reports/create', [CoordinatorController::class, 'createReport'])->name('report.create');
-    Route::post('/reports', [CoordinatorController::class, 'storeReport'])->name('report.store');
-    Route::get('/reports/{report}/edit', [CoordinatorController::class, 'editReport'])->name('report.edit');
-    Route::put('/reports/{report}', [CoordinatorController::class, 'updateReport'])->name('report.update');
-    Route::delete('/reports/{report}', [CoordinatorController::class, 'destroyReport'])->name('report.destroy');
+    Route::get('/reports', [ReportController::class, 'index'])->name('report.index');
+    Route::get('/reports/create', [ReportController::class, 'create'])->name('report.create');
+    Route::post('/reports', [ReportController::class, 'store'])->name('report.store');
+    Route::get('/reports/{report}', [ReportController::class, 'show'])->name('report.show');
+    Route::get('/reports/{report}/edit', [ReportController::class, 'edit'])->name('report.edit');
+    Route::put('/reports/{report}', [ReportController::class, 'update'])->name('report.update');
+    Route::delete('/reports/{report}', [ReportController::class, 'destroy'])->name('report.destroy');
 
 });
 

@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('teacher.panel');
@@ -62,14 +59,12 @@ class TeacherController extends Controller
     {
         return view('pages.forum.index');
     }
+
     public function chat()
     {
         return view('pages.chat.index');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(User $teacher)
     {
         //

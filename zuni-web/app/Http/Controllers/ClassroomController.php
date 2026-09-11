@@ -14,25 +14,16 @@ use Illuminate\Validation\Rule;
 
 class ClassroomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('pages.classroom.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('pages.classroom.register');
     }
 
-    /**
-     * Criar nova sala
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -54,18 +45,11 @@ class ClassroomController extends Controller
             ->with('success', 'Turma criada com sucesso.');
     }
 
-
-    /**
-     * Visualização de informações da sala
-     */
     public function show(Classroom $classroom)
     {
         return view('pages.classroom.show', ['classroom' => $classroom]);
     }
 
-    /**
-     * Visualização dos Professores de uma sala
-     */
     public function teachers(Classroom $classroom)
     {
 
@@ -77,10 +61,6 @@ class ClassroomController extends Controller
         ]);
     }
 
-
-    /**
-     * Assimilação de professores às salas
-     */
     public function assignTeachers(Request $request, Classroom $classroom) 
     {
         $validated = $request->validate([
@@ -97,9 +77,6 @@ class ClassroomController extends Controller
             ->with('success', 'Professores atribuídos com sucesso.');
     }
 
-    /**
-     * Visualização dos Alunos de uma sala
-     */
     public function students(Classroom $classroom)
     {
         $classroom->load([
@@ -118,10 +95,6 @@ class ClassroomController extends Controller
         ]);
     }
 
-
-    /**
-     * Assimilação de alunos às salas
-     */
     public function assignStudents(Request $request, Classroom $classroom)
     {
         $validated = $request->validate([
@@ -169,25 +142,16 @@ class ClassroomController extends Controller
             ->with('success', 'Alunos da turma atualizados com sucesso.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Classroom $classroom)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Classroom $classroom)
     {
-        //
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Classroom $classroom)
     {
         //

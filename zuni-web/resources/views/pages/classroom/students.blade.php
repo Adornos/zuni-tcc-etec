@@ -1,6 +1,10 @@
-<x-panel.coordinator>
+<x-dynamic-component :component="'panel.' . auth()->user()->role->value">
 
-    <div class="col-span-4">
+    @php
+        $canAddStudents = Auth::user()->isCoordinator();
+    @endphp
+
+    <div class="col-span-4 row-span-4">
         <div class="card bg-base-100 shadow-xl">
             <div class="card-body">
 
@@ -40,7 +44,7 @@
                                     {{ $classroom->students->count() }}
                                 </span>
                             </div>
-
+                        @if($canAddStudents)
                             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
 
                                 @forelse ($classroom->students as $studentSheet)
@@ -49,9 +53,9 @@
                                         class="flex items-center gap-3 p-4 rounded-box
                                                border border-base-300
                                                hover:bg-base-200
+                                               hover:shadow-lg
                                                cursor-pointer transition"
                                     >
-
                                         <input
                                             type="checkbox"
                                             name="students[]"
@@ -59,7 +63,6 @@
                                             class="checkbox checkbox-primary"
                                             checked
                                         >
-
                                         <div class="flex-1 min-w-0">
 
                                             <p class="font-semibold truncate">
@@ -88,8 +91,7 @@
                                 @endforelse
 
                             </div>
-                        </div>
-
+                        </div>                      
 
                         {{-- ALUNOS SEM TURMA --}}
                         <div>
@@ -164,7 +166,42 @@
                             </button>
 
                         </div>
+                        @else
+                            @forelse ($classroom->students as $studentSheet)
+                                <a
+                                    href="{{ route('teacher.student.show', ['student' => $studentSheet->user->id]) }}"
+                                    class="flex items-center gap-3 p-4 rounded-box
+                                        border border-base-300
+                                        hover:bg-base-200
+                                        hover:shadow-lg
+                                        cursor-pointer transition"
+                                >
+                                    <div class="flex-1 min-w-0">
 
+                                        <p class="font-semibold truncate">
+                                            {{ $studentSheet->user->name }}
+                                        </p>
+
+                                        <p class="text-sm text-base-content/60">
+                                            Matrícula:
+                                            {{ $studentSheet->registration_number ?? '—' }}
+                                        </p>
+
+                                    </div>
+                                </a>
+
+                            @empty
+
+                                <div class="col-span-full">
+                                    <div class="alert">
+                                        <span>
+                                            Nenhum aluno está associado a esta turma.
+                                        </span>
+                                    </div>
+                                </div>
+
+                            @endforelse
+                        @endif
                     </div>
                 </form>
 
@@ -172,4 +209,4 @@
         </div>
     </div>
 
-</x-panel.coordinator>
+</x-dynamic-component>

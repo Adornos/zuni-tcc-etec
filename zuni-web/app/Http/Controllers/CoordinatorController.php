@@ -27,6 +27,7 @@ class CoordinatorController extends Controller
         return  view('coordinator.panel');
         
     }
+    
     public function profile()
     {
         $user = Auth::user();
@@ -101,10 +102,8 @@ class CoordinatorController extends Controller
 
     public function approveEnrollment(Enrollment $enrollment)
     {
-
-
         $enrollment->update([
-            'reviewed_by' => auth()->id(),
+            'reviewed_by' => Auth::id(),
             'reviewed_at' => now(),
         ]);
 
@@ -120,10 +119,10 @@ class CoordinatorController extends Controller
 
     public function rejectEnrollment(Enrollment $enrollment)
     {
-
+        
 
         $enrollment->update([
-            'reviewed_by' => auth()->id(),
+            'reviewed_by' => Auth::id(),
             'reviewed_at' => now(),
         ]);
 
@@ -134,34 +133,6 @@ class CoordinatorController extends Controller
 
         return redirect()->route('coordinator.student.show', [
             'student' => $user,
-        ]);
-    }
-
-    public function teachers(){
-        
-        return view('pages.teacher.index');
-        
-    }
-    public function formTeacher(){
-        
-        return view('pages.teacher.register');
-        
-    }
-    public function registerTeacher(Request $request)
-    {
-        return app(EmployeeController::class)->store($request);
-    }
-    public function showTeacher($teacher){
-
-        $teacherInfo = TeacherSheet::where('id', $teacher)->firstOrFail();
-
-
-        return view('pages.teacher.show', ['teacherInfo' => $teacherInfo]);
-
-    }
-    public function editTeacher(TeacherSheet $teacher){
-        return redirect()->route('coordinator.teacher.show', [
-            'teacherId' => $teacher->id,
         ]);
     }
 
@@ -212,91 +183,6 @@ class CoordinatorController extends Controller
         
         return view('pages.schedule.teacher');
 
-    }
-
-    // TRATAMENTO EDE RELATÓRIOS
-    
-    public function reports()
-    {
-        $reports = Report::latest()->paginate(20);
-
-        return view('pages.report.index');
-
-    }
-
-    public function searchItems($index) : JsonResponse
-    {
-        return match ($index) {
-
-            1 => response()->json([
-                'type' => 'general',
-                'data' => Report::query()->get(),
-            ]),
-
-            2 => response()->json([
-                'type' => 'classroom',
-                'data' => [],
-                ]),
-                
-            3 => response()->json([
-                'type' => 'student',
-                'data' => StudentSheet::query()->get('id', 'student_id', 'name', 'class'),
-            ]),
-
-            default => response()->json([
-                'message' => 'Referência inválida.'
-            ], 422),
-            
-        };
-    }
-
-
-    public function createReport()
-    {
-        return view('pages.report.create');
-    }
-
-    public function storeReport(Request $request)
-    {
-        $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'content' => ['required', 'string'],
-            'type' => ['required', 'in:internal,external'],
-            'student_id' => ['nullable', 'exists:students,id'],
-        ]);
-
-        $validated['author_id'] = $request->user()->id;
-
-        Report::create($validated);
-
-        return redirect()->route('coordinator.reports.index');
-    }
-
-    public function editReport(Report $report)
-    {
-        return view('pages.report.edit');
-
-    }
-
-    public function updateReport(Request $request, Report $report)
-    {
-        $validated = $request->validate([
-            'title' => ['sometimes', 'string', 'max:255'],
-            'content' => ['sometimes', 'string'],
-            'type' => ['sometimes', 'in:internal,external'],
-            'student_id' => ['nullable', 'exists:students,id'],
-        ]);
-
-        $report->update($validated);
-
-        return redirect()->route('coordinator.reports.index');
-    }
-
-    public function destroyReport(Report $report)
-    {
-        $report->delete();
-
-        return redirect()->route('coordinator.reports.index');
     }
 
 }
