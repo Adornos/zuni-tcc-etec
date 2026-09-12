@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Enums\UserRole;
+use Illuminate\Validation\Rule;
 
 class Register extends Controller
 {
@@ -43,14 +44,22 @@ class Register extends Controller
     }
 
     public function __invoke(Request $request)
-    {
-
+    {      
         // Validate the input
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'cpf' => 'required|string|min:11',
-            'password' => 'required|string|min:8|confirmed',
+            'phone' => 'required|string|min:14|unique:users',
+            'cpf' => 'required|string|min:11|unique:users',
+            'password' => [
+                'nullable',
+                'string',
+                Rule::when(
+                    config('auth.password_strict_validation'),
+                    ['min:8']
+                ),
+                'confirmed',
+            ],
         ]);
 
 
@@ -59,6 +68,7 @@ class Register extends Controller
             'name' => $validated['name'],
             'username' => self::generateUsername($validated['name']),
             'email' => $validated['email'],
+            'phone' => $validated['phone'],
             'password' => Hash::make($validated['password']),
             'cpf' => $validated['cpf'],
             'role' => UserRole::GUARDIAN,
