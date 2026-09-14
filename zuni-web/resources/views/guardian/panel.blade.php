@@ -19,7 +19,7 @@
             
         </div>
             <a 
-            href="{{ route('guardian.registered') }}#cadastro"
+            href="{{ route('guardian.student.index') }}"
             class="flex items-center text-[1vmax] pl-[0.6vmax] pr-[1.8vmax] py-[0.6vmax] rounded-full bg-Csecondary text-white font-medium hover:bg-Csecondary-dark transition">
                 <h1 class="text-[4vmax] leading-0 mr-[1vmax]">+</h1>
                 <p>Cadastrar <br> nova criança</p>

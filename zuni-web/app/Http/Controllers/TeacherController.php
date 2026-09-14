@@ -13,27 +13,39 @@ use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('teacher.panel');
     }
-    public function profile()
+
+    public function show(User $teacher)
+    {   
+
+        if(isset($teacher)){
+            $teacher = Auth::user();
+            abort_unless($teacher->role === UserRole::TEACHER, 403, 'Usuário não permitido');
+        }
+
+        return view('pages.teacher.show', ['teacherInfo' => $teacher]);    
+
+    }
+    
+    public function edit()
     {
         $user = Auth::user();
-        return view('teacher.profile', ['profile' => $user]);
+        return view('pages.teacher.edit', ['profile' => $user]);
     }
-    public function profileSave(Request $request)
+
+    public function update(Request $request)
     {
 
         $user = Auth::user();
         abort_unless($user->role === UserRole::TEACHER, 403, 'Acesso negado.');
 
         app(EmployeeController::class)->update($request, $user);
-        
-        return redirect()->back()->with('status', 'Perfil atualizado com sucesso!');
+
+
+        return redirect()->route('teacher.profile')->with('status', 'Perfil atualizado com sucesso!');
 
     }
 
@@ -45,41 +57,15 @@ class TeacherController extends Controller
 
     public function forum()
     {
-        return view('teacher.forum');
+        return view('pages.forum.index');
     }
+
     public function chat()
     {
-        return view('teacher.chat');
+        return view('pages.chat.index');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(TeacherSheet $teacher)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(TeacherSheet $teacher)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, TeacherSheet $teacher)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(TeacherSheet $teacher)
+    
+    public function destroy(User $teacher)
     {
         //
     }

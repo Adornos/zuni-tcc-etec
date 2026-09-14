@@ -33,7 +33,7 @@
         {{-- Cadastros --}}
         <li>
             <a
-                href="{{ route('guardian.registered') }}"
+                href="{{ route('guardian.student.index') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <x-svg.icon.enroll class="mr-[1vmax]" />

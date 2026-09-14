@@ -154,7 +154,7 @@
                                 } }}
                             ">
     
-                                <span class="mr-[.3vmax] w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
+                            <span class="mr-[.3vmax] w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
     
                                 {{ $teacherInfo->user->status->label() }}
     

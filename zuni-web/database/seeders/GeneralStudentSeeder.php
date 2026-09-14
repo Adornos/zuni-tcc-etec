@@ -57,7 +57,7 @@ class GeneralStudentSeeder extends Seeder
                     $classrooms->push(
                         Classroom::create([
                             'name' => '1º Ano ' . chr(64 + $i),
-                            'grade' => '1-ano',
+                            'grade' => '1-ANO',
                             'shift' => 'morning',
                             'capacity' => 25,
                             'status' => 'active',

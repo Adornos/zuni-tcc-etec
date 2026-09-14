@@ -115,8 +115,8 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 ## Dia 8 — Professor → Aluno
 
 - [ ] Visualização de horários
-- [ ] Visualização de sala
-- [ ] Visualização de alunos por sala
+- [x] Visualização de sala
+- [x] Visualização de alunos por sala
 
 ## Dia 9 — Proficiências
 

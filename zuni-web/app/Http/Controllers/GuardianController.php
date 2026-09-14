@@ -25,7 +25,7 @@ class GuardianController extends Controller
     }
     public function registered()
     {
-        return view('guardian.student.index');
+        return view('pages.student.index');
     }
     /**
      * Show the form for creating a new resource.
@@ -45,11 +45,11 @@ class GuardianController extends Controller
 
     public function forum()
     {
-        return view('guardian.forum');
+        return view('pages.forum.index');
     }
     public function chat()
     {
-        return view('guardian.chat');
+        return view('pages.chat.index');
     }
 
     /**
