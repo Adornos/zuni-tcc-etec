@@ -1,4 +1,4 @@
-<x-panel.coordinator>
+<x-dynamic-component :component="'panel.' . auth()->user()->role->value">
     <div class="card bg-base-200 h-fit shadow-xl p-6 col-span-4 row-span-4">
     
         <div class="grid grid-cols-1 gap-[1vmax]">
@@ -170,6 +170,13 @@
                                 </strong>
     
                             </span>
+
+                            <a 
+                                href="{{route('teacher.profile.edit')}}"
+                                class="btn btn-primary"
+                            >
+                                Editar
+                            </a>
     
                         </div>
     
@@ -773,4 +780,4 @@
         </div>
     
     </div>
-</x-panel.coordinator>
+</x-dynamic-component>

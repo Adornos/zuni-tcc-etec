@@ -1,187 +1,214 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Classroom;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use App\Enums\ClassroomGrade;
+use App\Enums\UserRole;
+
 
 new class extends Component
 {
+    // Visualização do coordenador
     public string $name = '';
     public string $grade = '';
     public string $status = '';
     public string $shift = '';
+    public bool $canSearchClass = false;
+    public string $routePrefix;
 
     public array $availableGrades;
 
     public function mount()
     {
         $this->availableGrades = ClassroomGrade::cases();
+
+        $this->canSearchClass = Auth::user()->isCoordinator();
+
+        $this->routePrefix = Auth::user()->role->value;
     }
+
+
 
     #[Computed]
     public function classrooms()
     {
-        return Classroom::query()
-        ->with([
+        $query = Classroom::query();
+
+        $query->with([
             'teachers',
+            'students',
             'latestPerformance',
-        ])
+            'performances',
+        ]);
 
-        ->when($this->name, function ($query) {
-            $query->where(
-                'name',
-                'like',
-                '%' . $this->name . '%'
-            );
-        })
+        if($this->canSearchClass){
 
-        ->when($this->grade, function ($query) {
-            $query->where(
-                'grade',
-                $this->grade
-            );
-        })
+            $query->when($this->name, function ($query) {
+                $query->where(
+                    'name',
+                    'like',
+                    '%' . $this->name . '%'
+                );
+            });
+    
+            $query->when($this->grade, function ($query) {
+                $query->where(
+                    'grade',
+                    $this->grade
+                );
+            });
+    
+            $query->when($this->status, function ($query) {
+                $query->where(
+                    'status',
+                    $this->status
+                );
+            });
+    
+            $query->when($this->shift, function ($query) {
+                $query->where(
+                    'shift',
+                    $this->shift
+                );
+            });
+        } else {
 
-        ->when($this->status, function ($query) {
-            $query->where(
-                'status',
-                $this->status
-            );
-        })
+            $query->whereHas('teachers', function ($query) {
+                $query->where('id', Auth::id());
+            });
 
-        ->when($this->shift, function ($query) {
-            $query->where(
-                'shift',
-                $this->shift
-            );
-        })
+        }
 
-        ->latest()
-        ->get();
+        return $query->paginate(32);
     }
 }
 ?>
 
 <div>
 
+
     {{-- FILTROS --}}
-    <div class="
-        card
-        bg-base-100
-        shadow-xl
-        p-4
-        sm:p-5
-        md:p-6
-        mb-6
-    ">
-
-        <h2 class="
-            card-title
-            mb-4
-            text-base
-            sm:text-lg
-            md:text-xl
-        ">
-            Filtros
-        </h2>
-
+    @if($this->canSearchClass)
         <div class="
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-4
-            gap-3
-            sm:gap-4
+            card
+            bg-base-100
+            shadow-xl
+            p-4
+            sm:p-5
+            md:p-6
+            mb-6
         ">
 
-            {{-- Nome --}}
-            <div class="form-control">
+            <h2 class="
+                card-title
+                mb-4
+                text-base
+                sm:text-lg
+                md:text-xl
+            ">
+                Filtros
+            </h2>
 
-                <label class="label">
-                    <span class="label-text">
-                        Turma
-                    </span>
-                </label>
+            <div class="
+                grid
+                grid-cols-1
+                sm:grid-cols-2
+                lg:grid-cols-4
+                gap-3
+                sm:gap-4
+            ">
 
-                <input
-                    type="text"
-                    wire:model.live.debounce.300ms="name"
-                    placeholder="Nome da turma"
-                    class="input input-bordered w-full"
-                >
+                {{-- Nome --}}
+                <div class="form-control">
 
-            </div>
+                    <label class="label">
+                        <span class="label-text">
+                            Turma
+                        </span>
+                    </label>
 
+                    <input
+                        type="text"
+                        wire:model.live.debounce.300ms="name"
+                        placeholder="Nome da turma"
+                        class="input input-bordered w-full"
+                    >
 
-            {{-- Série --}}
-            <div class="form-control">
-
-                <label class="label">
-                    <span class="label-text">
-                        Série / Ano
-                    </span>
-                </label>
-
-                <select
-                    wire:model.live="grade"
-                    class="select select-bordered w-full"
-                >
-                    <option value="">Todos</option>
-                    @foreach(ClassroomGrade::cases() as $grade)
-                        <option value="{{$grade}}">{{$grade->label()}}</option>
-                    @endforeach
-                </select>
-
-            </div>
+                </div>
 
 
-            {{-- Período --}}
-            <div class="form-control">
+                {{-- Série --}}
+                <div class="form-control">
 
-                <label class="label">
-                    <span class="label-text">
-                        Período
-                    </span>
-                </label>
+                    <label class="label">
+                        <span class="label-text">
+                            Série / Ano
+                        </span>
+                    </label>
 
-                <select
-                    wire:model.live="shift"
-                    class="select select-bordered w-full"
-                >
-                    <option value="">Todos</option>
-                    <option value="morning">Manhã</option>
-                    <option value="afternoon">Tarde</option>
-                    <option value="full_time">Integral</option>
-                    <option value="evening">Noite</option>
-                </select>
+                    <select
+                        wire:model.live="grade"
+                        class="select select-bordered w-full"
+                    >
+                        <option value="">Todos</option>
+                        @foreach(ClassroomGrade::cases() as $grade)
+                            <option value="{{$grade}}">{{$grade->label()}}</option>
+                        @endforeach
+                    </select>
 
-            </div>
+                </div>
 
 
-            {{-- Status --}}
-            <div class="form-control">
+                {{-- Período --}}
+                <div class="form-control">
 
-                <label class="label">
-                    <span class="label-text">
-                        Status
-                    </span>
-                </label>
+                    <label class="label">
+                        <span class="label-text">
+                            Período
+                        </span>
+                    </label>
 
-                <select
-                    wire:model.live="status"
-                    class="select select-bordered w-full"
-                >
-                    <option value="">Todos</option>
-                    <option value="active">Ativa</option>
-                    <option value="inactive">Inativa</option>
-                </select>
+                    <select
+                        wire:model.live="shift"
+                        class="select select-bordered w-full"
+                    >
+                        <option value="">Todos</option>
+                        <option value="morning">Manhã</option>
+                        <option value="afternoon">Tarde</option>
+                        <option value="full_time">Integral</option>
+                        <option value="evening">Noite</option>
+                    </select>
+
+                </div>
+
+
+                {{-- Status --}}
+                <div class="form-control">
+
+                    <label class="label">
+                        <span class="label-text">
+                            Status
+                        </span>
+                    </label>
+
+                    <select
+                        wire:model.live="status"
+                        class="select select-bordered w-full"
+                    >
+                        <option value="">Todos</option>
+                        <option value="active">Ativa</option>
+                        <option value="inactive">Inativa</option>
+                    </select>
+
+                </div>
 
             </div>
 
         </div>
-
-    </div>
+    @endif()
 
 
     {{-- RESULTADOS --}}
@@ -378,7 +405,7 @@ new class extends Component
 
                         <a
                             href="{{ route(
-                                'coordinator.classroom.show',
+                                $this->routePrefix . '.classroom.show',
                                 $classroom->id
                             ) }}"
                             class="
@@ -405,12 +432,36 @@ new class extends Component
             </div>
 
         @empty
+            @if($this->canSearchClass)
+                <div class="col-span-full text-center py-10">
 
+                    <p class="text-base-content/60 mb-8">
+                        Nenhuma turma encontrada.
+                    </p>
+
+                    <a
+                        href="{{ route('coordinator.classroom.create') }}"
+                        class="text-white bg-Csecondary rounded-full p-4"
+                    >
+                        CADASTRAR TURMA
+                    </a>
+
+                </div>
+            @else
+                <div class="col-span-full text-center py-10">
+
+                    <p class="text-base-content/60 mb-8">
+                        Nenhuma turma atribuída.
+                    </p>
+                </div>
+            @endif
+
+        @endforelse
+
+        @if($this->canSearchClass)
+        
+        {{-- CADASTRAR --}}
             <div class="col-span-full text-center py-10">
-
-                <p class="text-base-content/60 mb-8">
-                    Nenhuma turma encontrada.
-                </p>
 
                 <a
                     href="{{ route('coordinator.classroom.create') }}"
@@ -420,21 +471,7 @@ new class extends Component
                 </a>
 
             </div>
-
-        @endforelse
-
-
-        {{-- CADASTRAR --}}
-        <div class="col-span-full text-center py-10">
-
-            <a
-                href="{{ route('coordinator.classroom.create') }}"
-                class="text-white bg-Csecondary rounded-full p-4"
-            >
-                CADASTRAR TURMA
-            </a>
-
-        </div>
+        @endif
 
     </div>
 

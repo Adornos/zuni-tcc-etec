@@ -18,6 +18,41 @@
         <input id="sidebar-drawer" type="checkbox" class="drawer-toggle" />
         
         <div class="drawer-content flex flex-col min-h-screen">
+
+            {{-- Messages --}}
+            <span class="fixed left-1/2 -translate-x-1/2 top-[2vmin] z-10 w-[50%]">
+                @foreach (['success', 'error', 'warning', 'info'] as $type)
+                    @session($type)
+                        <div
+                            x-data="{ show: false }"
+                            x-cloak
+                            x-show="show"
+                            x-transition:enter="transition ease-out duration-500"
+                            x-transition:enter-start="opacity-0 -translate-y-20 scale-95"
+                            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave="transition ease-in duration-500"
+                            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave-end="opacity-0 -translate-y-20 scale-95"
+                            x-init="
+                                setTimeout(() => show = true, 100);
+                                setTimeout(() => show = false, 5100);
+                            "
+                            class="alert alert-{{ $type }} mb-4"
+                        >
+                            <span>{{ $value }}</span>
+                            <button
+                                type="button"
+                                @click="show = false"
+                                class="btn btn-white btn-sm btn-circle ml-auto"
+                                aria-label="Fechar"
+                            >
+                                ✕
+                            </button>
+                        </div>
+                    @endsession
+                @endforeach
+            </span>
+
             {{-- Header --}}
             <header class="bg-base-100 border-b px-4 py-3 sm:px-6 flex items-center justify-between gap-4">
 
@@ -233,7 +268,9 @@
             </header>
 
             {{-- Main Content --}}
-            <main class="flex-1 bg-base-200 p-4 md:p-6 overflow-auto">
+
+
+            <main class="flex-1 bg-base-200 p-4 md:p-6 overflow-auto">    
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-4 gap-4">
                     @isset($slot)
                         {!! $slot !!}

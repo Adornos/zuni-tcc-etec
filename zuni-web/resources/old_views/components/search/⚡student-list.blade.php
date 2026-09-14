@@ -7,6 +7,7 @@ use App\Enums\UserRole;
 use GuzzleHttp\Psr7\Query;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 new class extends Component
 {
@@ -19,7 +20,7 @@ new class extends Component
      */
     public function canSearchAllStudents(): bool
     {
-        return in_array(auth()->user()->role, [
+        return in_array(Auth::user()->role, [
             UserRole::COORDINATOR,
             UserRole::DIRECTOR,
         ]);
@@ -35,7 +36,10 @@ new class extends Component
     public function students()
     {
         $query = StudentSheet::query()
-            ->with('user');
+            ->with([
+                'user',
+                'classroom:id,name,shift',
+            ]);
 
         /*
          * COORDINATOR e DIRECTOR
@@ -233,7 +237,7 @@ new class extends Component
 
 
 
-    {{-- RESULTADOS --}}
+    {{-- RESULTADOS - RESPONSÁVEL--}}
     <div class="flex flex-col gap-4">
 
     @if (auth()->user()->isGuardian())

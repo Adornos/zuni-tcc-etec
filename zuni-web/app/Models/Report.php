@@ -22,7 +22,7 @@ class Report extends Model
     
     public function student() : belongsTo
     {
-        return $this->belongsTo(StudentSheets::class, 'student_id');
+        return $this->belongsTo(StudentSheet::class, 'student_id');
     }
 
     public function author() : belongsTo

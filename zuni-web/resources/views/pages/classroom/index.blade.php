@@ -1,7 +1,9 @@
-<x-panel.coordinator>
+<x-dynamic-component :component="'panel.' . auth()->user()->role->value">
+
     <div class="row-span-4 col-span-4">
-    
+
         <livewire:search.classroom-list />
     
     </div>
-</x-panel.coordinator>
+
+</x-dynamic-component>

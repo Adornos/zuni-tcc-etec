@@ -1,4 +1,10 @@
-<x-panel.coordinator>
+@php
+    $routePrefix = Auth::user()->role->value;
+    $isCoordinator = Auth::user()->isCoordinator();
+@endphp
+
+
+<x-dynamic-component :component="'panel.' . auth()->user()->role->value">
 
 <form
     action="{{ route('coordinator.classroom.update', $classroom) }}"
@@ -184,13 +190,14 @@
                     Professores
                 </h2>
 
-                <a
-                    href="{{ route('coordinator.classroom.teachers', $classroom) }}"
-                    class="btn btn-sm btn-outline"
-                >
-                    Gerenciar
-                </a>
-
+                @if($isCoordinator)
+                    <a
+                        href="{{ route('coordinator.classroom.teachers', $classroom) }}"
+                        class="btn btn-sm btn-outline"
+                    >
+                        Gerenciar
+                    </a>
+                @endif
             </div>
 
 
@@ -249,7 +256,7 @@
 
                 
                     <a
-                    href="{{ route('coordinator.classroom.students', $classroom) }}"
+                    href="{{ route($routePrefix . '.classroom.students', $classroom) }}"
                     class="btn btn-sm btn-outline "
                     >
                     Gerenciar
@@ -281,7 +288,7 @@
                 </h2>
 
                 <a
-                    href="{{ route('coordinator.report.create', $classroom) }}"
+                    href="{{ route( $routePrefix . '.report.create', $classroom) }}"
                     class="btn btn-sm btn-outline"
                 >
                     Criar relatório (WIP)
@@ -356,18 +363,20 @@
     {{-- ========================================================= --}}
     {{-- BOTÃO SALVAR --}}
     {{-- ========================================================= --}}
+    @if($isCoordinator)
+    
+        <div class="flex justify-end">
 
-    <div class="flex justify-end">
+            <button
+                type="submit"
+                class="btn text-Cwhite btn-sm bg-Csecondary"
+            >
+                Salvar alterações (WIP)
+            </button>
 
-        <button
-            type="submit"
-            class="btn text-Cwhite btn-sm bg-Csecondary"
-        >
-            Salvar alterações (WIP)
-        </button>
+        </div>
 
-    </div>
-
+    @endif
 </form>
 
-</x-panel.coordinator>
+</x-dynamic-component>

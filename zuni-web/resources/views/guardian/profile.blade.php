@@ -1,6 +1,6 @@
 <x-panel.guardian>
     
-    <form action="{{ route('teacher.profile.save') }}" method="post" class="card bg-base-100 shadow-md col-span-4 row-span-4">
+    <form action="{{ route('guardian.profile.save') }}" method="post" class="card bg-base-100 shadow-md col-span-4 row-span-4">
         @method('put')
         @csrf
 

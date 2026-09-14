@@ -3,6 +3,7 @@
 use App\Enums\UserRole;
 use App\Models\User;
 use Livewire\Attributes\Computed;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 new class extends Component
@@ -363,9 +364,6 @@ new class extends Component
             </div>
 
         @empty
-
-
-
         @endforelse
 
     </div>

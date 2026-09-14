@@ -33,7 +33,18 @@
             </a>
         </li>
 
-        {{-- Cadastros --}}
+    {{-- Salas --}}
+        <li>
+            <a
+                href="{{ route('teacher.classroom.index') }}"
+                class="hover:bg-white hover:text-Cprimary"
+            >
+                <x-svg.icon.enroll/>
+                Salas
+            </a>
+        </li>
+
+    {{-- Cronograma --}}
         <li>
             <a
                 href="{{ route('teacher.schedule') }}"
@@ -47,7 +58,7 @@
             </a>
         </li>
 
-        {{-- Mural --}}
+    {{-- Mural --}}
         <li>
             <a
                 href="{{ route('teacher.forum') }}"
@@ -58,7 +69,7 @@
             </a>
         </li>
 
-        {{-- Chat --}}
+    {{-- Chat --}}
         <li>
             <a
                 href="{{ route('teacher.chat') }}"

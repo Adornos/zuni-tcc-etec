@@ -1,4 +1,5 @@
-<x-panel.coordinator>
+<x-dynamic-component :component="'panel.' . auth()->user()->role->value">
+
     <form action="{{ route('coordinator.teacher.store') }}" method="POST" class="space-y-8 col-span-4">
         @csrf
     
@@ -488,4 +489,4 @@
         </div>
     
     </form>
-</x-panel.coordinator>    
+</x-dynamic-component>
