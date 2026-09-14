@@ -1,4 +1,4 @@
-<x-dynamic-component :component="'panel.' . auth()->user()->role->value">
+<x-chat.layout>
 
     <div class="col-span-4 row-span-4">
 
@@ -326,4 +326,4 @@
 
     </div>
 
-</x-dynamic-component>
+</x-chat.layout>

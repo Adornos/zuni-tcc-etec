@@ -13,13 +13,13 @@
             </div>
     
             <span class="text-5xl">
-                👥
+                <x-svg.icon.people/>
             </span>
         </div>
     </div>
     
     {{-- Cantina --}}
-    <div class="card bg-base-100 shadow-md">
+    <div class="card bg-base-100 shadow-md text-center">
         <div class="card-body">
             <h2 class="text-3xl font-bold">
                 R$155
@@ -96,7 +96,8 @@
     
     {{-- Reunião --}}
     <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
+        <div class="card-body flex-row items-center justify-between">
+            <div class="">
             <h2 class="text-3xl font-bold">
                 13/03
             </h2>
@@ -104,11 +105,15 @@
             <p class="text-base-content/60">
                 Próxima reunião
             </p>
+            </div>
+            <span class="text-5xl text-Cprimary">
+                <x-svg.icon.blackboard/>
+            </span>
         </div>
     </div>
     
     {{-- Mensagens --}}
-    <div class="card bg-base-100 shadow-md">
+    <div class="card bg-base-100 shadow-md text-center">
         <div class="card-body">
             <h2 class="text-3xl font-bold">
                 10

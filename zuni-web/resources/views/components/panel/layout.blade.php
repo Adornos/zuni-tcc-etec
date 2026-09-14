@@ -54,7 +54,7 @@
             </span>
 
             {{-- Header --}}
-            <header class="bg-base-100 border-b px-4 py-3 sm:px-6 flex items-center justify-between gap-4">
+            <header class="bg-base-100 border-b px-4 py-3 pt-12 sm:px-6 sm:p-12 flex items-center justify-between gap-4">
 
                 {{-- Menu Mobile --}}
                 <label for="sidebar-drawer" class="btn btn-ghost btn-circle lg:hidden shrink-0">
@@ -285,7 +285,9 @@
         <div class="drawer-side">
             <label for="sidebar-drawer" class="drawer-overlay"></label>
             
-            <aside class="bg-Csecondary text-primary-content flex flex-col min-h-screen">
+            <aside class="bg-Csecondary text-primary-content flex flex-col min-h-screen sm:pt-5">
+
+                {{-- Botão de fechar --}}
 
                 {{-- Logo --}}
                 <div class="flex justify-center mt-6 md:mt-8 mb-6 md:mb-8 w-full h-8">
@@ -295,7 +297,7 @@
                 </div>
 
                 {{-- Navegação --}}
-                <div class="flex-1 px-3 overflow-y-auto">
+                <div class="flex-1 px-3 overflow-y-auto sm:pt-7">
                     <ul class="menu w-full gap-2 md:gap-[2vmin] text-sm md:text-[1vmax]">
                         @isset($aside)
                             {!! $aside  !!}
