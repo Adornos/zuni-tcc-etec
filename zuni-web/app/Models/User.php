@@ -14,11 +14,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Enums\UserRole;
 use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 use App\Models\StudentSheet;
 use App\Models\Enrollment;
-
-
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -30,14 +29,22 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
+        'username',
         'registration_number',
         'email',
         'cpf',
         'rg',
+        'gender',
         'birth_date',
         'phone',
         'password',
         'role',
+
+        'street',
+        'number',
+        'district',
+        'city',
+        'state',
     ];
 
     protected $hidden = [
@@ -59,6 +66,13 @@ class User extends Authenticatable
             'status' => UserStatus::class,
             'role' => UserRole::class,
         ];
+    }
+
+    public function age() : Attribute
+    {
+        return Attribute::get(
+            fn () => $this->birth_date?->age
+        );
     }
 
 

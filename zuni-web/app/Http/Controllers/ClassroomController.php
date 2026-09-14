@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\StudentSheet;
 use App\Models\Classroom;
+
+use App\Enums\UserRole;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class ClassroomController extends Controller
 {
@@ -38,15 +45,42 @@ class ClassroomController extends Controller
             'capacity' => ['nullable', 'integer', 'min:1'],
         ]);
 
-        Classroom::create($validated);
+        $classroom = Classroom::create($validated);
 
         //Route::current()->getPrefix()
 
         return redirect()
-            ->back()
+            ->route('coordinator.classroom.show', $classroom->id)
             ->with('success', 'Turma criada com sucesso.');
     }
 
+
+    /**
+     * Visualização de informações da sala
+     */
+    public function show(Classroom $classroom)
+    {
+        return view('coordinator.classroom.show', ['classroom' => $classroom]);
+    }
+
+    /**
+     * Visualização dos Professores de uma sala
+     */
+    public function teachers(Classroom $classroom)
+    {
+
+        $teachers = User::where('role', 'teacher')->orderBy('name')->paginate(10);
+
+        return view('coordinator.classroom.teachers', [
+            'classroom' => $classroom,
+            'teachers' => $teachers,
+        ]);
+    }
+
+
+    /**
+     * Assimilação de professores às salas
+     */
     public function assignTeachers(Request $request, Classroom $classroom) 
     {
         $validated = $request->validate([
@@ -59,16 +93,80 @@ class ClassroomController extends Controller
         $classroom->teachers()->sync($validated['teachers'] ?? []);
 
         return redirect()
-            ->back()
+            ->route('coordinator.classroom.show', $classroom->id)
             ->with('success', 'Professores atribuídos com sucesso.');
     }
 
     /**
-     * Display the specified resource.
+     * Visualização dos Alunos de uma sala
      */
-    public function show(Classroom $classroom)
+    public function students(Classroom $classroom)
     {
-        return view('coordinator.classroom.show', ['classroom' => $classroom]);
+        $classroom->load([
+            'students.user',
+            'teachers',
+        ]);
+
+        $availableStudents = StudentSheet::with('user')
+            ->whereNull('classroom_id')
+            ->get()
+            ->sortBy('user.name');
+
+        return view('coordinator.classroom.students', [
+            'classroom' => $classroom,
+            'availableStudents' => $availableStudents,
+        ]);
+    }
+
+
+    /**
+     * Assimilação de alunos às salas
+     */
+    public function assignStudents(Request $request, Classroom $classroom)
+    {
+        $validated = $request->validate([
+            'students' => ['nullable', 'array'],
+
+            'students.*' => [
+                'integer',
+                Rule::exists('users', 'id')
+                    ->where('role', UserRole::STUDENT->value),
+            ],
+        ]);
+
+        $studentIds = $validated['students'] ?? [];
+
+        DB::transaction(function () use ($studentIds, $classroom) {
+
+            /*
+            * Alunos que já pertencem à turma atual,
+            * mas foram desmarcados, deixam a turma.
+            */
+            StudentSheet::where('classroom_id', $classroom->id)
+                ->when(
+                    !empty($studentIds),
+                    fn ($query) => $query->whereNotIn('student_id', $studentIds)
+                )
+                ->update([
+                    'classroom_id' => null,
+                ]);
+
+            /*
+            * Os alunos selecionados passam a pertencer
+            * à turma atual.
+            *
+            * Se algum deles estava em outra turma,
+            * ele será deslocado para esta.
+            */
+            StudentSheet::whereIn('student_id', $studentIds)
+                ->update([
+                    'classroom_id' => $classroom->id,
+                ]);
+        });
+
+        return redirect()
+            ->route('coordinator.classroom.show', $classroom->id)
+            ->with('success', 'Alunos da turma atualizados com sucesso.');
     }
 
     /**

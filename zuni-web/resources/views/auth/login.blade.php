@@ -1,128 +1,151 @@
 <x-layout>
+
     <x-slot:title>
         Login do Responsável
     </x-slot:title>
-<div class="hero min-h-[calc(100vh-16rem)] bg-Cprimary-light">
-    <div class="hero-content flex-col">
 
-        <div class="card w-96 bg-Cwhite shadow-xl">
+    <div class="hero min-h-[calc(100vh-16rem)] bg-Cprimary-light px-4">
 
-            <div class="card-body">
+        <div class="hero-content flex-col w-full">
 
-                <h1 class="text-3xl font-bold text-center text-Cprimary mb-2">
-                    Área de login
-                </h1>
+            <div class="card w-full max-w-md bg-Cwhite shadow-xl">
 
-                <p class="text-center text-Ctext-muted mb-6">
-                    Entre para o sistema!
-                </p>
+                <div class="card-body">
 
-                <form method="POST" action="/login">
-                    @csrf
+                    <h1 class="text-3xl font-bold text-center text-Cprimary mb-2">
+                        Área de login
+                    </h1>
 
-                    <!-- Email ou Username -->
-                    <label class="floating-label mb-6">
-                        <input
-                            type="text"
-                            name="login"
-                            placeholder="Email ou Username"
-                            value="{{ old('login') }}"
-                            class="input input-bordered w-full @error('login') input-error @enderror"
-                            required
-                        >
+                    <p class="text-center text-Ctext-muted mb-6">
+                        Entre para o sistema!
+                    </p>
 
-                        <span>Email ou Username</span>
-                    </label>
+                    <form method="POST" action="/login">
 
-                    @error('email')
-                        <div class="label -mt-4 mb-2">
-                            <span class="label-text-alt text-error">
-                                {{ $message }}
-                            </span>
-                        </div>
-                    @enderror
+                        @csrf
 
-                    <!-- Senha -->
-                    <label class="floating-label mb-2">
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="••••••••"
-                            class="input input-bordered w-full @error('password') input-error @enderror"
-                            required
-                        >
+                        <!-- Email ou Username -->
 
-                        <span>Senha</span>
-                    </label>
+                        <label class="floating-label mb-6">
 
-                    @error('password')
-                        <div class="label mb-2">
-                            <span class="label-text-alt text-error">
-                                {{ $message }}
-                            </span>
-                        </div>
-                    @enderror
-
-                    <!-- Remember -->
-                    <div class="flex justify-between items-center mt-4">
-
-                        <label class="label cursor-pointer gap-2">
                             <input
-                                type="checkbox"
-                                name="remember"
-                                class="checkbox checkbox-sm"
+                                type="text"
+                                name="login"
+                                placeholder="Email ou Username"
+                                value="{{ old('login') }}"
+                                class="input input-bordered w-full @error('login') input-error @enderror"
+                                required
                             >
 
-                            <span class="label-text">
-                                Lembrar-me
-                            </span>
+                            <span>Email ou Username</span>
+
                         </label>
 
+                        @error('email')
+
+                            <div class="label -mt-4 mb-2">
+
+                                <span class="label-text-alt text-error">
+                                    {{ $message }}
+                                </span>
+
+                            </div>
+
+                        @enderror
+
+                        <!-- Senha -->
+
+                        <label class="floating-label mb-2">
+
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="••••••••"
+                                class="input input-bordered w-full @error('password') input-error @enderror"
+                                required
+                            >
+
+                            <span>Senha</span>
+
+                        </label>
+
+                        @error('password')
+
+                            <div class="label mb-2">
+
+                                <span class="label-text-alt text-error">
+                                    {{ $message }}
+                                </span>
+
+                            </div>
+
+                        @enderror
+
+                        <!-- Remember -->
+
+                        <div class="flex justify-between items-center mt-4 gap-2">
+
+                            <label class="label cursor-pointer gap-2">
+
+                                <input
+                                    type="checkbox"
+                                    name="remember"
+                                    class="checkbox checkbox-sm"
+                                >
+
+                                <span class="label-text">
+                                    Lembrar-me
+                                </span>
+
+                            </label>
+
+                            <a
+                                href="/forgot-password"
+                                class="text-xs text-Csecondary hover:underline"
+                            >
+                                Esqueci minha senha
+                            </a>
+
+                        </div>
+
+                        <!-- Submit -->
+
+                        <div class="form-control mt-8">
+
+                            <button
+                                type="submit"
+                                class="btn bg-Csecondary hover:bg-Csecondary-dark border-none text-white w-full"
+                            >
+                                Entrar
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    <div class="divider text-Ctext-muted">
+                        OU
+                    </div>
+
+                    <p class="text-center text-sm">
+
+                        Ainda não possui cadastro?
+
                         <a
-                            href="/forgot-password"
-                            class="text-sm text-Csecondary hover:underline"
+                            href="/register"
+                            class="text-Cprimary font-semibold hover:underline"
                         >
-                            Esqueci minha senha
+                            Criar conta
                         </a>
 
-                    </div>
+                    </p>
 
-                    <!-- Submit -->
-                    <div class="form-control mt-8">
-
-                        <button
-                            type="submit"
-                            class="btn bg-Csecondary hover:bg-Csecondary-dark border-none text-white w-full"
-                        >
-                            Entrar
-                        </button>
-
-                    </div>
-
-                </form>
-
-                <div class="divider text-Ctext-muted">
-                    OU
                 </div>
-
-                <p class="text-center text-sm">
-
-                    Ainda não possui cadastro?
-
-                    <a
-                        href="/register"
-                        class="text-Cprimary font-semibold hover:underline"
-                    >
-                        Criar conta
-                    </a>
-
-                </p>
 
             </div>
 
         </div>
 
     </div>
-</div>
 
 </x-layout>

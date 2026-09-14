@@ -33,9 +33,11 @@ Route::middleware(['auth', 'role:guardian'])
     Route::get('/chat', [GuardianController::class, 'chat'])->name('chat');
 
     // Perfil do aluno (acesso mediado pelo responsável)
-    Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
-    Route::get('/students/{student}/schedule', [StudentController::class, 'schedule'])->name('students.schedule');
-    Route::get('/students/{student}/reports', [StudentController::class, 'reports'])->name('students.reports');
+    Route::get('/students/{student}', [StudentController::class, 'show'])->name('student.show');
+    Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name('student.edit');
+    Route::put('/students/{student}', [StudentController::class, 'update'])->name('student.update');
+    Route::get('/students/{student}/schedule', [StudentController::class, 'schedule'])->name('student.schedule');
+    Route::get('/students/{student}/reports', [StudentController::class, 'reports'])->name('student.reports');
 
 });
 
@@ -98,8 +100,8 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/chat', [CoordinatorController::class, 'chat'])->name('chat');
 
     // Aprovação de matrículas
-    Route::get('/students', [CoordinatorController::class, 'students'])->name('students.index');
-    Route::get('/students/{enrollment}', [CoordinatorController::class, 'showStudent'])->name('enrollment.show');
+    Route::get('/students', [CoordinatorController::class, 'students'])->name('student.index');
+    Route::get('/students/{enrollment}', [CoordinatorController::class, 'showStudent'])->name('student.show');
     Route::put('/students/{enrollment}/approve', [CoordinatorController::class, 'approveEnrollment'])->name('enrollment.approve');
     Route::put('/students/{enrollment}/reject', [CoordinatorController::class, 'rejectEnrollment'])->name('enrollment.reject');
 
@@ -110,7 +112,7 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/teacher/show/{teacher}', [CoordinatorController::class, 'showTeacher'])->name('teacher.show');
     Route::put('/teacher/show/{teacher}/edit', [CoordinatorController::class, 'editTeacher'])->name('teacher.edit');
 
-    // Criação de salas
+    // Criação e gerenciamento de salas
     Route::get('/classrooms', [ClassroomController::class, 'index'])->name('classroom.index');
     Route::get('/classroom/register', [ClassroomController::class, 'create'])->name('classroom.create');
     Route::post('/classroom/register', [ClassroomController::class, 'store'])->name('classroom.store');
@@ -118,7 +120,8 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::put('/classroom/show/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
     Route::get('/classroom/show/{classroom}/teachers', [ClassroomController::class, 'teachers'])->name('classroom.teachers');
     Route::put('/classroom/show/{classroom}/teachers', [ClassroomController::class, 'assignTeachers'])->name('classroom.teachers.update');
-    Route::put('/classroom/show/{classroom}/students', [ClassroomController::class, 'students'])->name('classroom.students');
+    Route::get('/classroom/show/{classroom}/students', [ClassroomController::class, 'students'])->name('classroom.students');
+    Route::put('/classroom/show/{classroom}/students', [ClassroomController::class, 'assignStudents'])->name('classroom.students.update');
 
 
     // Gerenciamento de horários (abordagem de grade)
@@ -137,7 +140,7 @@ Route::middleware(['auth', 'role:coordinator'])
 
 });
 
-// Login Routes
+// Login Route
 
 Route::view('/login', 'auth.login')
     ->middleware('guest')
@@ -146,7 +149,7 @@ Route::view('/login', 'auth.login')
 Route::post('/login', Login::class)
     ->middleware('guest');
 
-// Register Routes
+// Register Route
 Route::view('/register', 'auth.register')
     ->middleware('guest')
     ->name('register') ;

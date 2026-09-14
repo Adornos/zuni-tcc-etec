@@ -60,15 +60,21 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 ### Observações:
 
-- [ ] Testar o funcionamento de todas as telas
-- [ ] Testar o funcionamento do campo de perfil de todos os usuários
-- [ ] Padronizar série dos alunos e das salas
+- [x] Testar o funcionamento de todas as telas
+- [x] Testar o funcionamento do campo de perfil de todos os usuários
+- [x] Padronizar série dos alunos e das salas
 
 ## Dia 4 — Atribuição de alunos
 
-- [ ] Atribuição de professores às salas
-- [ ] Atribuição de alunos às salas
-- [ ] Visualização dos alunos por sala
+- [x] Visualização dos professores por sala
+- [x] Atribuição de professores às salas
+- [x] Atribuição de alunos às salas
+- [x] Visualização dos alunos por sala
+
+### Observações:
+
+- [x]  Testar funcionamento da paginação
+- [x]  Verificar a visualização do professor atribuído direto na tela de classe
 
 ## Dia 5 — Atribuição de aulas
 
@@ -78,16 +84,23 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 ## Dia 6 — Tela do responsável
 
-- [ ] Edição de cadastro
-- [ ] Visualização de aluno
-- [ ] Visualização de proficiências por aluno
+- [x] Edição de cadastro do aluno pelo responsável
+- [x] Visualização de aluno
+- [x] Visualização de proficiências por aluno
 
 ## Dia 7 — 🔄 Revisão
 
-- [ ] Testar cadastros
-- [ ] Testar relacionamentos
+- [x] Testar cadastros
+- [x] Testar relacionamentos
 - [ ] Corrigir bugs da semana
-- [ ] Atualizar checklist
+- [x] Atualizar checklist
+
+### Observações:
+
+- [x] Dinamização dos ícones (agora components do blade)
+- [ ] Finalizar/Normalizar Profiles e a edição deles (separar visualização de edit)
+- [ ] Planejar atribuição de aulas
+- [ ] Planejar funcionamento do fórum
 
 ### 🎯 Resultado esperado
 

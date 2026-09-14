@@ -10,9 +10,9 @@
                     Dados do Aluno
                 </h2>
     
-                <div class="grid grid-cols-4 md:grid-cols-4 gap-4 px-[10vmax]">
+                <div class="grid grid-cols-3 md:grid-cols-2 gap-4 px-[10vmax]">
     
-                    <div class="form-control col-span-4">
+                    <div class="form-control col-span-3">
                         <label class="label">
                             <span class="label-text">Nome</span>
                         </label>
@@ -66,33 +66,10 @@
                             class="select select-bordered w-full"
                             required
                         >
-                            <option value="">Todos</option>
-                            <option value="1-jardim">1º Jardim</option>
-                            <option value="2-jardim">2º Jardim</option>
-                            <option value="1-ano">1º Ano</option>
-                            <option value="2-ano">2º Ano</option>
-                            <option value="3-ano">3º Ano</option>
-                            <option value="4-ano">4º Ano</option>
-                            <option value="5-ano">5º Ano</option>
-                            <option value="6-ano">6º Ano</option>
-                            <option value="7-ano">7º Ano</option>
-                            <option value="8-ano">8º Ano</option>
-                            <option value="9-ano">9º Ano</option>
+                            @foreach(App\Enums\ClassroomGrade::cases() as $grade)
+                                <option value="{{$grade}}">{{$grade->label()}}</option>
+                            @endforeach
                         </select>
-                    </div>
-    
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Idade</span>
-                        </label>
-    
-                        <input
-                            type="number"
-                            name="age"
-                            min="0"
-                            value=6
-                            class="input input-bordered"
-                        >
                     </div>
     
                 </div>

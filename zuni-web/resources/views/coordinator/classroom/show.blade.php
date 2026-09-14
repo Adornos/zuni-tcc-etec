@@ -240,38 +240,25 @@
 
             <div class="flex items-center justify-between">
 
-                <h2 class="card-title">
-                    Alunos
-                </h2>
+                    <h2 class="card-title">
+                        Alunos
+                    </h2>
 
-                <a
+                
+                    <a
                     href="{{ route('coordinator.classroom.students', $classroom) }}"
-                    class="btn btn-sm btn-outline"
-                >
+                    class="btn btn-sm btn-outline "
+                    >
                     Gerenciar
                 </a>
-
             </div>
-
-
-            <div class="stats shadow mt-4">
-
-                <div class="stat">
-                    <div class="stat-title">
-                        Alunos matriculados
-                    </div>
-
-                    <div class="stat-value">
-                        {{ $classroom->students->count() }}
-                    </div>
-
-                    <div class="stat-desc">
-                        de {{ $classroom->capacity ?? '∞' }}
-                    </div>
-                </div>
-
-            </div>
-
+        
+            <p Class="text-sm text-base-content/50 mt-2">
+                Matriculados: 
+                {{ $classroom->students->count() }}
+                de {{ $classroom->capacity ?? '∞' }}
+            </p>
+        
         </div>
     </div>
 
@@ -292,7 +279,7 @@
 
                 <a
                     href="{{ route('coordinator.report.create', $classroom) }}"
-                    class="btn btn-primary btn-sm"
+                    class="btn btn-sm btn-outline"
                 >
                     Criar relatório
                 </a>
@@ -371,7 +358,7 @@
 
         <button
             type="submit"
-            class="btn btn-primary"
+            class="btn text-Cwhite btn-sm bg-Csecondary"
         >
             Salvar alterações
         </button>

@@ -7,38 +7,39 @@
     <title>{{ isset($title) ? $title . ' - Zuni' : 'Zuni'}}</title>
     <link rel="preconnect" href="<https://fonts.bunny.net>">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="min-h-screen flex flex-col bg-white font-sans">
-    <header class="w-full px-8 py-5 bg-linear-to-b from-white to-transparent">
+    <header class="w-full px-8 py-4 bg-linear-to-b from-white to-transparent">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="/" class="flex items-center">
-                <img src="{{ asset('images/logo.svg') }}" alt="Zuni" class="h-6">
+
+            <!-- Logo -->
+            <a href="/" class="flex items-center flex-col group px-3 hover:bg-Csecondary transition card hover:shadow-md">
+                <x-svg.logo.lockup class="w-25 h-11 text-Csecondary group-hover:text-white transition" />
             </a>
             <nav class="hidden lg:flex items-center gap-[1.5vmax]">
 
-                <a href="#" class="font-medium text-Ctext hover:text-Cprimary-dark transition">
-                    Sobre Nós
+                <a href="#" class="font-medium text-Ctext hover:text-Cprimary-dark transition p-2.5 group transition">
+                    <p class="group-hover:text-shadow-md transition">Sobre Nós</p>
                 </a>
 
-                <a href="#" class="font-medium text-Ctext hover:text-Cprimary-dark transition">
-                    Companhia
+                <a href="#" class="font-medium text-Ctext hover:text-Cprimary-dark transition p-2.5 group transition">
+                    <p class="group-hover:text-shadow-md transition">Companhia</p>
                 </a>
 
+                <!-- Parceiros -->
                 <div class="dropdown dropdown-end">
                     <label tabindex="0"
-                        class="cursor-pointer font-medium text-Ctext hover:text-Cprimary-dark transition flex items-center gap-1">
-                        Parceiros
-                        <span class="text-xs">▼</span>
+                        class="cursor-pointer font-medium text-Ctext hover:text-Cprimary-dark transition flex items-center gap-1 p-2.5 group transition">
+                        <p class="group-hover:text-shadow-md transition">Parceiros</p>
+                        <span class="text-xs group-hover:text-shadow-md transition">▼</span>
                     </label>
 
                     <ul tabindex="0"
                         class="dropdown-content z-50 mt-3 w-56 rounded-2xl bg-white p-2 shadow-xl">
                         <li>
-                            <a class="rounded-xl hover:bg-Cprimary-light p-3 block">
+                            <a class="rounded-xl hover:bg-Cprimary-light p-3 block ">
                                 Escolas Parceiras
                             </a>
                         </li>
@@ -50,8 +51,8 @@
                     </ul>
                 </div>
 
-                <a href="#" class="mr-[3vmax] font-medium text-Ctext hover:text-Cprimary-dark transition">
-                    Ajuda
+                <a href="#" class="mr-[3vmax] font-medium text-Ctext hover:text-Cprimary-dark transition p-2.5 group transition">
+                    <p class="group-hover:text-shadow-md transition">Ajuda</p>
                 </a>
                 @auth
                     <span class="text-sm">
@@ -60,6 +61,8 @@
                             @case('student')    href="{{ route('student.index') }}"     @break 
                             @case('guardian')   href="{{ route('guardian.index') }}"    @break 
                             @case('teacher')    href="{{ route('teacher.index') }}"     @break 
+                            @case('coordinator')    href="{{ route('coordinator.index') }}"     @break 
+                            @case('director')    href="{{ route('director.index') }}"     @break 
                             @case('admin')      href="{{ route('admin.index') }}"       @break 
                         @endswitch
                         class="px-5 py-2 rounded-full border-2 border-Cprimary text-Cprimary font-medium hover:bg-Cprimary hover:text-white transition"
@@ -81,7 +84,7 @@
                     </a>
 
                     <a href="{{route('register')}}"
-                    class="px-5 py-2 rounded-full bg-Csecondary text-white font-medium hover:brightness-110 transition">
+                    class="px-5 py-2 rounded-full border-2 border-Csecondary bg-Csecondary text-white font-medium hover:bg-Csecondary-dark hover:border-Csecondary-dark transition">
                         Cadastrar-se
                     </a>
                     

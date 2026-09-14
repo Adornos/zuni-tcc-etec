@@ -103,6 +103,7 @@ class CoordinatorController extends Controller
     public function showStudent($student)
     {
 
+
         $studentInfo = StudentSheet::where('id', $student)->firstOrFail();
 
         return view('coordinator.student.show', ['studentSheet' => $studentInfo]);
@@ -123,8 +124,8 @@ class CoordinatorController extends Controller
         $user->status = UserStatus::ACTIVE;
         $user->save();
 
-        return redirect()->route('coordinator.enrollment.show', [
-            'enrollment' => $enrollment->student_id,
+        return redirect()->route('coordinator.student.show', [
+            'enrollment' => $enrollment->sheet_id,
         ]);
     }
 
@@ -142,8 +143,8 @@ class CoordinatorController extends Controller
         $user->status = UserStatus::INACTIVE;
         $user->save();
 
-        return redirect()->route('coordinator.enrollment.show', [
-            'enrollment' => $enrollment->student_id,
+        return redirect()->route('coordinator.student.show', [
+            'enrollment' => $enrollment->sheet_id,
         ]);
     }
 

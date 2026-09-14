@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
 {
@@ -17,7 +18,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
+        /** @var User $user */
+        $user = Auth::user();
 
         abort_unless($user->isGuardian(), 403);
 
@@ -31,7 +33,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $user = auth()->user();
+        /** @var User $user */
+        $user = Auth::user();
 
         abort_unless($user->isGuardian(), 403);
 
@@ -82,18 +85,44 @@ class StudentController extends Controller
         $validated['password'] = 'zuni2026';
 
         return User::create([
-            'name' => $validated['name'],
+            
+            ...$validated,
+
             'username' => $this->generateUsername(),
             'password' => Hash::make($validated['password']),
             'role' => 'student',
+
         ]);
+    }
+
+    
+    /**
+     * Gera o registrarion_number da StudentSheet
+     */
+    private static function generateRegistrationNumber(): string
+    {
+        $year = now()->year;
+
+        $lastNumber = StudentSheet::where('registration_number', 'like', "ALU-{$year}-%")
+            ->orderByDesc('registration_number')
+            ->value('registration_number');
+
+        if ($lastNumber) {
+            $number = (int) substr($lastNumber, -4);
+            $number++;
+        } else {
+            $number = 1;
+        }
+
+        return sprintf('ALU-%d-%04d', $year, $number);
     }
     /**
      * Faz o link entre o usuário Student e sua StudentSheet
      */
     private function linkStudentSheet(Request $request, User $studentUser){
 
-        $user = auth()->user();
+        /** @var User $user */
+        $user = Auth::user();
 
         $studentSheet_validated = $request->validate([
             'class' => 'nullable|string|max:50',
@@ -110,12 +139,10 @@ class StudentController extends Controller
         $response = $studentUser->studentSheet()->create([
             ...$studentSheet_validated,
             'guardian_id' => $user->id,
+            'registration_number' => self::generateRegistrationNumber(),
         ]);
 
         // dd($response);
-
-        
-
         
     }
     /**
@@ -135,10 +162,10 @@ class StudentController extends Controller
     public function store(Request $request)
     {
 
-        $user = auth()->user();
+        /** @var User $user */
+        $user = Auth::user();
 
         abort_unless($user->isGuardian(), 403);
-        
         
         
         DB::transaction(function () use ($request) {
@@ -146,7 +173,7 @@ class StudentController extends Controller
             try{
 
             $studentUser = $this->registerStudent($request);
-                        
+                      
             $this->linkStudentSheet($request, $studentUser);
             $this->linkStudentEnroll($studentUser->studentSheet);
             
@@ -168,13 +195,14 @@ class StudentController extends Controller
      */
     public function show(User $student)
     {
-        $user = auth()->user();
+        abort_unless($student->role->value === 'student', 404);
 
-        abort_unless($user->isGuardian(), 403);
+        $student->load([
+            'studentSheet.guardian',
+            'studentSheet.classroom',
+        ]);
 
-        abort_unless($student->user_id === $user->id, 403);
-
-        return view('students.show', compact('student'));
+        return view('guardian.student.show', compact('student'));
     }
 
     /**
@@ -182,13 +210,14 @@ class StudentController extends Controller
      */
     public function edit(User $student)
     {
-        $user = auth()->user();
+        abort_unless($student->role->value === 'student', 404);
 
-        abort_unless($user->isGuardian(), 403);
+        $student->load([
+            'studentSheet.guardian',
+            'studentSheet.classroom',
+        ]);
 
-        abort_unless($student->user_id === $user->id, 403);
-
-        return view('students.edit', compact('student'));
+        return view('guardian.student.edit', compact('student'));
     }
 
     /**
@@ -196,38 +225,82 @@ class StudentController extends Controller
      */
     public function update(Request $request, User $student)
     {
-        $user = auth()->user();
+        abort_unless(
+            $student->role->value === 'student',
+            404
+        );
 
-        abort_unless($user->isGuardian(), 403);
-
-        abort_unless($student->user_id === $user->id, 403);
-
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'birth_date' => 'nullable|date',
-            'gender' => 'nullable|in:M,F,O',
-            'class' => 'nullable|string|max:50',
-            'age' => 'nullable|integer',
-
-            'street' => 'nullable|string|max:100',
-            'number' => 'nullable|string|max:10',
-            'district' => 'nullable|string|max:50',
-            'city' => 'nullable|string|max:50',
-            'state' => 'nullable|string|max:50',
-
-            'neurodivergent' => 'nullable|boolean',
-            'allergy' => 'nullable|boolean',
-            'food_restriction' => 'nullable|boolean',
-            'special_care' => 'nullable|boolean',
-
-            'notes' => 'nullable|string',
+        // Retirar Máscaras
+        $request->merge([
+            'cpf' => preg_replace('/\D/', '', $request->cpf),
+            'rg' => preg_replace('/\D/', '', $request->rg),
+            'phone' => preg_replace('/\D/', '', $request->phone),
         ]);
 
-        $student->update($validated);
+
+        $validated = $request->validate([
+
+            // User
+            'name' => ['required', 'string', 'max:255'],
+            'birth_date' => ['nullable', 'date'],
+            'gender' => ['nullable', Rule::in(['M', 'F', 'O'])],
+            'cpf' => ['nullable', 'string', 'max:14', Rule::unique('users', 'cpf')->ignore($student->id)],
+            'rg' => ['nullable', 'string', 'max:20', Rule::unique('users', 'rg')->ignore($student->id)],
+            'phone' => ['nullable', 'string', 'max:20', Rule::unique('users', 'phone')->ignore($student->id)],
+            'email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')->ignore($student->id),],
+
+            'street' => ['nullable', 'string', 'max:100'],
+            'number' => ['nullable', 'string', 'max:10'],
+            'district' => ['nullable', 'string', 'max:50'],
+            'city' => ['nullable', 'string', 'max:50'],
+            'state' => ['nullable', 'string', 'max:50'],
+
+            // StudentSheet
+            'neurodivergent' => ['nullable', 'boolean'],
+            'allergy' => ['nullable', 'boolean'],
+            'food_restriction' => ['nullable', 'boolean'],
+            'special_care' => ['nullable', 'boolean'],
+
+            'notes' => ['nullable', 'string'],
+        ]);
+
+
+        DB::transaction(function () use ($student, $validated) {
+
+            /*
+            * Dados da conta/pessoa
+            */
+            $student->update([
+                'name' => $validated['name'],
+                'birth_date' => $validated['birth_date'] ?? null,
+                'gender' => $validated['gender'] ?? null,
+                'cpf' => $validated['cpf'] ?? null,
+                'rg' => $validated['rg'] ?? null,
+                'phone' => $validated['phone'] ?? null,
+                'email' => $validated['email'] ?? null,
+
+                'street' => $validated['street'] ?? null,
+                'number' => $validated['number'] ?? null,
+                'district' => $validated['district'] ?? null,
+                'city' => $validated['city'] ?? null,
+                'state' => $validated['state'] ?? null,
+            ]);
+
+            /*
+            * Dados específicos do aluno
+            */
+            $student->studentSheet()->update([
+                'neurodivergent' => $validated['neurodivergent'] ?? false,
+                'allergy' => $validated['allergy'] ?? false,
+                'food_restriction' => $validated['food_restriction'] ?? false,
+                'special_care' => $validated['special_care'] ?? false,
+                'notes' => $validated['notes'] ?? null,
+            ]);
+        });
 
         return redirect()
-            ->route('students.index')
-            ->with('success', 'Student updated successfully.');
+            ->route('guardian.student.show', $student)
+            ->with('success', 'Dados do aluno atualizados com sucesso.');
     }
 
     /**
@@ -235,7 +308,8 @@ class StudentController extends Controller
      */
     public function destroy(User $student)
     {
-        $user = auth()->user();
+        /** @var User $user */
+        $user = Auth::user();
 
         abort_unless($user->isGuardian(), 403);
 

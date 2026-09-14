@@ -13,24 +13,42 @@ return new class extends Migration
             $table->id();
 
             // Usuário aluno
-            $table->foreignId('student_id')->constrained('users')->cascadeOnDelete()->unique();
+            $table->foreignId('student_id')
+                ->constrained('users')
+                ->cascadeOnDelete()
+                ->unique();
 
-            // Responsável pelo aluno
-            $table->foreignId('guardian_id')->constrained('users')->cascadeOnDelete();
+            // Responsável
+            $table->foreignId('guardian_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
 
-            // Dados específicos do aluno
-            $table->foreignId('classroom_id')->nullable()->constrained('classrooms')->nullOnDelete();
+            // Turma atual
+            $table->foreignId('classroom_id')
+                ->nullable()
+                ->constrained('classrooms')
+                ->nullOnDelete();
 
+            // Número de registro
+            $table->string('registration_number')->unique()->nullable();
 
+            // Idade
             $table->integer('age')->nullable();
 
-            // Necessidades específicas
-            $table->boolean('neurodivergent')->nullable();
-            $table->boolean('allergy')->nullable();
-            $table->boolean('food_restriction')->nullable();
-            $table->boolean('special_care')->nullable();
+            // Parâmetros de desenvolvimento/desempenho
+            $table->decimal('sociability', 4, 2)->default(5);
+            $table->decimal('autonomy', 4, 2)->default(5);
+            $table->decimal('engagement', 4, 2)->default(5);
+            $table->decimal('communication', 4, 2)->default(5);
+            $table->decimal('motor_development', 4, 2)->default(5);
 
-            // Informações adicionais
+            // Necessidades específicas
+            $table->boolean('neurodivergent')->default(false);
+            $table->boolean('allergy')->default(false);
+            $table->boolean('food_restriction')->default(false);
+            $table->boolean('special_care')->default(false);
+
+            // Observações
             $table->text('notes')->nullable();
 
             $table->timestamps();

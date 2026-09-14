@@ -3,6 +3,7 @@
 use App\Models\Classroom;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
+use App\Enums\ClassroomGrade;
 
 new class extends Component
 {
@@ -10,6 +11,13 @@ new class extends Component
     public string $grade = '';
     public string $status = '';
     public string $shift = '';
+
+    public array $availableGrades;
+
+    public function mount()
+    {
+        $this->availableGrades = ClassroomGrade::cases();
+    }
 
     #[Computed]
     public function classrooms()
@@ -115,12 +123,15 @@ new class extends Component
                     </span>
                 </label>
 
-                <input
-                    type="text"
-                    wire:model.live.debounce.300ms="grade"
-                    placeholder="Ex.: 3º ano"
-                    class="input input-bordered w-full"
+                <select
+                    wire:model.live="grade"
+                    class="select select-bordered w-full"
                 >
+                    <option value="">Todos</option>
+                    @foreach(ClassroomGrade::cases() as $grade)
+                        <option value="{{$grade}}">{{$grade->label()}}</option>
+                    @endforeach
+                </select>
 
             </div>
 
