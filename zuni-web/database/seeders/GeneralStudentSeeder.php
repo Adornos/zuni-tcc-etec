@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Enums\UserRole;
+use App\Enums\UserStatus;
 use App\Models\Classroom;
+use App\Models\Enrollment;
 use App\Models\StudentSheet;
 use App\Models\User;
 use Carbon\Carbon;
@@ -123,6 +125,8 @@ class GeneralStudentSeeder extends Seeder
                     'password' => Hash::make('123456'),
 
                     'role' => UserRole::STUDENT,
+
+                    'status' => UserStatus::ACTIVE
                 ]);
 
                 /*
@@ -203,6 +207,12 @@ class GeneralStudentSeeder extends Seeder
                         'Apresenta evolução satisfatória ao longo das atividades.',
 
                     ]),
+                ]);
+                /*
+                * Cria a StudentSheet.
+                */
+                Enrollment::create([
+                    'sheet_id' => $student->studentSheet->id,
                 ]);
             }
         });

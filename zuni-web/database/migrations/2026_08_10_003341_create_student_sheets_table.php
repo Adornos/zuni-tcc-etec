@@ -36,17 +36,17 @@ return new class extends Migration
             $table->integer('age')->nullable();
 
             // Parâmetros de desenvolvimento/desempenho
-            $table->decimal('sociability', 4, 2)->nullable();
-            $table->decimal('autonomy', 4, 2)->nullable();
-            $table->decimal('engagement', 4, 2)->nullable();
-            $table->decimal('communication', 4, 2)->nullable();
-            $table->decimal('motor_development', 4, 2)->nullable();
+            $table->decimal('sociability', 4, 2)->default(5);
+            $table->decimal('autonomy', 4, 2)->default(5);
+            $table->decimal('engagement', 4, 2)->default(5);
+            $table->decimal('communication', 4, 2)->default(5);
+            $table->decimal('motor_development', 4, 2)->default(5);
 
             // Necessidades específicas
-            $table->boolean('neurodivergent')->nullable();
-            $table->boolean('allergy')->nullable();
-            $table->boolean('food_restriction')->nullable();
-            $table->boolean('special_care')->nullable();
+            $table->boolean('neurodivergent')->default(false);
+            $table->boolean('allergy')->default(false);
+            $table->boolean('food_restriction')->default(false);
+            $table->boolean('special_care')->default(false);
 
             // Observações
             $table->text('notes')->nullable();

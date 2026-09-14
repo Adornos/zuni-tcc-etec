@@ -7,43 +7,41 @@
     <title>{{ isset($title) ? $title . ' - Zuni' : 'Zuni'}}</title>
     <link rel="preconnect" href="<https://fonts.bunny.net>">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="min-h-screen flex flex-col bg-white font-sans">
-    <header class="w-full px-8 py-5 bg-linear-to-b from-white to-transparent">
+    <header class="w-full px-8 py-4 bg-linear-to-b from-white to-transparent sticky">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
 
             <!-- Logo -->
-            <a href="/" class="flex items-center">
-                <img src="{{ asset('images/logo.svg') }}" alt="Zuni" class="h-6">
+            <a href="/" class="flex items-center flex-col group px-3 hover:bg-Csecondary transition card hover:shadow-md">
+                <x-svg.logo.lockup class="w-25 h-11 text-Csecondary group-hover:text-white transition" />
             </a>
 
             <!-- Navegação -->
             <nav class="flex items-center gap-[1.5vmax]">
 
-                <a href="#" class="font-medium text-Ctext hover:text-Cprimary-dark transition">
-                    Sobre Nós
+                <a href="#" class="font-medium text-Ctext hover:text-Cprimary-dark transition p-2.5 group transition">
+                    <p class="group-hover:text-shadow-md transition">Sobre Nós</p>
                 </a>
 
-                <a href="#" class="font-medium text-Ctext hover:text-Cprimary-dark transition">
-                    Companhia
+                <a href="#" class="font-medium text-Ctext hover:text-Cprimary-dark transition p-2.5 group transition">
+                    <p class="group-hover:text-shadow-md transition">Companhia</p>
                 </a>
 
                 <!-- Parceiros -->
                 <div class="dropdown dropdown-end">
                     <label tabindex="0"
-                        class="cursor-pointer font-medium text-Ctext hover:text-Cprimary-dark transition flex items-center gap-1">
-                        Parceiros
-                        <span class="text-xs">▼</span>
+                        class="cursor-pointer font-medium text-Ctext hover:text-Cprimary-dark transition flex items-center gap-1 p-2.5 group transition">
+                        <p class="group-hover:text-shadow-md transition">Parceiros</p>
+                        <span class="text-xs group-hover:text-shadow-md transition">▼</span>
                     </label>
 
                     <ul tabindex="0"
                         class="dropdown-content z-50 mt-3 w-56 rounded-2xl bg-white p-2 shadow-xl">
                         <li>
-                            <a class="rounded-xl hover:bg-Cprimary-light p-3 block">
+                            <a class="rounded-xl hover:bg-Cprimary-light p-3 block ">
                                 Escolas Parceiras
                             </a>
                         </li>
@@ -55,8 +53,8 @@
                     </ul>
                 </div>
 
-                <a href="#" class="mr-[3vmax] font-medium text-Ctext hover:text-Cprimary-dark transition">
-                    Ajuda
+                <a href="#" class="mr-[3vmax] font-medium text-Ctext hover:text-Cprimary-dark transition p-2.5 group transition">
+                    <p class="group-hover:text-shadow-md transition">Ajuda</p>
                 </a>
 
                 <!-- Login e Auth -->
@@ -76,7 +74,7 @@
                         {{  auth()->user()->name }}
                         </a>
                     </span>
-                    <form action="{{ route('logout') }}" method="get" class="inline">
+                    <form action="{{ route('logout') }}" method="post" class="inline">
                     @csrf
                         <button type="submit" class="px-5 py-2 rounded-full bg-Csecondary text-white font-medium hover:brightness-110 transition">
                         Sair
@@ -91,7 +89,7 @@
 
                     <!-- CTA Principal -->
                     <a href="{{route('register')}}"
-                    class="px-5 py-2 rounded-full bg-Csecondary text-white font-medium hover:brightness-110 transition">
+                    class="px-5 py-2 rounded-full border-2 border-Csecondary bg-Csecondary text-white font-medium hover:bg-Csecondary-dark hover:border-Csecondary-dark transition">
                         Cadastrar-se
                     </a>
                     

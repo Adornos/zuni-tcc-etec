@@ -23,7 +23,7 @@
 
                 {{-- Menu Mobile --}}
                 <label for="sidebar-drawer" class="btn btn-ghost btn-circle lg:hidden shrink-0">
-                    <img src="{{ asset('images/icons/gear.svg') }}" class="w-5 h-5" alt="Menu" />
+                        <img src="{{ asset('images/icons/gear.svg') }}" class="w-5 h-5" alt="Menu" />
                 </label>
 
                 {{-- Título --}}
@@ -68,59 +68,165 @@
                         </div>
                     </button>
 
-                    {{-- Perfil --}}
-                    <div class="hidden sm:block dropdown dropdown-end flex" tabindex="0" role="button">
-                        <div class="avatar flex cursor-pointer items-center gap-2 rounded-xl bg-base-100 p-1.5 md:p-2">
+                                        @php
+                    $currentUser = auth()->user();
 
-                            <div class="w-9 rounded-full md:w-10">
-                                <img
-                                    src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name ?? 'Sem nome') }}"
-                                    alt="Avatar"
-                                />
+                    $roleLabel = match ($currentUser?->role?->value ?? $currentUser?->role) {
+                        'admin' => 'Administrador',
+                        'director' => 'Diretor',
+                        'coordinator' => 'Coordenador',
+                        'teacher' => 'Professor',
+                        'student' => 'Aluno',
+                        'guardian' => 'Responsável',
+                        'staff' => 'Funcionário',
+                        default => 'Usuário',
+                    };
+
+                    @endphp
+
+                    {{-- Perfil --}}
+
+                    <div class="dropdown dropdown-end hidden sm:block">
+
+                        {{-- Trigger --}}
+                        <div
+                            tabindex="0"
+                            role="button"
+                            class="flex cursor-pointer items-center gap-2 rounded-xl bg-base-100 p-1.5 transition hover:bg-base-200 md:p-2"
+                        >
+
+                            {{-- Avatar --}}
+                            <div class="avatar placeholder shrink-0">
+
+                                <div class="w-9 rounded-full md:w-10">
+                                    <img
+                                        src="https://ui-avatars.com/api/?name={{ urlencode($currentUser?->name ?? 'Sem nome') }}"
+                                        alt="Avatar de {{ $currentUser?->name ?? 'usuário' }}"
+                                        class="object-cover"
+                                    />
+                                </div>
+
                             </div>
 
+
+                            {{-- Informações --}}
                             <div class="hidden min-w-0 md:block">
-                                <div class="flex items-center gap-1">
-                                    <p class="max-w-32 truncate text-sm font-medium">
-                                        {{ auth()->user()->name ?? 'Sem nome' }}
+
+                                <div class="flex max-w-40 items-center gap-1.5">
+
+                                    <p class="truncate text-sm font-semibold">
+                                        {{ $currentUser?->name ?? 'Sem nome' }}
                                     </p>
 
                                     <img
                                         src="{{ asset('images/icons/chevronDown.svg') }}"
-                                        class="h-3 w-3"
+                                        class="h-3 w-3 shrink-0 opacity-60"
                                         alt=""
-                                    />
+                                    >
+
                                 </div>
 
-                                <small class="block max-w-32 truncate text-[10px] text-Ctext-muted">
-                                    {{ auth()->user()->email ?? 'sem email' }}
-                                </small>
+                                <p class="mt-0.5 max-w-40 truncate text-[10px] text-Ctext-muted">
+                                    {{ $roleLabel }}
+                                </p>
+
                             </div>
 
                         </div>
 
+
+                        {{-- Dropdown --}}
                         <ul
                             tabindex="0"
-                            class="dropdown-content menu bg-base-100 rounded-box z-10 mt-2 w-52 p-2 shadow-lg"
+                            class="dropdown-content menu z-50 mt-2 w-64 rounded-2xl border border-base-200 bg-base-100 p-2 shadow-xl"
                         >
-                            <li>
-                                <a href="{{ route(auth()->user()->role->value.'.profile') }}">
-                                    Meu Perfil
-                                </a>
+
+                            {{-- Cabeçalho do dropdown --}}
+                            <li class="mb-1 pointer-events-none">
+
+                                <div class="flex items-center gap-3 rounded-xl px-3 py-2">
+
+                                    <div class="avatar placeholder shrink-0">
+
+                                        <div class="w-10 rounded-full">
+                                            <img
+                                                src="https://ui-avatars.com/api/?name={{ urlencode($currentUser?->name ?? 'Sem nome') }}"
+                                                alt=""
+                                            >
+                                        </div>
+
+                                    </div>
+
+                                    <div class="min-w-0">
+
+                                        <p class="truncate text-sm font-semibold">
+                                            {{ $currentUser?->name ?? 'Sem nome' }}
+                                        </p>
+
+                                        <p class="truncate text-xs text-Ctext-muted">
+                                            {{ $currentUser?->email ?? 'Sem e-mail' }}
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
                             </li>
 
+                            <div class="divider my-1"></div>
+
+
+                            {{-- Perfil --}}
                             <li>
-                                <a class="text-error" href="{{ route('logout') }}">
-                                    Sair
-                                    <img
-                                        loading="lazy"
-                                        src="{{ asset('images/icons/logout-red.svg') }}"
-                                        class="ml-auto w-4"
-                                        alt=""
-                                    />
+
+                                <a
+                                    href="{{ route(($currentUser?->role?->value ?? $currentUser?->role) . '.profile') }}"
+                                    class="gap-3 rounded-xl"
+                                >
+
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-4 w-4"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.8"
+                                            d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a7.5 7.5 0 0 1 15 0"
+                                        />
+                                    </svg>
+
+                                    <span>
+                                        Meu perfil
+                                    </span>
+
                                 </a>
+
                             </li>
+
+
+                            {{-- Sair --}}
+                            <li>
+
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+
+                                    <button
+                                        type="submit"
+                                        class="flex items-center gap-2 bg-transparent border-0 p-0 text-Csecondary cursor-pointer"
+                                    >
+                                        <x-svg.icon.logout class="text-Csecondary" />
+                                        Sair
+                                    </button>
+                                </form>
+
+                            </li>
+
                         </ul>
+
                     </div>
 
                 </div>
@@ -142,11 +248,13 @@
         <div class="drawer-side">
             <label for="sidebar-drawer" class="drawer-overlay"></label>
             
-            <aside class="bg-Csecondary text-primary-content flex flex-col w-64 min-h-screen">
+            <aside class="bg-Csecondary text-primary-content flex flex-col min-h-screen">
 
                 {{-- Logo --}}
-                <div class="flex justify-center py-6 md:py-8">
-                    <img src="{{ asset('images/logo_white.svg') }}" alt="Logo" class="h-6 md:h-8">
+                <div class="flex justify-center mt-6 md:mt-8 mb-6 md:mb-8 w-full h-8">
+                    <a href="/">
+                        <x-svg.logo.mark class="size-8 text-white hover:text-Cprimary transition" />
+                    </a>
                 </div>
 
                 {{-- Navegação --}}
@@ -165,16 +273,23 @@
                     <ul class="menu w-full text-sm md:text-base">
                         <li>
                             <a href="#">
-                                <img src="{{ asset('images/icons/config.svg') }}" class="w-4 md:w-5 mr-2 md:mr-3" alt=""/>
+                                <x-svg.icon.config class="text-white" />
                                 Configurações
                             </a>
                         </li>
 
                         <li>
-                            <a href="{{ route('logout') }}" class="text-error">
-                                <img src="{{ asset('images/icons/logout.svg') }}" class="w-4 md:w-5 mr-2 md:mr-3" alt=""/>
-                                Encerrar sessão
-                            </a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+
+                                <button
+                                    type="submit"
+                                    class="flex items-center gap-2 bg-transparent border-0 p-0 text-white cursor-pointer"
+                                >
+                                    <x-svg.icon.logout class="text-white" />
+                                    Encerrar sessão
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\Enrollment;
+use App\Models\User;
 
 
 class GuardianController extends Controller
@@ -24,7 +25,7 @@ class GuardianController extends Controller
     }
     public function registered()
     {
-        return view('guardian.student.index');
+        return view('pages.student.index');
     }
     /**
      * Show the form for creating a new resource.
@@ -44,19 +45,19 @@ class GuardianController extends Controller
 
     public function forum()
     {
-        return view('guardian.forum');
+        return view('pages.forum.index');
     }
     public function chat()
     {
-        return view('guardian.chat');
+        return view('pages.chat.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $student)
     {
-        //
+
     }
 
     /**

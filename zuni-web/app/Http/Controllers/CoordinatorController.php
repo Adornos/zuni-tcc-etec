@@ -38,25 +38,14 @@ class CoordinatorController extends Controller
     public function forum()
     {
        
-            return view('coordinator.forum');
+            return view('pages.forum.index');
         
     }
 
     public function chat()
     {
         
-            return view('coordinator.chat');
-        
-    }
-
-    // Aprovação de matrículas
-    public function students()
-    {
-
-        // Validar dados de $students para disponibilizar depois.
-
-        
-            return view('coordinator.student.index');
+            return view('pages.chat.index');
         
     }
 
@@ -103,6 +92,7 @@ class CoordinatorController extends Controller
     public function showStudent($student)
     {
 
+
         $studentInfo = StudentSheet::where('id', $student)->firstOrFail();
 
         $studentInfo->load('enrollment');
@@ -110,6 +100,8 @@ class CoordinatorController extends Controller
         dd($studentInfo->enrollment);
 
         return view('coordinator.student.show', ['studentSheet' => $studentInfo]);
+        return view('pages.student.show', ['studentSheet' => $studentInfo]);
+        b089afd9eac39f12b94a18d17928734edfa0e6e9;
             
     }
 
@@ -127,8 +119,8 @@ class CoordinatorController extends Controller
         $user->status = UserStatus::ACTIVE;
         $user->save();
 
-        return redirect()->route('coordinator.enrollment.show', [
-            'enrollment' => $enrollment->student_id,
+        return redirect()->route('coordinator.student.show', [
+            'student' => $user,
         ]);
     }
 
@@ -146,19 +138,19 @@ class CoordinatorController extends Controller
         $user->status = UserStatus::INACTIVE;
         $user->save();
 
-        return redirect()->route('coordinator.enrollment.show', [
-            'enrollment' => $enrollment->student_id,
+        return redirect()->route('coordinator.student.show', [
+            'student' => $user,
         ]);
     }
 
     public function teachers(){
         
-        return view('coordinator.teacher.index');
+        return view('pages.teacher.index');
         
     }
     public function formTeacher(){
         
-        return view('coordinator.teacher.register');
+        return view('pages.teacher.register');
         
     }
     public function registerTeacher(Request $request)
@@ -170,7 +162,7 @@ class CoordinatorController extends Controller
         $teacherInfo = TeacherSheet::where('id', $teacher)->firstOrFail();
 
 
-        return view('coordinator.teacher.show', ['teacherInfo' => $teacherInfo]);
+        return view('pages.teacher.show', ['teacherInfo' => $teacherInfo]);
 
     }
     public function editTeacher(TeacherSheet $teacher){
@@ -215,7 +207,7 @@ class CoordinatorController extends Controller
     {
         $schedules = Schedule::where('student_id', $student->id)->get();
 
-        return view('coordinator.schedules.student');
+        return view('pages.schedule.student');
 
     }
 
@@ -224,7 +216,7 @@ class CoordinatorController extends Controller
         $schedules = Schedule::where('teacher_id', $teacher->id)->get();
 
         
-        return view('coordinator.schedules.teacher');
+        return view('pages.schedule.teacher');
 
     }
 
@@ -234,7 +226,7 @@ class CoordinatorController extends Controller
     {
         $reports = Report::latest()->paginate(20);
 
-        return view('coordinator.reports.index');
+        return view('pages.report.index');
 
     }
 
@@ -267,7 +259,7 @@ class CoordinatorController extends Controller
 
     public function createReport()
     {
-        return view('coordinator.reports.create');
+        return view('pages.report.create');
     }
 
     public function storeReport(Request $request)
@@ -288,7 +280,7 @@ class CoordinatorController extends Controller
 
     public function editReport(Report $report)
     {
-        return view('coordinator.reports.edit');
+        return view('pages.report.edit');
 
     }
 
