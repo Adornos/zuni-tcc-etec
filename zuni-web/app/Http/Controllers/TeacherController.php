@@ -20,14 +20,14 @@ class TeacherController extends Controller
 
     public function show(User $teacher)
     {   
-
+        
         if(isset($teacher)){
             $teacher = Auth::user();
             abort_unless($teacher->role === UserRole::TEACHER, 403, 'Usuário não permitido');
         } else {
             abort_unless(Auth::user()->role === UserRole::COORDINATOR, 403, 'Usuário não permitido');
         }
-
+                
         return view('pages.teacher.show', ['teacherInfo' => $teacher]);    
 
     }
@@ -40,7 +40,6 @@ class TeacherController extends Controller
 
     public function update(Request $request)
     {
-
         $user = Auth::user();
         abort_unless($user->role === UserRole::TEACHER, 403, 'Acesso negado.');
 

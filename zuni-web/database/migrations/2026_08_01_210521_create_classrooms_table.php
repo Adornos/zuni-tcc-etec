@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 use App\Enums\ClassroomGrade;
+use App\Enums\ClassroomShift;
 
 return new class extends Migration
 {
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->enum('grade', ClassroomGrade::cases());
 
             // Período
-            $table->enum('shift', ['morning','afternoon','full_time','evening',])->nullable();
+            $table->enum('shift', ClassroomShift::cases())->nullable();
 
             // Capacidade máxima
             $table->unsignedInteger('capacity')->nullable();

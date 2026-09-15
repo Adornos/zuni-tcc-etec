@@ -18,7 +18,7 @@
                             {{-- Foto --}}
                             <div class="p-[1vmax] flex flex-row">
     
-                                @if($teacherInfo->teacher->photo ?? false)
+                                @if($guardianInfo->teacher->photo ?? false)
     
                                     <div class="
                                         overflow-hidden
@@ -30,8 +30,8 @@
                                         h-[10vmax]
                                     ">
                                         <img
-                                            src="{{ asset('storage/' . $teacherInfo->teacher->photo) }}"
-                                            alt="Foto de {{ $teacherInfo->name }}"
+                                            src="{{ asset('storage/' . $guardianInfo->teacher->photo) }}"
+                                            alt="Foto de {{ $guardianInfo->name }}"
                                             class="w-full h-full object-cover"
                                         >
                                     </div>
@@ -86,7 +86,7 @@
                                         font-bold
                                         text-primary-dark
                                     ">
-                                        {{ $teacherInfo->name }}
+                                        {{ $guardianInfo->name }}
                                     </h1>
     
                                     <div class="flex flex-wrap items-center gap-x-[.5vmax] gap-y-[.2vmax]">
@@ -102,7 +102,7 @@
                                         <span class="text-base-content/60">
                                             Formação:
                                             <strong class="text-base-content">
-                                                {{ $teacherInfo->teacherSheet?->formation ?? 'Não informada' }}
+                                                {{ $guardianInfo->teacherSheet?->formation ?? 'Não informada' }}
                                             </strong>
                                         </span>
     
@@ -113,7 +113,7 @@
                                         <span class="text-base-content/60">
                                             Registro:
                                             <strong class="text-base-content">
-                                                {{ $teacherInfo->teacherSheet?->registration ?? 'Não informado' }}
+                                                {{ $guardianInfo->teacherSheet?->registration ?? 'Não informado' }}
                                             </strong>
                                         </span>
     
@@ -145,7 +145,7 @@
                                 text-[.8vmax]
                                 font-semibold
     
-                                {{ match($teacherInfo->status->value) {
+                                {{ match($guardianInfo->status->value) {
                                     'pending' => 'badge-warning',
                                     'active' => 'badge-success',
                                     'inactive' => 'badge-error',
@@ -156,7 +156,7 @@
     
                                 <span class="mr-[.3vmax] w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
     
-                                {{ $teacherInfo->status->label() }}
+                                {{ $guardianInfo->status->label() }}
     
                             </span>
     
@@ -166,13 +166,13 @@
                                 Id Nº
     
                                 <strong class="text-base-content">
-                                    {{ str_pad($teacherInfo->teacherSheet?->id, 4, '0', STR_PAD_LEFT) }}
+                                    {{ str_pad($guardianInfo->teacherSheet?->id, 4, '0', STR_PAD_LEFT) }}
                                 </strong>
     
                             </span>
-                            @if(auth()->user()->role->value === 'teacher')
+                            @if(auth()->user()->role->value === 'guardian')
                             <a 
-                                href="{{route('teacher.profile.edit')}}"
+                                href="{{route('guardian.profile.edit')}}"
                                 class="btn btn-primary"
                             >
                                 Editar
@@ -231,7 +231,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $teacherInfo->name }}
+                                {{ $guardianInfo->name }}
                             </p>
     
                         </div>
@@ -245,7 +245,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $teacherInfo->birth_date?->format('d/m/Y') ?? 'Não informado' }}
+                                {{ $guardianInfo->birth_date?->format('d/m/Y') ?? 'Não informado' }}
                             </p>
     
                         </div>
@@ -260,7 +260,7 @@
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
     
-                                {{ match($teacherInfo->gender) {
+                                {{ match($guardianInfo->gender) {
                                     'M' => 'Masculino',
                                     'F' => 'Feminino',
                                     'O' => 'Outro',
@@ -280,7 +280,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $teacherInfo->cpf ?? 'Não informado' }}
+                                {{ $guardianInfo->cpf ?? 'Não informado' }}
                             </p>
     
                         </div>
@@ -294,7 +294,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $teacherInfo->rg ?? 'Não informado' }}
+                                {{ $guardianInfo->rg ?? 'Não informado' }}
                             </p>
     
                         </div>
@@ -308,7 +308,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $teacherInfo->teacherSheet->registration ?? 'Não informado' }}
+                                {{ $guardianInfo->teacherSheet->registration ?? 'Não informado' }}
                             </p>
     
                         </div>
@@ -357,7 +357,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $teacherInfo->teacher->username ?? 'Não informado' }}
+                                {{ $guardianInfo->teacher->username ?? 'Não informado' }}
                             </p>
     
                         </div>
@@ -371,7 +371,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax] break-all">
-                                {{ $teacherInfo->teacher->email ?? 'Não informado' }}
+                                {{ $guardianInfo->teacher->email ?? 'Não informado' }}
                             </p>
     
                         </div>
@@ -385,7 +385,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $teacherInfo->phone ?? 'Não informado' }}
+                                {{ $guardianInfo->phone ?? 'Não informado' }}
                             </p>
     
                         </div>
@@ -441,7 +441,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $teacherInfo->teacherSheet?->formation ?? 'Não informada' }}
+                                {{ $guardianInfo->teacherSheet?->formation ?? 'Não informada' }}
                             </p>
     
                         </div>
@@ -455,7 +455,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $teacherInfo->teacherSheet?->specialization ?? 'Não informada' }}
+                                {{ $guardianInfo->teacherSheet?->specialization ?? 'Não informada' }}
                             </p>
     
                         </div>
@@ -469,7 +469,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $teacherInfo->teacherSheet?->registration ?? 'Não informado' }}
+                                {{ $guardianInfo->teacherSheet?->registration ?? 'Não informado' }}
                             </p>
     
                         </div>
@@ -483,7 +483,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $teacherInfo->teacherSheet?->hire_date?->format('d/m/Y') ?? 'Não informada' }}
+                                {{ $guardianInfo->teacherSheet?->hire_date?->format('d/m/Y') ?? 'Não informada' }}
                             </p>
     
                         </div>
@@ -538,7 +538,7 @@
                                 text-[.8vmax]
                                 font-semibold
     
-                                {{ match($teacherInfo->status->value) {
+                                {{ match($guardianInfo->status->value) {
                                     'pending' => 'badge-warning',
                                     'active' => 'badge-success',
                                     'inactive' => 'badge-error',
@@ -549,7 +549,7 @@
     
                                 <span class="mr-[.3vmax] w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
     
-                                {{$teacherInfo->status->label()}}
+                                {{$guardianInfo->status->label()}}
     
                             </span>
     
@@ -605,24 +605,24 @@
     
                     <div class="mt-[1.5vmax]">
     
-                        @if($teacherInfo->street || $teacherInfo->number)
+                        @if($guardianInfo->street || $guardianInfo->number)
     
                             <p class="text-[1vmax] font-medium">
-                                {{ $teacherInfo->street ?? '' }}
-                                @if($teacherInfo->number)
-                                    , {{ $teacherInfo->number }}
+                                {{ $guardianInfo->street ?? '' }}
+                                @if($guardianInfo->number)
+                                    , {{ $guardianInfo->number }}
                                 @endif
                             </p>
     
                             <p class="text-[1vmax] mt-[.2vmax]">
-                                {{ $teacherInfo->district ?? 'Bairro não informado' }}
+                                {{ $guardianInfo->district ?? 'Bairro não informado' }}
                             </p>
     
                             <p class="text-[.9vmax] text-base-content/60 mt-[.2vmax]">
-                                {{ $teacherInfo->city ?? 'Cidade não informada' }}
+                                {{ $guardianInfo->city ?? 'Cidade não informada' }}
     
-                                @if($teacherInfo->state)
-                                    — {{ $teacherInfo->state }}
+                                @if($guardianInfo->state)
+                                    — {{ $guardianInfo->state }}
                                 @endif
                             </p>
     
@@ -698,7 +698,7 @@
                             </p>
     
                             <p class="text-[.75vmax] text-base-content/60">
-                                {{ $teacherInfo->created_at?->format('d/m/Y H:i') }}
+                                {{ $guardianInfo->created_at?->format('d/m/Y H:i') }}
                             </p>
     
                         </div>
@@ -724,7 +724,7 @@
                             </p>
     
                             <p class="text-[.75vmax] text-base-content/60">
-                                {{ $teacherInfo->updated_at?->format('d/m/Y H:i') }}
+                                {{ $guardianInfo->updated_at?->format('d/m/Y H:i') }}
                             </p>
     
                         </div>
@@ -740,7 +740,7 @@
             {{-- INFORMAÇÕES ADICIONAIS --}}
             {{-- ========================================================= --}}
     
-            @if($teacherInfo->notes)
+            @if($guardianInfo->notes)
     
                 <div class="
                     card
@@ -768,7 +768,7 @@
                             whitespace-pre-line
                             mt-[1vmax]
                         ">
-                            {{ $teacherInfo->notes }}
+                            {{ $guardianInfo->notes }}
                         </p>
     
                     </div>

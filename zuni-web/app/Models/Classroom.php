@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ClassroomGrade;
+use App\Enums\ClassroomShift;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -24,6 +25,8 @@ class Classroom extends Model
         return [
             'grade' => ClassroomGrade::class,
             'capacity' => 'integer',
+            'shift' => ClassroomShift::class,
+
         ];
     }
 
