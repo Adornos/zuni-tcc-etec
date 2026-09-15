@@ -22,11 +22,7 @@ export default defineConfig({
         },
         host: '0.0.0.0',
         hmr: { 
-<<<<<<< HEAD
             host: '169.254.155.207'
-=======
-            host: '10.239.0.50'
->>>>>>> cabcbb62ba453dcfab9e54cf857e91aecacdd1a8
         }
     },
 });

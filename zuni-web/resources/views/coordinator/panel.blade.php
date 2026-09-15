@@ -29,13 +29,21 @@
     {{-- Cantina --}}
     <div class="card bg-base-100 shadow-md text-center pt-[1vmax]">
         <div class="card-body">
-            <h2 class="text-3xl font-bold">
-                15/02
-            </h2>
-    
-            <p class="text-base-content/60">
-                Próxima reunião 
-            </p>
+            <div class="flex flex-row justify-center gap-10">
+                <div>
+                    <h2 class="text-3xl font-bold">
+                        10
+                    </h2>
+            
+                    <p class="text-base-content/60">
+                        Mensagens pendentes
+                    </p>
+                </div>
+
+                <span class="text-5xl text-Cprimary">
+                    <x-svg.icon.blackboard/>
+                </span>
+            </div>
         </div>
     </div>
     
@@ -86,13 +94,22 @@
     {{-- Reunião --}}
     <div class="card bg-base-100 shadow-md text-center pt-[1vmax]">
         <div class="card-body">
-            <h2 class="text-3xl font-bold">
-                13/03
-            </h2>
-    
-            <p class="text-base-content/60">
-                Próxima reunião
-            </p>
+            <div class="flex flex-row justify-center gap-10">
+                <div>
+                    <h2 class="text-3xl font-bold">
+                        13/03
+                    </h2>
+                
+        
+                    <p class="text-base-content/60">
+                        Próxima reunião
+                    </p>
+                </div>
+                
+                <span class="text-5xl">
+                    <x-svg.icon.people/>
+                </span>
+            </div>
         </div>
     </div>
     
@@ -102,10 +119,9 @@
             <h3 class="font-semibold text-lg">
                 Rendimento por Turma
             </h3>
-    
-            <div class="flex items-center justify-center h-full text-base-content/50">
-                Gráfico aqui
-            </div>
+
+            <span>
+                <x-svg.icon.graph class="w-full h-full"/>
         </div>
     </div>
 </x-panel.coordinator>

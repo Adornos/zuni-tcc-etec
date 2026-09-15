@@ -298,7 +298,7 @@
 
                 {{-- Navegação --}}
                 <div class="flex-1 px-3 overflow-y-auto sm:pt-7">
-                    <ul class="menu w-full gap-2 md:gap-[2vmin] text-sm md:text-[1vmax]">
+                    <ul class="menu w-full gap-2 md:gap-[2.5vmin] text-sm md:text-[1vmax]">
                         @isset($aside)
                             {!! $aside  !!}
                         @else
