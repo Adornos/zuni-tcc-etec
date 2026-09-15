@@ -151,6 +151,7 @@
                         name="cpf"
                         type="text"
                         class="input input-bordered w-full"
+                        x-mask="999.999.999-99"
                         value="{{ old('cpf', $profile->cpf) }}"
                     >
 
@@ -165,6 +166,7 @@
                     <input
                         name="rg"
                         type="text"
+                        x-mask="99.999.999-9"
                         class="input input-bordered w-full"
                         value="{{ old('rg', $profile->rg) }}"
                     >
@@ -180,6 +182,7 @@
                     <input
                         name="phone"
                         type="text"
+                        x-mask="(99) 9999-9999"
                         class="input input-bordered w-full"
                         value="{{ old('phone', $profile->phone) }}"
                     >

@@ -24,6 +24,8 @@ class TeacherController extends Controller
         if(isset($teacher)){
             $teacher = Auth::user();
             abort_unless($teacher->role === UserRole::TEACHER, 403, 'Usuário não permitido');
+        } else {
+            abort_unless(Auth::user()->role === UserRole::COORDINATOR, 403, 'Usuário não permitido');
         }
 
         return view('pages.teacher.show', ['teacherInfo' => $teacher]);    

@@ -164,10 +164,10 @@ class EmployeeController extends Controller
         return match (Auth::user()->role) {
 
             UserRole::DIRECTOR => redirect()
-                ->route('director.employee.index')->with('success', 'Funcionário atualizado com sucesso.'),
+                ->route('director.employee.show')->with('success', 'Funcionário atualizado com sucesso.'),
 
             UserRole::COORDINATOR => redirect()
-                ->route('coordinator.teacher.index')->with('success', 'Professor atualizado com sucesso.'),
+                ->route('coordinator.teacher.show')->with('success', 'Professor atualizado com sucesso.'),
 
             UserRole::TEACHER => redirect()
                 ->route('teacher.profile')->with('success', 'Perfil atualizado com sucesso.'),
