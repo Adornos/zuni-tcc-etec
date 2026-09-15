@@ -12,7 +12,7 @@
                 class="hover:bg-white hover:text-Cprimary"
             >
                 <img 
-                class="w-[2.2vmax] mr-[1vmax] rounded-full " 
+                class="w-[2.2vmax] mr-[1vmax] rounded-full" 
                 src="https://ui-avatars.com/api/?name={{ auth()->user()->name[0] ?? 'Sem nome' }}" 
                 />
                 {{ auth()->user()->name }}
@@ -23,12 +23,9 @@
         <li>
             <a
                 href="{{ route('teacher.index') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="hover:bg-white hover:text-Cprimary gap-5"
             >
-                <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
-                src="{{ asset('images/icons/dashboard.svg') }}" 
-                />
+                <x-svg.icon.dashboard class="size-10"/>
                 Dashboard
             </a>
         </li>
@@ -37,9 +34,9 @@
         <li>
             <a
                 href="{{ route('teacher.classroom.index') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="hover:bg-white hover:text-Cprimary gap-5"
             >
-                <x-svg.icon.enroll/>
+                <x-svg.icon.enroll class="size-10"/>
                 Salas
             </a>
         </li>
@@ -48,12 +45,9 @@
         <li>
             <a
                 href="{{ route('teacher.schedule') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="hover:bg-white hover:text-Cprimary gap-5"
             >
-                <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
-                src="{{ asset('images/icons/schedule.svg') }}" 
-                />
+                <x-svg.icon.schedule class="size-10"/>
                 Cronograma
             </a>
         </li>
@@ -62,9 +56,9 @@
         <li>
             <a
                 href="{{ route('teacher.forum') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="hover:bg-white hover:text-Cprimary gap-5"
             >
-                <x-svg.icon.forum class="text-white" />
+                <x-svg.icon.forum class="size-10"/>
                 Mural
             </a>
         </li>
@@ -73,9 +67,9 @@
         <li>
             <a
                 href="{{ route('teacher.chat') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="hover:bg-white hover:text-Cprimary gap-5"
             >
-                <x-svg.icon.chat class="text-white" />
+                <x-svg.icon.chat class="size-10"/>
                 Chat
             </a>
         </li> 
