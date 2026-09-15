@@ -18,9 +18,7 @@
             <a href="/" class="flex items-center flex-col group px-3 hover:bg-Csecondary transition card hover:shadow-md">
                 <x-svg.logo.lockup class="w-25 h-11 text-Csecondary group-hover:text-white transition" />
             </a>
-
-            <!-- Navegação -->
-            <nav class="flex items-center gap-[1.5vmax]">
+            <nav class="hidden lg:flex items-center gap-[1.5vmax]">
 
                 <a href="#" class="font-medium text-Ctext hover:text-Cprimary-dark transition p-2.5 group transition">
                     <p class="group-hover:text-shadow-md transition">Sobre Nós</p>
@@ -56,8 +54,6 @@
                 <a href="#" class="mr-[3vmax] font-medium text-Ctext hover:text-Cprimary-dark transition p-2.5 group transition">
                     <p class="group-hover:text-shadow-md transition">Ajuda</p>
                 </a>
-
-                <!-- Login e Auth -->
                 @auth
                     <span class="text-sm">
                         <a
@@ -87,7 +83,6 @@
                         Entrar
                     </a>
 
-                    <!-- CTA Principal -->
                     <a href="{{route('register')}}"
                     class="px-5 py-2 rounded-full border-2 border-Csecondary bg-Csecondary text-white font-medium hover:bg-Csecondary-dark hover:border-Csecondary-dark transition">
                         Cadastrar-se
@@ -96,6 +91,96 @@
                 @endauth
 
             </nav>
+            <div class="dropdown dropdown-end lg:hidden">
+                <label tabindex="0" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </label>
+        
+                <ul tabindex="0"
+                    class="dropdown-content z-50 mt-3 w-56 rounded-2xl bg-white p-2 shadow-xl">
+
+                    <li>
+                        <a href="#">
+                            Sobre Nós
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Companhia
+                        </a>
+                    </li>
+
+                    <li>
+                        <details>
+                            <summary>
+                                Parceiros
+                            </summary>
+
+                            <ul>
+                                <li>
+                                    <a>
+                                        Escolas Parceiras
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a>
+                                        Seja um Parceiro
+                                    </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Ajuda
+                        </a>
+                    </li>
+
+                    @auth
+                        <li>
+                            <a
+                            @switch(auth()->user()->role->value)
+                                @case('student')    href="{{ route('student.index') }}"     @break 
+                                @case('guardian')   href="{{ route('guardian.index') }}"    @break 
+                                @case('teacher')    href="{{ route('teacher.index') }}"     @break 
+                                @case('admin')      href="{{ route('admin.index') }}"       @break 
+                            @endswitch
+                            >
+                                {{ auth()->user()->name }}
+                            </a>
+                        </li>
+
+                        <li>
+                            <form action="{{ route('logout') }}" method="get">
+                                @csrf
+                                <button type="submit">
+                                    Sair
+                                </button>
+                            </form>
+                        </li>
+                    @else
+                        <li>
+                            <a href="{{route('login')}}">
+                                Entrar
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{route('register')}}">
+                                Cadastrar-se
+                            </a>
+                        </li>
+                    @endauth
+
+                </ul>
+            </div>
 
         </div>
     </header>

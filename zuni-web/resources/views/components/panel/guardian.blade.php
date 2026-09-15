@@ -25,7 +25,7 @@
                 href="{{ route('guardian.index') }}"
                 class="hover:bg-white hover:text-Cprimary"
             >
-                <x-svg.icon.forum class="mr-[1vmax]" />
+                <x-svg.icon.forum class="mr-[1vmax]"/>
                 Dashboard
             </a>
         </li>

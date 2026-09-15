@@ -2,12 +2,12 @@
 
 ## Geral
 
-- [ ] `home.blade.php` // não está adaptada para celular // *Sobre Nós Companhia Parceiros ▼ Ajuda* não funcionam (e a navbar em geral)
+- [ ] `home.blade.php` // falta retirar o void branco no final no mobile// com *Sobre Nós Companhia Parceiros ▼ Ajuda* não funcionam (e a navbar em geral)
 - [ ] `welcome.blade.php`?
 
 ## Autenticação
 
-- [V] `auth/login.blade.php` mas não adaptada ao mobile
+- [V] `auth/login.blade.php`
 - [V] `auth/register.blade.php` //deve apresentar um erro ao cadastrrar um aluno com cpf igual
 
 ### Painéis
