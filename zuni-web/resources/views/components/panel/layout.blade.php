@@ -282,23 +282,23 @@
         </div>
 
         {{-- Sidebar (Drawer) --}}
-        <div class="drawer-side">
+        <div class="drawer-side panel-drawer-side">
             <label for="sidebar-drawer" class="drawer-overlay"></label>
             
-            <aside class="bg-Csecondary text-primary-content flex flex-col min-h-screen sm:pt-5">
+            <aside class="bg-Csecondary text-primary-content flex h-screen min-h-0 flex-col sm:pt-5 {{ request()->routeIs('coordinator.*') ? 'coordinator-sidebar w-72 max-w-[85vw] lg:w-64' : '' }}">
 
                 {{-- Botão de fechar --}}
 
                 {{-- Logo --}}
-                <div class="flex justify-center mt-6 md:mt-8 mb-6 md:mb-8 w-full h-8">
+                <div class="flex justify-center mt-2 md:mt-8 mb-2 md:mb-8 w-full h-8">
                     <a href="/">
                         <x-svg.logo.mark class="size-8 text-white hover:text-Cprimary transition" />
                     </a>
                 </div>
 
                 {{-- Navegação --}}
-                <div class="flex-1 px-3 overflow-y-auto sm:pt-7">
-                    <ul class="menu w-full gap-2 md:gap-[2.5vmin] text-sm md:text-[1vmax]">
+                <div class="panel-sidebar-nav min-h-0 flex-1 px-3 overflow-y-auto sm:pt-7">
+                    <ul class="menu w-full gap-0 md:gap-[2.5vmin] text-sm md:text-[1vmax] [&>li>a]:py-1.5 md:[&>li>a]:py-2">
                         @isset($aside)
                             {!! $aside  !!}
                         @else
@@ -308,8 +308,8 @@
                 </div>
 
                 {{-- Rodapé --}}
-                <div class="border-t border-primary-content/20 p-2 md:p-3">
-                    <ul class="menu w-full text-sm md:text-base">
+                <div class="border-t border-primary-content/20 p-1 md:p-3">
+                    <ul class="menu w-full text-sm md:text-base [&>li>a]:py-1 md:[&>li>a]:py-2">
                         <li>
                             <a href="#">
                                 <x-svg.icon.config class="text-white" />

@@ -6,13 +6,14 @@
 
     <x-slot:aside>
     {{-- Perfil --}}
-        <li>
+        <li class="w-full">
             <a
                 href="{{ route(auth()->user()->role->value.'.profile') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="group w-full hover:bg-white hover:text-Cprimary"
+                style="{{ request()->routeIs('coordinator.profile') ? 'background-color: #fff; color: #0a155c; font-weight: 600;' : '' }}"
             >
                 <img 
-                class="w-[2.2vmax] mr-[1vmax] rounded-full " 
+                class="w-8 h-8 mr-3 shrink-0 rounded-full"
                 src="https://ui-avatars.com/api/?name={{ auth()->user()->name[0] ?? 'Sem nome' }}" 
                 />
                 {{auth()->user()->name}}
@@ -20,13 +21,15 @@
         </li>
 
     {{-- Dashboard --}}
-        <li>
+        <li class="w-full">
             <a
                 href="{{ route('coordinator.index') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="group w-full hover:bg-white hover:text-Cprimary"
+                style="{{ request()->routeIs('coordinator.index') ? 'background-color: #fff; color: #0a155c; font-weight: 600;' : '' }}"
             >
                 <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
+                class="w-6 h-6 mr-3 shrink-0 group-hover:[filter:brightness(0)_saturate(100%)]"
+                style="{{ request()->routeIs('coordinator.index') ? 'filter: brightness(0) saturate(100%);' : '' }}"
                 src="{{ asset('images/icons/dashboard.svg') }}" 
                 />
                 Dashboard
@@ -34,13 +37,15 @@
         </li>
 
         {{-- Matrículas --}}
-        <li>
+        <li class="w-full">
             <a
                 href="{{ route('coordinator.student.index') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="group w-full hover:bg-white hover:text-Cprimary"
+                style="{{ request()->routeIs('coordinator.student.*') ? 'background-color: #fff; color: #0a155c; font-weight: 600;' : '' }}"
             >
                 <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
+                class="w-6 h-6 mr-3 shrink-0 group-hover:[filter:brightness(0)_saturate(100%)]"
+                style="{{ request()->routeIs('coordinator.student.*') ? 'filter: brightness(0) saturate(100%);' : '' }}"
                 src="{{ asset('images/icons/enroll.svg') }}" 
                 />
                 Matrículas
@@ -48,41 +53,45 @@
         </li>
 
         {{-- Matrículas --}}
-        <li>
+        <li class="w-full">
             <a
                 href="{{ route('coordinator.teacher.index') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="group w-full hover:bg-white hover:text-Cprimary"
+                style="{{ request()->routeIs('coordinator.teacher.*') ? 'background-color: #fff; color: #0a155c; font-weight: 600;' : '' }}"
             >
-                <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
-                src="{{ asset('images/icons/teacher.svg') }}" 
+                <x-svg.icon.people
+                    class="w-6 h-6 mr-3 shrink-0 brightness-0 invert group-hover:invert-0"
+                    style="{{ request()->routeIs('coordinator.teacher.*') ? 'filter: brightness(0) saturate(100%);' : '' }}"
                 />
                 Professores
             </a>
 
         </li>
         {{-- Salas --}}
-        <li>
+        <li class="w-full">
             <a
                 href="{{ route('coordinator.classroom.index') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="group w-full hover:bg-white hover:text-Cprimary"
+                style="{{ request()->routeIs('coordinator.classroom.*') ? 'background-color: #fff; color: #0a155c; font-weight: 600;' : '' }}"
             >
-                <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
-                src="{{ asset('images/icons/classroom.svg') }}" 
+                <x-svg.icon.blackboard
+                    class="w-6 h-6 mr-3 shrink-0 brightness-0 invert group-hover:invert-0"
+                    style="{{ request()->routeIs('coordinator.classroom.*') ? 'filter: brightness(0) saturate(100%);' : '' }}"
                 />
                 Salas de Aula
             </a>
         </li>
 
         {{-- Cronogramas --}}
-        <li>
+        <li class="w-full">
             <a
                 href="{{ route('coordinator.schedules.index') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="group w-full hover:bg-white hover:text-Cprimary"
+                style="{{ request()->routeIs('coordinator.schedules.*') ? 'background-color: #fff; color: #0a155c; font-weight: 600;' : '' }}"
             >
                 <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
+                class="w-6 h-6 mr-3 shrink-0 group-hover:[filter:brightness(0)_saturate(100%)]"
+                style="{{ request()->routeIs('coordinator.schedules.*') ? 'filter: brightness(0) saturate(100%);' : '' }}"
                 src="{{ asset('images/icons/schedule.svg') }}" 
                 />
                 Cronogramas
@@ -90,13 +99,15 @@
         </li>
 
         {{-- Relatórios --}}
-        <li>
+        <li class="w-full">
             <a
                 href="{{ route('coordinator.report.index') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="group w-full hover:bg-white hover:text-Cprimary"
+                style="{{ request()->routeIs('coordinator.report.*') ? 'background-color: #fff; color: #0a155c; font-weight: 600;' : '' }}"
             >
                 <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
+                class="w-6 h-6 mr-3 shrink-0 group-hover:[filter:brightness(0)_saturate(100%)]"
+                style="{{ request()->routeIs('coordinator.report.*') ? 'filter: brightness(0) saturate(100%);' : '' }}"
                 src="{{ asset('images/icons/reports.svg') }}" 
                 />
                 Relatórios
@@ -104,13 +115,15 @@
         </li>
 
         {{-- Mural --}}
-        <li>
+        <li class="w-full">
             <a
                 href="{{ route('coordinator.forum') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="group w-full hover:bg-white hover:text-Cprimary"
+                style="{{ request()->routeIs('coordinator.forum') ? 'background-color: #fff; color: #0a155c; font-weight: 600;' : '' }}"
             >
                 <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
+                class="w-6 h-6 mr-3 shrink-0 group-hover:[filter:brightness(0)_saturate(100%)]"
+                style="{{ request()->routeIs('coordinator.forum') ? 'filter: brightness(0) saturate(100%);' : '' }}"
                 src="{{ asset('images/icons/forum.svg') }}" 
                 />
                 Mural
@@ -118,13 +131,15 @@
         </li>
 
         {{-- Chat --}}
-        <li>
+        <li class="w-full">
             <a
                 href="{{ route('coordinator.chat') }}"
-                class="hover:bg-white hover:text-Cprimary"
+                class="group w-full hover:bg-white hover:text-Cprimary"
+                style="{{ request()->routeIs('coordinator.chat') ? 'background-color: #fff; color: #0a155c; font-weight: 600;' : '' }}"
             >
                 <img 
-                class="w-[2.2vmax] mr-[1vmax]" 
+                class="w-6 h-6 mr-3 shrink-0 group-hover:[filter:brightness(0)_saturate(100%)]"
+                style="{{ request()->routeIs('coordinator.chat') ? 'filter: brightness(0) saturate(100%);' : '' }}"
                 src="{{ asset('images/icons/chat.svg') }}" 
                 />
                 Chat

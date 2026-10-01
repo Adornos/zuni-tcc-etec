@@ -104,12 +104,12 @@
         </div>
     </section>
 
-    <section class="w-full py-16 px-6 bg-linear-to-b from-Cprimary-light to-white">
+    <section class="w-full pt-16 pb-4 px-6 bg-linear-to-b from-Cprimary-light to-white md:py-16">
         <div class="max-w-6xl mx-auto">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-x-12 gap-y-6">
 
-                <div class="space-y-6">
+                <div class="order-1 space-y-6 md:col-start-1 md:row-start-1">
 
                     <h2 class="text-3xl md:text-4xl font-bold text-Ctext leading-tight">
                         ACOMPANHE SEU FILHO MESMO NO TRABALHO!
@@ -120,28 +120,28 @@
                         Instale o Zuni e acompanhe o dia do seu filho!
                     </p>
 
-                    <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                </div>
 
-                        <a
-                            href="#"
-                            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-Csecondary text-white font-semibold hover:bg-Csecondary-dark transition"
-                        >
-                            Acesse no seu iPhone
-                            <span>→</span>
-                        </a>
+                <div class="order-3 flex flex-col sm:flex-row gap-4 pt-2 md:col-start-1 md:row-start-2">
 
-                        <a
-                            href="#"
-                            class="inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-Cprimary text-Cprimary font-semibold bg-white hover:bg-Cprimary hover:text-white transition"
-                        >
-                            Acesse no android
-                        </a>
+                    <a
+                        href="#"
+                        class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-Csecondary text-white font-semibold hover:bg-Csecondary-dark transition"
+                    >
+                        Acesse no seu iPhone
+                        <span>→</span>
+                    </a>
 
-                    </div>
+                    <a
+                        href="#"
+                        class="inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-Cprimary text-Cprimary font-semibold bg-white hover:bg-Cprimary hover:text-white transition"
+                    >
+                        Acesse no android
+                    </a>
 
                 </div>
 
-                <div class="relative flex justify-center items-center">
+                <div class="order-2 relative flex justify-center items-center md:col-start-2 md:row-start-1 md:row-span-2">
 
                     <div class="absolute bottom-0 w-[40vmin] h-[40vmin] bg-Csecondary">
                     </div>
@@ -149,7 +149,7 @@
                     <img
                         src="{{ asset('images/home/img-1.svg') }}"
                         alt="Zuni app preview"
-                        class="relative bottom-0 z-10 max-w-[80vmin]"
+                        class="relative bottom-0 z-10 max-w-[65vmin] md:max-w-[80vmin]"
                     >
 
                 </div>
