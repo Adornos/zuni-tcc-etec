@@ -4,9 +4,9 @@
     <section class="slogan relative overflow-hidden py-12 px-6 sm:py-16 lg:h-[80vmin] lg:min-h-0 lg:px-0 lg:py-0">
 
         <div class="relative z-10 mx-auto flex w-full max-w-[500px] flex-col gap-5 text-Ctext
-            lg:absolute lg:left-[20vmax] lg:top-[27vmin] lg:mx-0 lg:w-auto lg:max-w-[28.8vw] lg:gap-[1.2max]">
+            lg:absolute lg:left-[19vmax] lg:top-[20vmin] lg:mx-0 lg:w-auto lg:max-w-[28.8vw] lg:gap-[1.2max]">
 
-            <h1 class="text-4xl leading-tight font-bold sm:text-5xl lg:text-[3vmax] lg:leading-[1.2em]">
+            <h1 class="text-4xl leading-tight font-bold w-[35vmax] sm:text-5xl lg:text-[3.5vmax] lg:leading-[1.2em]">
                 Onde a Tecnologia Encontra a Educação
             </h1>
 
@@ -31,8 +31,8 @@
 
         <img
             src="{{ asset('images/home/img-0.svg') }}"
-            alt=""
-            class="kid absolute z-10 hidden lg:bottom-0 lg:right-[8vw] lg:block lg:w-[32vmax] lg:max-w-none"
+            alt="criança escolar"
+            class="kid absolute z-10 hidden lg:bottom-0 lg:right-[8vw] lg:block lg:w-[40vmax] lg:max-w-none "
         >
 
     </section>
