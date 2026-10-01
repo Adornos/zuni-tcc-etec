@@ -1,7 +1,7 @@
 <x-layout>
     <x-slot:title>Home</x-slot:title>
 
-    <section class="slogan relative overflow-hidden py-12 px-6 sm:py-16 lg:h-[80vmin] lg:min-h-0 lg:px-0 lg:py-0">
+    <section class="slogan relative overflow-hidden py-12 px-6 sm:py-16 lg:h-[80vmin] lg:min-h-0 lg:px-0 lg:py-0 bg-gradient-to-b from-Cprimary-light via-white to-white">
 
         <div class="relative z-10 mx-auto flex w-full max-w-[500px] flex-col gap-5 text-Ctext
             lg:absolute lg:left-[19vmax] lg:top-[20vmin] lg:mx-0 lg:w-auto lg:max-w-[28.8vw] lg:gap-[1.2max]">
@@ -37,74 +37,61 @@
 
     </section>
 
-    <section class="propose w-full py-16 px-6 bg-linear-to-b from-white to-Cprimary-light">
+    <section class="features w-full py-30 px-6 bg-linear-to-b from-white to-Cprimary-light">
         <div class="max-w-6xl mx-auto">
-            
-            <h2 class="text-3xl md:text-4xl font-bold text-Ctext mb-10 text-center">
-                Nosso Diferencial
-            </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-                <div class="text-center p-6 rounded-4xl bg-gray-50 shadow-[4px_4px_20px_rgba(0,0,0,0.3)]">
-                    <h3 class="text-xl font-semibold text-Ctext mb-3">
-                        Contato Direto com os professores
-                    </h3>
+            @php
+                $features = [
+                    [
+                        'img'   => 'images/home/img-3.png',
+                        'alt'   => 'Criança sorrindo com mochila',
+                        'title' => 'Controle Completo',
+                        'text'  => 'Acompanhe o desempenho, a frequência e as principais atividades do seu filho de maneira simples e acessível.',
+                    ],
+                    [
+                        'img'   => 'images/home/img-4.png',
+                        'alt'   => 'Família sorrindo junta',
+                        'title' => 'Gestão Simplificada',
+                        'text'  => 'Tenha todas as informações escolares organizadas em um só lugar, facilitando a rotina e o gerenciamento da escola.',
+                    ],
+                    [
+                        'img'   => 'images/home/img-5.png',
+                        'alt'   => 'Professora sorrindo',
+                        'title' => 'Contato Integrado',
+                        'text'  => 'Mantenha uma comunicação mais rápida e eficiente entre responsáveis, professores e toda a comunidade escolar.',
+                    ],
+                ];
+            @endphp
 
-                    <p class="text-Ctext leading-relaxed">
-                        No Zuni é possível os pais dos alunos mandarem mensagens diretamente com os professores em tempo real para tirar dúvidas, de forma fácil, simples e prática
-                    </p>
-                </div>
-                <div class="text-center p-6 rounded-4xl bg-gray-50 shadow-[4px_4px_20px_rgba(0,0,0,0.3)]">
-                    <h3 class="text-xl font-semibold text-Ctext mb-3">
-                        Contato Direto com os professores
-                    </h3>
-                    <p class="text-Ctext leading-relaxed">
-                        No Zuni é possível os pais dos alunos mandarem mensagens diretamente com os professores em tempo real para tirar dúvidas, de forma fácil, simples e prática
-                    </p>
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-14">
 
-                <div class="text-center p-6 rounded-4xl bg-gray-50 shadow-[4px_4px_20px_rgba(0,0,0,0.3)]">
-                    <h3 class="text-xl font-semibold text-Ctext mb-3">
-                        Sistema próprio pra cantina!
-                    </h3>
+                @foreach ($features as $feature)
+                    <div class="flex flex-col items-center md:items-start max-w-sm mx-auto md:mx-0 pb-[2vmax]">
 
-                    <p class="text-Ctext leading-relaxed">
-                        As escolas que utilizam o nosso sistema possuem um próprio sistema para pagamento dos lanches, utilizando créditos digitais adicionados pelos pais dentro do próprio aplicativo Zuni, otimizando o tempo de lanche dos pequenos e facilitando a organização da cantina.
-                    </p>
-                </div>
-                <div class="text-center p-6 rounded-4xl bg-gray-50 shadow-[4px_4px_20px_rgba(0,0,0,0.3)]">
-                    <h3 class="text-xl font-semibold text-Ctext mb-3">
-                        Sistema próprio pra cantina!
-                    </h3>
-                    <p class="text-Ctext leading-relaxed">
-                        As escolas que utilizam o nosso sistema possuem um próprio sistema para pagamento dos lanches, utilizando créditos digitais adicionados pelos pais dentro do próprio aplicativo Zuni, otimizando o tempo de lanche dos pequenos e facilitando a organização da cantina.
-                    </p>
-                </div>
+                        <div class="w-48 h-48 lg:w-56 lg:h-56 rounded-full bg-Csecondary overflow-hidden mb-8 self-center">
+                            <img
+                                src="{{ asset($feature['img']) }}"
+                                alt="{{ $feature['alt'] }}"
+                                class="w-full h-full object-cover object-top"
+                            >
+                        </div>
 
-                <div class="text-center p-6 rounded-4xl bg-gray-50 shadow-[4px_4px_20px_rgba(0,0,0,0.3)]">
-                    <h3 class="text-xl font-semibold text-Ctext mb-3">
-                        Contato Direto com os professores
-                    </h3>
+                        <h3 class="text-2xl lg:text-3xl font-bold uppercase text-Ctext mb-4 text-center md:text-left">
+                            {{ $feature['title'] }}
+                        </h3>
 
-                    <p class="text-Ctext leading-relaxed">
-                        No Zuni é possível os pais dos alunos mandarem mensagens diretamente com os professores em tempo real para tirar dúvidas, de forma fácil, simples e prática
-                    </p>
-                </div>
-                <div class="text-center p-6 rounded-4xl bg-gray-50 shadow-[4px_4px_20px_rgba(0,0,0,0.3)]">
-                    <h3 class="text-xl font-semibold text-Ctext mb-3">
-                        Contato Direto com os professores
-                    </h3>
-                    <p class="text-Ctext leading-relaxed">
-                        No Zuni é possível os pais dos alunos mandarem mensagens diretamente com os professores em tempo real para tirar dúvidas, de forma fácil, simples e prática
-                    </p>
-                </div>
+                        <p class="text-Ctext text-base leading-relaxed text-justify">
+                            {{ $feature['text'] }}
+                        </p>
+
+                    </div>
+                @endforeach
 
             </div>
         </div>
     </section>
 
-    <section class="w-full pt-16 pb-4 px-6 bg-linear-to-b from-Cprimary-light to-white md:py-16">
+    <section class="w-full pt-16 pb-4 px-6 py-30 bg-linear-to-b from-Cprimary-light to-white md:py-16">
         <div class="max-w-6xl mx-auto">
             
             <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-x-12 gap-y-6">

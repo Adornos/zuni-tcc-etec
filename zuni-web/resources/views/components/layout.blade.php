@@ -11,7 +11,7 @@
 </head>
 
 <body class="min-h-screen flex flex-col bg-white font-sans">
-    <header class="sticky top-0 z-50 w-full px-8 py-4 bg-[#e7effa]/90 backdrop-blur-sm">
+    <header class="sticky top-0 z-50 w-full px-8 py-4 bg-gradient-to-t from-Cprimary-light via-white to-white backdrop-blur-sm">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
 
             <!-- Logo -->
