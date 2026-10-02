@@ -1,22 +1,22 @@
 <x-dynamic-component :component="'panel.' . auth()->user()->role->value">
-    <div class="card bg-base-200 h-fit shadow-xl p-6 col-span-4 row-span-4">
+    <div class="card col-span-1 row-span-1 h-fit min-w-0 bg-base-200 p-3 shadow-xl sm:col-span-2 sm:p-4 lg:col-span-4 lg:row-span-4 lg:p-6 max-[639px]:[&_h1]:text-2xl max-[639px]:[&_h2]:text-lg max-[639px]:[&_p]:text-base max-[639px]:[&_p.uppercase]:text-sm max-[639px]:[&_span]:text-sm">
     
-        <div class="grid grid-cols-1 gap-[1vmax]">
+        <div class="grid min-w-0 grid-cols-1 gap-3 sm:gap-4">
     
             {{-- ========================================================= --}}
             {{-- HEADER --}}
             {{-- ========================================================= --}}
     
             <div class="card bg-base-100 shadow-md col-span-1 md:col-span-12">
-                <div class="card-body p-[1.5vmax]">
+                <div class="card-body min-w-0 p-4 sm:p-6">
     
-                    <div class="flex flex-col gap-[1.5vmax] md:flex-row md:items-center md:justify-between">
+                    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
     
                         {{-- Informações do professor --}}
-                        <div class="flex items-center">
+                        <div class="flex min-w-0 flex-col items-center text-center md:flex-row md:text-left">
     
                             {{-- Foto --}}
-                            <div class="p-[1vmax] flex flex-row">
+                            <div class="flex shrink-0 flex-col items-center p-2 md:flex-row md:p-4">
     
                                 @if($teacherInfo->teacher->photo ?? false)
     
@@ -26,8 +26,10 @@
                                         border
                                         border-base-300
                                         bg-base-200
-                                        w-[10vmax]
-                                        h-[10vmax]
+                                        h-20
+                                        w-20
+                                        sm:h-24
+                                        sm:w-24
                                     ">
                                         <img
                                             src="{{ asset('storage/' . $teacherInfo->teacher->photo) }}"
@@ -48,13 +50,15 @@
                                         border-base-300
                                         bg-base-200
                                         text-base-content/40
-                                        w-[10vmax]
-                                        h-[10vmax]
+                                        h-20
+                                        w-20
+                                        sm:h-24
+                                        sm:w-24
                                     ">
     
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
-                                            class="w-[3vmax] h-[3vmax]"
+                                            class="h-8 w-8"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"
@@ -73,15 +77,15 @@
     
     
                                 <div class="
-                                    p-[2vmax]
+                                    min-w-0 p-2 text-center md:p-4 md:text-left
                                     items-center
-                                    gap-x-[.5vmax]
-                                    mt-[.3vmax]
-                                    text-[.9vmax]
+                                    gap-x-2
+                                    mt-1
+                                    text-sm
                                 ">
     
                                     <h1 class="
-                                        text-[2vmax]
+                                        break-words text-2xl sm:text-3xl
                                         font-Sans
                                         font-bold
                                         text-primary-dark
@@ -89,28 +93,28 @@
                                         {{ $teacherInfo->name }}
                                     </h1>
     
-                                    <div class="flex flex-wrap items-center gap-x-[.5vmax] gap-y-[.2vmax]">
+                                    <div class="flex flex-col items-center gap-y-1 md:flex-row md:flex-wrap md:items-center md:gap-x-2">
     
                                         <span class="text-base-content/60">
                                             Professor
                                         </span>
     
-                                        <span class="text-base-content/40">
+                                        <span class="hidden text-base-content/40 md:inline">
                                             •
                                         </span>
     
-                                        <span class="text-base-content/60">
+                                        <span class="w-full text-base-content/60 md:w-auto">
                                             Formação:
                                             <strong class="text-base-content">
                                                 {{ $teacherInfo->teacherSheet?->formation ?? 'Não informada' }}
                                             </strong>
                                         </span>
     
-                                        <span class="text-base-content/40">
+                                        <span class="hidden text-base-content/40 md:inline">
                                             •
                                         </span>
     
-                                        <span class="text-base-content/60">
+                                        <span class="w-full text-base-content/60 md:w-auto">
                                             Registro:
                                             <strong class="text-base-content">
                                                 {{ $teacherInfo->teacherSheet?->registration ?? 'Não informado' }}
@@ -132,7 +136,7 @@
                             flex-row
                             items-center
                             justify-between
-                            gap-[1.5vmax]
+                            gap-4
                             md:flex-col
                             md:items-end
                         ">
@@ -140,9 +144,9 @@
                             <span class="
                                 badge
                                 rounded-full
-                                px-[1vmax]
-                                py-[1vmax]
-                                text-[.8vmax]
+                                px-3
+                                py-2
+                                text-sm
                                 font-semibold
     
                                 {{ match($teacherInfo->status->value) {
@@ -154,14 +158,14 @@
                                 } }}
                             ">
     
-                                <span class="mr-[.3vmax] w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
+                                <span class="mr-1 h-2 w-2 rounded-full bg-current"></span>
     
                                 {{ $teacherInfo->status->label() }}
     
                             </span>
     
     
-                            <span class="text-[.85vmax] text-base-content/60">
+                            <span class="text-sm text-base-content/60">
     
                                 Id Nº
     
@@ -173,7 +177,7 @@
                             @if(auth()->user()->role->value === 'teacher')
                             <a 
                                 href="{{route('teacher.profile.edit')}}"
-                                class="btn btn-primary"
+                                class="btn btn-primary min-h-11 text-base"
                             >
                                 Editar
                             </a>
@@ -199,13 +203,13 @@
                 md:col-span-7
             ">
     
-                <div class="card-body p-[1.5vmax]">
+                <div class="card-body min-w-0 p-4 sm:p-6">
     
                     <h2 class="
                         flex
                         items-center
-                        gap-[.5vmax]
-                        text-[1.1vmax]
+                        gap-2
+                        text-lg
                         font-bold
                         uppercase
                         text-error
@@ -218,19 +222,19 @@
                         grid
                         grid-cols-1
                         sm:grid-cols-2
-                        gap-x-[3vmax]
-                        gap-y-[1.5vmax]
-                        mt-[1.5vmax]
+                        gap-x-6
+                        gap-y-5
+                        mt-5
                     ">
     
                         {{-- Nome --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 Nome completo
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax]">
+                            <p class="mt-1 text-base font-medium">
                                 {{ $teacherInfo->name }}
                             </p>
     
@@ -240,11 +244,11 @@
                         {{-- Nascimento --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 Data de nascimento
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax]">
+                            <p class="mt-1 text-base font-medium">
                                 {{ $teacherInfo->birth_date?->format('d/m/Y') ?? 'Não informado' }}
                             </p>
     
@@ -254,11 +258,11 @@
                         {{-- Sexo --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 Sexo
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax]">
+                            <p class="mt-1 text-base font-medium">
     
                                 {{ match($teacherInfo->gender) {
                                     'M' => 'Masculino',
@@ -275,11 +279,11 @@
                         {{-- CPF --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 CPF
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax]">
+                            <p class="mt-1 text-base font-medium">
                                 {{ $teacherInfo->cpf ?? 'Não informado' }}
                             </p>
     
@@ -289,11 +293,11 @@
                         {{-- RG --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 RG
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax]">
+                            <p class="mt-1 text-base font-medium">
                                 {{ $teacherInfo->rg ?? 'Não informado' }}
                             </p>
     
@@ -303,11 +307,11 @@
                         {{-- Registro --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 Matrícula / Registro
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax]">
+                            <p class="mt-1 text-base font-medium">
                                 {{ $teacherInfo->teacherSheet->registration ?? 'Não informado' }}
                             </p>
     
@@ -332,13 +336,13 @@
                 md:col-span-5
             ">
     
-                <div class="card-body p-[1.5vmax]">
+                <div class="card-body min-w-0 p-4 sm:p-6">
     
                     <h2 class="
                         flex
                         items-center
-                        gap-[.5vmax]
-                        text-[1.1vmax]
+                        gap-2
+                        text-lg
                         font-bold
                         uppercase
                         text-error
@@ -347,16 +351,16 @@
                     </h2>
     
     
-                    <div class="space-y-[1.2vmax] mt-[1.5vmax]">
+                    <div class="mt-5 space-y-5">
     
                         {{-- Username --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 Usuário
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax]">
+                            <p class="mt-1 text-base font-medium break-words">
                                 {{ $teacherInfo->teacher->username ?? 'Não informado' }}
                             </p>
     
@@ -366,11 +370,11 @@
                         {{-- E-mail --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 E-mail
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax] break-all">
+                            <p class="mt-1 break-all text-base font-medium">
                                 {{ $teacherInfo->teacher->email ?? 'Não informado' }}
                             </p>
     
@@ -380,11 +384,11 @@
                         {{-- Telefone --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 Telefone
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax]">
+                            <p class="mt-1 text-base font-medium break-words">
                                 {{ $teacherInfo->phone ?? 'Não informado' }}
                             </p>
     
@@ -409,13 +413,13 @@
                 md:col-span-7
             ">
     
-                <div class="card-body p-[1.5vmax]">
+                <div class="card-body min-w-0 p-4 sm:p-6">
     
                     <h2 class="
                         flex
                         items-center
-                        gap-[.5vmax]
-                        text-[1.1vmax]
+                        gap-2
+                        text-lg
                         font-bold
                         uppercase
                         text-error
@@ -428,19 +432,19 @@
                         grid
                         grid-cols-1
                         sm:grid-cols-2
-                        gap-x-[3vmax]
-                        gap-y-[1.5vmax]
-                        mt-[1.5vmax]
+                        gap-x-6
+                        gap-y-5
+                        mt-5
                     ">
     
                         {{-- Formação --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 Formação
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax]">
+                            <p class="mt-1 text-base font-medium break-words">
                                 {{ $teacherInfo->teacherSheet?->formation ?? 'Não informada' }}
                             </p>
     
@@ -450,11 +454,11 @@
                         {{-- Especialização --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 Especialização
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax]">
+                            <p class="mt-1 text-base font-medium break-words">
                                 {{ $teacherInfo->teacherSheet?->specialization ?? 'Não informada' }}
                             </p>
     
@@ -464,11 +468,11 @@
                         {{-- Matrícula --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 Matrícula / Registro
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax]">
+                            <p class="mt-1 text-base font-medium">
                                 {{ $teacherInfo->teacherSheet?->registration ?? 'Não informado' }}
                             </p>
     
@@ -478,11 +482,11 @@
                         {{-- Contratação --}}
                         <div>
     
-                            <p class="text-[.7vmax] uppercase text-base-content/60">
+                            <p class="text-sm uppercase text-base-content/60">
                                 Data de contratação
                             </p>
     
-                            <p class="text-[1vmax] font-medium mt-[.2vmax]">
+                            <p class="mt-1 text-base font-medium">
                                 {{ $teacherInfo->teacherSheet?->hire_date?->format('d/m/Y') ?? 'Não informada' }}
                             </p>
     
@@ -507,13 +511,13 @@
                 md:col-span-5
             ">
     
-                <div class="card-body p-[1.5vmax]">
+                <div class="card-body min-w-0 p-4 sm:p-6">
     
                     <h2 class="
                         flex
                         items-center
-                        gap-[.5vmax]
-                        text-[1.1vmax]
+                        gap-2
+                        text-lg
                         font-bold
                         uppercase
                         text-error
@@ -522,20 +526,20 @@
                     </h2>
     
     
-                    <div class="mt-[1.5vmax]">
+                    <div class="mt-5">
     
-                        <p class="text-[.7vmax] uppercase text-base-content/60">
+                        <p class="text-sm uppercase text-base-content/60">
                             Situação atual
                         </p>
     
-                        <div class="mt-[.7vmax]">
+                        <div class="mt-3">
     
                             <span class="
                                 badge
                                 rounded-full
-                                px-[1vmax]
-                                py-[1vmax]
-                                text-[.8vmax]
+                                px-3
+                                py-2
+                                text-sm
                                 font-semibold
     
                                 {{ match($teacherInfo->status->value) {
@@ -547,7 +551,7 @@
                                 } }}
                             ">
     
-                                <span class="mr-[.3vmax] w-[.35vmax] h-[.35vmax] rounded-full bg-current"></span>
+                                <span class="mr-1 h-2 w-2 rounded-full bg-current"></span>
     
                                 {{$teacherInfo->status->label()}}
     
@@ -562,9 +566,9 @@
                         grid
                         grid-cols-1
                         sm:grid-cols-2
-                        gap-[.7vmax]
+                        gap-3
                         mt-auto
-                        pt-[1.5vmax]
+                        pt-5
                     ">
     
     
@@ -588,13 +592,13 @@
                 md:col-span-7
             ">
     
-                <div class="card-body p-[1.5vmax]">
+                <div class="card-body min-w-0 p-4 sm:p-6">
     
                     <h2 class="
                         flex
                         items-center
-                        gap-[.5vmax]
-                        text-[1.1vmax]
+                        gap-2
+                        text-lg
                         font-bold
                         uppercase
                         text-error
@@ -603,22 +607,22 @@
                     </h2>
     
     
-                    <div class="mt-[1.5vmax]">
+                    <div class="mt-5">
     
                         @if($teacherInfo->street || $teacherInfo->number)
     
-                            <p class="text-[1vmax] font-medium">
+                            <p class="text-base font-medium break-words">
                                 {{ $teacherInfo->street ?? '' }}
                                 @if($teacherInfo->number)
                                     , {{ $teacherInfo->number }}
                                 @endif
                             </p>
     
-                            <p class="text-[1vmax] mt-[.2vmax]">
+                            <p class="mt-1 text-base break-words">
                                 {{ $teacherInfo->district ?? 'Bairro não informado' }}
                             </p>
     
-                            <p class="text-[.9vmax] text-base-content/60 mt-[.2vmax]">
+                            <p class="mt-1 text-base text-base-content/60 break-words">
                                 {{ $teacherInfo->city ?? 'Cidade não informada' }}
     
                                 @if($teacherInfo->state)
@@ -628,7 +632,7 @@
     
                         @else
     
-                            <p class="text-[.9vmax] text-base-content/50">
+                            <p class="text-base text-base-content/50">
                                 Endereço não informado.
                             </p>
     
@@ -653,13 +657,13 @@
                 md:col-span-5
             ">
     
-                <div class="card-body p-[1.5vmax]">
+                <div class="card-body min-w-0 p-4 sm:p-6">
     
                     <h2 class="
                         flex
                         items-center
-                        gap-[.5vmax]
-                        text-[1.1vmax]
+                        gap-2
+                        text-lg
                         font-bold
                         uppercase
                         text-error
@@ -672,10 +676,10 @@
                         relative
                         border-l
                         border-base-300
-                        ml-[.5vmax]
-                        pl-[1.2vmax]
-                        mt-[1.5vmax]
-                        space-y-[1.5vmax]
+                        ml-2
+                        pl-5
+                        mt-5
+                        space-y-5
                     ">
     
                         {{-- Cadastro --}}
@@ -683,21 +687,21 @@
     
                             <span class="
                                 absolute
-                                -left-[1.5vmax]
-                                top-[.3vmax]
-                                w-[.6vmax]
-                                h-[.6vmax]
+                                -left-6
+                                top-1
+                                h-2
+                                w-2
                                 rounded-full
                                 bg-primary
-                                ring-[.3vmax]
+                                ring-4
                                 ring-base-100
                             "></span>
     
-                            <p class="text-[.9vmax] font-semibold">
+                            <p class="text-base font-semibold">
                                 Professor cadastrado
                             </p>
     
-                            <p class="text-[.75vmax] text-base-content/60">
+                            <p class="text-sm text-base-content/60">
                                 {{ $teacherInfo->created_at?->format('d/m/Y H:i') }}
                             </p>
     
@@ -709,21 +713,21 @@
     
                             <span class="
                                 absolute
-                                -left-[1.5vmax]
-                                top-[.3vmax]
-                                w-[.6vmax]
-                                h-[.6vmax]
+                                -left-6
+                                top-1
+                                h-2
+                                w-2
                                 rounded-full
                                 bg-primary
-                                ring-[.3vmax]
+                                ring-4
                                 ring-base-100
                             "></span>
     
-                            <p class="text-[.9vmax] font-semibold">
+                            <p class="text-base font-semibold">
                                 Última atualização
                             </p>
     
-                            <p class="text-[.75vmax] text-base-content/60">
+                            <p class="text-sm text-base-content/60">
                                 {{ $teacherInfo->updated_at?->format('d/m/Y H:i') }}
                             </p>
     
@@ -750,10 +754,10 @@
                     md:col-span-12
                 ">
     
-                    <div class="card-body p-[1.5vmax]">
+                    <div class="card-body min-w-0 p-4 sm:p-6">
     
                         <h2 class="
-                            text-[1.1vmax]
+                            text-lg
                             font-bold
                             uppercase
                             text-error
@@ -763,10 +767,10 @@
     
     
                         <p class="
-                            text-[.9vmax]
+                            text-base
                             text-base-content/70
                             whitespace-pre-line
-                            mt-[1vmax]
+                            mt-4
                         ">
                             {{ $teacherInfo->notes }}
                         </p>

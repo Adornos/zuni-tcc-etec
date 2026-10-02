@@ -47,11 +47,11 @@
         <div class="card bg-base-100 shadow-md sm:col-span-1 md:col-span-2 xl:col-span-3 row-span-2">
             <div class="card-body">
 
-                <h2 class="text-Cprimary text-3xl font-bold ">
+                <h2 class="text-Cprimary text-2xl leading-tight font-bold sm:text-3xl">
                     Novo Bimestre!
                 </h2>
 
-                <p class="text-base-content/70 max-w-[15vmax] pt-[1vmax] pb-[1vmax] text-justify">
+                <p class="w-full text-base-content/70 pt-2 pb-2 text-left sm:text-justify">
                     Atualize as habilidades que serão trabalhadas com cada turma este ano.
                     Organize o planejamento com antecedência e evite deixar tudo para a última hora.
                 </p>
