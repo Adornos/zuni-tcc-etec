@@ -1,4 +1,4 @@
-<x-panel.coordinator>
+<x-panel.director>
     @props(['profile'])
     
     
@@ -94,4 +94,4 @@
         </div>
     
     </div>
-</x-panel.coordinator>
+</x-panel.director>

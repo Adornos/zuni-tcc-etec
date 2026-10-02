@@ -12,7 +12,7 @@
 
 ### Painéis
 
-- [ ] `components/panel/coordinator.blade.php` //"ver mais" não funciona, "ir para a programação" não funciona, rendimento e relatório igualmente, não adaptado ao mobile
+- [ ] `components/panel/coordinator.blade.php` //"ver mais" não funciona, "ir para a programação" não funciona, rendimento e relatório igualmente
 - [V] `components/panel/director.blade.php`
 
 
