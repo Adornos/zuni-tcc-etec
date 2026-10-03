@@ -120,9 +120,9 @@ Finalizar todas as funcionalidades, integrações e testes do sistema **ZUNI** e
 
 ## Dia 9 — Proficiências
 
-- [ ] Atribuição de proficiência para aluno
 - [ ] Visualização das proficiências
 - [ ] Visualização de proficiências por aluno
+- [ ] Atribuição de proficiência para aluno
 
 ## Dia 10 — Gráficos
 
