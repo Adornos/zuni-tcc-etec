@@ -91,7 +91,10 @@
                                     <span class="font-semibold">
                                         {{ $studentSheet->classroom->name }}
                                     </span>
-
+    
+                                    <span class="text-base-content/60">
+                                        Turma {{ $studentSheet->classroom }}
+                                    </span>
     
                                     <span class="text-base-content/40">
                                         •
@@ -276,7 +279,7 @@
                             </p>
     
                             <p class="text-[1vmax] font-medium mt-[.2vmax]">
-                                {{ $studentSheet->class?->name ?? "Sem Turma"}}
+                                {{ $studentSheet->classroom }}
                             </p>
     
                         </div>

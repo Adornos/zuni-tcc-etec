@@ -1,4 +1,5 @@
 <x-layout>
+
     <x-slot:title>
         Login do Responsável
     </x-slot:title>

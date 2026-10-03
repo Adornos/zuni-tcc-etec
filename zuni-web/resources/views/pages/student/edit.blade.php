@@ -176,12 +176,13 @@
                                         name="cpf"
                                         x-data
                                         x-mask="999.999.999-99"
-                                        placeholder="990.999.999-99"
+                                        placeholder="000.000.000-00"
                                         value="{{ old('cpf', $student->cpf) }}"
                                         class="input input-bordered w-full"
                                     >
 
                                 </fieldset>
+
 
 
                                 {{-- RG --}}
@@ -196,12 +197,13 @@
                                         name="rg"
                                         x-data
                                         x-mask="99.999.999-9"
-                                        placeholder="99.999.999-9"
+                                        placeholder="00.000.000-0"
                                         value="{{ old('rg', $student->rg) }}"
                                         class="input input-bordered w-full"
                                     >
 
                                 </fieldset>
+
 
 
                                 {{-- Telefone --}}
@@ -216,12 +218,13 @@
                                         name="phone"
                                         x-data
                                         x-mask="(99) 99999-9999"
-                                        placeholder="(99) 99999-9999"
+                                        placeholder="(00) 00000-0000"
                                         value="{{ old('phone', $student->phone) }}"
                                         class="input input-bordered w-full"
                                     >
 
                                 </fieldset>
+
 
 
                                 {{-- Email --}}

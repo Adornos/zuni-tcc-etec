@@ -90,17 +90,16 @@ class EmployeeController extends Controller
 
     public function update(Request $request, User $employee)
     {
-
         try {
             $validated = $request->validate([
     
                 // User
-                'name' => ['nullable', 'string', 'max:255'],
-                'email' => ['nullable','email','max:255','unique:users,email,' . $employee->id,],
+                'name' => ['nullable', 'string', 'min:3', 'max:255'],
+                'email' => ['nullable', 'email', 'min:5', 'max:255', 'unique:users,email,' . $employee->id],
                 'role' => ['nullable','in:teacher,coordinator,director',],
-                'cpf' => ['nullable','string','max:14','unique:users,cpf,' . $employee->id,],
-                'rg' => ['nullable','string','max:20','unique:users,rg,' . $employee->id,],
-                'phone' => ['nullable','string','max:20',],
+                'cpf' => ['nullable', 'string', 'min:14', 'max:14', 'unique:users,cpf,' . $employee->id],
+                'rg' => ['nullable', 'string', 'min:12', 'max:12', 'unique:users,rg,' . $employee->id],
+                'phone' => ['nullable', 'string', 'min:10', 'max:20'],
                 'birth_date' => ['nullable','date',],
                 'gender' => ['nullable','in:M,F,O',],
                 'password' => [
@@ -130,7 +129,7 @@ class EmployeeController extends Controller
                 'notes' => ['nullable','string',],
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
-            dd($e->errors());
+            return redirect()->route('teacher.profile.edit')->with('error', 'Ocorreu um erro ao atualizar o usuário: ' . $e->getMessage());
         }
         
 
@@ -164,10 +163,10 @@ class EmployeeController extends Controller
         return match (Auth::user()->role) {
 
             UserRole::DIRECTOR => redirect()
-                ->route('director.employee.index')->with('success', 'Funcionário atualizado com sucesso.'),
+                ->route('director.employee.show')->with('success', 'Funcionário atualizado com sucesso.'),
 
             UserRole::COORDINATOR => redirect()
-                ->route('coordinator.teacher.index')->with('success', 'Professor atualizado com sucesso.'),
+                ->route('coordinator.teacher.show')->with('success', 'Professor atualizado com sucesso.'),
 
             UserRole::TEACHER => redirect()
                 ->route('teacher.profile')->with('success', 'Perfil atualizado com sucesso.'),

@@ -1,6 +1,6 @@
 <x-panel.coordinator>
     {{-- Matrículas --}}
-    <div class="card bg-base-100 shadow-md row-span-2">
+    <div class="card min-w-0 bg-base-100 shadow-md row-span-1 lg:row-span-2">
         <div class="card-body relative">
     
             {{-- Bolinha vermelha que deve aparecer apenas quando houver matrículas pendentes --}}
@@ -17,7 +17,7 @@
             </div>
     
             <div class="card-actions mt-auto">
-                <button class="btn btn-primary w-full bg-Cprimary">
+                <button class="btn btn-primary w-full bg-Cprimary" onclick="window.location.href='{{ route('coordinator.student.index') }}'"    >
                     <span>Ver Mais</span>
                     <span class="ml-auto text-xl">→</span>
                 </button>
@@ -27,20 +27,28 @@
     </div>
     
     {{-- Cantina --}}
-    <div class="card bg-base-100 shadow-md text-center pt-[1vmax]">
+    <div class="card min-w-0 bg-base-100 shadow-md text-center pt-[1vmax]">
         <div class="card-body">
-            <h2 class="text-3xl font-bold">
-                15/02
-            </h2>
-    
-            <p class="text-base-content/60">
-                Próxima reunião 
-            </p>
+            <div class="flex flex-row items-center justify-center gap-4 md:gap-10">
+                <div>
+                    <h2 class="text-3xl font-bold">
+                        10
+                    </h2>
+            
+                    <p class="text-base-content/60">
+                        Mensagens pendentes
+                    </p>
+                </div>
+
+                <span class="text-5xl text-Cprimary">
+                    <x-svg.icon.blackboard/>
+                </span>
+            </div>
         </div>
     </div>
     
     {{-- Novo Bimestre --}}
-    <div class="card bg-base-100 shadow-md row-span-2 ">
+    <div class="card min-w-0 bg-base-100 shadow-md row-span-1 lg:row-span-2">
         <div class="card-body">
     
             <h2 class="text-4xl font-Sans font-bold Text-Bold text-primary-dark pt-[1vmax]">
@@ -53,9 +61,9 @@
             </p>
     
             <div class="card-actions mt-auto">
-                <button class="btn btn-primary bg-Cprimary">
+                <a href="{{ route('coordinator.schedules.index') }}" class="btn btn-primary bg-Cprimary">
                     Ir para Programação →
-                </button>
+                </a>
             </div>
     
         </div>
@@ -63,7 +71,7 @@
     
     {{-- Agenda --}}
     
-    <div class="card bg-base-100 shadow-md row-span-4">
+    <div class="card min-w-0 bg-base-100 shadow-md row-span-1 lg:row-span-4">
         <div class="card-body">
     
             <!-- Título da seção -->
@@ -84,28 +92,36 @@
     
     
     {{-- Reunião --}}
-    <div class="card bg-base-100 shadow-md text-center pt-[1vmax]">
+    <div class="card min-w-0 bg-base-100 shadow-md text-center pt-[1vmax]">
         <div class="card-body">
-            <h2 class="text-3xl font-bold">
-                13/03
-            </h2>
-    
-            <p class="text-base-content/60">
-                Próxima reunião
-            </p>
+            <div class="flex flex-row items-center justify-center gap-4 md:gap-10">
+                <div>
+                    <h2 class="text-3xl font-bold">
+                        13/03
+                    </h2>
+                
+        
+                    <p class="text-base-content/60">
+                        Próxima reunião
+                    </p>
+                </div>
+                
+                <span class="text-5xl">
+                    <x-svg.icon.people/>
+                </span>
+            </div>
         </div>
     </div>
     
     {{-- Gráfico --}}
-    <div class="card bg-base-100 shadow-md col-span-3 row-span-2">
+    <div class="card min-w-0 bg-base-100 shadow-md col-span-1 row-span-1 sm:col-span-2 lg:col-span-3 lg:row-span-2">
         <div class="card-body">
             <h3 class="font-semibold text-lg">
                 Rendimento por Turma
             </h3>
-    
-            <div class="flex items-center justify-center h-full text-base-content/50">
-                Gráfico aqui
-            </div>
+
+            <span>
+                <x-svg.icon.graph class="w-full h-full"/>
         </div>
     </div>
 </x-panel.coordinator>

@@ -31,3 +31,38 @@
 [x-cloak] {
     display: none !important;
 }
+
+.panel-sidebar-nav {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.panel-sidebar-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.panel-drawer-side {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.panel-drawer-side::-webkit-scrollbar {
+    display: none;
+}
+
+@media (max-width: 639px) {
+    .coordinator-sidebar .menu > li > a {
+        min-height: 44px;
+        gap: 12px;
+        padding: 8px 12px;
+        border-radius: 10px;
+        font-size: 14px;
+    }
+
+    .coordinator-sidebar .menu > li > a > img,
+    .coordinator-sidebar .menu > li > a > svg {
+        width: 24px;
+        height: 24px;
+        flex: none;
+    }
+}

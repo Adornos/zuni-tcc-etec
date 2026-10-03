@@ -1,31 +1,31 @@
-<x-dynamic-component :component="'panel.' . auth()->user()->role->value">
+<x-chat.layout>
 
     <div class="col-span-4 row-span-4">
 
-        <div class="card bg-base-200 shadow-xl h-full overflow-hidden">
+        <div class="bg-base-200 h-full overflow-hidden">
 
-            <div class="card-body p-0">
+            <div class="p-0 h-full">
 
                 <div class="flex h-full min-h-[600px]">
 
                     {{-- LISTA DE CONVERSAS --}}
-                    <div class="w-1/3 border-r border-base-300 bg-base-100">
+                    <div class="w-1/3 bg-base-100">
 
                         {{-- HEADER --}}
-                        <div class="p-4 border-b border-base-300">
+                        <div class="p-4 border-base-300">
 
                             <div class="flex items-center justify-between">
-                                <h2 class="text-xl font-bold">
-                                    Mensagens
-                                </h2>
+                                <!-- <h2 class="text-xl font-bold"> -->
+                                    <!-- Mensagens
+                                </h2> -->
 
-                                <button class="btn btn-primary btn-sm">
+                                <!-- <button class="btn btn-primary btn-sm">
                                     + Nova
-                                </button>
+                                </button> -->
                             </div>
 
                             {{-- BUSCA --}}
-                            <label class="input input-sm input-bordered flex items-center gap-2 mt-3">
+                            <label class="input input-sm input-bordered flex items-center gap-2 mt-3 w-full rounded-full">
 
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +166,7 @@
                     <div class="flex flex-col flex-1 bg-base-200">
 
                         {{-- HEADER DO CHAT --}}
-                        <div class="flex items-center gap-3 p-4 bg-base-100 border-b border-base-300">
+                        <div class="flex items-center gap-3 p-4 bg-base-100">
 
                             <div class="avatar placeholder">
                                 <div class="bg-primary text-primary-content rounded-full w-11">
@@ -288,7 +288,7 @@
 
 
                         {{-- CAMPO DE MENSAGEM --}}
-                        <div class="p-4 bg-base-100 border-t border-base-300">
+                        <div class="p-4 bg-base-100">
 
                             <form class="flex items-center gap-2">
 
@@ -302,12 +302,12 @@
                                 <input
                                     type="text"
                                     placeholder="Digite uma mensagem..."
-                                    class="input input-bordered flex-1"
+                                    class="input input-bordered flex-1 rounded-full"
                                 />
 
                                 <button
                                     type="submit"
-                                    class="btn btn-primary"
+                                    class="btn btn-primary rounded-full"
                                 >
                                     Enviar
                                 </button>
@@ -326,4 +326,4 @@
 
     </div>
 
-</x-dynamic-component>
+</x-chat.layout>

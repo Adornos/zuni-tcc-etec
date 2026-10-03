@@ -1,4 +1,5 @@
 <x-panel.guardian>
+    @props(['profile'])
     
     <form action="{{ route('guardian.profile.save') }}" method="post" class="card bg-base-100 shadow-md col-span-4 row-span-4">
         @method('put')

@@ -9,8 +9,8 @@
         $role = auth()->user()->role->value ?? auth()->user()->role;
 
         $backRoute = match ($role) {
-            'teacher' => 'teacher.profile',
-            'coordinator' => 'coordinator.teacher.show',
+            'guardian' => 'guardian.profile',
+            'coordinator' => 'coordinator.guardian.show',
             'director' => 'coordinator.employee.show',
             default => 'home',
         };
@@ -20,7 +20,7 @@
     
 
     <form
-        action="{{ route('teacher.profile.update') }}"
+        action="{{ route('guardian.profile.update') }}"
         method="post"
         class="card bg-base-100 shadow-md col-span-4 row-span-4"
 
@@ -480,29 +480,6 @@
 
             </div>
 
-
-            {{-- ========================================================= --}}
-            {{-- ROLE                                                        --}}
-            {{-- ========================================================= --}}
-
-            <!-- NÃO RETIRAR -->
-
-            <label class="floating-label hidden">
-
-                <select
-                    name="role"
-                    class="input input-bordered w-full"
-                >
-
-                    <option value="{{ $profile->role->value }}">
-                        {{ $profile->role->label() }}
-                    </option>
-
-                </select>
-
-                <span>Função</span>
-
-            </label>
 
 
             {{-- ========================================================= --}}

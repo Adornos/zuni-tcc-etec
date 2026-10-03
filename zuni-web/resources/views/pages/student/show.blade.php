@@ -296,7 +296,7 @@
                                 @endif
                                 <div>
                                     <p class="text-sm text-base-content/50">Turno</p>
-                                    <p class="font-semibold mt-1">{{ $classroom?->shift ?? 'Não informado' }}</p>
+                                    <p class="font-semibold mt-1">{{ $classroom?->shift->label() ?? 'Não informado' }}</p>
                                 </div>
 
 

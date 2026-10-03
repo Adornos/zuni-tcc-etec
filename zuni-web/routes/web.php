@@ -24,8 +24,9 @@ Route::middleware(['auth', 'role:guardian'])
 
     // Rotas dos Responsáveis
     Route::get('/', [GuardianController::class, 'index'])->name('index');
-    Route::get('/profile', [GuardianController::class, 'profile'])->name('profile');
-    Route::put('/profile', [GuardianController::class, 'profileSave'])->name('profile.save');
+    Route::get('/profile', [GuardianController::class, 'show'])->name('profile');
+    Route::get('/profile/edit', [GuardianController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [GuardianController::class, 'update'])->name('profile.update');
     
     Route::get('/forum', [GuardianController::class, 'forum'])->name('forum');
     Route::get('/chat', [GuardianController::class, 'chat'])->name('chat');
@@ -54,7 +55,7 @@ Route::middleware(['auth', 'role:teacher'])
     Route::get('', [TeacherController::class, 'index'])->name('index');
     Route::get('/profile', [TeacherController::class, 'show'])->name('profile');
     Route::get('/profile/edit', [TeacherController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [TeacherController::class, 'update'])->name('profile.update');
+    Route::put('/profile/edit/update', [TeacherController::class, 'update'])->name('profile.update');
     Route::get('/schedule', [TeacherController::class, 'schedule'])->name('schedule');
     Route::get('/forum', [TeacherController::class, 'forum'])->name('forum');
     Route::get('/chat', [TeacherController::class, 'chat'])->name('chat');

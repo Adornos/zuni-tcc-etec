@@ -334,7 +334,7 @@ new class extends Component
 
                         <a
                         @if($this->searchTeachersOnly()){
-                            href="{{ route( 'coordinator.teacher.show', $user ) }}"
+                            href="{{ route( 'coordinator.teacher.show', ['teacher' => $user] ) }}"
                         } 
                         @else{
                             href="{{ route( 'director.employee.show', $user ) }}"

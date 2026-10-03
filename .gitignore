@@ -141,3 +141,6 @@ vite.config.ts.timestamp-*
 #Sql files
 .sql
 .sql.*
+
+#Vite config files
+zuni-web/vite.config.js
