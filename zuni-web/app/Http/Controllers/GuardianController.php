@@ -23,18 +23,9 @@ class GuardianController extends Controller
     {
         return view('guardian.panel');
     }
-    public function show(User $guardian)
-    {   
-        
-        if(empty($guardian->name)){
-            $guardian = Auth::user();
-            abort_unless($guardian->role === UserRole::GUARDIAN, 403, 'Usuário não permitido');
-        } else {
-
-        }
-
-        return view('pages.guardian.show', ['guardianInfo' => $guardian]);    
-
+    public function show()
+    {
+        return redirect()->route('guardian.student.index');
     }
     
     public function edit()

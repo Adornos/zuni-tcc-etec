@@ -40,6 +40,16 @@ $obRouter->get('/login', [
     }
 ]);
 
+//ROTA logout
+$obRouter->get('/logout', [
+    function () {
+        $response = new Response(302, '');
+        $response->addHeader('Location', rtrim(URL, '/') . '/login');
+
+        return $response;
+    }
+]);
+
 //ROTA professor
 
 $obRouter->get('/professor/', [

@@ -74,7 +74,7 @@ class Response{
 
         //ENVIAR
         foreach ($this->headers as $key => $value) {
-            header($key .''. $value);
+            header($key . ': ' . $value);
         }
     }
     

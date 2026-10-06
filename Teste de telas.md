@@ -8,20 +8,19 @@
 ## Autenticação
 
 - [V] `auth/login.blade.php`
-- [V] `auth/register.blade.php` //deve apresentar um erro ao cadastrrar um aluno com cpf igual
+- [V] `auth/register.blade.php`
 
 ### Painéis
 
-- [ ] `components/panel/coordinator.blade.php` //"ver mais" não funciona, "ir para a programação" não funciona, rendimento e relatório igualmente
+- [V] `components/panel/coordinator.blade.php`
 - [V] `components/panel/director.blade.php`
 
-
-- [ ] `components/panel/guardian.blade.php` //design provavelmente incompleto, mas funcional, e talvez seja necessário exibir mais informações sobre a criança, cadastro de criança não adaptado ao mobile, erro SQLSTATE[42S22]: Column not found: 1054 Unknown column 'classrooms.sheet_id' in 'where clause' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: zuni_web, SQL: select * from `classrooms` where `classrooms`.`sheet_id` = 1 and `classrooms`.`sheet_id` is not null limit 1) ao tentar criar uma criança
+x
+- [ ] `components/panel/guardian.blade.php` talvez seja necessário exibir mais informações sobre a criança, erro SQLSTATE[42S22]: Column not found: 1054 Unknown column 'classrooms.sheet_id' in 'where clause' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: zuni_web, SQL: select * from `classrooms` where `classrooms`.`sheet_id` = 1 and `classrooms`.`sheet_id` is not null limit 1) ao tentar criar uma criança
 
 
 - [ ] `components/panel/layout.blade.php`
-- [ ] `components/panel/teacher.blade.php` //maior parte dos botões nao funcionam, sem cores, não adaptado ao mobile
-
+- [V] `components/panel/teacher.blade.php`
 ### Busca
 
 - [V] `components/search/employee-list.blade.php` seria ideal conseguir alterar os status dos funcionarios
@@ -32,7 +31,7 @@
 
 - [X] `coordinator/chat.php`
 - [X] `coordinator/forum.php`
-- [ ] `coordinator/panel.blade.php` nao adaptado ao mobile
+- [V] `coordinator/panel.blade.php` 
 - [ ] `coordinator/profile.blade.php` não exibe o CSS
 - [V] `coordinator/schedules.blade.php` não adaptado ao mobile + precisa ser funcional e não apenas visual
 
@@ -67,7 +66,7 @@ PROFILE NAO FUNCIONA!!
 
 - [X] `guardian/chat.blade.php`
 - [X] `guardian/forum.blade.php`
-- [V] `guardian/panel.blade.php` parece design incompleto e adaptar ao celular
+- [V] `guardian/panel.blade.php`
 - [V] `guardian/profile.blade.php`
 
 ### Alunos

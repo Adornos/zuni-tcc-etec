@@ -57,9 +57,9 @@
                 </p>
 
                 <div class="card-actions mt-auto">
-                    <button class="btn btn-primary">
+                    <a href="{{ route('teacher.schedule') }}" class="btn btn-primary">
                         Ir para Programação →
-                    </button>
+                    </a>
                 </div>
 
             </div>

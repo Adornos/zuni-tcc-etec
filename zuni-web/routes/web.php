@@ -23,7 +23,7 @@ Route::middleware(['auth', 'role:guardian'])
     ->group(function () {
 
     // Rotas dos Responsáveis
-    Route::get('/', [GuardianController::class, 'index'])->name('index');
+    Route::get('/', fn () => redirect()->route('guardian.student.index'))->name('index');
     Route::get('/profile', [GuardianController::class, 'show'])->name('profile');
     Route::get('/profile/edit', [GuardianController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [GuardianController::class, 'update'])->name('profile.update');

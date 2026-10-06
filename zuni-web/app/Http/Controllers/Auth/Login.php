@@ -40,8 +40,12 @@ class Login extends Controller
         // Security
         $request->session()->regenerate();
 
+        $defaultRedirect = $user->role->value === 'guardian'
+            ? route('guardian.student.index')
+            : $user->role->value;
+
         return redirect()
-            ->intended(auth()->user()->role->value)
+            ->intended($defaultRedirect)
             ->with('success', 'Bem-vindo novamente!');
     }
 }
