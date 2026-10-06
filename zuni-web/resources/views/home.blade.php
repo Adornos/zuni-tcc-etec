@@ -32,7 +32,7 @@
         <img
             src="{{ asset('images/home/img-0.svg') }}"
             alt="criança escolar"
-            class="kid absolute z-10 hidden lg:bottom-0 lg:right-[8vw] lg:block lg:w-[40vmax] lg:max-w-none "
+            class="kid absolute z-10 hidden lg:bottom-0 lg:left-[50vw] lg:block lg:w-[40vmax] lg:max-w-none "
         >
 
     </section>

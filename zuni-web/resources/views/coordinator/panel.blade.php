@@ -95,18 +95,37 @@
             </div>
 
             <!-- Botão criar -->
-            <button type="button" class="btn btn-primary w-full gap-2">
+            <button type="button" class="btn btn-primary w-full gap-2 bg-Cprimary mb-5"">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
                 Novo relatório
             </button>
 
-            <!-- Lista de relatórios anteriores -->
             <div class="mt-6 flex min-h-0 flex-1 flex-col">
                 <h3 class="mb-3 text-sm font-semibold uppercase tracking-wide text-base-content/60">
                     Relatórios anteriores
                 </h3>
+                <div class="pt-[.5vmax]">
+                    <td class="s">
+                        <div class="flex items-start gap-2 p-3 rounded-lg  shadow border-l-4 border-gray-400">
+                            <div class="w-1 bg-gray-400 rounded"></div>
+        
+                            <div>
+                                <div class="font-semibold">Arthur explodiu a sala</div>
+                                <div class="text-gray-500 text-sm">Pegou dinamite e explodiu a sala</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2 p-3 rounded-lg  shadow border-l-4 border-gray-400">
+                            <div class="w-1 bg-gray-400 rounded"></div>
+        
+                            <div>
+                                <div class="font-semibold">Maria bateu no arthur</div>
+                                <div class="text-gray-500 text-sm">Deu um soco no arthur</div>
+                            </div>
+                        </div>
+                    </td>
+                </div>
    
             </div>
 
