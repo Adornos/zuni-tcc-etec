@@ -37,59 +37,64 @@
 
     </section>
 
-    <section class="features w-full py-30 px-6 bg-linear-to-b from-white to-Cprimary-light">
-        <div class="max-w-6xl mx-auto">
+    <section class="features relative isolate overflow-hidden w-full py-30 px-6
+                    before:content-[''] before:absolute before:-z-10
+                    before:left-1/2 before:-translate-x-1/2
+                    before:top-[calc(100%-30rem)]
+                    before:w-[150vw] before:aspect-square before:rounded-full
+                    before:bg-linear-to-b before:from-white before:via-Cprimary-light before:via-12% before:to-Cprimary-light">
+    <div class="max-w-6xl mx-auto">
 
-            @php
-                $features = [
-                    [
-                        'img'   => 'images/home/img-3.png',
-                        'alt'   => 'Criança sorrindo com mochila',
-                        'title' => 'Controle Completo',
-                        'text'  => 'Acompanhe o desempenho, a frequência e as principais atividades do seu filho de maneira simples e acessível.',
-                    ],
-                    [
-                        'img'   => 'images/home/img-4.png',
-                        'alt'   => 'Família sorrindo junta',
-                        'title' => 'Gestão Simplificada',
-                        'text'  => 'Tenha todas as informações escolares organizadas em um só lugar, facilitando a rotina e o gerenciamento da escola.',
-                    ],
-                    [
-                        'img'   => 'images/home/img-5.png',
-                        'alt'   => 'Professora sorrindo',
-                        'title' => 'Contato Integrado',
-                        'text'  => 'Mantenha uma comunicação mais rápida e eficiente entre responsáveis, professores e toda a comunidade escolar.',
-                    ],
-                ];
-            @endphp
+        @php
+            $features = [
+                [
+                    'img'   => 'images/home/img-3.png',
+                    'alt'   => 'Criança sorrindo com mochila',
+                    'title' => 'Controle Completo',
+                    'text'  => 'Acompanhe o desempenho, a frequência e as principais atividades do seu filho de maneira simples e acessível.',
+                ],
+                [
+                    'img'   => 'images/home/img-4.png',
+                    'alt'   => 'Família sorrindo junta',
+                    'title' => 'Gestão Simplificada',
+                    'text'  => 'Tenha todas as informações escolares organizadas em um só lugar, facilitando a rotina e o gerenciamento da escola.',
+                ],
+                [
+                    'img'   => 'images/home/img-5.png',
+                    'alt'   => 'Professora sorrindo',
+                    'title' => 'Contato Integrado',
+                    'text'  => 'Mantenha uma comunicação mais rápida e eficiente entre responsáveis, professores e toda a comunidade escolar.',
+                ],
+            ];
+        @endphp
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-14">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-14">
 
-                @foreach ($features as $feature)
-                    <div class="flex flex-col items-center md:items-start max-w-sm mx-auto md:mx-0 pb-[2vmax]">
+            @foreach ($features as $feature)
+                <div class="flex flex-col items-center md:items-start max-w-sm mx-auto md:mx-0 pb-[2vmax]">
 
-                        <div class="w-48 h-48 lg:w-56 lg:h-56 rounded-full bg-Csecondary overflow-hidden mb-8 self-center">
-                            <img
-                                src="{{ asset($feature['img']) }}"
-                                alt="{{ $feature['alt'] }}"
-                                class="w-full h-full object-cover object-top"
-                            >
-                        </div>
-
-                        <h3 class="text-2xl lg:text-3xl font-bold uppercase text-Ctext mb-4 text-center md:text-left">
-                            {{ $feature['title'] }}
-                        </h3>
-
-                        <p class="text-Ctext text-base leading-relaxed text-justify">
-                            {{ $feature['text'] }}
-                        </p>
-
+                    <div class="w-48 h-48 lg:w-56 lg:h-56 rounded-full bg-Csecondary overflow-hidden mb-8 self-center">
+                        <img
+                            src="{{ asset($feature['img']) }}"
+                            alt="{{ $feature['alt'] }}"
+                            class="w-full h-full object-cover object-top"
+                        >
                     </div>
-                @endforeach
 
-            </div>
+                    <h3 class="text-2xl lg:text-3xl font-bold uppercase text-Ctext mb-4 text-center md:text-left">
+                        {{ $feature['title'] }}
+                    </h3>
+
+                    <p class="text-Ctext text-base leading-relaxed text-justify">
+                        {{ $feature['text'] }}
+                    </p>
+
+                </div>
+            @endforeach
+
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="w-full pt-16 pb-4 px-6 py-30 bg-linear-to-b from-Cprimary-light to-white md:py-16">
         <div class="max-w-6xl mx-auto">

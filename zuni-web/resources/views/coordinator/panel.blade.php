@@ -70,25 +70,49 @@
     </div>
     
     {{-- Agenda --}}
-    
+        
+        @php
+        $relatorios = [
+            ['titulo' => 'Boletim 3º Bimestre',  'turma' => '5º Ano A', 'data' => '28/09/2026', 'status' => 'Concluído', 'resumo' => 'Notas e frequência de 32 alunos'],
+            ['titulo' => 'Frequência de Setembro', 'turma' => '5º Ano A', 'data' => '30/09/2026', 'status' => 'Rascunho',  'resumo' => 'Faltas e justificativas do mês'],
+            ['titulo' => 'Desempenho em Matemática', 'turma' => '4º Ano B', 'data' => '15/09/2026', 'status' => 'Concluído', 'resumo' => 'Comparativo entre as avaliações'],
+            ['titulo' => 'Reunião de Pais 2º Bim.', 'turma' => '5º Ano A', 'data' => '02/08/2026', 'status' => 'Concluído', 'resumo' => 'Pontos discutidos e encaminhamentos'],
+        ];
+    @endphp
+
     <div class="card min-w-0 bg-base-100 shadow-md row-span-1 lg:row-span-4">
         <div class="card-body">
-    
+
             <!-- Título da seção -->
             <div class="mb-6">
-                <h2 class="text-4xl font-sans font-bold text-primary-dark">
+                <h2 class="text-4xl font-sans font-bold text-primary-dark pt-[1vmax]">
                     Relatórios
                 </h2>
-    
-                <p class="mt-2 text-base-content/70">
+
+                <p class="mt-2 text-base-content/70 pt-[1vmax]">
                     Consulte e crie seus relatórios rapidamente nesta área!
                 </p>
             </div>
-    
-    
+
+            <!-- Botão criar -->
+            <button type="button" class="btn btn-primary w-full gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                Novo relatório
+            </button>
+
+            <!-- Lista de relatórios anteriores -->
+            <div class="mt-6 flex min-h-0 flex-1 flex-col">
+                <h3 class="mb-3 text-sm font-semibold uppercase tracking-wide text-base-content/60">
+                    Relatórios anteriores
+                </h3>
+   
+            </div>
+
         </div>
     </div>
-    
+        
     
     
     {{-- Reunião --}}
