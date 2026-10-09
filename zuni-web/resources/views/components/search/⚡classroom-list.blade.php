@@ -207,6 +207,30 @@ new class extends Component
 
             </div>
 
+            
+            @if($this->canSearchClass)
+            
+            {{-- CADASTRAR --}}
+                <div class="col-span-full text-left pt-5">
+
+                    <a
+                        href="{{ route('coordinator.classroom.create') }}"
+                        class="
+                            btn
+                            btn-sm
+                            sm:btn-md
+                            text-Cprimary
+                            bg-white
+                            border-Cprimary/40
+                            w-full
+                            sm:w-auto
+                        "
+                    >
+                        CADASTRAR TURMA
+                    </a>
+
+                </div>
+            @endif
         </div>
     @endif()
 
@@ -316,10 +340,10 @@ new class extends Component
                                 Status
                             </span>
 
-                            <span class="badge
+                            <span class="
                                 {{ $classroom->status === 'active'
-                                    ? 'badge-success'
-                                    : 'badge-error'
+                                    ? 'text-Cstats'
+                                    : 'text-error'
                                 }}"
                             >
                                 {{ $classroom->status === 'active'
@@ -401,7 +425,7 @@ new class extends Component
 
 
                     {{-- AÇÕES --}}
-                    <div class="card-actions justify-end mt-4">
+                    <div class="card-actions justify-left mt-4">
 
                         <a
                             href="{{ route(
@@ -433,7 +457,7 @@ new class extends Component
 
         @empty
             @if($this->canSearchClass)
-                <div class="col-span-full text-center py-10">
+                <div class="col-span-full text-center pt-5">
 
                     <p class="text-base-content/60 mb-8">
                         Nenhuma turma encontrada.
@@ -441,7 +465,16 @@ new class extends Component
 
                     <a
                         href="{{ route('coordinator.classroom.create') }}"
-                        class="text-white bg-Csecondary rounded-full p-4"
+                        class="
+                            btn
+                            btn-sm
+                            sm:btn-md
+                            text-Cprimary
+                            bg-white
+                            border-Cprimary/40
+                            w-full
+                            sm:w-auto
+                        "
                     >
                         CADASTRAR TURMA
                     </a>
@@ -457,21 +490,6 @@ new class extends Component
             @endif
 
         @endforelse
-
-        @if($this->canSearchClass)
-        
-        {{-- CADASTRAR --}}
-            <div class="col-span-full text-center py-10">
-
-                <a
-                    href="{{ route('coordinator.classroom.create') }}"
-                    class="text-white bg-Csecondary rounded-full p-4"
-                >
-                    CADASTRAR TURMA
-                </a>
-
-            </div>
-        @endif
 
     </div>
 
