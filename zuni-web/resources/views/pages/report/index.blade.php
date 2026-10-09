@@ -70,7 +70,7 @@
             
             <button
                 type="submit"
-                class="mt-4 bg-Csecondary text-white px-4 py-2 rounded-md hover:bg-red-700"
+                class="mt-4 bg-Cprimary text-white px-4 py-2 rounded-md hover:bg-Cprimary/80 transition-colors duration-100"
             >
                 Salvar
             </button>

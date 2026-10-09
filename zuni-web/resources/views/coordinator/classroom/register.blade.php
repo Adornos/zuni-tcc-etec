@@ -173,7 +173,8 @@
     <div class="flex justify-end">
         <button
             type="submit"
-            class="btn btn-primary"
+            class="btn btn-primary
+            bg-Cprimary text-white hover:bg-Cprimary/80 transition-colors duration-100"
         >
             Criar turma
         </button>
