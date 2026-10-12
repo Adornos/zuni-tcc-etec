@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -82,8 +83,29 @@ class StudentSheet extends Model
     /**
      * Reports
      */
-    public function reports(): HasMany
+    public function reports(): BelongsToMany
     {
-        return $this->hasMany(Report::class, 'student_id');
+        return $this->belongsToMany(
+            Report::class,
+            'report_student_sheet',
+            'student_sheet_id',
+            'report_id'
+        );
+    }
+
+    /**
+     * Valores atuais das proficiências (um registro por habilidade).
+     */
+    public function studentProficiencies(): HasMany
+    {
+        return $this->hasMany(StudentProficiency::class);
+    }
+
+    /**
+     * Histórico de observações de proficiência.
+     */
+    public function proficiencyObservations(): HasMany
+    {
+        return $this->hasMany(ProficiencyObservation::class);
     }
 }

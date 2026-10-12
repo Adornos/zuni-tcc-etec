@@ -48,6 +48,20 @@
         </li>
 
 
+        {{-- Relatórios --}}
+        <li>
+            <a
+                href="{{ route('director.report.index') }}"
+                class="hover:bg-white hover:text-Cprimary"
+            >
+                <img
+                class="w-[2.2vmax] mr-[1vmax]"
+                src="{{ asset('images/icons/reports.svg') }}"
+                />
+                Relatórios
+            </a>
+        </li>
+
         {{-- Mural --}}
         <li>
             <a

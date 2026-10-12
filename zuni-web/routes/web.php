@@ -10,6 +10,7 @@ use App\Http\Controllers\GuardianController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ProficiencyController;
 use App\Http\Controllers\ZuniController;
 use Illuminate\Support\Facades\Route;
 use App\Enums\UserRole;
@@ -23,7 +24,7 @@ Route::middleware(['auth', 'role:guardian'])
     ->group(function () {
 
     // Rotas dos Responsáveis
-    Route::get('/', fn () => redirect()->route('guardian.student.index'))->name('index');
+    Route::get('/', [GuardianController::class, 'index'])->name('index');
     Route::get('/profile', [GuardianController::class, 'show'])->name('profile');
     Route::get('/profile/edit', [GuardianController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [GuardianController::class, 'update'])->name('profile.update');
@@ -43,6 +44,9 @@ Route::middleware(['auth', 'role:guardian'])
     Route::put('/student/{student}', [StudentController::class, 'update'])->name('student.update');
     Route::get('/student/{student}/schedule', [StudentController::class, 'schedule'])->name('student.schedule');
     Route::get('/student/{student}/reports', [StudentController::class, 'reports'])->name('student.reports');
+
+    // Relatórios ativos dos próprios filhos (somente leitura)
+    Route::get('/reports/{report}', [ReportController::class, 'show'])->name('report.show');
 
 });
 
@@ -78,6 +82,7 @@ Route::middleware(['auth', 'role:teacher'])
     Route::get('/reports/{report}/edit', [ReportController::class, 'edit'])->name('report.edit');
     Route::put('/reports/{report}', [ReportController::class, 'update'])->name('report.update');
     Route::delete('/reports/{report}', [ReportController::class, 'destroy'])->name('report.destroy');
+    Route::patch('/reports/{report}/status', [ReportController::class, 'status'])->name('report.status');
 
 });
 
@@ -101,6 +106,10 @@ Route::middleware(['auth', 'role:director'])
     Route::get('/forum', [DirectorController::class, 'forum'])->name('forum');
     Route::get('/chat', [DirectorController::class, 'chat'])->name('chat');
 
+    // Relatórios (somente leitura)
+    Route::get('/reports', [ReportController::class, 'index'])->name('report.index');
+    Route::get('/reports/{report}', [ReportController::class, 'show'])->name('report.show');
+
 });
 
 Route::middleware(['auth', 'role:coordinator'])
@@ -122,8 +131,8 @@ Route::middleware(['auth', 'role:coordinator'])
 
     // Cadastro e gerenciamento de professores
     Route::get('/teachers', [EmployeeController::class, 'index'])->name('teacher.index');
-    Route::get('/teacher/register', [EmployeeController::class, 'formTeacher'])->name('teacher.register');
-    Route::post('/teacher/register', [EmployeeController::class, 'registerTeacher'])->name('teacher.store');
+    Route::get('/teacher/register', [EmployeeController::class, 'create'])->name('teacher.register');
+    Route::post('/teacher/register', [EmployeeController::class, 'store'])->name('teacher.store');
     Route::get('/teacher/show/{teacher}', [TeacherController::class, 'show'])->name('teacher.show');
     Route::put('/teacher/show/{teacher}/edit', [TeacherController::class, 'update'])->name('teacher.edit');
 
@@ -145,6 +154,15 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/schedules/students/{student}', [CoordinatorController::class, 'studentSchedule'])->name('schedules.student');
     Route::get('/schedules/teachers/{teacher}', [CoordinatorController::class, 'teacherSchedule'])->name('schedules.teacher');
 
+    // Cadastro de habilidades (proficiências)
+    Route::get('/proficiencies', [ProficiencyController::class, 'index'])->name('proficiency.index');
+    Route::get('/proficiencies/create', [ProficiencyController::class, 'create'])->name('proficiency.create');
+    Route::post('/proficiencies', [ProficiencyController::class, 'store'])->name('proficiency.store');
+    Route::get('/proficiencies/{proficiency}', [ProficiencyController::class, 'show'])->name('proficiency.show');
+    Route::get('/proficiencies/{proficiency}/edit', [ProficiencyController::class, 'edit'])->name('proficiency.edit');
+    Route::put('/proficiencies/{proficiency}', [ProficiencyController::class, 'update'])->name('proficiency.update');
+    Route::patch('/proficiencies/{proficiency}/status', [ProficiencyController::class, 'status'])->name('proficiency.status');
+
     // Relatórios (internos: para docentes | externos: para responsáveis)
     Route::get('/reports', [ReportController::class, 'index'])->name('report.index');
     Route::get('/reports/create', [ReportController::class, 'create'])->name('report.create');
@@ -153,6 +171,7 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/reports/{report}/edit', [ReportController::class, 'edit'])->name('report.edit');
     Route::put('/reports/{report}', [ReportController::class, 'update'])->name('report.update');
     Route::delete('/reports/{report}', [ReportController::class, 'destroy'])->name('report.destroy');
+    Route::patch('/reports/{report}/status', [ReportController::class, 'status'])->name('report.status');
 
 });
 

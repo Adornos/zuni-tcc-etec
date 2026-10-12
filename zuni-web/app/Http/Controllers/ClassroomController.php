@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\StudentSheet;
 use App\Models\Classroom;
+use App\Services\Proficiency\ClassroomAverageService;
+use App\Services\Proficiency\ProficiencyService;
 
 use App\Enums\UserRole;
 
@@ -109,6 +111,13 @@ class ClassroomController extends Controller
 
         $studentIds = $validated['students'] ?? [];
 
+        // Salas afetadas (a atual e as de origem dos alunos movidos) terão a média recalculada.
+        $affectedClassrooms = StudentSheet::query()
+            ->where('classroom_id', $classroom->id)
+            ->orWhereIn('student_id', $studentIds)
+            ->pluck('classroom_id')
+            ->push($classroom->id);
+
         DB::transaction(function () use ($studentIds, $classroom) {
 
             /*
@@ -136,6 +145,16 @@ class ClassroomController extends Controller
                     'classroom_id' => $classroom->id,
                 ]);
         });
+
+        // Alunos ativos que entraram na sala garantem suas proficiências; depois, médias.
+        $proficiencies = app(ProficiencyService::class);
+        StudentSheet::query()
+            ->whereIn('student_id', $studentIds)
+            ->whereHas('user', fn ($q) => $q->where('status', \App\Enums\UserStatus::ACTIVE->value))
+            ->get()
+            ->each(fn ($sheet) => $proficiencies->ensureInitialized($sheet));
+
+        app(ClassroomAverageService::class)->refreshMany($affectedClassrooms);
 
         return redirect()
             ->route('coordinator.classroom.show', $classroom->id)

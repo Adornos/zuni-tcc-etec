@@ -2,231 +2,248 @@
 
     @php
         $canAddStudents = Auth::user()->isCoordinator();
+        $canCreateReports = Gate::allows('create', \App\Models\Report::class);
+        $reportPrefix = Auth::user()->role->value;
     @endphp
 
-    <div class="container mx-auto col-span-4 row-span-4">
+    <div class="col-span-4 row-span-4">
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
 
-        @if ($canAddStudents)
-            <form
-                method="POST"
-                action="{{ route('coordinator.classroom.students.update', $classroom) }}"
-            >
-                @csrf
-                @method('PUT')
-        @endif
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold">
+                            Alunos da turma
+                        </h2>
 
-            {{-- CAIXA ÚNICA --}}
-            <div class="card bg-base-100 shadow-md">
-                <div class="card-body p-6">
-
-                    {{-- CABEÇALHO --}}
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5 mb-2 border-b border-base-200">
-
-                        <div>
-                            <h2 class="text-lg font-bold text-Cprimary">
-                                Alunos da turma
-                            </h2>
-                            <p class="text-sm text-base-content/60 mt-1">
-                                {{ $classroom->name }}
-                            </p>
-                        </div>
-
-                        @if ($canAddStudents)
-                            <a
-                                href="{{ route('coordinator.classroom.show', $classroom->id) }}"
-                                class="btn btn-sm bg-Cprimary hover:bg-Cprimary/90 text-white border-none w-full sm:w-auto"
-                            >
-                                ← Voltar
-                            </a>
-                        @endif
-
+                        <p class="text-base-content/60">
+                            {{ $classroom->name }}
+                        </p>
                     </div>
 
-                    @if ($canAddStudents)
+                    <div class="badge badge-primary badge-lg">
+                        {{ $classroom->students->count() }} alunos
+                    </div>
+                </div>
 
-                        {{-- ALUNOS DA TURMA --}}
-                        <h3 class="text-sm font-semibold text-Cprimary mt-4 mb-1 px-3">
-                            Na turma
-                        </h3>
+                {{-- Seleção de alunos para criar relatório (GET). Os checkboxes ligam-se a este form pelo atributo form="report-select". --}}
+                @if ($canCreateReports)
+                    <form
+                        id="report-select"
+                        method="GET"
+                        action="{{ route($reportPrefix . '.report.create') }}"
+                        class="flex justify-end mb-4"
+                    >
+                        <button type="submit" class="btn btn-sm bg-Csecondary text-white">
+                            Criar relatório para os selecionados
+                        </button>
+                    </form>
+                @endif
 
-                        <div class="flex flex-col divide-y divide-base-200">
+                <form
+                    action="{{ route('coordinator.classroom.students.update', $classroom) }}"
+                    method="POST"
+                >
+                    @csrf
+                    @method('PUT')
 
-                            @forelse ($classroom->students as $studentSheet)
+                    <div class="space-y-6">
 
-                                <label
-                                    for="student-{{ $studentSheet->user->id }}"
-                                    class="flex items-center gap-4 px-3 py-3 cursor-pointer transition-colors duration-200 hover:bg-base-200/60 bg-base-200/60"
-                                >
+                        {{-- ALUNOS JÁ ASSOCIADOS À TURMA --}}
+                        <div>
+                            <div class="flex items-center gap-2 mb-3">
+                                <h3 class="text-lg font-semibold">
+                                    Alunos da turma
+                                </h3>
 
-                                    <div class="avatar shrink-0">
-                                        <div class="w-12 h-12 rounded-full">
-                                            <img
-                                                src="https://ui-avatars.com/api/?name={{ urlencode($studentSheet->user->name ?? 'Sem nome') }}&background=random"
-                                                alt="Avatar de {{ $studentSheet->user->name }}"
+                                <span class="badge badge-success">
+                                    {{ $classroom->students->count() }}
+                                </span>
+                            </div>
+                        @if($canAddStudents)
+                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+
+                                @forelse ($classroom->students as $studentSheet)
+
+                                    <label
+                                        class="flex items-center gap-3 p-4 rounded-box
+                                               border border-base-300
+                                               hover:bg-base-200
+                                               hover:shadow-lg
+                                               cursor-pointer transition"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            name="students[]"
+                                            value="{{ $studentSheet->user->id }}"
+                                            class="checkbox checkbox-primary"
+                                            checked
+                                        >
+                                        <div class="flex-1 min-w-0">
+
+                                            <p class="font-semibold truncate">
+                                                {{ $studentSheet->user->name }}
+                                            </p>
+
+                                            <p class="text-sm text-base-content/60">
+                                                Matrícula:
+                                                {{ $studentSheet->registration_number ?? '—' }}
+                                            </p>
+
+                                        </div>
+
+                                        @if ($canCreateReports)
+                                            <input
+                                                type="checkbox"
+                                                form="report-select"
+                                                name="students[]"
+                                                value="{{ $studentSheet->id }}"
+                                                class="checkbox checkbox-sm"
+                                                title="Selecionar para relatório"
+                                                aria-label="Selecionar {{ $studentSheet->user->name }} para relatório"
+                                                onclick="event.stopPropagation()"
                                             >
+                                        @endif
+
+                                    </label>
+
+                                @empty
+
+                                    <div class="col-span-full">
+                                        <div class="alert">
+                                            <span>
+                                                Nenhum aluno está associado a esta turma.
+                                            </span>
                                         </div>
                                     </div>
 
-                                    <div class="flex-1 min-w-0">
-                                        <h3 class="font-bold text-base text-Cprimary leading-tight truncate">
-                                            {{ $studentSheet->user->name }}
-                                        </h3>
-                                        <p class="text-xs text-base-content/60 mt-1 truncate">
-                                            Matrícula: {{ $studentSheet->registration_number ?? '—' }}
-                                        </p>
-                                    </div>
+                                @endforelse
 
-                                    <input
-                                        class="checkbox checkbox-sm border-Cprimary [--chkbg:theme(colors.Cprimary)] [--chkfg:white] shrink-0"
-                                        type="checkbox"
-                                        name="students[]"
-                                        value="{{ $studentSheet->user->id }}"
-                                        id="student-{{ $studentSheet->user->id }}"
-                                        checked
+                            </div>
+                        </div>                      
+
+                        {{-- ALUNOS SEM TURMA --}}
+                        <div>
+
+                            <div class="flex items-center gap-2 mb-3">
+                                <h3 class="text-lg font-semibold">
+                                    Alunos disponíveis
+                                </h3>
+
+                                <span class="badge badge-warning">
+                                    {{ $availableStudents->count() }}
+                                </span>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+
+                                @forelse ($availableStudents as $studentSheet)
+
+                                    <label
+                                        class="flex items-center gap-3 p-4 rounded-box
+                                               border border-base-300
+                                               hover:bg-base-200
+                                               cursor-pointer transition"
                                     >
 
-                                </label>
+                                        <input
+                                            type="checkbox"
+                                            name="students[]"
+                                            value="{{ $studentSheet->user->id }}"
+                                            class="checkbox checkbox-primary"
+                                        >
 
-                            @empty
+                                        <div class="flex-1 min-w-0">
 
-                                <div class="py-3">
-                                    <div class="alert">
-                                        <span>Nenhum aluno está associado a esta turma.</span>
-                                    </div>
-                                </div>
+                                            <p class="font-semibold truncate">
+                                                {{ $studentSheet->user->name }}
+                                            </p>
 
-                            @endforelse
+                                            <p class="text-sm text-base-content/60">
+                                                Matrícula:
+                                                {{ $studentSheet->registration_number ?? '—' }}
+                                            </p>
 
-                        </div>
+                                        </div>
 
-                        {{-- ALUNOS DISPONÍVEIS --}}
-                        <h3 class="text-sm font-semibold text-Cprimary mt-8 mb-1 px-3">
-                            Disponíveis
-                        </h3>
+                                    </label>
 
-                        <div class="flex flex-col divide-y divide-base-200">
+                                @empty
 
-                            @forelse ($availableStudents as $studentSheet)
-
-                                <label
-                                    for="student-{{ $studentSheet->user->id }}"
-                                    class="flex items-center gap-4 px-3 py-3 cursor-pointer transition-colors duration-200 hover:bg-base-200/60"
-                                >
-
-                                    <div class="avatar shrink-0">
-                                        <div class="w-12 h-12 rounded-full">
-                                            <img
-                                                src="https://ui-avatars.com/api/?name={{ urlencode($studentSheet->user->name ?? 'Sem nome') }}&background=random"
-                                                alt="Avatar de {{ $studentSheet->user->name }}"
-                                            >
+                                    <div class="col-span-full">
+                                        <div class="alert alert-success">
+                                            <span>
+                                                Não há alunos sem turma no momento.
+                                            </span>
                                         </div>
                                     </div>
 
-                                    <div class="flex-1 min-w-0">
-                                        <h3 class="font-bold text-base text-Cprimary leading-tight truncate">
-                                            {{ $studentSheet->user->name }}
-                                        </h3>
-                                        <p class="text-xs text-base-content/60 mt-1 truncate">
-                                            Matrícula: {{ $studentSheet->registration_number ?? '—' }}
-                                        </p>
-                                    </div>
+                                @endforelse
 
-                                    <input
-                                        class="checkbox checkbox-sm border-Cprimary [--chkbg:theme(colors.Cprimary)] [--chkfg:white] shrink-0"
-                                        type="checkbox"
-                                        name="students[]"
-                                        value="{{ $studentSheet->user->id }}"
-                                        id="student-{{ $studentSheet->user->id }}"
-                                    >
-
-                                </label>
-
-                            @empty
-
-                                <div class="py-3">
-                                    <div class="alert">
-                                        <span>Não há alunos sem turma no momento.</span>
-                                    </div>
-                                </div>
-
-                            @endforelse
-
+                            </div>
                         </div>
 
-                        {{-- AÇÕES --}}
-                        <div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 mt-6 pt-5 border-t border-base-200">
 
-                            <a
-                                href="{{ route('coordinator.classroom.show', $classroom->id) }}"
-                                class="btn btn-outline border-Cprimary text-Cprimary hover:bg-Cprimary hover:text-white w-full sm:w-auto"
-                            >
-                                Cancelar
-                            </a>
+                        {{-- BOTÃO --}}
+                        <div class="flex justify-end pt-4 border-t border-base-300">
 
                             <button
                                 type="submit"
-                                class="btn bg-Cprimary hover:bg-Cprimary/90 text-white border-none w-full sm:w-auto"
+                                class="btn btn-primary"
                             >
                                 Salvar alunos
                             </button>
 
                         </div>
-
-                    @else
-
-                        {{-- VISÃO DO PROFESSOR --}}
-                        <div class="flex flex-col divide-y divide-base-200">
-
+                        @else
                             @forelse ($classroom->students as $studentSheet)
-
-                                <a
-                                    href="{{ route('teacher.student.show', ['student' => $studentSheet->user->id]) }}"
-                                    class="flex items-center gap-4 px-3 py-3 cursor-pointer transition-colors duration-200 hover:bg-base-200/60"
-                                >
-
-                                    <div class="avatar shrink-0">
-                                        <div class="w-12 h-12 rounded-full">
-                                            <img
-                                                src="https://ui-avatars.com/api/?name={{ urlencode($studentSheet->user->name ?? 'Sem nome') }}&background=random"
-                                                alt="Avatar de {{ $studentSheet->user->name }}"
-                                            >
-                                        </div>
-                                    </div>
-
+                                <div class="flex items-center gap-3 rounded-box border border-base-300 hover:bg-base-200 hover:shadow-lg transition pl-4">
+                                    @if ($canCreateReports)
+                                        <input
+                                            type="checkbox"
+                                            form="report-select"
+                                            name="students[]"
+                                            value="{{ $studentSheet->id }}"
+                                            class="checkbox checkbox-primary"
+                                            aria-label="Selecionar {{ $studentSheet->user->name }} para relatório"
+                                        >
+                                    @endif
+                                    <a
+                                        href="{{ route('teacher.student.show', ['student' => $studentSheet->user->id]) }}"
+                                        class="flex flex-1 items-center gap-3 p-4 cursor-pointer"
+                                    >
                                     <div class="flex-1 min-w-0">
-                                        <h3 class="font-bold text-base text-Cprimary leading-tight truncate">
+
+                                        <p class="font-semibold truncate">
                                             {{ $studentSheet->user->name }}
-                                        </h3>
-                                        <p class="text-xs text-base-content/60 mt-1 truncate">
-                                            Matrícula: {{ $studentSheet->registration_number ?? '—' }}
                                         </p>
+
+                                        <p class="text-sm text-base-content/60">
+                                            Matrícula:
+                                            {{ $studentSheet->registration_number ?? '—' }}
+                                        </p>
+
                                     </div>
-
-                                    <span class="text-Cprimary shrink-0">→</span>
-
-                                </a>
+                                    </a>
+                                </div>
 
                             @empty
 
-                                <div class="py-3">
+                                <div class="col-span-full">
                                     <div class="alert">
-                                        <span>Nenhum aluno está associado a esta turma.</span>
+                                        <span>
+                                            Nenhum aluno está associado a esta turma.
+                                        </span>
                                     </div>
                                 </div>
 
                             @endforelse
+                        @endif
+                    </div>
+                </form>
 
-                        </div>
-
-                    @endif
-
-                </div>
             </div>
-
-        @if ($canAddStudents)
-            </form>
-        @endif
-
+        </div>
     </div>
 
 </x-dynamic-component>

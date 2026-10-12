@@ -20,6 +20,18 @@ new class extends Component
     public string $classroomGrade = '';
     public string $classroomName = '';
 
+    /* Parametros de rota */
+
+    public string $routePrefix;
+    public string $routeToCreate;
+
+    public function mount()
+    {
+
+        $this->routePrefix = Auth::user()->role->value;
+
+        $this->routeToCreate = ($this->routePrefix === 'teacher') ? 'coordinator.teacher.register' : 'director.employee.register' ;
+    }
 
     /**
      * Verifica se a busca deve ser por todos os Employees ou apenas pelo Professor
@@ -266,7 +278,15 @@ new class extends Component
 
                     <div class="card-actions justify-center items-center h-full">
 
-                        <a href="{{route('director.employee.register')}}" class="text-white bg-Csecondary rounded-full p-4">CADASTRAR
+                        <a @if($this->searchTeachersOnly()){
+                            href="{{ route( 'coordinator.teacher.register') }}"
+                        } 
+                        @else{
+                            href="{{ route( 'director.employee.register') }}"
+                        }
+                        @endif
+                         class="text-white bg-Csecondary rounded-full p-4"
+                        >CADASTRAR
 
                             <span aria-hidden="true">
                                 +

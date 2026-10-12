@@ -41,6 +41,17 @@
             </a>
         </li>
 
+    {{-- Relatórios --}}
+        <li>
+            <a
+                href="{{ route('teacher.report.index') }}"
+                class="hover:bg-white hover:text-Cprimary gap-5"
+            >
+                <x-svg.icon.reports class="size-10"/>
+                Relatórios
+            </a>
+        </li>
+
     {{-- Cronograma --}}
         <li>
             <a

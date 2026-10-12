@@ -145,9 +145,12 @@ class User extends Authenticatable
         return $this->hasOne(DirectorSheet::class, 'director_id');
     }
     
-    public function report(): HasMany
+    /**
+     * Relatórios criados por este usuário.
+     */
+    public function reports(): HasMany
     {
-        return $this->hasMany(Report::class, 'report_id');
+        return $this->hasMany(Report::class, 'author_id');
     }
 
 

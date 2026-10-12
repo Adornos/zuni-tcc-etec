@@ -8,12 +8,53 @@ use App\Enums\UserRole;
 use GuzzleHttp\Psr7\Query;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\WithPagination;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Report;
 
 new class extends Component
 {
+    use WithPagination;
+
     public string $name = '';
     public string $status = '';
     public string $class = '';
+
+    /** IDs de StudentSheet marcados para criação de relatório. */
+    public array $selected = [];
+
+    public function updated(string $property): void
+    {
+        if (in_array($property, ['name', 'status', 'class'], true)) {
+            $this->resetPage();
+        }
+    }
+
+    /**
+     * Encaminha os alunos marcados ao formulário de criação de Report.
+     * O destino revalida existência e autorização de cada ID.
+     */
+    public function createReport()
+    {
+        abort_unless(Gate::allows('create', Report::class), 403);
+
+        $ids = collect($this->selected)
+            ->filter(fn ($id) => is_scalar($id) && ctype_digit((string) $id))
+            ->map(fn ($id) => (int) $id)
+            ->unique()
+            ->values()
+            ->all();
+
+        if ($ids === []) {
+            $this->addError('selected', 'Selecione ao menos um aluno.');
+
+            return;
+        }
+
+        return $this->redirect(
+            route(Auth::user()->role->value . '.report.create', ['students' => $ids])
+        );
+    }
 
     /**
      * Verifica se o usuário pode pesquisar todos os alunos.
@@ -95,6 +136,16 @@ new class extends Component
                 }
             );
             $query;
+
+        } elseif (Auth::user()->isTeacher()) {
+
+            /*
+             * Professor: alunos das turmas pelas quais é responsável.
+             */
+            $query->whereIn(
+                'classroom_id',
+                Auth::user()->classrooms()->pluck('classrooms.id')->all()
+            )->orderByDesc('id');
 
         } else {
 
@@ -401,6 +452,23 @@ new class extends Component
 
     @else 
 
+        @can('create', \App\Models\Report::class)
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <p class="text-sm text-base-content/60">
+                    Marque um ou mais alunos para criar um relatório.
+                    @error('selected') <span class="text-error">{{ $message }}</span> @enderror
+                </p>
+
+                <button
+                    type="button"
+                    wire:click="createReport"
+                    class="btn btn-sm bg-Csecondary text-white"
+                >
+                    Criar relatório ({{ count($selected) }})
+                </button>
+            </div>
+        @endcan
+
         {{-- RESULTADOS --}} 
         <div
             class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 "> 
@@ -410,7 +478,18 @@ new class extends Component
                 class=" card bg-base-100 border border-base-200 shadow-sm transition-shadow hover:shadow-md h-fit "
                 >
                     <div class="card-body p-4 sm:p-5 md:p-6">
-                        <h2 class="card-title text-base sm:text-lg"> {{ $student->user->name }} </h2>
+                        <div class="flex items-center gap-3">
+                            @can('create', \App\Models\Report::class)
+                                <input
+                                    type="checkbox"
+                                    wire:model.live="selected"
+                                    value="{{ $student->id }}"
+                                    class="checkbox checkbox-primary"
+                                    aria-label="Selecionar {{ $student->user->name }} para relatório"
+                                >
+                            @endcan
+                            <h2 class="card-title text-base sm:text-lg"> {{ $student->user->name }} </h2>
+                        </div>
                         <p class="text-xs sm:text-sm text-base-content/60"> Student #{{ $student->student_id }} </p>
                         <div class="divider my-2"></div>
                         <div class="flex justify-between gap-3">
