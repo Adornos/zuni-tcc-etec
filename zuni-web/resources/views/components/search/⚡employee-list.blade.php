@@ -332,7 +332,7 @@ new class extends Component
 
                     <div class="flex justify-between gap-3">
                         <span class="text-sm text-base-content/60">
-                            Student ID
+                            ID
                         </span>
 
                         <span class="font-medium">
@@ -346,7 +346,7 @@ new class extends Component
                         </span>
 
                         <span class="font-medium">
-                            {{ $user->roleSheet?->status }}
+                            {{ $user->status->label() }}
                         </span>
                     </div>
 

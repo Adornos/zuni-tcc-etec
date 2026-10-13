@@ -75,17 +75,6 @@
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 pb-4">
 
                 {{-- =====================================================
-                    AVALIAÇÃO DO PROFESSOR (primeira coisa da página)
-                ====================================================== --}}
-                @if ($sheet)
-                    @can('observe', $sheet)
-                        <div class="lg:col-span-4">
-                            <livewire:search.student-evaluation :sheetId="$sheet->id" />
-                        </div>
-                    @endcan
-                @endif
-
-                {{-- =====================================================
                     CABEÇALHO
                 ====================================================== --}}
                 <div class="lg:col-span-4">
@@ -152,6 +141,16 @@
                     </div>
                 </div>
 
+                {{-- =====================================================
+                    AVALIAÇÃO DO PROFESSOR (primeira coisa da página)
+                ====================================================== --}}
+                @if ($sheet)
+                    @can('observe', $sheet)
+                        <div class="lg:col-span-4">
+                            <livewire:search.student-evaluation :sheetId="$sheet->id" />
+                        </div>
+                    @endcan
+                @endif
 
                 {{-- =====================================================
                     DADOS PESSOAIS
@@ -233,7 +232,7 @@
 
                                 <div>
                                     <p class="text-sm text-base-content/50">Ano/Série</p>
-                                    <p class="font-semibold mt-1">{{ $classroom?->grade ?? 'Não informado' }}</p>
+                                    <p class="font-semibold mt-1">{{ $classroom?->grade->label() ?? 'Não informado' }}</p>
                                 </div>
                                 
                                 @if ($role === 'coordinator')

@@ -17,6 +17,8 @@
         default => 'badge-ghost',
     };
 
+    $statusClass = $profile->role->value === 'guardian' ? 'hidden' : $statusClass;
+
     $identifier = $sheet?->id ?? $profile->id;
     $address = collect([
         trim(($profile->street ?? '').($profile->number ? ', '.$profile->number : ''), ', '),
