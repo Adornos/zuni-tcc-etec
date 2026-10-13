@@ -16,12 +16,9 @@ use Illuminate\Validation\Rule;
 
 class GuardianController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('guardian.panel');
+        return view('guardian.index');
     }
     
     public function forum()

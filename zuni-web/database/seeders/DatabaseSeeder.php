@@ -2,30 +2,28 @@
 
 namespace Database\Seeders;
 
-
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+/**
+ * Dados de desenvolvimento (idempotente: rodar de novo atualiza os mesmos registros).
+ *
+ *   1 coordenador · 1 diretor · 5 professores · 5 responsáveis · 25 alunos (5 por responsável)
+ *   + 5 turmas (1º ao 5º ano), uma por professor
+ *
+ * Todos os usuários usam a senha 123456. Recomendado: php artisan migrate:fresh --seed
+ */
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-
         $this->call([
-            DirectorUserSeeder::class,
-            CoordinatorUserSeeder::class,
-            TeacherUserSeeder::class,
-            GuardianUserSeeder::class,
-
-            GeneralTeacherSeeder::class,
-            GeneralStudentSeeder::class
+            DirectorSeeder::class,
+            CoordinatorSeeder::class,
+            TeacherSeeder::class,
+            ClassroomSeeder::class,
+            GuardianSeeder::class,
+            StudentSeeder::class,
+            ProficiencySeeder::class,
         ]);
-
     }
 }
