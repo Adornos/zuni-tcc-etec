@@ -32,8 +32,16 @@
                         id="report-select"
                         method="GET"
                         action="{{ route($reportPrefix . '.report.create') }}"
-                        class="flex justify-end mb-4"
+                        class="flex flex-wrap items-center justify-end gap-2 mb-4"
                     >
+                        <button type="button" class="btn btn-sm btn-outline"
+                                onclick="document.querySelectorAll('input[form=report-select][name=\'students[]\']').forEach(i => i.checked = true)">
+                            Selecionar todos
+                        </button>
+                        <button type="button" class="btn btn-sm btn-ghost"
+                                onclick="document.querySelectorAll('input[form=report-select][name=\'students[]\']').forEach(i => i.checked = false)">
+                            Limpar seleção
+                        </button>
                         <button type="submit" class="btn btn-sm bg-Csecondary text-white">
                             Criar relatório para os selecionados
                         </button>

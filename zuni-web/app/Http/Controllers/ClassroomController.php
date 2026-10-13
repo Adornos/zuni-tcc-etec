@@ -8,7 +8,10 @@ use App\Models\Classroom;
 use App\Services\Proficiency\ClassroomAverageService;
 use App\Services\Proficiency\ProficiencyService;
 
+use App\Enums\ClassroomGrade;
+use App\Enums\ClassroomShift;
 use App\Enums\UserRole;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -161,14 +164,47 @@ class ClassroomController extends Controller
             ->with('success', 'Alunos da turma atualizados com sucesso.');
     }
 
+    /**
+     * Formulário de edição da turma (separado da página de visualização). Só a coordenação edita.
+     */
     public function edit(Classroom $classroom)
     {
-        //
+        abort_unless(Auth::user()->isCoordinator(), 403);
+
+        return view('pages.classroom.edit', [
+            'classroom' => $classroom,
+            'enrolled' => $classroom->students()->count(),
+        ]);
     }
 
     public function update(Request $request, Classroom $classroom)
     {
+        abort_unless(Auth::user()->isCoordinator(), 403);
 
+        $enrolled = $classroom->students()->count();
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:50'],
+            'grade' => ['required', Rule::enum(ClassroomGrade::class)],
+            'shift' => ['nullable', Rule::enum(ClassroomShift::class)],
+            // A capacidade nunca pode ficar abaixo do número de alunos já matriculados.
+            'capacity' => ['nullable', 'integer', 'min:'.max(1, $enrolled)],
+            'status' => ['required', 'in:active,inactive'],
+        ], [
+            'capacity.min' => "A capacidade não pode ser menor que o número de alunos matriculados ({$enrolled}).",
+        ], [
+            'name' => 'nome da turma',
+            'grade' => 'série',
+            'shift' => 'turno',
+            'capacity' => 'capacidade',
+            'status' => 'status',
+        ]);
+
+        $classroom->update($validated);
+
+        return redirect()
+            ->route('coordinator.classroom.show', $classroom)
+            ->with('success', 'Turma atualizada com sucesso.');
     }
 
     public function destroy(Classroom $classroom)

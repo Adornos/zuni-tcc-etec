@@ -154,7 +154,7 @@
                 style="{{ request()->routeIs('coordinator.chat') ? 'background-color: #fff; color: #0a155c; font-weight: 600;' : '' }}"
             >
                 <img 
-                class="w-6 h-6 mr-3 shrink-0 group-hover:[filter:brightness(0)_saturate(100%)]"
+                class="w-z6 h-6 mr-3 shrink-0 group-hover:[filter:brightness(0)_saturate(100%)]"
                 style="{{ request()->routeIs('coordinator.chat') ? 'filter: brightness(0) saturate(100%);' : '' }}"
                 src="{{ asset('images/icons/chat.svg') }}" 
                 />

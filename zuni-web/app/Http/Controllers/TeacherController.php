@@ -18,38 +18,7 @@ class TeacherController extends Controller
         return view('teacher.panel');
     }
 
-    public function show(User $teacher)
-    {   
-        
-        if(isset($teacher)){
-            $teacher = Auth::user();
-            abort_unless($teacher->role === UserRole::TEACHER, 403, 'Usuário não permitido');
-        } else {
-            abort_unless(Auth::user()->role === UserRole::COORDINATOR, 403, 'Usuário não permitido');
-        }
-                
-        return view('pages.teacher.show', ['teacherInfo' => $teacher]);    
-
-    }
     
-    public function edit()
-    {
-        $user = Auth::user();
-        return view('pages.teacher.edit', ['profile' => $user]);
-    }
-
-    public function update(Request $request)
-    {
-        $user = Auth::user();
-        abort_unless($user->role === UserRole::TEACHER, 403, 'Acesso negado.');
-
-        app(EmployeeController::class)->update($request, $user);
-
-
-        return redirect()->route('teacher.profile')->with('status', 'Perfil atualizado com sucesso!');
-
-    }
-
     public function schedule()
     {
         $user = Auth::user();

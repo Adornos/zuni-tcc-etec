@@ -6,17 +6,10 @@
 
 <x-dynamic-component :component="'panel.' . auth()->user()->role->value">
 
-<form
-    action="{{ route('coordinator.classroom.update', $classroom) }}"
-    method="POST"
-    class="space-y-6 col-span-4"
->
-    @csrf
-    @method('PUT')
-
+<div class="space-y-6 col-span-4">
 
     {{-- ========================================================= --}}
-    {{-- DADOS DA TURMA --}}
+    {{-- DADOS DA TURMA (somente leitura; a edição fica em outra tela) --}}
     {{-- ========================================================= --}}
 
     <div class="card bg-base-100 shadow">
@@ -25,153 +18,46 @@
             <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 
                 <div>
-                    <h2 class="card-title">
-                        {{ $classroom->name }}
-                    </h2>
-
+                    <h2 class="card-title">{{ $classroom->name }}</h2>
                     <p class="text-sm text-base-content/60">
                         Turma #{{ str_pad($classroom->id, 4, '0', STR_PAD_LEFT) }}
                     </p>
                 </div>
 
-                <span class="
-                    badge
-                    rounded-full
-                    px-4
-                    py-3
-                    {{ $classroom->status === 'active'
-                        ? 'badge-success'
-                        : 'badge-error'
-                    }}
-                ">
-                    {{ $classroom->status === 'active' ? 'Ativa' : 'Inativa' }}
-                </span>
+                <div class="flex items-center gap-3">
+                    <span class="badge rounded-full px-4 py-3 {{ $classroom->status === 'active' ? 'badge-success' : 'badge-error' }}">
+                        {{ $classroom->status === 'active' ? 'Ativa' : 'Inativa' }}
+                    </span>
+
+                    @if ($isCoordinator)
+                        <a href="{{ route('coordinator.classroom.edit', $classroom) }}" class="btn btn-sm btn-outline">
+                            Editar turma
+                        </a>
+                    @endif
+                </div>
 
             </div>
-
 
             <div class="divider"></div>
 
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-                {{-- Nome --}}
-                <div class="form-control md:col-span-2">
-                    <label class="label">
-                        <span class="label-text">
-                            Nome da turma
-                        </span>
-                    </label>
-
-                    <input
-                        type="text"
-                        name="name"
-                        value="{{ old('name', $classroom->name) }}"
-                        class="input input-bordered w-full"
-                        required
-                    >
+            <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div>
+                    <dt class="text-sm uppercase text-base-content/60">Série / Ano</dt>
+                    <dd class="mt-1 font-medium">{{ $classroom->grade?->label() ?? 'Não informada' }}</dd>
                 </div>
-
-
-                {{-- Série --}}
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text">
-                            Série / Ano
-                        </span>
-                    </label>
-
-                    <select
-                        name="grade"
-                        class="select select-bordered w-full"
-                    >
-                        <option value="{{ old('name', $classroom->grade->value) }}">{{ old('name', $classroom->grade->label()) }}</option>
-
-                        @foreach(App\Enums\ClassroomGrade::cases() as $grade)
-                        <option value="{{$grade}}">{{$grade->label()}}</option>
-                        @endforeach
-                    </select>
+                <div>
+                    <dt class="text-sm uppercase text-base-content/60">Turno</dt>
+                    <dd class="mt-1 font-medium">{{ $classroom->shift?->label() ?? 'Não informado' }}</dd>
                 </div>
-
-
-                {{-- Turno --}}
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text">
-                            Turno
-                        </span>
-                    </label>
-
-                    <select
-                        name="shift"
-                        class="select select-bordered w-full"
-                    >
-                        <option value="morning"
-                            @selected(old('shift', $classroom->shift) === 'morning')>
-                            Manhã
-                        </option>
-
-                        <option value="afternoon"
-                            @selected(old('shift', $classroom->shift) === 'afternoon')>
-                            Tarde
-                        </option>
-
-                        <option value="full_time"
-                            @selected(old('shift', $classroom->shift) === 'full_time')>
-                            Integral
-                        </option>
-
-                        <option value="evening"
-                            @selected(old('shift', $classroom->shift) === 'evening')>
-                            Noite
-                        </option>
-                    </select>
+                <div>
+                    <dt class="text-sm uppercase text-base-content/60">Capacidade</dt>
+                    <dd class="mt-1 font-medium">{{ $classroom->capacity ?? 'Sem limite' }}</dd>
                 </div>
-
-
-                {{-- Capacidade --}}
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text">
-                            Capacidade
-                        </span>
-                    </label>
-
-                    <input
-                        type="number"
-                        name="capacity"
-                        value="{{ old('capacity', $classroom->capacity) }}"
-                        min="1"
-                        class="input input-bordered w-full"
-                    >
+                <div>
+                    <dt class="text-sm uppercase text-base-content/60">Matriculados</dt>
+                    <dd class="mt-1 font-medium">{{ $classroom->students->count() }}</dd>
                 </div>
-
-
-                {{-- Status --}}
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text">
-                            Status
-                        </span>
-                    </label>
-
-                    <select
-                        name="status"
-                        class="select select-bordered w-full"
-                    >
-                        <option value="active"
-                            @selected(old('status', $classroom->status) === 'active')>
-                            Ativa
-                        </option>
-
-                        <option value="inactive"
-                            @selected(old('status', $classroom->status) === 'inactive')>
-                            Inativa
-                        </option>
-                    </select>
-                </div>
-
-            </div>
+            </dl>
 
         </div>
     </div>
@@ -185,56 +71,26 @@
         <div class="card-body">
 
             <div class="flex items-center justify-between">
+                <h2 class="card-title">Professores</h2>
 
-                <h2 class="card-title">
-                    Professores
-                </h2>
-
-                @if($isCoordinator)
-                    <a
-                        href="{{ route('coordinator.classroom.teachers', $classroom) }}"
-                        class="btn btn-sm btn-outline"
-                    >
+                @if ($isCoordinator)
+                    <a href="{{ route('coordinator.classroom.teachers', $classroom) }}" class="btn btn-sm btn-outline">
                         Gerenciar
                     </a>
                 @endif
             </div>
 
-
             <div class="mt-4 space-y-3">
-
-                @forelse($classroom->teachers as $teacher)
-
-                    <div class="
-                        flex
-                        items-center
-                        justify-between
-                        rounded-xl
-                        border
-                        border-base-200
-                        p-3
-                    ">
-
+                @forelse ($classroom->teachers as $teacher)
+                    <div class="flex items-center justify-between rounded-xl border border-base-200 p-3">
                         <div>
-                            <p class="font-medium">
-                                {{ $teacher->name }}
-                            </p>
-
-                            <p class="text-xs text-base-content/60">
-                                {{ $teacher->role->label() }}
-                            </p>
+                            <p class="font-medium">{{ $teacher->name }}</p>
+                            <p class="text-xs text-base-content/60">{{ $teacher->role->label() }}</p>
                         </div>
-
                     </div>
-
                 @empty
-
-                    <p class="text-sm text-base-content/50">
-                        Nenhum professor atribuído.
-                    </p>
-
+                    <p class="text-sm text-base-content/50">Nenhum professor atribuído.</p>
                 @endforelse
-
             </div>
 
         </div>
@@ -249,48 +105,21 @@
         <div class="card-body">
 
             <div class="flex items-center justify-between">
+                <h2 class="card-title">Alunos</h2>
 
-                    <h2 class="card-title">
-                        Alunos
-                    </h2>
-
-                
-                    <a
-                    href="{{ route($routePrefix . '.classroom.students', $classroom) }}"
-                    class="btn btn-sm btn-outline "
-                    >
+                <a href="{{ route($routePrefix . '.classroom.students', $classroom) }}" class="btn btn-sm btn-outline">
                     Gerenciar
                 </a>
             </div>
-        
-            <p Class="text-sm text-base-content/50 mt-2">
-                Matriculados: 
-                {{ $classroom->students->count() }}
-                de {{ $classroom->capacity ?? '∞' }}
+
+            <p class="mt-2 text-sm text-base-content/50">
+                Matriculados: {{ $classroom->students->count() }} de {{ $classroom->capacity ?? '∞' }}
             </p>
-        
+
         </div>
     </div>
 
-
-    {{-- ========================================================= --}}
-    {{-- BOTÃO SALVAR --}}
-    {{-- ========================================================= --}}
-    @if($isCoordinator)
-    
-        <div class="flex justify-end">
-
-            <button
-                type="submit"
-                class="btn text-Cwhite btn-sm bg-Csecondary"
-            >
-                Salvar alterações (WIP)
-            </button>
-
-        </div>
-
-    @endif
-</form>
+</div>
 
 @can('viewProficiencies', $classroom)
     <div class="col-span-4">

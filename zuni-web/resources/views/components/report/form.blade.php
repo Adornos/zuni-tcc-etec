@@ -23,7 +23,21 @@
 <form
     method="POST"
     action="{{ $isEdit ? route($prefix . '.report.update', $report) : route($prefix . '.report.store') }}"
-    x-data="{ target: @js($currentTarget), q: '' }"
+    x-data="{
+        target: @js($currentTarget),
+        q: '',
+        count: 0,
+        recount() { this.count = this.$refs.studentList ? this.$refs.studentList.querySelectorAll('input[type=checkbox]:checked').length : 0 },
+        // Marca só os alunos visíveis (respeita o filtro digitado).
+        selectVisible() {
+            this.$refs.studentList.querySelectorAll('label').forEach(l => {
+                if (l.offsetParent !== null) { const c = l.querySelector('input[type=checkbox]'); if (c) c.checked = true }
+            });
+            this.recount();
+        },
+        clearAll() { this.$refs.studentList.querySelectorAll('input[type=checkbox]').forEach(c => c.checked = false); this.recount() },
+    }"
+    x-init="recount()"
     class="space-y-6 col-span-4"
 >
     @csrf
@@ -117,7 +131,14 @@
                     class="input input-bordered w-full" aria-label="Filtrar alunos"
                 >
 
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 max-h-96 overflow-y-auto">
+                <div class="flex flex-wrap items-center gap-2">
+                    <button type="button" class="btn btn-xs btn-outline" @click="selectVisible()"
+                            x-text="q ? 'Selecionar filtrados' : 'Selecionar todos'"></button>
+                    <button type="button" class="btn btn-xs btn-ghost" @click="clearAll()">Limpar seleção</button>
+                    <span class="text-xs text-base-content/60" aria-live="polite"><span x-text="count"></span> selecionado(s)</span>
+                </div>
+
+                <div x-ref="studentList" @change="recount()" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 max-h-96 overflow-y-auto">
                     @forelse ($sheets as $sheet)
                         <label
                             class="flex items-center gap-3 p-3 rounded-box border border-base-300 hover:bg-base-200 cursor-pointer"

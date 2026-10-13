@@ -30,14 +30,6 @@ class CoordinatorController extends Controller
         
     }
     
-    public function profile()
-    {
-        $user = Auth::user();
-        
-            return view('coordinator.profile', ['profile' => $user]);
-        
-    }
-
     public function forum()
     {
        

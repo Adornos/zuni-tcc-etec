@@ -1,26 +1,14 @@
 <x-dynamic-component :component="'panel.' . auth()->user()->role->value">
 
     @php
-
-        /*
-         * Roteamento dinâmico conforme o perfil autenticado
-         */
-
-        $role = auth()->user()->role->value ?? auth()->user()->role;
-
-        $backRoute = match ($role) {
-            'guardian' => 'guardian.profile',
-            'coordinator' => 'coordinator.guardian.show',
-            'director' => 'coordinator.employee.show',
-            default => 'home',
-        };
-
+        // Tela única de edição de perfil, igual para todos os roles (o usuário edita só o próprio).
+        $role = $profile->role->value;
     @endphp
 
     
 
     <form
-        action="{{ route('guardian.profile.update') }}"
+        action="{{ route($role . '.profile.update') }}"
         method="post"
         class="card bg-base-100 shadow-md col-span-4 row-span-4"
 
@@ -75,6 +63,16 @@
 
         <div class="card-body">
 
+            @if ($errors->any())
+                <div class="alert alert-error mb-4" role="alert">
+                    <ul class="list-disc pl-5 text-sm">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             {{-- HEADER DO PERFIL --}}
             <div class="flex items-center gap-6 mb-6">
 
@@ -94,7 +92,7 @@
                     </h2>
 
                     <p class="text-base-content/60">
-                        Responsável
+                        {{ $profile->role->label() }}
                     </p>
 
                 </div>
@@ -481,7 +479,6 @@
             </div>
 
 
-
             {{-- ========================================================= --}}
             {{-- AÇÕES                                                       --}}
             {{-- ========================================================= --}}
@@ -489,7 +486,7 @@
             <div class="card-actions justify-end mt-8">
 
                 <a
-                    href="{{ url()->previous() }}"
+                    href="{{ route($role . '.profile') }}"
                     class="px-5 py-2 rounded-full border-2 border-Cprimary text-Cprimary font-medium hover:bg-Cprimary hover:text-white transition"
                 >
                     Cancelar

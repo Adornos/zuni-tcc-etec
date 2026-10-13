@@ -30,6 +30,17 @@ new class extends Component
         }
     }
 
+    /** Marca todos os alunos exibidos na página atual (já respeitando os filtros). */
+    public function selectAllOnPage(): void
+    {
+        $this->selected = $this->students->pluck('id')->map(fn ($id) => (string) $id)->all();
+    }
+
+    public function clearSelection(): void
+    {
+        $this->selected = [];
+    }
+
     /**
      * Encaminha os alunos marcados ao formulário de criação de Report.
      * O destino revalida existência e autorização de cada ID.
@@ -459,13 +470,21 @@ new class extends Component
                     @error('selected') <span class="text-error">{{ $message }}</span> @enderror
                 </p>
 
-                <button
-                    type="button"
-                    wire:click="createReport"
-                    class="btn btn-sm bg-Csecondary text-white"
-                >
-                    Criar relatório ({{ count($selected) }})
-                </button>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" wire:click="selectAllOnPage" class="btn btn-sm btn-outline">
+                        Selecionar todos desta página
+                    </button>
+                    <button type="button" wire:click="clearSelection" class="btn btn-sm btn-ghost">
+                        Limpar seleção
+                    </button>
+                    <button
+                        type="button"
+                        wire:click="createReport"
+                        class="btn btn-sm bg-Csecondary text-white"
+                    >
+                        Criar relatório ({{ count($selected) }})
+                    </button>
+                </div>
             </div>
         @endcan
 
