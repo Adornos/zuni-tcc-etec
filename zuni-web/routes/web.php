@@ -141,8 +141,8 @@ Route::middleware(['auth', 'role:coordinator'])
     Route::get('/teachers', [EmployeeController::class, 'index'])->name('teacher.index');
     Route::get('/teacher/register', [EmployeeController::class, 'formTeacher'])->name('teacher.register');
     Route::post('/teacher/register', [EmployeeController::class, 'registerTeacher'])->name('teacher.store');
-    Route::get('/teacher/show/{teacher}', [TeacherController::class, 'show'])->name('teacher.show');
-    Route::put('/teacher/show/{teacher}/edit', [TeacherController::class, 'update'])->name('teacher.edit');
+    Route::get('/teacher/show/{user}', [ProfileController::class, 'show'])->name('teacher.show');
+    Route::put('/teacher/show/{user}/edit', [TeacherController::class, 'update'])->name('teacher.edit');
 
     // Criação e gerenciamento de salas
     Route::get('/classrooms', [ClassroomController::class, 'index'])->name('classroom.index');

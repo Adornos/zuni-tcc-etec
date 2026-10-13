@@ -16,10 +16,10 @@ use Illuminate\Validation\Rule;
  */
 class ProfileController extends Controller
 {
-    public function show()
+    public function show(User $user = null)
     {
         /** @var User $user */
-        $user = Auth::user();
+        $user = $user ?? Auth::user();
 
         $user->load(['students.user', 'students.classroom']);
 

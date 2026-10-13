@@ -4,6 +4,7 @@
      *  - professor, coordenador e diretor: ficha profissional (formação, especialização, contratação);
      *  - responsável: alunos vinculados.
      */
+    $authRole = Auth::user()->role;
     $role = $profile->role;
     $isEmployee = $sheet !== null;
     $gender = ['M' => 'Masculino', 'F' => 'Feminino', 'O' => 'Outro'][$profile->gender] ?? null;
@@ -24,7 +25,7 @@
     ])->filter()->implode(' · ');
 @endphp
 
-<x-dynamic-component :component="'panel.' . $role->value">
+<x-dynamic-component :component="'panel.' . $authRole->value">
 
     <div class="col-span-4 row-span-4 min-w-0 space-y-3 sm:space-y-4">
 
@@ -64,9 +65,11 @@
                             Id Nº <strong class="text-base-content">{{ str_pad($identifier, 4, '0', STR_PAD_LEFT) }}</strong>
                         </span>
 
-                        <a href="{{ route($role->value . '.profile.edit') }}" class="btn btn-primary min-h-11 text-base">
-                            Editar perfil
-                        </a>
+                        @if($role === Auth::user()->role)
+                            <a href="{{ route($role->value . '.profile.edit') }}" class="btn btn-primary min-h-11 text-base">
+                                Editar perfil
+                            </a>
+                        @endif
                     </div>
 
                 </div>

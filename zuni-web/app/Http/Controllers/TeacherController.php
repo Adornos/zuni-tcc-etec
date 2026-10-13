@@ -17,7 +17,6 @@ class TeacherController extends Controller
     {
         return view('teacher.panel');
     }
-
     
     public function schedule()
     {
