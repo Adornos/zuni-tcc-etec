@@ -2,6 +2,8 @@
 
     @php
         $canAddStudents = Auth::user()->isCoordinator();
+        $canCreateReports = Gate::allows('create', \App\Models\Report::class);
+        $reportPrefix = Auth::user()->role->value;
     @endphp
 
     <div class="col-span-4 row-span-4">
@@ -23,6 +25,28 @@
                         {{ $classroom->students->count() }} alunos
                     </div>
                 </div>
+
+                {{-- Seleção de alunos para criar relatório (GET). Os checkboxes ligam-se a este form pelo atributo form="report-select". --}}
+                @if ($canCreateReports)
+                    <form
+                        id="report-select"
+                        method="GET"
+                        action="{{ route($reportPrefix . '.report.create') }}"
+                        class="flex flex-wrap items-center justify-end gap-2 mb-4"
+                    >
+                        <button type="button" class="btn btn-sm btn-outline"
+                                onclick="document.querySelectorAll('input[form=report-select][name=\'students[]\']').forEach(i => i.checked = true)">
+                            Selecionar todos
+                        </button>
+                        <button type="button" class="btn btn-sm btn-ghost"
+                                onclick="document.querySelectorAll('input[form=report-select][name=\'students[]\']').forEach(i => i.checked = false)">
+                            Limpar seleção
+                        </button>
+                        <button type="submit" class="btn btn-sm bg-Csecondary text-white">
+                            Criar relatório para os selecionados
+                        </button>
+                    </form>
+                @endif
 
                 <form
                     action="{{ route('coordinator.classroom.students.update', $classroom) }}"
@@ -75,6 +99,19 @@
                                             </p>
 
                                         </div>
+
+                                        @if ($canCreateReports)
+                                            <input
+                                                type="checkbox"
+                                                form="report-select"
+                                                name="students[]"
+                                                value="{{ $studentSheet->id }}"
+                                                class="checkbox checkbox-sm"
+                                                title="Selecionar para relatório"
+                                                aria-label="Selecionar {{ $studentSheet->user->name }} para relatório"
+                                                onclick="event.stopPropagation()"
+                                            >
+                                        @endif
 
                                     </label>
 
@@ -168,14 +205,21 @@
                         </div>
                         @else
                             @forelse ($classroom->students as $studentSheet)
-                                <a
-                                    href="{{ route('teacher.student.show', ['student' => $studentSheet->user->id]) }}"
-                                    class="flex items-center gap-3 p-4 rounded-box
-                                        border border-base-300
-                                        hover:bg-base-200
-                                        hover:shadow-lg
-                                        cursor-pointer transition"
-                                >
+                                <div class="flex items-center gap-3 rounded-box border border-base-300 hover:bg-base-200 hover:shadow-lg transition pl-4">
+                                    @if ($canCreateReports)
+                                        <input
+                                            type="checkbox"
+                                            form="report-select"
+                                            name="students[]"
+                                            value="{{ $studentSheet->id }}"
+                                            class="checkbox checkbox-primary"
+                                            aria-label="Selecionar {{ $studentSheet->user->name }} para relatório"
+                                        >
+                                    @endif
+                                    <a
+                                        href="{{ route('teacher.student.show', ['student' => $studentSheet->user->id]) }}"
+                                        class="flex flex-1 items-center gap-3 p-4 cursor-pointer"
+                                    >
                                     <div class="flex-1 min-w-0">
 
                                         <p class="font-semibold truncate">
@@ -188,7 +232,8 @@
                                         </p>
 
                                     </div>
-                                </a>
+                                    </a>
+                                </div>
 
                             @empty
 

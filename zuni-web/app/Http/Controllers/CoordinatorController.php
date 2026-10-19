@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Models\TeacherSheet;
 use App\Models\CoordinatorSheet;
 use App\Models\StudentSheet;
+use App\Services\Proficiency\ClassroomAverageService;
+use App\Services\Proficiency\ProficiencyService;
 
 use Illuminate\Http\Request;
 
@@ -28,14 +30,6 @@ class CoordinatorController extends Controller
         
     }
     
-    public function profile()
-    {
-        $user = Auth::user();
-        
-            return view('coordinator.profile', ['profile' => $user]);
-        
-    }
-
     public function forum()
     {
        
@@ -118,6 +112,11 @@ class CoordinatorController extends Controller
         $user->status = UserStatus::ACTIVE;
         $user->save();
 
+        // Aluno aprovado passa a ser elegível: cria as proficiências (valor 5) e atualiza a média da sala.
+        $sheet = $enrollment->studentSheet;
+        app(ProficiencyService::class)->ensureInitialized($sheet);
+        app(ClassroomAverageService::class)->refreshForSheet($sheet);
+
         return redirect()->route('coordinator.student.show', [
             'student' => $user,
         ]);
@@ -136,6 +135,9 @@ class CoordinatorController extends Controller
         
         $user->status = UserStatus::INACTIVE;
         $user->save();
+
+        // Deixou de ser elegível: a média da sala precisa ser recalculada.
+        app(ClassroomAverageService::class)->refreshForSheet($enrollment->studentSheet);
 
         return redirect()->route('coordinator.student.show', [
             'student' => $user,
