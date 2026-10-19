@@ -22,6 +22,17 @@ class EmployeeController extends Controller
 
     }
 
+    public function create()
+    {
+
+        return match (Auth::user()->role) {
+            UserRole::COORDINATOR => view('pages.teacher.register'),
+            UserRole::DIRECTOR => view('pages.employee.register'),
+            default => abort(403),
+        };
+
+    }
+
     public function store(Request $request)
     {
     

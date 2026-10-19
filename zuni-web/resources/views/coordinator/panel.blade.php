@@ -95,12 +95,12 @@
             </div>
 
             <!-- Botão criar -->
-            <button type="button" class="btn btn-primary w-full gap-2 bg-Cprimary mb-5"">
+            <a href="{{ route('coordinator.report.index') }}" class="btn btn-primary w-full gap-2 bg-Cprimary mb-5"">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
                 Novo relatório
-            </button>
+            </a>
 
             <div class="mt-6 flex min-h-0 flex-1 flex-col">
                 <h3 class="mb-3 text-sm font-semibold uppercase tracking-wide text-base-content/60">

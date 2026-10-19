@@ -13,7 +13,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // bind (não singleton): lê config('proficiency') a cada resolução, o que
+        // permite alterar parâmetros em testes sem reiniciar o container.
+        $this->app->bind(
+            \App\Services\Proficiency\ProficiencyCalculator::class,
+            fn () => \App\Services\Proficiency\ProficiencyCalculator::fromConfig()
+        );
     }
 
     /**

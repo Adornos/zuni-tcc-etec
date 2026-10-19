@@ -39,14 +39,6 @@ class DirectorController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function profile()
-    {
-        $user = Auth::user();
-        
-            return view('director.profile', ['profile' => $user]);
-        
-    }
-
 
     /*
     |--------------------------------------------------------------------------

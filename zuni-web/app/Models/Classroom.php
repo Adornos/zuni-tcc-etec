@@ -52,11 +52,17 @@ class Classroom extends Model
     }
 
     /**
-     * Relatórios da turma
+     * Relatórios atribuídos diretamente à turma (N:N).
+     * Relatórios dos alunos da turma NÃO entram aqui.
      */
-    public function reports(): HasMany
+    public function reports(): BelongsToMany
     {
-        return $this->hasMany(Report::class, 'classroom_id');
+        return $this->belongsToMany(
+            Report::class,
+            'report_classroom',
+            'classroom_id',
+            'report_id'
+        );
     }
 
     /**
@@ -74,5 +80,15 @@ class Classroom extends Model
                 'year',
                 'period',
             ]);
+    }
+
+    public function proficiencyAverages(): HasMany
+    {
+        return $this->hasMany(ClassroomProficiencyAverage::class);
+    }
+
+    public function proficiencySnapshots(): HasMany
+    {
+        return $this->hasMany(ClassroomProficiencySnapshot::class);
     }
 }

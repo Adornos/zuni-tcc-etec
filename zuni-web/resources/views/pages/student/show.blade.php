@@ -34,13 +34,19 @@
 
         $birthDate = $student->birth_date?->format('d/m/Y');
 
-        $skills = [
-            'Sociabilidade' => $sheet?->sociability,
-            'Autonomia' => $sheet?->autonomy,
-            'Engajamento' => $sheet?->engagement,
-            'Comunicação' => $sheet?->communication,
-            'Desenvolvimento motor' => $sheet?->motor_development,
-        ];
+        /*
+         * Proficiências atuais (habilidades ativas), vindas de student_proficiencies.
+         * Substitui as 5 colunas fixas de student_sheets (mantidas como legado).
+         */
+        $skills = $sheet
+            ? $sheet->studentProficiencies()
+                ->whereHas('proficiency', fn ($q) => $q->where('is_active', true))
+                ->with('proficiency:id,name')
+                ->get()
+                ->sortBy('proficiency.name')
+                ->mapWithKeys(fn ($sp) => [$sp->proficiency->name => (float) $sp->value])
+                ->all()
+            : [];
 
         /*
          * Roteamento dinâmico conforme o perfil autenticado
@@ -135,6 +141,16 @@
                     </div>
                 </div>
 
+                {{-- =====================================================
+                    AVALIAÇÃO DO PROFESSOR (primeira coisa da página)
+                ====================================================== --}}
+                @if ($sheet)
+                    @can('observe', $sheet)
+                        <div class="lg:col-span-4">
+                            <livewire:search.student-evaluation :sheetId="$sheet->id" />
+                        </div>
+                    @endcan
+                @endif
 
                 {{-- =====================================================
                     DADOS PESSOAIS
@@ -216,7 +232,7 @@
 
                                 <div>
                                     <p class="text-sm text-base-content/50">Ano/Série</p>
-                                    <p class="font-semibold mt-1">{{ $classroom?->grade ?? 'Não informado' }}</p>
+                                    <p class="font-semibold mt-1">{{ $classroom?->grade->label() ?? 'Não informado' }}</p>
                                 </div>
                                 
                                 @if ($role === 'coordinator')
@@ -461,6 +477,26 @@
                     </div>
                 </div>
 
+                {{-- =====================================================
+                    PROFICIÊNCIAS E OBSERVAÇÕES
+                ====================================================== --}}
+                @if ($sheet)
+                    @can('viewProficiencies', $sheet)
+                        <div class="lg:col-span-4">
+                            <livewire:search.student-proficiencies :sheetId="$sheet->id" />
+                        </div>
+                    @endcan
+                @endif
+
+                {{-- =====================================================
+                    RELATÓRIOS DO ALUNO
+                ====================================================== --}}
+                @if ($sheet)
+                    <div class="lg:col-span-4">
+                        <livewire:search.entity-reports target="students" :entityId="$sheet->id" />
+                    </div>
+                @endif
+
             </div>
         </div>
     </div>
@@ -477,22 +513,10 @@
                 new Chart(ctx, {
                     type: 'radar',
                     data: {
-                        labels: [
-                            'Sociabilidade',
-                            'Autonomia',
-                            'Engajamento',
-                            'Comunicação',
-                            'Des. motor'
-                        ],
+                        labels: @json(array_keys($skills)),
                         datasets: [{
                             label: 'Proficiências',
-                            data: [
-                                {{ $sheet?->sociability ?? 0 }},
-                                {{ $sheet?->autonomy ?? 0 }},
-                                {{ $sheet?->engagement ?? 0 }},
-                                {{ $sheet?->communication ?? 0 }},
-                                {{ $sheet?->motor_development ?? 0 }}
-                            ],
+                            data: @json(array_values($skills)),
                             fill: true,
                             backgroundColor: 'rgba(79, 70, 229, 0.20)',
                             borderColor: 'rgb(79, 70, 229)',
