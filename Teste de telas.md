@@ -1,44 +1,69 @@
 1. Telas gerais e autenticação
-- [ ] Home
+- [X] Home 
+    - os botões não passam para suas respectivas paginas (ainda não existentes)
+    - botão sair na home na versão mobile dando erro
 - [ ] Welcome
-- [ ] Login
-- [ ] Cadastro
-- [ ] Recuperação de senha
-- [ ] Redefinição de senha
-- [ ] Verificação de e-mail
+- [X] Login 
+    - botão de esqueci a senha erro 404
+- [X] Cadastro
+- [-] Recuperação de senha
+- [-] Redefinição de senha
+- [-] Verificação de e-mail
 2. Coordenador
-- [ ] Painel do coordenador
-- [ ] Início
+- [X] Painel do coordenador
+    - Gráfico ilustrativo, não funcional
+    - histórico de relatório ilustrativo, não funcional
+- [X] Início
 - [ ] Perfil
-- [ ] Programações
-- [ ] Salas de aula
-- [ ] Cadastro de sala de aula
-- [ ] Edição de sala de aula
-- [ ] Detalhes da sala de aula
-- [ ] Alunos da sala
-- [ ] Professores da sala
-- [ ] Lista de alunos
-- [ ] Detalhes do aluno
-- [ ] Lista de professores
-- [ ] Cadastro de professor
-- [ ] Detalhes do professor
-- [ ] Relatórios
+    - falta sistema de segurança na mudança de informações (pedir para digitar a senha novamente antes da mudança ser efetuada)
+- [X] Programações
+- [X] Salas de aula
+- [X] Cadastro de sala de aula
+    - melhorar layout mobile
+- [X] Edição de sala de aula
+    - melhorar layout mobile
+- [X] Detalhes da sala de aula
+    - melhorar layout mobile
+    - tirar gap do meio da pagina
+- [X] Alunos da sala
+    - melhorar layout mobile
+- [X] Professores da sala
+- [X] Lista de alunos
+    - melhorar layout mobile
+    - melhorar fluxo do relatório e cadastro
+- [X] Detalhes do aluno
+    - não funciona na tela de lista de alunos
+- [X] Lista de professores
+    - botão de cadastro erro de rota
+- [-] Cadastro de professor
+    - botão de cadastro erro de rota
+- [X] Detalhes do professor
+    - falta de botão de editar informações e de voltar para a tela anterior
+- [X] Relatórios
 3. Diretor
-- [ ] Início
-- [ ] Perfil
-- [ ] Lista de funcionários
-- [ ] Cadastro de funcionário
-- [ ] Edição de funcionário
-- [ ] Detalhes do funcionário
+- [X] Início
+- [X] Perfil
+- [X] Lista de funcionários
+    - falta botão de voltar
+- [-] Cadastro de funcionário
+    - não funciona o cadastro
+    - falta botão de voltar
+- [X] Edição de funcionário  
+- [X] Detalhes do funcionário
 4. Responsável
-- [ ] Início
-- [ ] Perfil
-- [ ] Chat
-- [ ] Fórum
-- [ ] Lista de alunos
-- [ ] Cadastro de aluno
-- [ ] Edição de aluno
-- [ ] Detalhes do aluno
+- [X] Início
+- [X] Perfil
+- [-] Chat
+    - falta desenvolver
+    - sem menu
+- [X] Mural
+    - redesign 
+    - não é funcional, sem post
+- [X] Lista de alunos
+- [X] Cadastro de aluno
+- [X] Edição de aluno
+    - devia apenas o coordenador poder editar o cadastro de um aluno, não o pai
+- [X] Detalhes do aluno
 5. Professor
 - [ ] Início
 - [ ] Painel do professor
