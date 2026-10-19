@@ -285,14 +285,14 @@
         <div class="drawer-side panel-drawer-side">
             <label for="sidebar-drawer" class="drawer-overlay"></label>
             
-            <aside class="bg-Csecondary text-primary-content flex h-screen min-h-0 flex-col sm:pt-5 {{ request()->routeIs('coordinator.*') ? 'coordinator-sidebar w-72 max-w-[85vw] lg:w-64' : '' }}">
+            <aside class="bg-[#e7effa] text-[#102a70] flex h-screen min-h-0 flex-col sm:pt-5 {{ request()->routeIs('coordinator.*') ? 'coordinator-sidebar w-72 max-w-[85vw] lg:w-64' : '' }}">
 
                 {{-- Botão de fechar --}}
 
                 {{-- Logo --}}
                 <div class="flex justify-center mt-2 md:mt-8 mb-2 md:mb-8 w-full h-8">
                     <a href="/">
-                        <x-svg.logo.mark class="size-8 text-white hover:text-Cprimary transition" />
+                        <x-svg.logo.mark class="size-8 text-[#102a70] hover:text-[#DA291C] transition" />
                     </a>
                 </div>
 
@@ -312,7 +312,7 @@
                     <ul class="menu w-full text-sm md:text-base [&>li>a]:py-1 md:[&>li>a]:py-2">
                         <li>
                             <a href="#">
-                                <x-svg.icon.config class="text-white" />
+                                <x-svg.icon.config class="text-[#102a70]" />
                                 Configurações
                             </a>
                         </li>
@@ -323,9 +323,9 @@
 
                                 <button
                                     type="submit"
-                                    class="flex items-center gap-2 bg-transparent border-0 p-0 text-white cursor-pointer"
+                                    class="flex items-center gap-2 bg-transparent border-0 p-0 text-[#102a70] cursor-pointer"
                                 >
-                                    <x-svg.icon.logout class="text-white" />
+                                    <x-svg.icon.logout class="text-[#102a70]" />
                                     Encerrar sessão
                                 </button>
                             </form>
