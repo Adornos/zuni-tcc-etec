@@ -1,9 +1,10 @@
 <x-layout>
     <x-slot:title>Home</x-slot:title>
 
+    <div class="home-page">
     <section class="slogan relative overflow-hidden py-12 px-6 sm:py-16 lg:h-[80vmin] lg:min-h-0 lg:px-0 lg:py-0 bg-gradient-to-b from-Cprimary-light via-white to-white">
 
-        <div class="relative z-10 mx-auto flex w-full max-w-[500px] flex-col gap-5 text-Ctext
+        <div class="home-reveal relative z-10 mx-auto flex w-full max-w-[500px] flex-col gap-5 text-Ctext
             lg:absolute lg:left-[19vmax] lg:top-[20vmin] lg:mx-0 lg:w-auto lg:max-w-[28.8vw] lg:gap-[1.2max]">
 
             <h1 class="text-4xl leading-tight font-bold w-[35vmax] sm:text-5xl lg:text-[3.5vmax] lg:leading-[1.2em]">
@@ -26,13 +27,13 @@
         <img
             src="{{ asset('images/home/circle.svg') }}"
             alt=""
-            class="circle absolute hidden lg:right-[-5vw] lg:top-0 lg:block lg:w-[55vmax]"
+            class="home-reveal circle absolute hidden lg:right-[-5vw] lg:top-0 lg:block lg:w-[55vmax]"
         >
 
         <img
             src="{{ asset('images/home/img-0.svg') }}"
             alt="criança escolar"
-            class="kid absolute z-10 hidden lg:bottom-0 lg:left-[50vw] lg:block lg:w-[40vmax] lg:max-w-none "
+            class="home-reveal kid absolute z-10 hidden lg:bottom-0 lg:left-[50vw] lg:block lg:w-[40vmax] lg:max-w-none "
         >
 
     </section>
@@ -71,7 +72,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-14">
 
             @foreach ($features as $feature)
-                <div class="flex flex-col items-center md:items-start max-w-sm mx-auto md:mx-0 pb-[2vmax]">
+                <div class="home-reveal flex flex-col items-center md:items-start max-w-sm mx-auto md:mx-0 pb-[2vmax]">
 
                     <div class="w-48 h-48 lg:w-56 lg:h-56 rounded-full bg-Csecondary overflow-hidden mb-8 self-center">
                         <img
@@ -101,7 +102,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-x-12 gap-y-6">
 
-                <div class="order-1 space-y-6 md:col-start-1 md:row-start-1">
+                <div class="home-reveal order-1 space-y-6 md:col-start-1 md:row-start-1">
 
                     <h2 class="text-3xl md:text-4xl font-bold text-Ctext leading-tight">
                         ACOMPANHE SEU FILHO MESMO NO TRABALHO!
@@ -114,7 +115,7 @@
 
                 </div>
 
-                <div class="order-3 flex flex-col sm:flex-row gap-4 pt-2 md:col-start-1 md:row-start-2">
+                <div class="home-reveal order-3 flex flex-col sm:flex-row gap-4 pt-2 md:col-start-1 md:row-start-2">
 
                     <a
                         href="#"
@@ -141,7 +142,7 @@
                     <img
                         src="{{ asset('images/home/img-1.svg') }}"
                         alt="Zuni app preview"
-                        class="relative bottom-0 z-10 max-w-[65vmin] md:max-w-[80vmin]"
+                        class="home-reveal relative bottom-0 z-10 max-w-[65vmin] md:max-w-[80vmin]"
                     >
 
                 </div>
@@ -156,7 +157,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 
-                <div class="p-8">
+                <div class="home-reveal p-8">
 
                     <h2 class="text-2xl md:text-xl font-bold text-Ctext mb-4">
                         Pais de Aluno
@@ -175,7 +176,7 @@
 
                 </div>
 
-                <div class="p-8">
+                <div class="home-reveal p-8">
 
                     <h2 class="text-2xl md:text-xl font-bold text-Ctext mb-4">
                         Professor
@@ -199,4 +200,5 @@
         </div>
     </section>
 
+    </div>
 </x-layout>

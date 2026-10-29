@@ -41,8 +41,15 @@ $obRouter->get('/login', [
 ]);
 
 //ROTA logout
-$obRouter->get('/logout', [
+$obRouter->post('/logout', [
     function () {
+        if (session_status() === PHP_SESSION_NONE && !session_start()) {
+            throw new \RuntimeException('Não foi possível iniciar a sessão para encerrá-la.');
+        }
+
+        $_SESSION = [];
+        session_destroy();
+
         $response = new Response(302, '');
         $response->addHeader('Location', rtrim(URL, '/') . '/login');
 
