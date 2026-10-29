@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\UserRole;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -107,5 +109,25 @@ class StudentSheet extends Model
     public function proficiencyObservations(): HasMany
     {
         return $this->hasMany(ProficiencyObservation::class);
+    }
+
+    /**
+     * Fichas que o usuário pode abrir (mesma regra de StudentSheetPolicy):
+     * coordenador/diretor todas; professor as das suas salas; responsável as dos seus filhos.
+     */
+    public function scopeVisibleTo(Builder $query, User $user): Builder
+    {
+        return match ($user->role) {
+            UserRole::COORDINATOR, UserRole::DIRECTOR => $query,
+
+            UserRole::TEACHER => $query->whereIn(
+                'student_sheets.classroom_id',
+                $user->classrooms()->select('classrooms.id')
+            ),
+
+            UserRole::GUARDIAN => $query->where('student_sheets.guardian_id', $user->id),
+
+            default => $query->whereRaw('1 = 0'),
+        };
     }
 }

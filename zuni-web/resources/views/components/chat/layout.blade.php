@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 
 <body class="min-h-screen flex flex-col bg-white font-sans text-Cprimary">
@@ -36,6 +37,7 @@
     </div>
 
     <script src="https://kit.fontawesome.com/c0becc67c4.js" crossorigin="anonymous"></script>
+    @livewireScripts
 </body>
 
 </html>
