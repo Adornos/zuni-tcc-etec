@@ -36,7 +36,7 @@
             </a>
         </li>
 
-        <li class="w-full">
+        <!-- <li class="w-full">
             <a
                 href="{{ route('guardian.forum') }}"
                 class="group w-full hover:bg-white hover:text-Cprimary"
@@ -50,7 +50,7 @@
                 />
                 Mural
             </a>
-        </li>
+        </li> -->
 
         <li class="w-full">
             <a
