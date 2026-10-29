@@ -110,25 +110,28 @@ não consegui atribuir professor a sala de aula e nem verificar os 3 checkmark d
 - [-] Cadastro de professor
 - [ ] Edição de professor (nao achei)
 - [X] Detalhes do professor
-10. Responsáveis
+<!-- 10. Responsáveis
+
+    NAO EXISTE
+
 - [ ] Lista de responsáveis
 - [ ] Cadastro de responsável
 - [ ] Edição de responsável
-- [ ] Detalhes do responsável
+- [ ] Detalhes do responsável -->
 11. Alunos
-- [ ] Lista de alunos
-- [ ] Cadastro de aluno
-- [ ] Edição de aluno
-- [ ] Detalhes do aluno
+- [X] Lista de alunos
+- [X] Cadastro de aluno //algumas informações não aparecem para serem informadas na hora do cadastro, apenas na hora de editar
+- [ ] Edição de aluno   ano/série não aparecem para serem editados
+- [ ] Detalhes do aluno //algumas informações não são transferidas para essa tela
 12. Solicitações de matrícula
-- [ ] Lista de solicitações
+- [ ] Lista de solicitações //não existe uma lista de solicitações
 - [ ] Edição da solicitação
 - [ ] Detalhes da solicitação
 13. Relatórios
-- [ ] Lista de relatórios
-- [ ] Criar relatório
-- [ ] Editar relatório
-- [ ] Detalhes do relatório
+- [X] Lista de relatórios   
+- [X] Criar relatório
+- [X] Editar relatório
+- [X] Detalhes do relatório
 14. Programação e horários
 - [ ] Lista de programações
 - [ ] Criar programação

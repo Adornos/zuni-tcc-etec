@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Logout;
 use App\Http\Controllers\Auth\Register;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CoordinatorController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\DirectorController;
@@ -206,3 +207,7 @@ Route::post('/register', Register::class)
 
 Route::post('/logout', Logout::class)
     ->middleware('auth')->name('logout');
+
+// Abertura segura de links internos do chat (autorização no servidor)
+Route::get('/chat/messages/{message}/link', [ChatController::class, 'openLink'])
+    ->middleware('auth')->name('chat.link');

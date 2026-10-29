@@ -15,6 +15,14 @@ use App\Models\User;
  */
 class StudentSheetPolicy
 {
+    public function view(User $user, StudentSheet $sheet): bool
+    {
+        return StudentSheet::query()
+            ->visibleTo($user)
+            ->whereKey($sheet->getKey())
+            ->exists();
+    }
+
     public function viewProficiencies(User $user, StudentSheet $sheet): bool
     {
         return match (true) {
