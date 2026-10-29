@@ -23,6 +23,19 @@ class StudentSheetPolicy
             ->exists();
     }
 
+    /** Notas e histórico: mesma visibilidade da ficha. */
+    public function viewGrades(User $user, StudentSheet $sheet): bool
+    {
+        return $this->view($user, $sheet);
+    }
+
+    /** Lançar notas: coordenador ou professor responsável pela sala do aluno. */
+    public function recordGrade(User $user, StudentSheet $sheet): bool
+    {
+        return $user->isCoordinator()
+            || ($user->isTeacher() && $this->teachesSheet($user, $sheet));
+    }
+
     public function viewProficiencies(User $user, StudentSheet $sheet): bool
     {
         return match (true) {

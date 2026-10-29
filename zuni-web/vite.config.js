@@ -22,7 +22,7 @@ export default defineConfig({
         },
         host: '0.0.0.0',
         hmr: { 
-            host: '10.239.21.19'
+            host: '192.168.1.13'
         }
     },
 });

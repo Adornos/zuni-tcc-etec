@@ -96,6 +96,14 @@ class StudentSheet extends Model
     }
 
     /**
+     * Histórico de notas.
+     */
+    public function grades(): HasMany
+    {
+        return $this->hasMany(StudentGrade::class);
+    }
+
+    /**
      * Valores atuais das proficiências (um registro por habilidade).
      */
     public function studentProficiencies(): HasMany

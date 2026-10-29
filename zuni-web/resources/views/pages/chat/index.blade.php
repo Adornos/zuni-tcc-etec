@@ -1,4 +1,4 @@
-<x-dynamic-component :component="'panel.' . auth()->user()->role->value">
+<x-chat.layout>
 
     @if (app(\App\Services\Chat\ChatPermissions::class)->participatesInChat(auth()->user()))
         <livewire:chat.inbox />
@@ -10,4 +10,5 @@
         </div>
     @endif
 
-</x-dynamic-component>
+</x-chat.layout>
+

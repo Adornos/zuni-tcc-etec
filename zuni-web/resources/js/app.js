@@ -1,26 +1,21 @@
-import Alpine from 'alpinejs'
 import mask from '@alpinejs/mask'
 
-Alpine.plugin(mask)
+// Páginas com Livewire: o Livewire já traz (e inicia) o próprio Alpine, que é o
+// único que conhece magics como $wire. Só registramos o plugin nele.
+document.addEventListener('alpine:init', () => {
+    window.Alpine.plugin(mask)
+})
 
-window.Alpine = Alpine
+// Páginas sem nenhum componente Livewire: inicia o Alpine do projeto.
+// A checagem usa o DOM (wire:id), que não depende da ordem de carregamento dos scripts.
+document.addEventListener('DOMContentLoaded', async () => {
+    if (document.querySelector('[wire\\:id]') || window.Livewire || window.Alpine) {
+        return
+    }
 
-Alpine.start()
+    const { default: Alpine } = await import('alpinejs')
 
-const homePage = document.querySelector('.home-page')
-const revealItems = homePage?.querySelectorAll('.home-reveal')
-
-if (homePage && revealItems?.length && 'IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible')
-            } else {
-                entry.target.classList.remove('is-visible')
-            }
-        })
-    }, { threshold: 0.15 })
-
-    homePage.classList.add('has-scroll-reveal')
-    revealItems.forEach((item) => revealObserver.observe(item))
-}
+    Alpine.plugin(mask)
+    window.Alpine = Alpine
+    Alpine.start()
+})
